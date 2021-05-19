@@ -11,3 +11,32 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+:root{
+  --primary-1: #1877F2;
+  --primary-2: rgb(134,218,255);
+  --primary-3: rgb(95,170,255);
+
+  --secondary-1: rgb(118,62,230);
+  --secondary-2: rgb(147,96,247);
+  --secondary-3: rgb(219,26,139);
+
+  --supplementary-1: rgb(255,122,105);
+  --supplementary-2: rgb(241,168,23);
+  --supplementary-3: rgb(49,162,76);
+  --supplementary-4: rgb(50,52,54);
+
+  --shadow-1: rgba(0, 0, 0, 0.1);
+  --shadow-2: rgba(0, 0, 0, 0.2);
+  --shadow-5: rgba(0, 0, 0, 0.5);
+  --shadow-8: rgba(0, 0, 0, 0.8);
+
+  --primary-icon: #050505;
+  --primary-text: #050505;
+
+  --secondary-icon: #65676B;
+  --secondary-text: #65676B;
+
+  --black : #000;
+  --white : #fff;
+}
