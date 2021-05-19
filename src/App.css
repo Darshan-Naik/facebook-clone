@@ -1,6 +1,8 @@
 .App {
   text-align: center;
 }
-.icon{
-  fill: var(--secondary-1);
+.flexBox{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
