@@ -13,6 +13,7 @@
 
   --hover-overlay: rgba(0, 0, 0, 0.05);
   --media-hover: rgba(68, 73, 80, 0.15);
+  --hover-overlay-2: rgba(68, 73, 80, 0.25);
 
   --supplementary-1: rgb(255,122,105);
   --supplementary-2: rgb(241,168,23);
@@ -22,6 +23,7 @@
   --shadow-1: rgba(0, 0, 0, 0.1);
   --shadow-2: rgba(0, 0, 0, 0.2);
   --shadow-5: rgba(0, 0, 0, 0.5);
+  --shadow-7: rgba(0, 0, 0, 0.7);
   --shadow-8: rgba(0, 0, 0, 0.8);
 
   --primary-icon: #050505;
@@ -40,7 +42,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.34;
-  
   background-color: var(--secondary-background-2);
 }
 *{
@@ -49,5 +50,8 @@ body {
   box-sizing: border-box;
   color: var(--primary-text);
   font-size: 16px;
+  /* transition: all .3s ease-in-out; */
 }
-
+input,button{
+  outline: none;
+}

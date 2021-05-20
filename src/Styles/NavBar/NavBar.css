@@ -4,10 +4,82 @@
     height: 50px;
     background-color: var(--primary-background);
     box-shadow: 0px 0px 5px var(--shadow-2);
+    justify-content: space-between;
+    padding:0 10px;
+}
+.navBarLogo .main-logoIcon{
+    height: 35px;
+    margin-right: 8px;
+    cursor: pointer;
+}
+.mainLogoLetter{
+    fill: var(--white)
+}
+.navBarSearchBox>.searchIcon{
+    fill: var(--secondary-icon);
+    width: 20px;
+    height: 20px;
+}
+.navBarSearchBox{
+    background-color: var(--secondary-background-1);
+    padding:4px 10px;
+    border-radius: 50px;
+   
+}
+.navBarSearchBox>input{
+    padding: 5px;
+    background-color: transparent;
+    border: none;
+}
+.navBarSearchBox>input::placeholder{
+    font-size: 14px;
+}
+.navBarMainHeader{
+    height: 100%;
+    width: 30%;
+}
+.navBarMainHeader svg{
+    fill: var(--secondary-icon);
+    width: 30px;
+    height: 100%;
+}
+.navBarMainHeader .active svg {
+    fill: var(--primary-1);
+}
+.navBarMainHeader .active{  
+    border-bottom: 3px solid var(--primary-1);
+    height: 100%;
+    width: 30%;
+    cursor: pointer;
+    position: relative;
+
+}
+.navBarMainHeader .iconWrapper{
+    border-bottom: 3px solid transparent;
+    width: 30%;
+    height: 80%;
+    border-radius: 8px;   
+    cursor: pointer;
+    position: relative;
+}
+.navBarMainHeader .iconWrapper:hover{
+    background-color: var(--hover-overlay);  
 }
 
-.navBarSearchBox>.searchIcon{
-    fill: blue;
-    width: 50px;
-    height: 50px;
+.navBarUserBox svg{
+    width: 20px;
+    height: 20px;
+    fill: var(--primary-icon);
+}
+.navBarUserBox .iconWrapper-2{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--media-hover);
+    margin: 0 5px;
+    position: relative;
+    cursor: pointer;
+}
+.navBarUserBox .iconWrapper-2:hover{
+    background-color: var(--hover-overlay-2);
 }
