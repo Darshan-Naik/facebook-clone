@@ -9,6 +9,7 @@ function NavBar() {
                 <img src={process.env.PUBLIC_URL + '/main-logo.png'} alt="Facebook" />
                 <div className="navBarSearchBox">
                 <SearchIcon/>
+                fdskjgfgsdgfj
                 </div>
             </div>
         </div>
