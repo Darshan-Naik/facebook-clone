@@ -1,0 +1,30 @@
+.sideBarContainer {
+    /* provide top gap as per requirement */
+}
+
+.sideBarContentLink {
+    padding: 10px;
+    text-decoration: none;
+    color: var(--primary-text);
+    border-radius: 4px;
+}
+
+.sideBarContentLink:hover {
+    background: var(--shadow-1);
+}
+
+.flexBox.sideBarContentLink {
+    justify-content: left;
+}
+
+.sideBarContentImage {
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    margin: auto;
+}
+
+.sideBarContentLabel {
+    font-size: 0.9375rem;
+    margin-left: 10px;
+}
