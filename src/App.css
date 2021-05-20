@@ -6,3 +6,30 @@
   justify-content: center;
   align-items: center;
 }
+.statusDot,.notificationBubble{
+  border-radius: 50%;
+  border: 2px solid var(--white);
+  position: absolute;
+  font-size: 12px;
+  color: var(--white);
+  font-weight: 500;
+}
+
+.test{
+  height: 40px;
+  width: 40px;
+  background-color: brown;
+  border-radius: 50%;
+  position: relative;
+}
+.toolTipBox{
+  padding: 8px;
+  position: absolute;
+  background-color: var(--shadow-7);
+  font-size: 12px;
+  color: var(--white);
+  bottom: -40px;
+  border-radius: 5px;
+  z-index: 999;
+  box-shadow: 0px 0px 2px var(--shadow-8);
+}
