@@ -2,7 +2,6 @@
     width: 500px;
     /* border: 1px solid black; */
     margin: auto;
-    margin-top: 200px;
     border-radius: 8px;
     padding: 15px;
     background-color: var(--primary-background);
@@ -13,29 +12,23 @@
     /* border: 1px solid black; */
     
 }
-.postCardHeadBox1{
+.postCardHeadBox1>img{
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    border: 2px solid var(--primary-1);
+    box-shadow: 0px 0px 0px 2px var(--white), 0px 0px 0px 4px var(--primary-1);
+    margin: 0 10px;
 }
-.postCardHeadBox1>img{
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    
-}
+
 .postCardHeadBox2{
-    font-size: 15px;
-    font-weight: 500;
     color: var(--primary-text);
     width: 348px;
     text-align: left;
-    margin-left: 10px;
-    margin-top: -10px;
+   
 }
-.postCardHeadBox2>div{
-    margin-top: 150px;
+.postCardHeadBox2>h4{
+    
+    font-weight: 500;
 }
 
 .postCardHeadBox3{
