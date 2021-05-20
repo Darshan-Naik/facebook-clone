@@ -4,13 +4,15 @@
 
 .sideBarContentLink {
     padding: 10px;
+    margin-left: 0.5%;
     text-decoration: none;
     color: var(--primary-text);
     border-radius: 4px;
+    transition: all 0.3s ease-in-out;
 }
 
 .sideBarContentLink:hover {
-    background: var(--shadow-1);
+    background: var(--hover-overlay);
 }
 
 .flexBox.sideBarContentLink {
@@ -26,5 +28,6 @@
 
 .sideBarContentLabel {
     font-size: 0.9375rem;
+    font-weight: 500;
     margin-left: 10px;
 }

@@ -1,11 +1,12 @@
 import React from "react"
 import './App.css';
-import SideBar from "./Components/SideBar/SideBar";
-
+import Router from "./Routes/Router";
+import SideBar from "./Components/SideBar/SideBar"
 function App() {
   return (
     <div className="App">
-      <SideBar />
+        {/* <Router/> */}
+        <SideBar />
     </div>
   );
 }
