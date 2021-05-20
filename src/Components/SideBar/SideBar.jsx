@@ -1,7 +1,7 @@
 import React from 'react';
 import { SideBarContent } from "./SideBarContent";
 import { Link } from "react-router-dom";
-import "./SideBar.css";
+import "../../Styles/SideBar/SideBar.css";
 import "../../App.css";
 
 
