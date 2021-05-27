@@ -1,7 +1,7 @@
 
 import { ADD_ACTIVE_MESSAGE, REMOVE_ACTIVE_MESSAGE } from "./actionTypes";
 const init = {
-    activeMessages :[{},{}]
+    activeMessages :[{chatID:"1",user:{}},{}]
 }
 
 export const appReducer = (state=init,{type,payload})=>{
