@@ -15,7 +15,7 @@ function IconWrapper({children,path,label,handleRefresh}) {
         <div onClick={handlePath} className={location.pathname === path?"active" : "iconWrapper"} onMouseEnter={()=>setHoverState(true)} onMouseLeave={()=>setHoverState(false)}>
             {children}
             {hoverState && <ToolTip label={label} left="28%"/>}
-            <NotificationBubble right="30%" number={0}/>
+        {location.pathname !== path && <NotificationBubble right="30%" number={2}/>}
         </div>
     )
 }
