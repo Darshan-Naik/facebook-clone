@@ -34,6 +34,8 @@
 
   --black : #000;
   --white : #fff;
+
+  --navBar-height : 50px;
 }
 
 body {

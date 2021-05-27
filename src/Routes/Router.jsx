@@ -6,9 +6,10 @@ import Home from "../Components/Pages/Home";
 function Router() {
     return (
         <>
-            <NavBar />
+              <NavBar />
             <Switch>
                 <Route path="/" exact>
+                 
                    <Home />
                 </Route>
             </Switch>
