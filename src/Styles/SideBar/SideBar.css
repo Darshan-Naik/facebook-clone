@@ -1,13 +1,16 @@
 .sideBarContainer {
-    /* provide top gap as per requirement */
+    min-width: 350px;
+    margin-top: 18px;
 }
 
 .sideBarContentLink {
-    padding: 10px;
+    padding: 7px;
     margin-left: 0.5%;
     text-decoration: none;
     color: var(--primary-text);
     border-radius: 4px;
+    cursor: pointer;
+    justify-content: left;
     transition: all 0.3s ease-in-out;
 }
 
@@ -15,13 +18,13 @@
     background: var(--hover-overlay);
 }
 
-.flexBox.sideBarContentLink {
-    justify-content: left;
+.sideBarContentUserImageBox {
+    position: relative;
 }
 
 .sideBarContentImage {
-    width: 30px;
-    height: 30px;
+    width: 35px;
+    height: 35px;
     border-radius: 100%;
     margin: auto;
 }
@@ -30,4 +33,45 @@
     font-size: 0.9375rem;
     font-weight: 500;
     margin-left: 10px;
+}
+
+.activeContactHeader {
+    margin: 1%;
+    justify-content: space-between;
+}
+
+.contactHeaderTitle {
+    text-align: left;
+    font-weight: 500;
+    color: var(--secondary-text);
+}
+
+.videoCallIcon {
+    width: 20px;
+    height: 20px;
+    opacity: 0.6;
+    vertical-align: middle;
+}
+
+.contactHeaderContentContainer {
+    flex-grow: 0.1;
+    justify-content: space-around;
+}
+
+.contactIconContainer {
+    border-radius: 50px;
+    padding: 0.3rem;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.contactIconContainer:hover {
+    background: var(--hover-overlay);
+}
+
+.contactHeaderContentContainer .searchIcon {
+    width: 19px;
+    height: 19px;
+    opacity: 0.6;
+    vertical-align: middle;
 }
