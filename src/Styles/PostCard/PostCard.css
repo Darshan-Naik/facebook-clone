@@ -5,30 +5,39 @@
     border-radius: 8px;
     padding: 15px;
     background-color: var(--primary-background);
+    justify-content: space-around;
+    box-shadow:0 1px 2px var( --shadow-2);
 }
 .postCardHeadContainer{
-    width: 480px;
     height: 48px;
     /* border: 1px solid black; */
     
 }
 .postCardHeadBox1>img{
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
     border-radius: 50%;
     box-shadow: 0px 0px 0px 2px var(--white), 0px 0px 0px 4px var(--primary-1);
     margin: 0 10px;
+    margin-top: 10px;
+    margin-left: 0;
+    
 }
 
 .postCardHeadBox2{
     color: var(--primary-text);
-    width: 348px;
+    width: 392px;
     text-align: left;
+    flex-direction: column;
    
 }
-.postCardHeadBox2>h4{
-    
-    font-weight: 500;
+.postCardHeadBox2 strong{
+    font-size: 13px;
+    font-weight: 600;
+}
+.postCardHeadBox2 span{
+    font-size: 12px;
+    font-weight: 400;
 }
 
 .postCardHeadBox3{
@@ -36,4 +45,22 @@
     height: 36px;
     padding-top: 10px;
     margin-left: 10px;
+    border-radius: 50%;
+}
+.postCardHeadBox3:hover {
+    background: var(--hover-overlay);
+}
+.postCardTags{
+    font-size: 15px;
+    line-height: 1.3333;
+    color: var(--primary-text);
+    text-align: left;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.postCardImage{
+    max-width: 100%;
+    text-align: center;
+    padding-left: -15px;
+    padding-right: -15px;
 }
