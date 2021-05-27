@@ -1,11 +1,12 @@
 import React from 'react'
-import SideBar from "../SideBar/SideBar";
-import ActiveContactSideBar from "../SideBar/ActiveContactSideBar";
+import SideBar from "../../Components/SideBar/SideBar";
+import Chats from '../Chats/Chats';
+
 function Home() {
     return (
-        <div className="flexBox">    
+        <div>    
+            <Chats />
             <SideBar />
-            <ActiveContactSideBar />
         </div>
     )
 }
