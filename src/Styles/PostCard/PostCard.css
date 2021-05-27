@@ -1,15 +1,15 @@
 .postCardContainer{
-    width: 500px;
+    max-width: 500px;
+    width: 100%;
     /* border: 1px solid black; */
     margin: auto;
     border-radius: 8px;
-    padding: 15px;
     background-color: var(--primary-background);
     justify-content: space-around;
     box-shadow:0 1px 2px var( --shadow-2);
 }
 .postCardHeadContainer{
-    height: 48px;
+    padding: 0 15px;
     /* border: 1px solid black; */
     
 }
@@ -57,10 +57,27 @@
     text-align: left;
     margin-top: 5px;
     margin-bottom: 5px;
+    padding: 0 15px;
 }
-.postCardImage{
-    max-width: 100%;
-    text-align: center;
-    padding-left: -15px;
-    padding-right: -15px;
+.postCardImage img{
+    width: 100%;
+}
+
+.postCardFooter {
+    justify-content: space-around;
+    padding: 0 15px;
+}
+
+.postCardFooter svg{
+    width: 18px;
+    fill: var(--secondary-icon);
+    margin: 5px;
+    
+    
+}
+.postCardFooter p{
+    color: var(--secondary-icon);
+    font-size: 15px;
+
+
 }
