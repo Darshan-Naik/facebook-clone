@@ -1,10 +1,11 @@
 import React from 'react'
-import SideBar from "../../Components/SideBar/SideBar";
-
+import SideBar from "../SideBar/SideBar";
+import ActiveContactSideBar from "../SideBar/ActiveContactSideBar";
 function Home() {
     return (
-        <div>    
+        <div className="flexBox">    
             <SideBar />
+            <ActiveContactSideBar />
         </div>
     )
 }
