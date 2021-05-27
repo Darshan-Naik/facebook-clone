@@ -1,10 +1,23 @@
 import React from 'react'
 import SideBarContent from "./SideBarContent";
-import { Link } from "react-router-dom";
 import {ReactComponent as SearchIcon} from  "../../Icons/search.svg"
 import "../../Styles/SideBar/SideBar.css";
+import { useDispatch, useSelector } from 'react-redux';
+import { addActiveMessage } from '../../Redux/App/actions';
+import {v4 as uuid} from "uuid";
 
 const ActiveContactSideBar = () => {
+    const activeContacts = useSelector( state => state.app.activeContacts ); 
+    const dispatch = useDispatch();
+    const handleOpenChatBox = (id,userData) => {
+        const payload = {
+            chatId: id,
+            userDetails: userData
+        };
+
+        dispatch( addActiveMessage( payload ) );
+    };
+
     return (
         <div className="sideBarContainer">
             <div className="sideBarLinksContainer activeContact">
@@ -19,21 +32,17 @@ const ActiveContactSideBar = () => {
                         </div>
                     </div>
                 </div>
-                <Link className="flexBox sideBarContentLink" to="/">
-                    <SideBarContent label="Darshan Naik" />
-                </Link>
-                <Link className="flexBox sideBarContentLink" to="/">
-                    <SideBarContent dotPosition="relative" label="Darshan Naik" />
-                </Link>
-                <Link className="flexBox sideBarContentLink" to="/">
-                    <SideBarContent dotPosition="relative" label="Darshan Naik" />
-                </Link>
-                <Link className="flexBox sideBarContentLink" to="/">
-                    <SideBarContent dotPosition="relative" label="Darshan Naik" />
-                </Link>
-                <Link className="flexBox sideBarContentLink" to="/">
-                    <SideBarContent label="Darshan Naik" />
-                </Link>
+                <React.Fragment>
+                    {
+                        activeContacts.map( (el, i) => {
+                            return (
+                                <div key={i} onClick={() => handleOpenChatBox(i, el)} className="flexBox sideBarContentLink">
+                                    <SideBarContent active label={`${el.first_name} ${el.last_name}`} />
+                                </div>
+                            )
+                        })
+                    }
+                </React.Fragment>
             </div>
         </div>
     )

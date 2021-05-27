@@ -9,12 +9,17 @@
     text-decoration: none;
     color: var(--primary-text);
     border-radius: 4px;
+    cursor: pointer;
     justify-content: left;
     transition: all 0.3s ease-in-out;
 }
 
 .sideBarContentLink:hover {
     background: var(--hover-overlay);
+}
+
+.sideBarContentUserImageBox {
+    position: relative;
 }
 
 .sideBarContentImage {
