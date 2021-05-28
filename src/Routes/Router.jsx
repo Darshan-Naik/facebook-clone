@@ -4,6 +4,8 @@ import { Switch, Route } from "react-router-dom";
 import Home from "../Components/Pages/Home";
 import LoginPage from '../Components/Login/LoginPage';
 
+
+
 function Router() {
     return (
         <>
