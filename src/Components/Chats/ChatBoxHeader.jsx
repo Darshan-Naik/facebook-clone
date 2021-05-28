@@ -2,7 +2,13 @@ import React from 'react'
 import StatusDot from "../../SharedComponents/StatusDot"
 import {ReactComponent as MinimizeIcon} from  "../../Icons/minimize.svg"
 import {ReactComponent as CloseIcon} from  "../../Icons/close.svg"
-function ChatBoxHeader({firstName,lastName,activeStatus,profilePic}) {
+import { useDispatch } from 'react-redux'
+import { removeActiveMessage } from '../../Redux/App/actions'
+function ChatBoxHeader({first_name,last_name,chatId,activeStatus,profilePic}) {
+    const dispatch = useDispatch()
+    const handleClose =()=>{
+        dispatch(removeActiveMessage(chatId))
+    }
     return (
         <div className="chatBoxHeader flexBox">
             <div className="chatBoxUser flexBox">     
@@ -11,13 +17,13 @@ function ChatBoxHeader({firstName,lastName,activeStatus,profilePic}) {
                         <StatusDot bottom={5} right={2} width="12px" height="12px"/>
                 </div>
                 <div className="chatBoxUserDetails flexBox">
-                    <h4>{ firstName? `${firstName} ${lastName}` : "User"}</h4>
+                    <h4>{ first_name? `${first_name} ${last_name}` : "User"}</h4>
                     <small>{activeStatus || "While ago"}</small>
                 </div>
             </div>
             <div className="chatBoxHeaderIcons flexBox">
                 <MinimizeIcon />
-                <CloseIcon />
+                <CloseIcon onClick={handleClose} />
             </div>
         </div>
     )

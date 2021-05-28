@@ -10,14 +10,11 @@ function Chats() {
     const handleActiveChatBox = (index)=>{
         setActiveChatIndex(index)
     }
-    React.useEffect(()=>{
-        setActiveChatIndex(activeMessages.length-1)
-    },[activeMessages])
 
     return (
         <>
         <div className="chatsContainer flexBox">
-            {activeMessages.map((val,i)=><ChatBox active={activeChatIndex === i} handleActiveChatBox={handleActiveChatBox} index={i}/>)}
+            {activeMessages.map(({userDetails,chatId},i)=><ChatBox chatId={chatId} data={userDetails} active={activeChatIndex === i} handleActiveChatBox={handleActiveChatBox} index={i}/>)}
         </div>
         <ChatBubble />
         </>

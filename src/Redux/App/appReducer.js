@@ -30,8 +30,9 @@ export const appReducer = (state=init,{type,payload})=>{
                 return state;
             }
             if( state.activeMessages.length >= 3 ) {
-                const data = [...state.activeMessages, payload];
+                let data = [...state.activeMessages];
                 data.shift();
+                data = [payload,...data]
                 return {
                     ...state,
                     activeMessages: data
@@ -39,13 +40,13 @@ export const appReducer = (state=init,{type,payload})=>{
             }
             return {
                 ...state,
-                activeMessages : [...state.activeMessages, payload]
+                activeMessages : [payload,...state.activeMessages ]
             }
         }
         case REMOVE_ACTIVE_MESSAGE : {
             return {
                 ...state,
-                activeMessages : state.filter(item=>item.id !== payload)
+                activeMessages : state.activeMessages.filter(item=>item.chatId !== payload)
             }
         }
         default : return state;
