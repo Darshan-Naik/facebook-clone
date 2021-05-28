@@ -9,7 +9,7 @@ import LoginPage from '../Components/Login/LoginPage';
 function Router() {
     return (
         <>
-              <NavBar />
+            <NavBar />
             <Switch>
                 <Route path="/" exact>
                  
