@@ -5,6 +5,8 @@ import Home from "../Components/Pages/Home";
 import LoginPage from '../Components/Login/LoginPage';
 import Chats from '../Components/Chats/Chats';
 
+
+
 function Router() {
     
     return (
