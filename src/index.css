@@ -1,4 +1,6 @@
 :root {
+  --accent: hsl(214, 89%, 52%);
+  
   --primary-1: #1877f2;
   --primary-2: rgb(134, 218, 255);
   --primary-3: rgb(95, 170, 255);
@@ -40,6 +42,7 @@
   --white : #fff;
 
   --navBar-height : 50px;
+  --nav-bar-background-gradient: linear-gradient(to top, #FFFFFF, rgba(255,255,255), rgba(255,255,255,.7), rgba(255,255,255,.4), rgba(255,255,255,0));
 }
 
 body {

@@ -4,7 +4,6 @@ import {ReactComponent as SearchIcon} from  "../../Icons/search.svg"
 import "../../Styles/SideBar/SideBar.css";
 import { useDispatch, useSelector } from 'react-redux';
 import { addActiveMessage } from '../../Redux/App/actions';
-import {v4 as uuid} from "uuid";
 
 const ActiveContactSideBar = () => {
     const activeContacts = useSelector( state => state.app.activeContacts ); 
