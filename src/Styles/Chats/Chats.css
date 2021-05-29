@@ -8,14 +8,12 @@
 }
 .chatBubble{
     background-color: var(--white);
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    box-shadow: 0 2px 4px var(--shadow-1),0 12px 28px var(--shadow-2);
+    box-shadow: 0 2px 4px var(--shadow-1),0 8px 18px var(--shadow-2);
     cursor: pointer;
+    margin:0 10px;
     transition: all .2s ease-in-out;
 }
 .chatBubble:hover{
@@ -124,4 +122,105 @@
     background-color: transparent;
     transition: all .2s ease-in-out;
     font-size: 14px;
+}
+
+.activeChatBubbleContainer{
+    position: fixed;
+    right: 10px;
+    bottom: 20px;
+    height: fit-content;
+    width: fit-content;
+    max-height: 400px;
+    z-index: 10;
+}
+.activeChatBubbleBox{
+    height: 100%;
+    padding:10px;
+    height: fit-content;
+    width: fit-content; 
+    overflow: scroll;
+}
+.activeChatBubbleBox::-webkit-scrollbar{
+    width: 0;
+    height: 0;
+    visibility: hidden;
+}
+.activeChatBubbleContainer .bubbleOptions{
+    position: relative;
+    background-color: var(--white);
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    margin: auto;
+    cursor: pointer;
+    box-shadow: 0 2px 4px var(--shadow-2),0 2px 12px var(--shadow-2);
+}
+.bubbleOptionBox{
+    position: absolute;
+    background-color: var(--white);
+    max-width: 250px;
+    width: 100vw;
+    padding: 10px;
+    text-align: left;
+    right:5px;
+    bottom: 40px;
+    border-radius: 8px 8px 0 8px;
+    box-shadow: 0 2px 4px var(--shadow-2),0 12px 28px var(--shadow-2);
+    z-index: 10000;
+    transition: all .2s ease-in-out;
+}
+.bubbleOptionBox svg{
+    stroke: var(--black);
+    width: 20px;
+    height: 20px;
+    border: 1px solid var(--black);
+    border-radius: 50%;
+    margin:5px 10px;
+}
+.bubbleOptionIconBox{
+    justify-content: flex-start;
+    border-radius: 8px;
+    transition: all .2s ease-in-out;
+}
+.bubbleOptionIconBox:hover,.bubbleOptions:hover{
+    background-color: var(--secondary-background-2);
+}
+.bubbleOptionIconBox>p{
+    font-size: 14px;
+    font-weight: 500;
+}
+.activeChatBubble{
+    border-radius: 50%;
+    box-shadow: 0 2px 4px var(--shadow-2),0 2px 12px var(--shadow-2);
+    margin-top: 10px;
+    position: relative;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+}
+.activeChatBubble>img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+.activeChatBubbleCloseButton{
+   position: absolute;
+   top:-6px;
+   right: -5px;
+   z-index: 5;
+    background-color: var(--white);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px var(--shadow-2);
+    transition: all .2s ease-in-out;
+}
+.activeChatBubbleCloseButton svg{
+    stroke: var(--black);
+    width: 15px;
+    height: 15px;
+}
+.activeChatBubbleCloseButton:hover{
+    background-color: var(--secondary-background-2);
+
 }
