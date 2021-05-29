@@ -3,11 +3,14 @@ import StatusDot from "../../SharedComponents/StatusDot"
 import {ReactComponent as MinimizeIcon} from  "../../Icons/minimize.svg"
 import {ReactComponent as CloseIcon} from  "../../Icons/close.svg"
 import { useDispatch } from 'react-redux'
-import { removeActiveMessage } from '../../Redux/App/actions'
+import { addInActiveMessage, removeActiveMessage } from '../../Redux/App/actions'
 function ChatBoxHeader({first_name,last_name,chatId,activeStatus,profilePic}) {
     const dispatch = useDispatch()
     const handleClose =()=>{
         dispatch(removeActiveMessage(chatId))
+    }
+    const handleMinimize =()=>{
+        dispatch(addInActiveMessage(chatId))
     }
     return (
         <div className="chatBoxHeader flexBox">
@@ -22,7 +25,7 @@ function ChatBoxHeader({first_name,last_name,chatId,activeStatus,profilePic}) {
                 </div>
             </div>
             <div className="chatBoxHeaderIcons flexBox">
-                <MinimizeIcon />
+                <MinimizeIcon onClick={handleMinimize}/>
                 <CloseIcon onClick={handleClose} />
             </div>
         </div>
