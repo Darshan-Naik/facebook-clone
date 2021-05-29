@@ -37,7 +37,7 @@ const ActiveContactSideBar = () => {
                         activeContacts.map( (el, i) => {
                             return (
                                 <div key={i} onClick={() => handleOpenChatBox(i, el)} className="flexBox sideBarContentLink">
-                                    <SideBarContent active label={`${el.first_name} ${el.last_name}`} />
+                                    <SideBarContent active label={`${el.first_name} ${el.last_name}`} src={el.profilePic} />
                                 </div>
                             )
                         })
