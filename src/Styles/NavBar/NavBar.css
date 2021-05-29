@@ -1,11 +1,12 @@
 .navBarContainer{
-    position: static;
+    position: sticky;
     top: 0;
     height: var(--navBar-height);
     background-color: var(--primary-background);
     box-shadow: 0px 0px 5px var(--shadow-2);
     justify-content: space-between;
     padding:0 10px;
+    z-index: 999;
 }
 .navBarLogo .main-logoIcon{
     height: 35px;
@@ -15,7 +16,7 @@
 .mainLogoLetter{
     fill: var(--white)
 }
-.navBarSearchBox>.searchIcon{
+.navBarSearchBox .searchIcon{
     fill: var(--secondary-icon);
     width: 20px;
     height: 20px;
@@ -24,7 +25,25 @@
     background-color: var(--secondary-background-1);
     padding:4px 10px;
     border-radius: 50px;
-   
+}
+.mainSearchIconResponse{
+    display: none;
+}
+.searchBarBackButton{
+    cursor: pointer;
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    margin: 5px;
+    transition: all .2s ease-in-out;
+}
+.searchBarBackButton:hover{
+    background-color: var(--secondary-background-1);
+}
+.searchBarBackButton svg{
+    fill: var(--primary-icon);
+    width: 20px;
+    height: 20px;
 }
 .navBarSearchBox>input{
     padding: 5px;
@@ -34,6 +53,21 @@
 .navBarSearchBox>input::placeholder{
     font-size: 14px;
 }
+
+.navBarMenu{
+    padding: 5px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 4px;
+    display: none;
+}
+.navBarMenu svg{
+    fill: var(--secondary-icon);
+}
+.navBarMenu:hover{
+    background-color: var(--secondary-background-1);
+}
+
 .navBarMainHeader{
     height: 100%;
     width: 30%;
@@ -83,3 +117,30 @@
 .navBarUserBox .iconWrapper-2:hover{
     background-color: var(--hover-overlay-2);
 }
+
+@media only screen and (max-width: 992px) {
+
+    .navBarSearchBoxInput{
+        display: none;
+        width: 150px;
+    }
+    .navBarSearchBox{
+        padding: 10px;
+        cursor: pointer;
+    }
+    .navBarMenu{
+        display: flex;
+    }
+    .mainSearchIcon{
+        display: none;
+    }
+    .mainSearchIconResponse{
+        display: flex;
+    }
+}
+@media only screen and (max-width: 768px) {
+    .navBarMainHeader{
+        display: none;
+    }
+
+} 

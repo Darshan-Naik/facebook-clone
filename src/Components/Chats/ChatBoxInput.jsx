@@ -16,8 +16,8 @@ function ChatBoxInput() {
     },[text])
     return (
         <div className={`chatBoxInputContainer flexBox`}>
-         { iconVisibility && <> <CreateFilledIcon />
-            <PhotosIcon /> </>}
+            <CreateFilledIcon />
+             { iconVisibility && <>  <PhotosIcon /> </>}
             <div className="chatBoxInput flexBox">
                 <input  type="text"  value={text} placeholder="Aa" autoFocus onChange={(e)=>setText(e.target.value)} />
                 <EmojiIcon />

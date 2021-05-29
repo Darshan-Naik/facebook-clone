@@ -1,25 +1,59 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import "../../Styles/Chats/Chats.css"
+import ActiveChatBubble from './ActiveChatBubble'
 import ChatBox from './ChatBox'
 import ChatBubble from './ChatBubble'
-
+import {ReactComponent as DotsIcon} from  "../../Icons/dots.svg"
+import {ReactComponent as CloseIcon} from  "../../Icons/close.svg"
+import {ReactComponent as MinimizeIcon} from  "../../Icons/minimize.svg"
+import { closeAllMessage, minimizeAllMessage } from '../../Redux/App/actions'
 function Chats() {
-    const activeMessages = useSelector(store=>store.app.activeMessages)
+    const [optionVisibility,setOptionVisibility] = React.useState(false)
+    const [optionVisibilityBox,setOptionVisibilityBox] = React.useState(false)
+    const {activeMessages,inActiveMessages} = useSelector(store=>store.app)
     const [activeChatIndex,setActiveChatIndex] = React.useState(0)
+    const dispatch = useDispatch()
+
     const handleActiveChatBox = (index)=>{
         setActiveChatIndex(index)
     }
-    React.useEffect(()=>{
-        setActiveChatIndex(activeMessages.length-1)
-    },[activeMessages])
-
+    const handleOption =()=>{
+        setOptionVisibilityBox(!optionVisibilityBox)
+        setOptionVisibility(true)
+    }
+    const handleCloseAll = ()=>{
+        dispatch(closeAllMessage())
+    }
+    const handleMinimize = ()=>{
+        dispatch(minimizeAllMessage())
+    }
     return (
-        <>
-        <div className="chatsContainer flexBox">
-            {activeMessages.map((val,i)=><ChatBox active={activeChatIndex === i} handleActiveChatBox={handleActiveChatBox} index={i}/>)}
+        <> 
+        <div className="activeChatBubbleContainer" onMouseEnter={()=>setOptionVisibility(true)} onMouseLeave={()=>!optionVisibilityBox && setOptionVisibility(false)}>
+           {optionVisibility && (activeMessages.length || inActiveMessages.length ) ? <div className="bubbleOptions flexBox" onClick={handleOption}>
+            <DotsIcon/>
+           {optionVisibilityBox && <div className="bubbleOptionBox">
+                <div className="flexBox bubbleOptionIconBox" onClick={handleCloseAll}>
+                    <CloseIcon />
+                    <p>Close all chats</p>
+                </div>
+                <div className="flexBox bubbleOptionIconBox" onClick={handleMinimize}>
+                    <MinimizeIcon />
+                    <p>Minimize Open chats</p>
+                </div>
+            </div>}
+
+            </div> : null}
+            <div className="activeChatBubbleBox">
+            {inActiveMessages.map(({userDetails,chatId},i)=><ActiveChatBubble chatId={chatId} {...userDetails} />)}
+            </div>
+            <ChatBubble />
+            <div className="chatsContainer flexBox">
+            {activeMessages.map(({userDetails,chatId},i)=><ChatBox chatId={chatId} data={userDetails} active={activeChatIndex === i} handleActiveChatBox={handleActiveChatBox} index={i}/>)}
         </div>
-        <ChatBubble />
+        </div>
+        
         </>
     )
 }

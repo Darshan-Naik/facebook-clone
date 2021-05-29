@@ -10,6 +10,8 @@
   --secondary-2: rgb(147, 96, 247);
   --secondary-3: rgb(219, 26, 139);
   --secondary-4: #42b72a;
+  --secondary-5: #32af19;
+  --secondary-6: #146fe7;
 
   --primary-background: #fff;
   --secondary-background-1: #f0f2f5;
@@ -38,8 +40,8 @@
   --secondary-icon: #65676b;
   --secondary-text: #65676b;
 
-  --black : #000;
-  --white : #fff;
+  --black: #000;
+  --white: #fff;
 
   --navBar-height : 50px;
   --nav-bar-background-gradient: linear-gradient(to top, #FFFFFF, rgba(255,255,255), rgba(255,255,255,.7), rgba(255,255,255,.4), rgba(255,255,255,0));

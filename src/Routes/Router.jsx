@@ -4,14 +4,24 @@ import { Switch, Route } from "react-router-dom";
 import Home from "../Components/Pages/Home";
 import LoginPage from '../Components/Login/LoginPage';
 import UserProfilePage from "../Components/UserProfile/UserProfilePage";
+import Chats from '../Components/Chats/Chats';
+import SideBar from '../Components/SideBar/SideBar';
+
+
 
 function Router() {
+    
     return (
         <>
               <NavBar />
+              <Chats />
             <Switch>
                 <Route path="/" exact>
                    <Home />
+                </Route>
+                <Route path="/menu" exact>
+                 
+                   <SideBar />
                 </Route>
                 <Route path="/login" exact>
                    <LoginPage />
