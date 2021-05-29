@@ -1,26 +1,10 @@
+import { contacts } from "../../Utils/localData";
 import { ADD_ACTIVE_MESSAGE, ADD_IN_ACTIVE_MESSAGE, ADD_IN_ACTIVE_MESSAGE_TO_ACTIVE_MESSAGE, CLOSE_ALL_MESSAGE, MINIMIZE_ALL_MESSAGE, REMOVE_ACTIVE_MESSAGE, REMOVE_IN_ACTIVE_MESSAGE } from "./actionTypes";
 
 const init = {
     activeMessages :[],
     inActiveMessages :[],
-    activeContacts: [
-        {
-            first_name: "Bingo",
-            last_name: "Tangles"
-        },
-        {
-            first_name: "Darshan",
-            last_name: "Boss"
-        },
-        {
-            first_name: "Ankit",
-            last_name: "Manager"
-        },
-        {
-            first_name: "Soumyadri",
-            last_name: "cool"
-        }
-    ]
+    activeContacts: [...contacts]
 }
 
 export const appReducer = (state=init,{type,payload})=>{

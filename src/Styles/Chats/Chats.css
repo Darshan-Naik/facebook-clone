@@ -137,6 +137,7 @@
     height: 100%;
     padding:10px;
     height: fit-content;
+    max-height: 350px;
     width: fit-content; 
     overflow: scroll;
 }
