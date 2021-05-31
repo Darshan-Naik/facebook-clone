@@ -1,10 +1,10 @@
 import React from 'react'
 
-function NotificationBubble({width="20px",height="20px",color="#F02849",top=-5,right=-3,number}) {
+function NotificationBubble({width="18px",height="18px",color="#F02849",top=-5,right=-3,number}) {
     return number? (
-        <div className="notificationBubble" style={{width ,height,backgroundColor:color, top,
+        <div className="notificationBubble flexBox" style={{width ,height,backgroundColor:color, top,
             right}}>
-                {number}
+               <p>{number}</p> 
         </div>
     ) : null
 }
