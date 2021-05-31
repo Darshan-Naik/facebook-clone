@@ -15,6 +15,7 @@ import {ReactComponent as BackIcon} from  "../../Icons/back.svg"
 import IconWrapper from './IconWrapper'
 import IconWrapperCircle from './IconWrapperCircle'
 import { useHistory } from 'react-router'
+import AccountMenu from './AccountMenu'
 
 function NavBar() {
     const[refresh,setRefresh] = React.useState(true)
@@ -71,17 +72,17 @@ function NavBar() {
                 </IconWrapper>
             </div>
             <div className="navBarUserBox flexBox">
-               <IconWrapperCircle label="Create">
-                    <CreateIcon />
+               <IconWrapperCircle label="Create" icon={ <CreateIcon /> }>
+                    
                 </IconWrapperCircle >
-                <IconWrapperCircle label="Messenger">
-                    <MessageIcon />
+                <IconWrapperCircle label="Messenger" icon={ <MessageIcon /> }>
+                    
                 </IconWrapperCircle>
-                <IconWrapperCircle label="Notifications">
-                    <NotificationIcon />
+                <IconWrapperCircle label="Notifications" icon={ <NotificationIcon /> }>
+                    
                 </IconWrapperCircle>
-                <IconWrapperCircle label="Account">
-                    <DownArrowIcon />
+                <IconWrapperCircle label="Account" icon={ <DownArrowIcon/> }>
+                    <AccountMenu />
                 </IconWrapperCircle>
             </div>
             
