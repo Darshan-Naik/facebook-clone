@@ -1,6 +1,7 @@
 .postCardContainer{
-    max-width: 500px;
-    width: 100%;
+    max-width: 676px;
+    min-width: 400px;
+    width: 80%;
     /* border: 1px solid black; */
     margin: auto;
     border-radius: 8px;
@@ -21,11 +22,8 @@
     margin: 0 10px;
     margin-top: 10px;
     margin-left: 0;
+    cursor: pointer;
     
-}
-.postCardLike{
-    font-size: 14px;
-    color: var(--secondary-text);
 }
 
 .postCardHeadBox2{
@@ -38,18 +36,27 @@
 .postCardHeadBox2 strong{
     font-size: 13px;
     font-weight: 600;
+    cursor: pointer;
+}
+.postCardHeadBox2 strong:hover{
+    text-decoration: underline;
+   
 }
 .postCardHeadBox2 span{
     font-size: 12px;
     font-weight: 400;
+    cursor: pointer;
+}
+.postCardHeadBox2 span:hover{
+    text-decoration: underline;
+   
 }
 
 .postCardHeadBox3{
     width: 36px;
     height: 36px;
-    padding-top: 10px;
-    margin-left: 10px;
     border-radius: 50%;
+    cursor: pointer;
 }
 .postCardHeadBox3:hover {
     background: var(--hover-overlay);
@@ -66,24 +73,81 @@
 .postCardImage img{
     width: 100%;
 }
+.postCardLike{
+    justify-content: space-between;
+    margin: 5px 15px;
+}
+.postCardLike p{
+    font-size: 14px;
+    color: var(--secondary-icon);
+    cursor: pointer;
+   
+}
+.postCardLike p:hover{
+    text-decoration: underline;
+   
+}
+.postCardLike svg{
+    width: 18px;
+    height: 18px;
+    fill: var(--white);
+    margin: 5px;
+    cursor: pointer;
+}
 
 .postCardFooter {
     justify-content: space-around;
-    margin: 0 20px;
+    margin: 0 15px;
     border-top: 1px solid var( --secondary-text);
-    border-bottom: 1px solid var( -se--secondary-text);
+   
+}
+.postCardFooterBox{
+    width: 30%;
+}
+.postCardFooterBox:hover{
+    background: var(--hover-overlay);
+    border-radius: 2px;
+    width: 30%;
 }
 
 .postCardFooter svg{
     width: 18px;
     fill: var(--secondary-icon);
     margin: 5px;
+    cursor: pointer;
     
     
 }
 .postCardFooter p{
     color: var(--secondary-icon);
     font-size: 15px;
+    cursor: pointer;
+    font-weight: 500;
+}
+.postCardCommentContainer{
+    margin: 0 15px;
+    border-top: 1px solid var( --secondary-text);
+    flex-direction: column;
+    justify-content:space-between;
+    
+}
+.PostCardInputBox img{
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+
+}
+.commentInput{
+    flex:2;
+    
+}
 
 
+@media only screen and (max-width: 992px) {
+    .postCardContainer{
+        max-width: 500px;
+       
+    }
+
+    
 }

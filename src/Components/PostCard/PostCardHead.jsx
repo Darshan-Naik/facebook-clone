@@ -12,7 +12,7 @@ function PostCardHead({img,clientName,time}) {
                 <div><strong>{clientName||"NAME"}</strong></div>
                 <div><span>{time||"Yesterday at 9:50 AM"}</span></div> 
             </div>
-            <div className="postCardHeadBox3"><DotsIcon/></div>
+            <div className="postCardHeadBox3 flexBox"><DotsIcon/></div>
             
         </div>
     )

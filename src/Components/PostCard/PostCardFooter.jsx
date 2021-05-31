@@ -8,9 +8,9 @@ import {ReactComponent as ShareIcon} from  "../../Icons/shareIcon.svg"
 function PostCardFooter() {
     return (
         <div className="postCardFooter flexBox">
-            <div className="flexBox" ><LikeIcon/><p>Like</p></div>
-            <div className="flexBox"><CommentIcon/><p>Comments</p></div>
-            <div className="flexBox"><ShareIcon/><p>Share</p></div>
+            <div className="postCardFooterBox flexBox" ><LikeIcon/><p>Like</p></div>
+            <div className="postCardFooterBox flexBox"><CommentIcon/><p>Comments</p></div>
+            <div className="postCardFooterBox flexBox"><ShareIcon/><p>Share</p></div>
             
         </div>
     )
