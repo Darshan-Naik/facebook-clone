@@ -31,9 +31,48 @@
     background-size: cover;
 }
 
+.userProfileEditCoverPhotoContainer {
+    width: 170px;
+    position: absolute;
+    right: 50%;
+    bottom: 50%;
+    border-radius: 6px;
+    cursor: pointer;
+    background-color: red;
+    border: 2px solid black;
+    transform: translate(-21%, -50%);
+}
+
+.userProfileEditCoverPhotoBox {
+    width: 100%;
+    height: 36px;
+    padding: 6px 5px;
+    border-radius: 6px;
+    border: 2px solid transparent;
+}
+
+.userProfileEditCoverPhotoContainer:active {
+    border: 5px solid transparent;
+}
+
+.userProfileEditCoverCamIcon {
+    width: 24px;
+    height: 24px;
+    margin-right: 5px;
+    vertical-align: middle;
+}
+
+.userProfileEditCoverNamePlate {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--primary-text);
+    vertical-align: middle;
+}
+
 .userNameContainer {
     background: var(--white);
     padding: 10px;
+    position: relative;
 }
 
 .userNamePlate {
@@ -56,18 +95,27 @@
     text-decoration: underline;
 }
 
-.addBioTextField {
+.addBoxTexFieldContainer {
     width: 320px;
-    max-width: 100%;
+    margin: auto;
+}
+
+.addBioTextField {
+    width: 100%;
     min-height: 78px;
     text-align: center;
     padding: 10px 14px;
     border-radius: 6px;
     color: var(--primary-text);
-    border: 1px solid #ced0d4; /* --divider */
+    border: 1px solid var(--divider);
     outline: none;
-    background: #f0f2f5; /* --comment-background */
+    resize: none;
+    background-color: var(--comment-background);
     transform: translate(0, -5%);
+}
+
+.addBioTextField::placeholder {
+    color: var(--placeholder-text);
 }
 
 .addBioTextField:focus {
@@ -75,26 +123,87 @@
     background: var(--white);
 }
 
+.addBioTextField:focus::placeholder {
+    color: var(--disabled-button-text);
+}
+
+.addBioTextField:focus:hover {
+    background-color: var(--secondary-background-3);
+}
+
 .addBioTextField:hover {
-    background: var(--shadow-1);
+    background: var(--secondary-background-2);
+}
+
+.addBioTextFieldCharCount {
+    font-size: 12px;
+    font-weight: 400;
+    text-align: right;
+    padding-bottom: 8px;
+    color: var(--secondary-text);
+}
+
+.addBioButtonContainer {
+    justify-content: space-between;
+}
+
+.addBioGlobeIcon {
+    width: 27px;
+    height: 27px;
+    vertical-align: middle;
+}
+
+.addBioButtonBox button {
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    color: var(--white);
+    font-weight: 600;
+    outline: none;
+    background-color: var(--primary-1);
+}
+
+.addBioButtonBox button:first-child {
+    margin: 0 5px;
+    color: var(--primary-text);
+    background-color: var(--comment-background);
+}
+
+.addBioButtonBox button:first-child:hover {
+    background-color: var(--hover-overlay);
+}
+
+.addBioButtonBox button:last-child:hover {
+    background-color: var(--primary-button-hover);
+}
+
+.addBioButtonBox button:disabled {
+    cursor:not-allowed;
+    color: var(--disabled-button-text);
+    background-color: var(--comment-background);
+}
+
+.addBioButtonBox button:disabled:hover {
+    background-color: var(--comment-background);
 }
 
 /* UserProfilePicture Component CSS */
 
 .userProfilePictureContainer {
-    position: relative;
-}
-
-.userProfilePictureBox {
     width: 180px;
-    height: 180px;
     border-radius: 50%;
-    cursor: pointer;
-    border: 4px solid var(--white);
     position: absolute;
     bottom: 0;
     left: 50%;
+    z-index: 5;
     transform: translate(-50%, 10%);
+}
+
+.userProfilePictureBox {
+    height: 180px;
+    cursor: pointer;
+    border: 4px solid var(--white);
 }
 
 .userProfilePicture {
@@ -130,13 +239,165 @@
     transform: translate(4%, 18%);
 }
 
-.userProfilePicEditOptions {
+.userProfilePicEditOptionsContainer {
     width: 350px;
+    padding: 10px;
+    border-radius: 5px;
     position: absolute;
     bottom: 0;
-    background: #fff;
+    left: 50%;
+    z-index: 20;
+    background: var(--white);
+    box-shadow: 0px 0px 10px 5px var(--shadow-1);
+    transform: translate(-50%, 150%);
+}
+
+.userProfilePicEditOptionsBox {
+    justify-content: space-between;
+}
+
+.userProfilePicEditOptionNamePlate .photosIcon {
+    margin-right: 10px;
+}
+
+.userProfilePicEditOptionsBox button {
+    padding: 7px 10px;
     border-radius: 5px;
-    padding: 8px;
-    box-shadow: 0px 0px 10px #00000060;
-    transform: translate(84%, 160%);
+    border: none;
+    cursor: pointer;
+    color: var(--white);
+    background-color: var(--primary-4);
+    transition: all 0.2s ease-in-out;
+}
+
+.userProfilePicEditOptionsBox button:hover {
+    background-color: var(--primary-1);
+}
+
+/* UserProfileNavBar Component CSS */
+
+.userProfileNavBarContainer {
+    background-color: var(--white);
+    position: sticky;
+    top: 40px;
+    transition: all 0.3s ease-in-out;
+}
+
+.userProfileNav {
+    background: var(--white);
+    margin: 0 21%;
+    padding: 3px 0 0;
+    border-top: 1px solid var(--divider);
+    justify-content: space-between;
+}
+
+.userProfileNavMenuContainer {
+    flex: 1;
+    height: 60px;
+    margin-right: 20px;
+    justify-content: left;
+}
+
+.userProfileNavMenuNameBox {
+    flex-grow: 1;
+    padding: 18px 0;
+    border-radius: 6px;
+    border-bottom: 3.5px solid var(--white);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.userProfileNavMenuName {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--secondary-text);
+}
+
+.userProfileNavMenuFriendsCount {
+    font-size: 12px;
+    font-weight: 400;
+    margin-left: 5px;
+    color: var(--secondary-text);
+}
+
+.userProfileNavMenuNameBox:hover {
+    background: var(--secondary-background-1);
+}
+
+.userProfileNavMenuNameBox .downArrowIcon {
+    width: 15px;
+    height: 15px;
+    vertical-align: middle;
+    margin-left: 5px;
+    fill: var(--secondary-text)
+}
+
+.userProfileNavMenuName.active {
+    flex-grow: 1;
+    padding: 18px 0;
+    color: var(--primary-1);
+    border-bottom: 3.5px solid var(--primary-1);
+    text-decoration: none;
+}
+
+.userProfileNavButton {
+    margin-right: 8px;
+    padding: 8px 11px;
+    border-radius: 6px;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+}
+
+.userProfileNavButtonIcons {
+    width: 16px;
+    height: 16px;
+    margin-right: 6px;
+}
+
+.userProfileNavButtonIconsFilter {
+    filter: invert(100%);
+}
+
+.userProfileNavButton .messgeIcon {
+    margin-right: 4px;
+}
+
+.addToStoryContainer {
+    background-color: var(--primary-1);
+}
+
+.addToStoryContainer:hover {
+    background-color: var(--primary-button-hover);
+}
+
+.addToStoryContainer span {
+    color: var(--white);
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.editProfileContainer {
+    background-color: var(--secondary-background-2);
+}
+
+.editProfileContainer:hover {
+    /* background-color: ; */
+}
+
+.editProfileContainer span {
+    color: var(--primary-text);
+    font-weight: 500;
+}
+
+.userProfileNavDotsBox {
+    width: 50px;
+    cursor: pointer;
+    padding: 8px 11px;
+    border-radius: 6px;
+    background-color: var(--secondary-background-2);
+}
+
+.userProfileNavDotsBox .DotsIcon {
+    vertical-align: middle;
 }

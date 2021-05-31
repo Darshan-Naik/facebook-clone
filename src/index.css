@@ -45,6 +45,14 @@
 
   --navBar-height : 50px;
   --nav-bar-background-gradient: linear-gradient(to top, #FFFFFF, rgba(255,255,255), rgba(255,255,255,.7), rgba(255,255,255,.4), rgba(255,255,255,0));
+
+  --divider: #ced0d4;
+  --comment-background: #f0f2f5;
+
+  --primary-button-hover: #216FDB;
+  --disabled-button-text: #bcc0c4;
+
+  --placeholder-text: #8A8D91;
 }
 
 body {

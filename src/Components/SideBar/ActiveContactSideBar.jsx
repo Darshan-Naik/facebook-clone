@@ -4,6 +4,7 @@ import {ReactComponent as SearchIcon} from  "../../Icons/search.svg"
 import "../../Styles/SideBar/SideBar.css";
 import { useDispatch, useSelector } from 'react-redux';
 import { addActiveMessage } from '../../Redux/App/actions';
+import { ReactComponent as ContactBarDots } from "../../Icons/dots.svg"
 
 const ActiveContactSideBar = () => {
     const activeContacts = useSelector( state => state.app.activeContacts ); 
@@ -28,6 +29,9 @@ const ActiveContactSideBar = () => {
                         </div>
                         <div className="contactIconContainer">
                             <SearchIcon />
+                        </div>
+                        <div className="contactIconContainer">
+                            <ContactBarDots />
                         </div>
                     </div>
                 </div>

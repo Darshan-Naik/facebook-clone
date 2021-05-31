@@ -1,7 +1,7 @@
 .sideBarContainer {
     min-width: 200px;
     max-width: 350px;
-    width: 15vw;
+    width: 25vw;
     padding: 10px;
 }
 
@@ -74,6 +74,13 @@
 .contactHeaderContentContainer .searchIcon {
     width: 19px;
     height: 19px;
+    opacity: 0.6;
+    vertical-align: middle;
+}
+
+.contactIconContainer .DotsIcon {
+    width: 19px;
+    height: 17px;
     opacity: 0.6;
     vertical-align: middle;
 }
