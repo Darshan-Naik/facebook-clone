@@ -109,13 +109,53 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background-color: var(--media-hover);
+    background-color: var(--secondary-background-1);
     margin: 0 5px;
     position: relative;
     cursor: pointer;
 }
 .navBarUserBox .iconWrapper-2:hover{
     background-color: var(--hover-overlay-2);
+}
+
+.accountMenuContainer{
+    position: absolute;
+    min-width: 200px;
+    top: 50px;
+    right: 0;
+    background-color: var(--primary-background);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px var(--shadow-1),0 8px 18px var(--shadow-2);
+}
+.accountMenuContainer::after{
+    content: "";
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    top: -5px;
+    right: 12px;
+    background-color: var(--primary-background);
+    transform: rotate(45deg);
+}
+.darkModeBox{
+    justify-content: space-between;
+}
+
+.themeButton{
+    width: 50px;
+    height: 28px;
+    border-radius: 500px;
+    background-color: var(--secondary-background-1);
+
+    border: 1px solid teal;
+}
+.themeButtonBubble{
+    background-color: var(--supplementary-3);
+    height: 24px;
+    width: 24px;
+    border-radius: 50%;
+    cursor: pointer;
 }
 
 @media only screen and (max-width: 992px) {

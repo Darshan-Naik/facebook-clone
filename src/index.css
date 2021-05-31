@@ -22,7 +22,7 @@
 
   --supplementary-1: rgb(255, 122, 105);
   --supplementary-2: rgb(241, 168, 23);
-  --supplementary-3: rgb(49, 162, 76);
+  --supplementary-3: rgb(218, 218, 218);
   --supplementary-4: rgb(50, 52, 54);
 
   --shadow-1: rgba(0, 0, 0, 0.1);
@@ -42,6 +42,32 @@
   --white: #fff;
 
   --navBar-height: 50px;
+}
+
+.dark{
+  --primary-background: #242526;
+  --secondary-background-1: #3A3B3C;
+  --secondary-background-2: #18191A;
+  --secondary-background-3: #edeff1;
+
+  --hover-overlay: rgba(255, 255, 255, 0.1);
+  --media-hover: rgba(68, 73, 80, 0.15);
+  --hover-overlay-2: rgba(255, 255, 255, 0.25);
+
+  --supplementary-3: rgb(49, 162, 76);
+
+  --shadow-1: rgba(252, 252, 252, 0.1);
+  --shadow-2: rgba(0, 0, 0, 0.2);
+  --shadow-5: rgba(0, 0, 0, 0.5);
+  --shadow-7: rgba(0, 0, 0, 0.7);
+  --shadow-8: rgba(0, 0, 0, 0.8);
+  --shadow-9: rgb(224, 224, 224);
+
+  --primary-icon: #E4E6EB;
+  --primary-text: #E4E6EB;
+
+  --secondary-icon: #B0B3B8;
+  --secondary-text: #B0B3B8;
 }
 
 body {

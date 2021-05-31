@@ -8,11 +8,18 @@
 }
 .statusDot,.notificationBubble{
   border-radius: 50%;
-  border: 2px solid var(--white);
+  border: 2px solid var(--primary-background);
   position: absolute;
-  font-size: 12px;
   color: var(--white);
   font-weight: 500;
+}
+.notificationBubble{
+  border: none;
+ 
+}
+.notificationBubble p{
+  color: var(--white);
+  font-size: 12px;
 }
 
 .test{
