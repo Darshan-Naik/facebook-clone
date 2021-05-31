@@ -10,24 +10,50 @@ import {ReactComponent as CreateIcon} from  "../../Icons/create.svg"
 import {ReactComponent as MessageIcon} from  "../../Icons/message.svg"
 import {ReactComponent as NotificationIcon} from  "../../Icons/notification.svg"
 import {ReactComponent as DownArrowIcon} from  "../../Icons/downArrow.svg"
+import {ReactComponent as MenuIcon} from  "../../Icons/menu.svg"
+import {ReactComponent as BackIcon} from  "../../Icons/back.svg"
 import IconWrapper from './IconWrapper'
 import IconWrapperCircle from './IconWrapperCircle'
+import { useHistory } from 'react-router'
 
 function NavBar() {
     const[refresh,setRefresh] = React.useState(true)
-
+    const [searchBoxVisibility,setSearchBoxVisibility] = React.useState(false)
+    const path = React.useRef(true)
+    const history = useHistory()
     const handleRefresh=()=>{
         setRefresh(!refresh)
+    }
+    const handleMenu=()=>{
+        if(path.current){
+            path.current = !path.current;
+            history.push("/menu")
+        } else {
+            path.current = !path.current;
+            history.goBack()
+        }
+       
     }
     return (
         <div className="navBarContainer flexBox">
 
             <div className="navBarLogo flexBox">
-                <MainLogo/>
-                <div className="navBarSearchBox flexBox">
-                <SearchIcon/>
-                <input type="text" placeholder="Search Facebook" />
+               {!searchBoxVisibility ? <MainLogo onClick={()=>history.push("/")}/> : (<div className="searchBarBackButton flexBox" onClick={()=>setSearchBoxVisibility(false)}>
+                <BackIcon/> 
+            </div>)}
+                <div className="navBarSearchBox flexBox" style={{padding:searchBoxVisibility &&"4px 10px"}} >
+               <div className="mainSearchIcon flexBox">
+                    <SearchIcon />
+                </div> 
+                <div className="mainSearchIconResponse flexBox">
+                    <SearchIcon onClick={()=>setSearchBoxVisibility(true)}/>
                 </div>
+            
+                <input type="text" placeholder="Search Facebook" style={{display: searchBoxVisibility && "flex"}} className="navBarSearchBoxInput"/>
+                </div>
+              { !searchBoxVisibility && <div className="navBarMenu flexBox">
+                    <MenuIcon onClick={handleMenu} />
+                </div>}
             </div>
 
             <div className="navBarMainHeader flexBox">
@@ -45,7 +71,7 @@ function NavBar() {
                 </IconWrapper>
             </div>
             <div className="navBarUserBox flexBox">
-                <IconWrapperCircle label="Create">
+               <IconWrapperCircle label="Create">
                     <CreateIcon />
                 </IconWrapperCircle >
                 <IconWrapperCircle label="Messenger">

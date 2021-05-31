@@ -1,0 +1,32 @@
+.MainContainer{
+    display: flex;
+    padding:0 10px;
+    overflow: hidden;
+    height: calc(100vh - var(--navBar-height));
+}
+.mainPostsContainer{
+    flex-grow: 1;
+    height: calc(100vh - var(--navBar-height));
+    overflow: auto;
+    display: grid;
+    gap: 15px;
+    padding-top: 15px;
+}
+.mainPostsContainer::-webkit-scrollbar{
+    width: 0;
+    height: 0;
+    visibility: hidden;
+}
+
+@media only screen and (max-width: 992px) {
+
+    .mainLeftSidebarContainer{
+        display: none;
+    }
+}
+@media only screen and (max-width: 768px) {
+
+    .mainRightSidebarContainer{
+        display: none;
+    }
+} 
