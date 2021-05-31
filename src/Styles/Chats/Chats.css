@@ -17,7 +17,7 @@
     transition: all .2s ease-in-out;
 }
 .chatBubble:hover{
-    background-color: var(--secondary-background-2);
+    background-color: var(--hover-overlay);
 }
 .chatBubble .newMessageIcon{
     fill: var(--primary-icon);
@@ -209,7 +209,7 @@
    top:-6px;
    right: -5px;
    z-index: 5;
-    background-color: var(--white);
+    background-color: var(--secondary-background-1);
     width: 20px;
     height: 20px;
     border-radius: 50%;
@@ -217,7 +217,7 @@
     transition: all .2s ease-in-out;
 }
 .activeChatBubbleCloseButton svg{
-    stroke: var(--black);
+    stroke: var(--primary-icon);
     width: 15px;
     height: 15px;
 }

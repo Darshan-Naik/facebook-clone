@@ -7,9 +7,13 @@ import Chats from '../Components/Chats/Chats';
 import SideBar from '../Components/SideBar/SideBar';
 
 function Router() {
+    const[refresh,setRefresh] = React.useState(true)
+    const handleRefresh = ()=>{
+        setRefresh(!refresh)
+    }
     return (
         <>
-              <NavBar />
+              <NavBar refresh={refresh} handleRefresh={handleRefresh} />
               <Chats />
             <Switch>
                 <Route path="/" exact>
