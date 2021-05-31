@@ -8,10 +8,7 @@ import UserProfileAboutPage from "../Components/UserProfile/UserProfileAbout/Use
 import Chats from '../Components/Chats/Chats';
 import SideBar from '../Components/SideBar/SideBar';
 
-
-
 function Router() {
-    
     return (
         <>
               <NavBar />

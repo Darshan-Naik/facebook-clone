@@ -6,9 +6,15 @@ import LoginForm from './LoginForm';
 
 function LoginPage(){
     return (
-        <div className="loginPageContainer flexBox">
-            <LoginLogo />
-            <LoginForm />
+        <div>
+            <div className="loginPageContainer flexBox">
+                <LoginLogo />
+                <LoginForm />
+            </div>
+            <div className="LoginPageFooter">
+                <p>English (UK)</p>
+                <p>Facebook © 2021</p>
+            </div>
         </div>
 
 
