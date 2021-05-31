@@ -24,7 +24,7 @@ function Router() {
                 <Route path="/login" exact>
                    <LoginPage />
                 </Route>
-                <Route path="/:user_name" exact>
+                <Route path="/profile/:user_name" exact>
                     <UserProfilePage />
                 </Route>
                 <Route path="/:user_name/about" exact>

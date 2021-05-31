@@ -32,32 +32,29 @@
 }
 
 .userProfileEditCoverPhotoContainer {
-    width: 170px;
+    max-width: 170px;
     position: absolute;
-    right: 50%;
-    bottom: 50%;
+    right: 0%;
+    bottom: 0%;
     border-radius: 6px;
     cursor: pointer;
-    background-color: red;
-    border: 2px solid black;
-    transform: translate(-21%, -50%);
+    background-color: var(--white);
+    transform: translate(-20%, -40%);
 }
 
 .userProfileEditCoverPhotoBox {
     width: 100%;
-    height: 36px;
     padding: 6px 5px;
-    border-radius: 6px;
+    border: 3px solid transparent;
+}
+
+.userProfileEditCoverPhotoBox:active {
     border: 2px solid transparent;
 }
 
-.userProfileEditCoverPhotoContainer:active {
-    border: 5px solid transparent;
-}
-
 .userProfileEditCoverCamIcon {
-    width: 24px;
-    height: 24px;
+    width: 22px;
+    height: 22px;
     margin-right: 5px;
     vertical-align: middle;
 }
@@ -284,9 +281,10 @@
 }
 
 .userProfileNav {
-    background: var(--white);
-    margin: 0 21%;
+    max-width: 875px;
+    margin: auto;
     padding: 3px 0 0;
+    background: var(--white);
     border-top: 1px solid var(--divider);
     justify-content: space-between;
 }
@@ -322,6 +320,47 @@
 
 .userProfileNavMenuNameBox:hover {
     background: var(--secondary-background-1);
+}
+
+.userProfileMoreOptions {
+    flex-grow: 1;
+    position: relative;
+    display: none;
+}
+
+.userProfileMoreOptionsItemContainer {
+    display: none;
+    width: 300px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 10px;
+    flex-direction: column;
+    align-items:flex-start;
+    border-radius: 5px;
+    background: var(--white);
+    transform: translate(0, 102%);
+}
+
+.userProfileMoreOptionsItemContainer > a {
+    width: 100%;
+    border-radius: 5px;
+    padding: 6px 10px;
+    font-size: 14px;
+    text-align: left;
+    text-decoration: none;
+    color: var(--primary-text);
+    transition: all 0.3s ease-in-out;
+}
+
+.MoreOptionsItemBox {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--primary-text);
+}
+
+.userProfileMoreOptionsItemContainer > a:hover {
+    background-color: var(--hover-overlay);
 }
 
 .userProfileNavMenuNameBox .downArrowIcon {
@@ -400,4 +439,58 @@
 
 .userProfileNavDotsBox .DotsIcon {
     vertical-align: middle;
+}
+
+.userProfileNavAfterScrollBox {
+    padding: 9px 7px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.userProfileNavAfterScrollBox:hover {
+    background-color: var(--hover-overlay);
+}
+
+.userProfileNavAfterScrollProfileImage {
+    width: 38px;
+    height: 38px;
+    margin-right: 10px;
+    border-radius: 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.userProfileNavAfterScrollNamePlate {
+    font-weight: 500;
+    color: var(--primary-text);
+}
+
+/* UserProfile Media Queries */
+
+@media only screen and ( max-width: 800px ) {
+    
+    /* User Profile NavBar Media Queries CSS */
+
+    .userProfileMoreOptions {
+        display: block;
+    }
+
+    .hideUserProfileMenuItem {
+        display: none;
+    }
+
+    .userProfileMoreOptionsItemContainer {
+        display: flex;
+    }
+}
+
+@media only screen and ( max-width: 600px ) {
+
+    /* User Profile Page Media Queries CSS */
+
+    .userProfileEditCoverNamePlate {
+        display: none;
+    }
 }

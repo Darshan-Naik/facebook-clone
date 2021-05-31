@@ -76,6 +76,7 @@
     height: 19px;
     opacity: 0.6;
     vertical-align: middle;
+    fill: var(--primary-icon);
 }
 
 .contactIconContainer .DotsIcon {
