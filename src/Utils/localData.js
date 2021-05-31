@@ -18,5 +18,8 @@ export const contacts = [
         first_name: "Soumyadri",
         last_name: "cool",
         profilePic : "https://ca.slack-edge.com/T01HN2NGR0E-U01HEGW9WMD-9bd9e82b27a4-512"
-    }
+    },
+    
 ]
+
+

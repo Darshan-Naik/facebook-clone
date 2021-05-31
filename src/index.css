@@ -48,7 +48,7 @@
   --primary-background: #242526;
   --secondary-background-1: #3A3B3C;
   --secondary-background-2: #18191A;
-  --secondary-background-3: #edeff1;
+  --secondary-background-3: #3A3B3C;
 
   --hover-overlay: rgba(255, 255, 255, 0.1);
   --media-hover: rgba(68, 73, 80, 0.15);
@@ -61,7 +61,7 @@
   --shadow-5: rgba(0, 0, 0, 0.5);
   --shadow-7: rgba(0, 0, 0, 0.7);
   --shadow-8: rgba(0, 0, 0, 0.8);
-  --shadow-9: rgb(224, 224, 224);
+  --shadow-9: rgb(41, 41, 41);
 
   --primary-icon: #E4E6EB;
   --primary-text: #E4E6EB;

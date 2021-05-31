@@ -4,7 +4,14 @@ login => success
       global=>  current user ==> not a new user.
                    global=> fetch current user friends.
                     global=>  fetch friends posts=>comments,likes.  -- Dynamic.
+int = {
+      isAuth : false,
+      currentUser : {
 
+      },
+      token : "",
+      friends : []
+}
 
 
 application data => current active message = [{user1}]
