@@ -25,6 +25,7 @@ function NavBar() {
     const handleRefresh=()=>{
         setRefresh(!refresh)
     }
+    React.useEffect(handleRefresh,[history.location])
     const handleMenu=()=>{
         if(path.current){
             path.current = !path.current;
