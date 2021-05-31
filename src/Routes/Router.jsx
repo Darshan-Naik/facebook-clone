@@ -6,10 +6,7 @@ import LoginPage from '../Components/Login/LoginPage';
 import Chats from '../Components/Chats/Chats';
 import SideBar from '../Components/SideBar/SideBar';
 
-
-
 function Router() {
-    
     return (
         <>
               <NavBar />
