@@ -36,6 +36,7 @@
   padding: 20px 15px;
   border-radius: 8px;
   border: 1px solid var(--secondary-background-2);
+  background-color: var(--secondary-background-3);
 }
 .loginFormMainDiv > input:focus {
   border: 1px solid var(--primary-4);
@@ -43,7 +44,7 @@
 }
 .loginFormMainDiv > button {
   background-color: var(--primary-1);
-  color: var(--primary-background);
+  color: var(--white);
   margin: 8px 5px;
   padding: 3%;
   font-weight: 600;
@@ -61,7 +62,7 @@
 }
 .loginFormMainDiv > button:nth-last-child(1) {
   background-color: var(--secondary-4);
-  color: var(--primary-background);
+  color: var(--white);
   margin: 10px 80px;
   font-weight: 600;
   font-size: 17px;
