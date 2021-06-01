@@ -106,7 +106,7 @@
   background-color: var(--primary-background);
   box-shadow: 0px 0 5px 5px var(--shadow-1);
   border-radius: 10px;
-  padding-bottom: 25px;
+  padding-bottom: 15px;
 }
 .signUpContainer > .signUpH2 {
   font-size: 30px;
@@ -115,7 +115,7 @@
   padding: 3px;
   padding-top: 10px;
   margin-left: 22px;
-  margin-top: 25px;
+  margin-top: 10px;
 }
 .signUpContainer > .signUpP {
   font-size: 15px;
@@ -173,6 +173,47 @@
   margin-left: 22px;
   margin-top: 15px;
 }
+.signUpContainer > .dobSignUpContainer > div {
+  padding: 12px;
+  padding-bottom: 8px;
+  width: 120px;
+  margin-top: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
+  display: flex;
+  text-align: center;
+  border-radius: 5px;
+  border: 1px solid var(--shadow-1);
+  background-color: var(--secondary-background-1);
+}
+.signUpContainer > .dobSignUpContainer > div > p {
+  position: relative;
+  bottom: 4px;
+  left: 4px;
+}
+.signUpButton {
+  background-color: var(--secondary-4);
+  color: var(--white);
+  margin: 15px 60px;
+  font-weight: 600;
+  font-size: 17px;
+  padding: 8px 0;
+  border: 2px solid var(--secondary-4);
+  border-radius: 8px;
+  cursor: pointer;
+  width: 180px;
+}
+.signUpButton:hover {
+  background-color: var(--secondary-5);
+}
+.genderPtag {
+  font-size: 15px;
+  font-weight: 300;
+  text-align: left;
+  padding: 3px;
+  margin-left: 22px;
+  margin-top: 7px;
+}
 .signUpModel {
   width: 100%;
   height: 100vh;
@@ -185,6 +226,13 @@
   place-items: center;
   background-color: var(--shadow-9);
   z-index: 5;
+}
+.termsSignUpContainer {
+  font-size: 11px;
+  font-weight: 200;
+  text-align: left;
+  color: var(--black);
+  margin: 5px 30px;
 }
 /*Media Queries*/
 @media only screen and (max-width: 900px) {
