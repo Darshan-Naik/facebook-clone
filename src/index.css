@@ -1,4 +1,6 @@
 :root {
+  --accent: hsl(214, 89%, 52%);
+  
   --primary-1: #1877f2;
   --primary-2: rgb(134, 218, 255);
   --primary-3: rgb(95, 170, 255);
@@ -41,7 +43,18 @@
   --black: #000;
   --white: #fff;
 
-  --navBar-height: 51px;
+  --navBar-height : 50px;
+  --nav-bar-background: #FFFFFF;
+  --nav-bar-background-gradient: linear-gradient(to top, #FFFFFF, rgba(255,255,255), rgba(255,255,255,.7), rgba(255,255,255,.4), rgba(255,255,255,0));
+
+  --divider: #ced0d4;
+  --comment-background: #f0f2f5;
+
+  --primary-button-hover: #216FDB;
+  --disabled-button-text: #bcc0c4;
+
+  --placeholder-text: #8A8D91;
+  --filter-invert: 0;
 }
 
 .dark{
@@ -68,6 +81,11 @@
 
   --secondary-icon: #B0B3B8;
   --secondary-text: #B0B3B8;
+
+  --nav-bar-background: #242526;
+  --nav-bar-background-gradient: linear-gradient(to top, #242526, rgba(36,37,38,.9), rgba(36,37,38,.7), rgba(36,37,38,.4), rgba(36,37,38,0));
+
+  --filter-invert: 100%;
 }
 
 body {
