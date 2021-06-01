@@ -3,7 +3,7 @@ import NavBar from '../Components/NavBar/NavBar';
 import { Switch, Route } from "react-router-dom";
 import Home from "../Components/Pages/Home";
 import LoginPage from '../Components/Login/LoginPage';
-import UserProfilePage from "../Components/UserProfile/UserProfileHome/UserProfilePage";
+import UserProfilePageHeader from "../Components/UserProfile/UserProfileHome/UserProfilePageHeader";
 import UserProfileAboutPage from "../Components/UserProfile/UserProfileAbout/UserProfileAboutPage";
 import Chats from '../Components/Chats/Chats';
 import SideBar from '../Components/SideBar/SideBar';
@@ -28,11 +28,11 @@ function Router() {
                 <Route path="/login" exact>
                    <LoginPage />
                 </Route>
-                <Route path="/profile/:user_name" exact>
-                    <UserProfilePage />
+                <Route path="/:user_name" exact>
+                    <UserProfilePageHeader forceRefresh={handleRefresh} />
                 </Route>
                 <Route path="/:user_name/about" exact>
-                    <UserProfileAboutPage />
+                    <UserProfileAboutPage forceRefresh={handleRefresh} />
                 </Route>
             </Switch>
         </>

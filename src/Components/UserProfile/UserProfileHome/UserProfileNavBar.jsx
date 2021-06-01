@@ -5,9 +5,9 @@ import { ReactComponent as DownArrowIcon } from "../../../Icons/downArrow.svg";
 import UserProfileNavLinkWrapper from "./UserProfileNavLinkWrapper";
 import { Link } from "react-router-dom";
 
-const UserProfileNavBar = ({currentUser = true}) => {
+const UserProfileNavBar = ({currentUser}) => {
     const [userProfileNavBarState, setUserProfileNavBarState] = useState(true);
-    const [userProfileMoreOptionsState, setUserProfileMoreOptionsState] = useState(true);
+    const [userProfileMoreOptionsState, setUserProfileMoreOptionsState] = useState(false);
 
     const userProfileNavBarRef = useRef();
 
@@ -64,7 +64,7 @@ const UserProfileNavBar = ({currentUser = true}) => {
                                     <DownArrowIcon />
                                 </div>
                                 {
-                                    !userProfileMoreOptionsState ? (
+                                    userProfileMoreOptionsState ? (
                                         <div className="userProfileMoreOptionsItemContainer flexBox">
                                             <Link to={`/${'Darshan Naik'}/about`}>About</Link>
                                             <Link to={`/${'Darshan Naik'}/friends`}>
@@ -92,7 +92,7 @@ const UserProfileNavBar = ({currentUser = true}) => {
                         <div className="flexBox userProfileNavMenuContainer">
                             <div className="userProfileNavAfterScrollBox flexBox" onClick={handleScrollToTop}>
                                 <img className="userProfileNavAfterScrollProfileImage" src={process.env.PUBLIC_URL + '/Images/userProfile_icon.png'} alt=""/>
-                                <span className="userProfileNavAfterScrollNamePlate">{currentUser}</span>
+                                <span className="userProfileNavAfterScrollNamePlate">No Name</span>
                             </div>
                         </div>
                     )
@@ -116,7 +116,7 @@ const UserProfileNavBar = ({currentUser = true}) => {
                         ) : (
                             <React.Fragment>
                                 <div className="flexBox userProfileNavButton addToStoryContainer">
-                                    <img className="userProfileNavButtonIcons userProfileNavButtonIconsFilter" src={process.env.PUBLIC_URL + '/Images/addFriend_icon.png'} alt="plus"/>
+                                    <img className="userProfileNavButtonIcons userProfileNavButtonIconsFilter" src={process.env.PUBLIC_URL + '/Images/add_friend_icon.png'} alt="plus"/>
                                     <span>Add Friend</span>
                                 </div>
                                 <div className="editProfileContainer userProfileNavButton flexBox">

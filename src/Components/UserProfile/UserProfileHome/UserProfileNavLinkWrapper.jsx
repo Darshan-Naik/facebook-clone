@@ -6,7 +6,7 @@ const UserProfileNavLinkWrapper = ({ path, children, extraClass }) => {
     const { location } = history
     
     return (
-        <Link to={path} className={location.pathname === path ? `userProfileNavMenuName active` : `userProfileNavMenuNameBox userProfileNavMenuName ${extraClass}`}>
+        <Link to={path} className={location.pathname === path ? `userProfileNavMenuName active ${extraClass}` : `userProfileNavMenuNameBox userProfileNavMenuName ${extraClass}`}>
             {children}
         </Link>
     )

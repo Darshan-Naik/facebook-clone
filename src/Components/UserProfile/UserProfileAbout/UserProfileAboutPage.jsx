@@ -1,11 +1,11 @@
 import React from 'react'
-import UserProfilePage from "../UserProfileHome/UserProfilePage";
+import UserProfilePage from "../UserProfileHome/UserProfilePageHeader";
 
-const UserProfileAboutPage = () => {
+const UserProfileAboutPage = ({forceRefresh}) => {
     return (
-        <div>
-            <UserProfilePage />
-        </div>
+        // <div>
+            <UserProfilePage forceRefresh={forceRefresh} />
+        // </div>
     )
 }
 

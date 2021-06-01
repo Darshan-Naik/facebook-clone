@@ -44,6 +44,7 @@
   --white: #fff;
 
   --navBar-height : 50px;
+  --nav-bar-background: #FFFFFF;
   --nav-bar-background-gradient: linear-gradient(to top, #FFFFFF, rgba(255,255,255), rgba(255,255,255,.7), rgba(255,255,255,.4), rgba(255,255,255,0));
 
   --divider: #ced0d4;
@@ -53,6 +54,7 @@
   --disabled-button-text: #bcc0c4;
 
   --placeholder-text: #8A8D91;
+  --filter-invert: 0;
 }
 
 .dark{
@@ -79,6 +81,11 @@
 
   --secondary-icon: #B0B3B8;
   --secondary-text: #B0B3B8;
+
+  --nav-bar-background: #242526;
+  --nav-bar-background-gradient: linear-gradient(to top, #242526, rgba(36,37,38,.9), rgba(36,37,38,.7), rgba(36,37,38,.4), rgba(36,37,38,0));
+
+  --filter-invert: 100%;
 }
 
 body {

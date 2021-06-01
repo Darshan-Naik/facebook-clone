@@ -2,7 +2,7 @@ import React from 'react';
 import {ReactComponent as UpdateProfilePictureIcon} from "../../../Icons/photos.svg";
 import "../../../Styles/UserProfile/UserProfile.css";
 
-const UserProfilePicture = ({userProfilePic=(process.env.PUBLIC_URL + '/Images/userProfile_icon.png'), userProfilePicOptions, handleOptionsVisibility, currentUser = true}) => {
+const UserProfilePicture = ({userProfilePic=(process.env.PUBLIC_URL + '/Images/userProfile_icon.png'), userProfilePicOptions, handleOptionsVisibility, currentUser}) => {
     
     return (
         <div className="userProfilePictureContainer">

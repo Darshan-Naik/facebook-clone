@@ -62,12 +62,48 @@
 .userProfileEditCoverNamePlate {
     font-size: 14px;
     font-weight: 500;
-    color: var(--primary-text);
+    color: var(--black);
     vertical-align: middle;
 }
 
+.editUserProfileCoverPhotoModalBox {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: 20;
+    padding: 8px 10px;
+    border-radius: 6px;
+    background-color: var(--nav-bar-background);
+    box-shadow: 0px 0px 10px 5px var(--shadow-1);
+    transform: translate(0, 80%);
+}
+
+.editUserProfileCoverPhotoIconBox .photosIcon {
+    margin-right: 5px;
+    fill: var(--primary-icon);
+}
+
+.editUserProfileCoverPhotoIconBox p {
+    margin-right: 5px;
+}
+
+.editUserProfileCoverPhotoUpdateButton {
+    padding: 5px;
+    border-radius: 6px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    color: var(--white);
+    font-weight: 500;
+    background-color: var(--primary-1);
+}
+
+.editUserProfileCoverPhotoUpdateButton:hover {
+    background-color: var(--primary-button-hover);
+}
+
 .userNameContainer {
-    background: var(--white);
+    background: var(--nav-bar-background);
     padding: 10px;
     position: relative;
 }
@@ -107,7 +143,7 @@
     border: 1px solid var(--divider);
     outline: none;
     resize: none;
-    background-color: var(--comment-background);
+    background-color: var(--secondary-background-1);
     transform: translate(0, -5%);
 }
 
@@ -117,7 +153,7 @@
 
 .addBioTextField:focus {
     border: 1px solid var(--accent);
-    background: var(--white);
+    background: transparent;
 }
 
 .addBioTextField:focus::placeholder {
@@ -129,7 +165,7 @@
 }
 
 .addBioTextField:hover {
-    background: var(--secondary-background-2);
+    background: var(--hover-overlay-2);
 }
 
 .addBioTextFieldCharCount {
@@ -148,6 +184,7 @@
     width: 27px;
     height: 27px;
     vertical-align: middle;
+    filter: invert(var(--filter-invert));
 }
 
 .addBioButtonBox button {
@@ -164,11 +201,11 @@
 .addBioButtonBox button:first-child {
     margin: 0 5px;
     color: var(--primary-text);
-    background-color: var(--comment-background);
+    background-color: var(--secondary-background-1);
 }
 
 .addBioButtonBox button:first-child:hover {
-    background-color: var(--hover-overlay);
+    background-color: var(--hover-overlay-2);
 }
 
 .addBioButtonBox button:last-child:hover {
@@ -178,11 +215,11 @@
 .addBioButtonBox button:disabled {
     cursor:not-allowed;
     color: var(--disabled-button-text);
-    background-color: var(--comment-background);
+    background-color: var(--hover-overlay-2);
 }
 
 .addBioButtonBox button:disabled:hover {
-    background-color: var(--comment-background);
+    background-color: var(--hover-overlay-2);
 }
 
 /* UserProfilePicture Component CSS */
@@ -200,7 +237,7 @@
 .userProfilePictureBox {
     height: 180px;
     cursor: pointer;
-    border: 4px solid var(--white);
+    border: 4px solid var(--nav-bar-background);
 }
 
 .userProfilePicture {
@@ -213,7 +250,7 @@
 }
 
 .userProfilePictureBox:active {
-    border: 8px solid var(--white);
+    border: 8px solid var(--nav-bar-background);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -233,6 +270,7 @@
 .userProfileCameraIcon {
     width: 75%;
     height: 75%;
+    filter: invert(var(--filter-invert));
     transform: translate(4%, 18%);
 }
 
@@ -244,7 +282,7 @@
     bottom: 0;
     left: 50%;
     z-index: 20;
-    background: var(--white);
+    background: var(--nav-bar-background);
     box-shadow: 0px 0px 10px 5px var(--shadow-1);
     transform: translate(-50%, 150%);
 }
@@ -255,6 +293,7 @@
 
 .userProfilePicEditOptionNamePlate .photosIcon {
     margin-right: 10px;
+    fill: var(--primary-icon)
 }
 
 .userProfilePicEditOptionsBox button {
@@ -274,17 +313,16 @@
 /* UserProfileNavBar Component CSS */
 
 .userProfileNavBarContainer {
-    background-color: var(--white);
     position: sticky;
     top: 40px;
-    transition: all 0.3s ease-in-out;
+    background-color: var(--nav-bar-background);
 }
 
 .userProfileNav {
     max-width: 875px;
     margin: auto;
     padding: 3px 0 0;
-    background: var(--white);
+    background: var(--nav-bar-background);
     border-top: 1px solid var(--divider);
     justify-content: space-between;
 }
@@ -297,10 +335,9 @@
 }
 
 .userProfileNavMenuNameBox {
-    flex-grow: 1;
-    padding: 18px 0;
+    padding: 18px 15px;
     border-radius: 6px;
-    border-bottom: 3.5px solid var(--white);
+    border-bottom: 3.5px solid var(--nav-bar-background);
     text-decoration: none;
     cursor: pointer;
 }
@@ -309,6 +346,13 @@
     font-size: 15px;
     font-weight: 500;
     color: var(--secondary-text);
+}
+
+.userProfileNavMenuName.active {
+    padding: 18px 15px;
+    color: var(--primary-1);
+    border-bottom: 3.5px solid var(--primary-1);
+    text-decoration: none;
 }
 
 .userProfileNavMenuFriendsCount {
@@ -323,7 +367,6 @@
 }
 
 .userProfileMoreOptions {
-    flex-grow: 1;
     position: relative;
     display: none;
 }
@@ -338,7 +381,7 @@
     flex-direction: column;
     align-items:flex-start;
     border-radius: 5px;
-    background: var(--white);
+    background: var(--nav-bar-background);
     transform: translate(0, 102%);
 }
 
@@ -371,14 +414,6 @@
     fill: var(--secondary-text)
 }
 
-.userProfileNavMenuName.active {
-    flex-grow: 1;
-    padding: 18px 0;
-    color: var(--primary-1);
-    border-bottom: 3.5px solid var(--primary-1);
-    text-decoration: none;
-}
-
 .userProfileNavButton {
     margin-right: 8px;
     padding: 8px 11px;
@@ -392,6 +427,7 @@
     width: 16px;
     height: 16px;
     margin-right: 6px;
+    filter: invert(var(--filter-invert));
 }
 
 .userProfileNavButtonIconsFilter {
@@ -400,9 +436,11 @@
 
 .userProfileNavButton .messgeIcon {
     margin-right: 4px;
+    fill: var(--primary-icon);
 }
 
 .addToStoryContainer {
+    position: relative;
     background-color: var(--primary-1);
 }
 
@@ -417,11 +455,11 @@
 }
 
 .editProfileContainer {
-    background-color: var(--secondary-background-2);
+    background-color: var(--secondary-background-1);
 }
 
 .editProfileContainer:hover {
-    /* background-color: ; */
+    background-color: var(--hover-overlay-2);
 }
 
 .editProfileContainer span {
@@ -434,11 +472,19 @@
     cursor: pointer;
     padding: 8px 11px;
     border-radius: 6px;
-    background-color: var(--secondary-background-2);
+    background-color: var(--secondary-background-1);
+}
+
+.userProfileNavDotsBox:hover {
+    background-color: var(--hover-overlay-2);
 }
 
 .userProfileNavDotsBox .DotsIcon {
     vertical-align: middle;
+}
+
+.userProfileNavDotsBox path {
+    fill: var(--secondary-icon);
 }
 
 .userProfileNavAfterScrollBox {
@@ -469,7 +515,7 @@
 
 /* UserProfile Media Queries */
 
-@media only screen and ( max-width: 800px ) {
+@media only screen and ( max-width: 840px ) {
     
     /* User Profile NavBar Media Queries CSS */
 
@@ -491,6 +537,12 @@
     /* User Profile Page Media Queries CSS */
 
     .userProfileEditCoverNamePlate {
+        display: none;
+    }
+
+    /* User Profile NavBar Media Queries CSS */
+
+    .addToStoryContainer span, .editProfileContainer span {
         display: none;
     }
 }

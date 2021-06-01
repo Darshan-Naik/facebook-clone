@@ -1,12 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import UserProfilePicture from "./UserProfilePicture";
 import UserProfileNavBar from "./UserProfileNavBar";
+import { useSelector } from 'react-redux';
+import { ReactComponent as UpdateCoverPhotoIcon } from "../../../Icons/photos.svg";
 import "../../../Styles/UserProfile/UserProfile.css";
 
-const UserProfilePage = ({ coverPhoto, currentUser = true}) => {
+const UserProfilePageHeader = ({ coverPhoto, currentUser, forceRefresh}) => {
     const [userProfilePicOptions, setUserProfilePicOptions] = useState(true);
     const [addBioVisibility, setAddBioVisibility] = useState(false);
+    const [editUserProfileCoverPhoto, setEditUserProfileCoverPhoto] = useState(false);
     const [textFieldQuery, setTextFieldQuery] = useState("");
+    
+    const dark = useSelector(state => state.theme.dark)
     
     const handleOptionsVisibility = (e) => {
         e.stopPropagation();
@@ -17,21 +22,38 @@ const UserProfilePage = ({ coverPhoto, currentUser = true}) => {
         setAddBioVisibility(!addBioVisibility);
         setTextFieldQuery("");
     };
+
+    useEffect(() => {
+        forceRefresh();
+    }, [])
     
     return (
         <div className="userProfileContainer" onClick={() => setUserProfilePicOptions(true)}>
             <div className="userProfileCoverPageBox" style={{backgroundImage: `url(${coverPhoto})`}}>
                 <div className="userProfileCoverPageOverlay">
-                    <div className="userProfileCoverPhotoBox" style={coverPhoto ? {backgroundImage: `url(${coverPhoto})`}: {backgroundColor: `#f0f2f5`}}>
-                        <UserProfilePicture userProfilePicOptions={userProfilePicOptions} handleOptionsVisibility={handleOptionsVisibility} />
+                    <div className="userProfileCoverPhotoBox" style={coverPhoto ? {backgroundImage: `url(${coverPhoto})`} : ( dark ? {backgroundColor: `#18191a`} : {backgroundColor: `#f0f2f5`} )}>
+                        <UserProfilePicture userProfilePic={coverPhoto} userProfilePicOptions={userProfilePicOptions} handleOptionsVisibility={handleOptionsVisibility} />
                         {
                             currentUser && (
-                                <div className="userProfileEditCoverPhotoContainer flexBox">
-                                    <div className="userProfileEditCoverPhotoBox">
-                                        <img className="userProfileEditCoverCamIcon" src={process.env.PUBLIC_URL + '/Images/camera_icon.png'} alt="camera"/>
-                                        <span className="userProfileEditCoverNamePlate">Edit Cover Photo</span>
+                                <React.Fragment>
+                                    <div className="userProfileEditCoverPhotoContainer flexBox" onClick={() => setEditUserProfileCoverPhoto(!editUserProfileCoverPhoto)}>
+                                        <div className="userProfileEditCoverPhotoBox">
+                                            <img className="userProfileEditCoverCamIcon" src={process.env.PUBLIC_URL + '/Images/camera_icon.png'} alt="camera"/>
+                                            <span className="userProfileEditCoverNamePlate">Edit Cover Photo</span>
+                                        </div>
                                     </div>
-                                </div>
+                                    {
+                                        editUserProfileCoverPhoto && (
+                                            <div className="editUserProfileCoverPhotoModalBox flexBox">
+                                                <div className="flexBox editUserProfileCoverPhotoIconBox">
+                                                    <UpdateCoverPhotoIcon />
+                                                    <p>Update Cover Photo</p>
+                                                </div>
+                                                <button className="editUserProfileCoverPhotoUpdateButton">Update</button>
+                                            </div>
+                                        )
+                                    }
+                                </React.Fragment>
                             )
                         }
                     </div>
@@ -52,7 +74,7 @@ const UserProfilePage = ({ coverPhoto, currentUser = true}) => {
                                 </div>
                                 <div className="flexBox addBioButtonContainer">
                                     <div className="flexBox">
-                                        <img className="addBioGlobeIcon" src={process.env.PUBLIC_URL + '/Images/publicGlobe_icon.png'} alt="Public"/>
+                                        <img className="addBioGlobeIcon" src={process.env.PUBLIC_URL + '/Images/public_globe_icon.png'} alt="Public"/>
                                         <span>Public</span>
                                     </div>
                                     <div className="addBioButtonBox">
@@ -66,47 +88,8 @@ const UserProfilePage = ({ coverPhoto, currentUser = true}) => {
                 </React.Fragment>
             </div>
             <UserProfileNavBar />
-            <h1>hello</h1>
-            <h1>hello</h1>
-            <h1>hello</h1>
-            <h1>hello</h1>
-            <h1>hello</h1>
-            <h1>hello</h1>
-            <h1>hello</h1>
-            <h1>hello</h1>
-            <h1>hello</h1>
-            <h1>hello</h1>
-            <h1>hello</h1>
-            <h1>hello</h1>
-            <h1>hello</h1>
-            <h1>hello</h1>
-            <h1>hello</h1>
-            <h1>hello</h1>
-            <h1>hello</h1>
-            <h1>hello</h1>
-            <h1>hello</h1>
-            <h1>hello</h1>
-            <h1>hello</h1>
-            <h1>hello</h1>
-            <h1>hello</h1>
-            <h1>hello</h1>
-            <h1>hello</h1>
-            <h1>hello</h1>
-            <h1>hello</h1>
-            <h1>hello</h1>
-            <h1>hello</h1>
-            <h1>hello</h1>
-            <h1>hello</h1>
-            <h1>hello</h1>
-            <h1>hello</h1>
-            <h1>hello</h1>
-            <h1>hello</h1>
-            <h1>hello</h1>
-            <h1>hello</h1>
-            <h1>hello</h1>
-            <h1>hello</h1>
         </div>
     )
 }
 
-export default UserProfilePage
+export default UserProfilePageHeader
