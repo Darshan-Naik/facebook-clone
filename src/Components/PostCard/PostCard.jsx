@@ -7,6 +7,13 @@ import PostCardComment from './PostCardComment';
 //const 
 
 function PostCard({tag,img,likeCount,commentCount}) {
+    const[commentSection,setCommentSection]=React.useState(false);
+
+    const showComment =()=>{
+        setCommentSection(!commentSection)
+    }
+
+
     return (
         <div className="postCardContainer">
             <PostCardHead/>
@@ -16,8 +23,8 @@ function PostCard({tag,img,likeCount,commentCount}) {
                 <div className="flexBox"><LikeEmoji/> <p>{likeCount||"0"}</p></div>
                 <div className="flexBox"><p>{commentCount||"0"} Comments</p> </div>
             </div>
-            <PostCardFooter/>
-            {/* <PostCardComment/> */}
+            <PostCardFooter showComment={showComment}/>
+           {commentSection && <PostCardComment/>}
         </div>
     )
 }
