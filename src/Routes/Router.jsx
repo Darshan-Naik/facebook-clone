@@ -3,8 +3,7 @@ import NavBar from '../Components/NavBar/NavBar';
 import { Switch, Route } from "react-router-dom";
 import Home from "../Components/Pages/Home";
 import LoginPage from '../Components/Login/LoginPage';
-import UserProfilePostsPage from "../Components/UserProfile/UserProfilePostsPage/UserProfilePostsPage";
-import UserProfileAboutPage from "../Components/UserProfile/UserProfileAbout/UserProfileAboutPage";
+import UserProfileRouter from "./UserProfileRouter";
 import Chats from '../Components/Chats/Chats';
 import SideBar from '../Components/SideBar/SideBar';
 import Messenger from '../Components/Messenger/Messenger';
@@ -16,36 +15,35 @@ function Router() {
         setRefresh(!refresh)
     }
     const isAuth = useSelector(store=>store.auth.isAuth)
-    console.log(isAuth)
-    return !isAuth? <LoginPage/> : (
+    
+    return isAuth? <LoginPage/> : (
 
         <>
          <NavBar refresh={refresh} handleRefresh={handleRefresh} />
             <Switch>
+                <Route path="/friends/profile">
+                    <h1>SidBar Comes Here</h1>
+                    <UserProfileRouter path="/friends/profile" refresh={refresh} forceRefresh={handleRefresh} />
+                </Route>
+                <Route path="/profile">
+                    <UserProfileRouter path="/profile" refresh={refresh} forceRefresh={handleRefresh} />
+                </Route>
                 <Route path="/messenger/:chatId" >
                    <Messenger handleRefresh={handleRefresh} />
                 </Route>
-               
                 <Route path="/">
                 <>           
                     <Chats />
-                        <Switch>
-                            <Route path="/" exact>
+                    <Switch>
+                        <Route path="/" exact>
                             <Home />
-                            </Route>
-                            <Route path="/menu" exact>                           
+                        </Route>
+                        <Route path="/menu" exact>                           
                             <SideBar />
-                            </Route>  
-                            <Route path="/:user_name" exact>
-                                 <UserProfilePostsPage forceRefresh={handleRefresh} />
-                             </Route>
-                            <Route path="/:user_name/about" exact>
-                                <UserProfileAboutPage forceRefresh={handleRefresh} />
-                            </Route>                        
-                        </Switch>
+                        </Route>            
+                    </Switch>
                 </>
                 </Route>
-                
             </Switch>
             </>
         

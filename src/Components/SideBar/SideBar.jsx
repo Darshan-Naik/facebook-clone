@@ -10,10 +10,10 @@ function SideBar() {
     return (
         <div className="sideBarContainer">
             <div className="sideBarLinksContainer">
-                <Link className="flexBox sideBarContentLink" to={`/${userName}`}>
+                <Link className="flexBox sideBarContentLink" to={`/profile/${'Darshan Naik'}`}>
                     <SideBarContent label={userName} />
                 </Link>
-                <Link className="flexBox sideBarContentLink" to="/">
+                <Link className="flexBox sideBarContentLink" to="/friends/profile">
                     <SideBarContent src={process.env.PUBLIC_URL + '/Images/friends_icon.png'} label="Friends" />
                 </Link>
                 <Link className="flexBox sideBarContentLink" to="/">
