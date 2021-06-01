@@ -315,6 +315,7 @@
 .userProfileNavBarContainer {
     position: sticky;
     top: 45px;
+    z-index: 20;
     background-color: var(--nav-bar-background);
 }
 

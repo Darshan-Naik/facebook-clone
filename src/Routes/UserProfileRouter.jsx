@@ -6,19 +6,19 @@ import UserProfileNavBar from "../Components/UserProfile/UserProfileHome/UserPro
 import UserProfileAboutPage from "../Components/UserProfile/UserProfileAbout/UserProfileAboutPage";
 import UserProfileFriendsPage from "../Components/UserProfile/UserProfileFriends/UserProfileFriendsPage";
 
-function UserProfileRouter({forceRefresh, refresh}) {
+function UserProfileRouter({ path, forceRefresh, refresh }) {
     return (
         <React.Fragment>
             <UserProfilePageHeader forceRefresh={forceRefresh} />
-            <UserProfileNavBar refresh={refresh} />
+            <UserProfileNavBar alternativePath={path} refresh={refresh} />
             <Switch>
-                <Route path="/profile/:user_name" exact>
+                <Route path={`${path}/:user_name`} exact>
                     <UserProfilePostsPage forceRefresh={forceRefresh} />
                 </Route>
-                <Route  path="/profile/:user_name/about">
+                <Route  path={`${path}/:user_name/about`}>
                     <UserProfileAboutPage forceRefresh={forceRefresh} />
                 </Route>
-                <Route  path="/profile/:user_name/friends">
+                <Route  path={`${path}/:user_name/friends`}>
                     <UserProfileFriendsPage forceRefresh={forceRefresh} />
                 </Route>
             </Switch>

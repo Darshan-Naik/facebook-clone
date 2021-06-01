@@ -6,32 +6,47 @@ import LoginPage from '../Components/Login/LoginPage';
 import UserProfileRouter from "./UserProfileRouter";
 import Chats from '../Components/Chats/Chats';
 import SideBar from '../Components/SideBar/SideBar';
+import Messenger from '../Components/Messenger/Messenger';
+import { useSelector } from 'react-redux';
 
 function Router() {
     const[refresh,setRefresh] = React.useState(true)
     const handleRefresh = ()=>{
         setRefresh(!refresh)
     }
-    return (
+    const isAuth = useSelector(store=>store.auth.isAuth)
+    
+    return isAuth? <LoginPage/> : (
+
         <>
-              <NavBar refresh={refresh} handleRefresh={handleRefresh} />
-              <Chats />
+         <NavBar refresh={refresh} handleRefresh={handleRefresh} />
             <Switch>
-                <Route path="/" exact>
-                   <Home />
-                </Route>
-                <Route path="/menu" exact>
-                 
-                   <SideBar />
-                </Route>
-                <Route path="/login" exact>
-                   <LoginPage />
+                <Route path="/friends/profile">
+                    <h1>SidBar Comes Here</h1>
+                    <UserProfileRouter path="/friends/profile" refresh={refresh} forceRefresh={handleRefresh} />
                 </Route>
                 <Route path="/profile">
-                    <UserProfileRouter refresh={refresh} forceRefresh={handleRefresh} />
+                    <UserProfileRouter path="/profile" refresh={refresh} forceRefresh={handleRefresh} />
+                </Route>
+                <Route path="/messenger/:chatId" >
+                   <Messenger handleRefresh={handleRefresh} />
+                </Route>
+                <Route path="/">
+                <>           
+                    <Chats />
+                    <Switch>
+                        <Route path="/" exact>
+                            <Home />
+                        </Route>
+                        <Route path="/menu" exact>                           
+                            <SideBar />
+                        </Route>            
+                    </Switch>
+                </>
                 </Route>
             </Switch>
-        </>
+            </>
+        
     )
 }
 

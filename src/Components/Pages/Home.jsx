@@ -6,17 +6,17 @@ import "../../Styles/Home/Home.css"
 function Home() {
     return (
         <div className="MainContainer">
-            <div className="mainLeftSidebarContainer">
+            <div className="mainLeftSidebarContainer scroll">
                 <SideBar />
             </div>         
           
-            <div className="mainPostsContainer">
+            <div className="mainPostsContainer scroll">
             <PostCard/>
             <PostCard/>
             <PostCard/>
             <PostCard/>
             </div>
-            <div className="mainRightSidebarContainer">
+            <div className="mainRightSidebarContainer scroll">
                  <ActiveContactSideBar />
             </div>
             

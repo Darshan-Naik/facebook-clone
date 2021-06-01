@@ -1,6 +1,6 @@
 :root {
   --accent: hsl(214, 89%, 52%);
-  
+
   --primary-1: #1877f2;
   --primary-2: rgb(134, 218, 255);
   --primary-3: rgb(95, 170, 255);
@@ -32,7 +32,7 @@
   --shadow-5: rgba(0, 0, 0, 0.5);
   --shadow-7: rgba(0, 0, 0, 0.7);
   --shadow-8: rgba(0, 0, 0, 0.8);
-  --shadow-9: rgb(224, 224, 224);
+  --shadow-9: rgba(224, 224, 224, 0.7);
 
   --primary-icon: #050505;
   --primary-text: #050505;
@@ -43,26 +43,33 @@
   --black: #000;
   --white: #fff;
 
-  --navBar-height : 50px;
-  --nav-bar-background: #FFFFFF;
-  --nav-bar-background-gradient: linear-gradient(to top, #FFFFFF, rgba(255,255,255), rgba(255,255,255,.7), rgba(255,255,255,.4), rgba(255,255,255,0));
+  --navBar-height: 50px;
+  --nav-bar-background: #ffffff;
+  --nav-bar-background-gradient: linear-gradient(
+    to top,
+    #ffffff,
+    rgba(255, 255, 255),
+    rgba(255, 255, 255, 0.7),
+    rgba(255, 255, 255, 0.4),
+    rgba(255, 255, 255, 0)
+  );
 
   --divider: #ced0d4;
   --comment-background: #f0f2f5;
 
-  --primary-button-hover: #216FDB;
+  --primary-button-hover: #216fdb;
   --disabled-button-text: #bcc0c4;
 
-  --placeholder-text: #8A8D91;
+  --placeholder-text: #8a8d91;
   --filter-invert: 0;
   --filter-placeholder-icon: invert(59%) sepia(11%) saturate(200%) saturate(135%) hue-rotate(176deg) brightness(96%) contrast(94%);
 }
 
-.dark{
+.dark {
   --primary-background: #242526;
-  --secondary-background-1: #3A3B3C;
-  --secondary-background-2: #18191A;
-  --secondary-background-3: #3A3B3C;
+  --secondary-background-1: #3a3b3c;
+  --secondary-background-2: #18191a;
+  --secondary-background-3: #3a3b3c;
 
   --hover-overlay: rgba(255, 255, 255, 0.1);
   --media-hover: rgba(68, 73, 80, 0.15);
@@ -75,16 +82,23 @@
   --shadow-5: rgba(0, 0, 0, 0.5);
   --shadow-7: rgba(0, 0, 0, 0.7);
   --shadow-8: rgba(0, 0, 0, 0.8);
-  --shadow-9: rgb(41, 41, 41);
+  --shadow-9: rgba(41, 41, 41, 0.7);
 
-  --primary-icon: #E4E6EB;
-  --primary-text: #E4E6EB;
+  --primary-icon: #e4e6eb;
+  --primary-text: #e4e6eb;
 
-  --secondary-icon: #B0B3B8;
-  --secondary-text: #B0B3B8;
+  --secondary-icon: #b0b3b8;
+  --secondary-text: #b0b3b8;
 
   --nav-bar-background: #242526;
-  --nav-bar-background-gradient: linear-gradient(to top, #242526, rgba(36,37,38,.9), rgba(36,37,38,.7), rgba(36,37,38,.4), rgba(36,37,38,0));
+  --nav-bar-background-gradient: linear-gradient(
+    to top,
+    #242526,
+    rgba(36, 37, 38, 0.9),
+    rgba(36, 37, 38, 0.7),
+    rgba(36, 37, 38, 0.4),
+    rgba(36, 37, 38, 0)
+  );
 
   --filter-invert: 100%;
 }
