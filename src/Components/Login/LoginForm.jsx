@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-function LoginForm(){
+function LoginForm({onClickCreate}){
+    
     return (
         <div className="loginFormMainDiv">
             <input type="text" placeholder="Email address or phone number"/>
@@ -9,7 +10,7 @@ function LoginForm(){
             <button>Log In</button>
             <Link to="/">Forgotten password?</Link>
             <hr className="hrLoginForm" />
-            <button>Create New Account</button>
+            <button onClick={onClickCreate}>Create New Account</button>
         </div>
     )
 }
