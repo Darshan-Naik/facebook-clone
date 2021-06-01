@@ -62,7 +62,7 @@
 
 .contactIconContainer {
     border-radius: 50px;
-    padding: 0.3rem;
+    padding: 5px 6px;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
 }
@@ -71,9 +71,28 @@
     background: var(--hover-overlay);
 }
 
+.contactHeaderContentContainer .videoCallIcon {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+    fill: var(--primary-icon);
+}
+
 .contactHeaderContentContainer .searchIcon {
     width: 19px;
     height: 19px;
     opacity: 0.6;
     vertical-align: middle;
+    fill: var(--primary-icon);
+}
+
+.contactIconContainer .DotsIcon {
+    width: 19px;
+    height: 17px;
+    opacity: 0.6;
+    vertical-align: middle;
+}
+
+.contactHeaderContentContainer .DotsIcon path {
+    fill: var(--primary-icon);
 }
