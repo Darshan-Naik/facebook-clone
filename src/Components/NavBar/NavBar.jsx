@@ -73,7 +73,7 @@ function NavBar({refresh,handleRefresh}) {
                <IconWrapperCircle label="Create" icon={ <CreateIcon /> }>
                     
                 </IconWrapperCircle >
-                <IconWrapperCircle label="Messenger" icon={ <MessageIcon /> }>
+                <IconWrapperCircle path="/messenger/new" label="Messenger" icon={ <MessageIcon /> }>
                     
                 </IconWrapperCircle>
                 <IconWrapperCircle label="Notifications" icon={ <NotificationIcon /> }>

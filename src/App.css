@@ -6,6 +6,13 @@
   justify-content: center;
   align-items: center;
 }
+.scroll{
+  overflow: auto;
+}
+.scroll::-webkit-scrollbar{
+  width: 0;
+  visibility: hidden;
+}
 .statusDot,.notificationBubble{
   border-radius: 50%;
   border: 2px solid var(--primary-background);
