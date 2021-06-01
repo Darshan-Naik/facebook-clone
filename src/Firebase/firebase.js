@@ -2,6 +2,7 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
 import "firebase/database";
+import "firebase/storage";
 
 var firebaseConfig = {
     apiKey: "AIzaSyB5p8dkpbxvYX_6TirF0Tvr-Dfye1aikFQ",

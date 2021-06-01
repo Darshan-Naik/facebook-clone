@@ -8,13 +8,16 @@ import UserProfileAboutPage from "../Components/UserProfile/UserProfileAbout/Use
 import Chats from '../Components/Chats/Chats';
 import SideBar from '../Components/SideBar/SideBar';
 import Messenger from '../Components/Messenger/Messenger';
+import { useSelector } from 'react-redux';
 
 function Router() {
     const[refresh,setRefresh] = React.useState(true)
     const handleRefresh = ()=>{
         setRefresh(!refresh)
     }
-    return (
+    const isAuth = useSelector(store=>store.auth.isAuth)
+    console.log(isAuth)
+    return !isAuth? <LoginPage/> : (
 
         <>
          <NavBar refresh={refresh} handleRefresh={handleRefresh} />
@@ -32,10 +35,7 @@ function Router() {
                             </Route>
                             <Route path="/menu" exact>                           
                             <SideBar />
-                            </Route>
-                            <Route path="/login" exact>
-                            <LoginPage />
-                            </Route>   
+                            </Route>  
                             <Route path="/:user_name" exact>
                                  <UserProfilePostsPage forceRefresh={handleRefresh} />
                              </Route>

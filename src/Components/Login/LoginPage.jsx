@@ -4,9 +4,69 @@ import "../../Styles/Login/LoginPage.css"
 import LoginLogo from './LoginLogo';
 import LoginForm from './LoginForm';
 import {ReactComponent as CloseIcon} from  "../../Icons/close.svg"
+import { login, signup } from '../../Firebase/authentication';
+import { database } from '../../Firebase/firebase';
+import { useDispatch } from 'react-redux';
+import { loginFailure, loginRequest, loginSuccess, signUpFailure, signupRequest, signupSuccess } from '../../Redux/Auth/actions';
 
+const initFormSignup = {
+    first_name :"",
+    last_name : "",
+    email : "",
+    password : ""
+}
+const initFormLogin = {
+    email : "",
+    password : ""
+}
 function LoginPage(){
     const [isCreateClick, setIsCreateClick] = useState(false);
+    const [signUpForm,setSignUpForm] = React.useState(initFormSignup)
+    const [logInForm,setLogInForm] = React.useState(initFormLogin)
+    const {first_name , last_name,email, password} = signUpForm;
+    const handleSignUpForm = (e)=>{
+            const {value,name} = e.target;
+            setSignUpForm({...signUpForm,[name]:value}) 
+    }
+
+    const handleLoginForm = (e)=>{
+        const {value,name} = e.target;
+        setLogInForm({...logInForm,[name]:value}) 
+    }
+
+    const dispatch =useDispatch()
+
+    
+    const handleSingUp = ()=>{
+        dispatch(signupRequest())
+        signup(email,password)
+        .then(res=>{
+           const {uid} = res.user
+           const payload = {uid,...signUpForm}
+           database.collection("users").add(payload).then(()=>{
+                dispatch(signupSuccess(payload))
+           })
+        }).catch((err)=>{
+            dispatch(signUpFailure(err))
+        })
+
+    }
+
+
+
+    const handleLogin =()=>{
+        dispatch(loginRequest())
+        login(logInForm.email,logInForm.password)
+        .then(res=>{
+            const {uid} = res.user
+            database.collection("users").where("uid","==",uid).get().then(res=>{
+                res.docs.map(doc=>dispatch(loginSuccess(doc.data()) ))})
+        })
+        .catch((err)=>{
+            dispatch(loginFailure(err))
+        })
+    }
+
     const handleCreateClick = () => {
         console.log("u")
         setIsCreateClick(true);
@@ -22,7 +82,7 @@ function LoginPage(){
         <div>
             <div className="loginPageContainer flexBox">
                 <LoginLogo />
-                <LoginForm onClickCreate={handleCreateClick} />
+                <LoginForm {...logInForm}  handleLoginForm={handleLoginForm} handleLogin={handleLogin} onClickCreate={handleCreateClick} />
             </div>
             <div className="LoginPageFooter">
                 <p>English (UK)</p>
@@ -38,11 +98,11 @@ function LoginPage(){
             <button className="signUpbuttonClose" onClick={handleCloseClick}><CloseIcon /></button>
             <br />
             <div className="nameSignUpContainer" >
-                <input type="text" placeholder="First name" />
-                <input type="text" placeholder="Surname" />
+                <input type="text" placeholder="First name" value={first_name} name="first_name"  onChange={handleSignUpForm} />
+                <input type="text" placeholder="Surname" value={last_name}  name="last_name" onChange={handleSignUpForm}/>
             </div>
-            <input className="numPassInput" type="number" placeholder="Mobile number or email address" />
-            <input className="numPassInput" type="password" placeholder="New password" />
+            <input className="numPassInput" type="email" value={email}  placeholder="Email address" name="email" onChange={handleSignUpForm} />
+            <input className="numPassInput" type="password" value={password}  placeholder="New password" name="password" onChange={handleSignUpForm} />
             <div className="dobSignUpContainer">
                 <p>Date of birth</p>
                 <select class="first" name="date_of_birth:day" tabindex="7">
@@ -185,7 +245,9 @@ function LoginPage(){
                         <option value="2000">2000</option>
                     </select>
                 </div>
+                <button style={{padding:"10px 20px",cursor:"pointer"}} onClick={handleSingUp}>Sign-up</button>
                 </div>
+                
         </div>)}
         </>
 
