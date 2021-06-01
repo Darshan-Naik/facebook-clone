@@ -7,35 +7,48 @@ import UserProfilePostsPage from "../Components/UserProfile/UserProfilePostsPage
 import UserProfileAboutPage from "../Components/UserProfile/UserProfileAbout/UserProfileAboutPage";
 import Chats from '../Components/Chats/Chats';
 import SideBar from '../Components/SideBar/SideBar';
+import Messenger from '../Components/Messenger/Messenger';
+import { useSelector } from 'react-redux';
 
 function Router() {
     const[refresh,setRefresh] = React.useState(true)
     const handleRefresh = ()=>{
         setRefresh(!refresh)
     }
-    return (
+    const isAuth = useSelector(store=>store.auth.isAuth)
+    console.log(isAuth)
+    return !isAuth? <LoginPage/> : (
+
         <>
-              <NavBar refresh={refresh} handleRefresh={handleRefresh} />
-              <Chats />
+         <NavBar refresh={refresh} handleRefresh={handleRefresh} />
             <Switch>
-                <Route path="/" exact>
-                   <Home />
+                <Route path="/messenger/:chatId" >
+                   <Messenger handleRefresh={handleRefresh} />
                 </Route>
-                <Route path="/menu" exact>
-                 
-                   <SideBar />
+               
+                <Route path="/">
+                <>           
+                    <Chats />
+                        <Switch>
+                            <Route path="/" exact>
+                            <Home />
+                            </Route>
+                            <Route path="/menu" exact>                           
+                            <SideBar />
+                            </Route>  
+                            <Route path="/:user_name" exact>
+                                 <UserProfilePostsPage forceRefresh={handleRefresh} />
+                             </Route>
+                            <Route path="/:user_name/about" exact>
+                                <UserProfileAboutPage forceRefresh={handleRefresh} />
+                            </Route>                        
+                        </Switch>
+                </>
                 </Route>
-                <Route path="/login" exact>
-                   <LoginPage />
-                </Route>
-                <Route path="/:user_name" exact>
-                    <UserProfilePostsPage forceRefresh={handleRefresh} />
-                </Route>
-                <Route path="/:user_name/about" exact>
-                    <UserProfileAboutPage forceRefresh={handleRefresh} />
-                </Route>
+                
             </Switch>
-        </>
+            </>
+        
     )
 }
 

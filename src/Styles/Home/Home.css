@@ -12,18 +12,10 @@
     gap: 15px;
     padding-top: 15px;
 }
-.mainPostsContainer::-webkit-scrollbar{
-    width: 0;
-    height: 0;
-    visibility: hidden;
-}
+
 .mainRightSidebarContainer{
     overflow: auto;
     scrollbar-width: thin;
-}
-.mainRightSidebarContainer::-webkit-scrollbar{
-    width: 0;
-
 }
 
 @media only screen and (max-width: 992px) {

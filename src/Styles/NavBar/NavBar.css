@@ -7,6 +7,7 @@
     justify-content: space-between;
     padding:0 10px;
     z-index: 999;
+    border-bottom: 1px solid var(--shadow-1);
 }
 .navBarLogo .main-logoIcon{
     height: 35px;
