@@ -87,7 +87,6 @@ const UserProfilePageHeader = ({ coverPhoto, currentUser, forceRefresh}) => {
                     }
                 </React.Fragment>
             </div>
-            <UserProfileNavBar />
         </div>
     )
 }

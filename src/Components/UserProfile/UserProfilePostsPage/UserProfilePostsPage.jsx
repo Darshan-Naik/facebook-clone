@@ -1,8 +1,8 @@
-import React from 'react'
+import React from 'react';
 import UserProfilePageHeader from "../UserProfileHome/UserProfilePageHeader";
 import UserProfileNavBar from "../UserProfileHome/UserProfileNavBar";
 
-const UserProfileAboutPage = ({forceRefresh}) => {
+const UserProfilePostsPage = ({forceRefresh}) => {
     return (
         <div>
             <UserProfilePageHeader forceRefresh={forceRefresh} />
@@ -11,4 +11,4 @@ const UserProfileAboutPage = ({forceRefresh}) => {
     )
 }
 
-export default UserProfileAboutPage
+export default UserProfilePostsPage

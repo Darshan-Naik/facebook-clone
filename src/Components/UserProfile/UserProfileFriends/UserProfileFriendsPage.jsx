@@ -1,10 +1,12 @@
 import React from 'react';
-import UserProfilePage from "../UserProfileHome/UserProfilePage";
+import UserProfilePageHeader from "../UserProfileHome/UserProfilePageHeader";
+import UserProfileNavBar from "../UserProfileHome/UserProfileNavBar";
 
-const UserProfileFriendsPage = () => {
+const UserProfileFriendsPage = ({forceRefresh}) => {
     return (
         <div>
-            <UserProfilePage />
+            <UserProfilePageHeader forceRefresh={forceRefresh} />
+            <UserProfileNavBar />
         </div>
     )
 }
