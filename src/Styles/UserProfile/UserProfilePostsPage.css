@@ -1,0 +1,48 @@
+.postsPageMainContainer {
+    max-width: 875px;
+    margin: auto;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+/* User Profile Intro Component CSS */
+
+.postsPageIntroMainContainer {
+    max-width: 362px;
+    height: 100vh;
+    width: 100%;
+    text-align: left;
+}
+
+.postsPageUserDetailsContainer {
+    margin: 14.5px 4px 0 0;
+    padding: 10px 14px;
+    border-radius: 6px;
+    background-color: var(--secondary-background-1);
+}
+
+.postsPageUserDetailsNamePlate {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.5;
+    color: var(--primary-text);
+}
+
+.postsPageUserDetailsInfoBox {
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.postsPageUserDetalisCoverBox {
+    margin: 8px 0;
+}
+
+.postsPageUserDetailsInfoIcon {
+    width: 24px;
+    height: 24px;
+    margin-right: 11px;
+    vertical-align: middle;
+    filter: var(--filter-placeholder-icon);
+}
+
+/* User Profile Posts Component CSS */

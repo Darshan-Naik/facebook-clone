@@ -5,7 +5,7 @@ import { ReactComponent as DownArrowIcon } from "../../../Icons/downArrow.svg";
 import UserProfileNavLinkWrapper from "./UserProfileNavLinkWrapper";
 import { Link } from "react-router-dom";
 
-const UserProfileNavBar = ({currentUser}) => {
+const UserProfileNavBar = ({currentUser, refresh}) => {
     const [userProfileNavBarState, setUserProfileNavBarState] = useState(true);
     const [userProfileMoreOptionsState, setUserProfileMoreOptionsState] = useState(false);
 
@@ -13,10 +13,10 @@ const UserProfileNavBar = ({currentUser}) => {
 
     window.addEventListener('scroll', function() {
         const position = userProfileNavBarRef.current?.getBoundingClientRect()
-        if( position?.top >= 45 ) {
-            setUserProfileNavBarState(true);
+        if( position?.top >= 47 ) {
+            setUserProfileNavBarState && setUserProfileNavBarState(true);
         } else {
-            setUserProfileNavBarState(false);
+            setUserProfileNavBarState && setUserProfileNavBarState(false);
         }
     })
 
@@ -34,26 +34,26 @@ const UserProfileNavBar = ({currentUser}) => {
                 {
                     userProfileNavBarState ? (
                         <div className="flexBox userProfileNavMenuContainer">
-                            <UserProfileNavLinkWrapper path={`/${'Darshan Naik'}`} >
+                            <UserProfileNavLinkWrapper path={`/profile/${'Darshan Naik'}`} >
                                 Posts
                             </UserProfileNavLinkWrapper>
-                            <UserProfileNavLinkWrapper path={`/${'Darshan Naik'}/about`} extraClass="hideUserProfileMenuItem" >
+                            <UserProfileNavLinkWrapper path={`/profile/${'Darshan Naik'}/about`} extraClass="hideUserProfileMenuItem" >
                                 About
                             </UserProfileNavLinkWrapper>
-                            <UserProfileNavLinkWrapper path={`/${'Darshan Naik'}/friends`} label="Posts" extraClass="hideUserProfileMenuItem" >
+                            <UserProfileNavLinkWrapper path={`/profile/${'Darshan Naik'}/friends`} label="Posts" extraClass="hideUserProfileMenuItem" >
                                 <span className="userProfileNavMenuName">Friends</span>
                                 <span className="userProfileNavMenuFriendsCount">1000</span>
                             </UserProfileNavLinkWrapper>
-                            <UserProfileNavLinkWrapper path={`/${'Darshan Naik'}/photos`} extraClass="hideUserProfileMenuItem" >
+                            <UserProfileNavLinkWrapper path={`/profile/${'Darshan Naik'}/photos`} extraClass="hideUserProfileMenuItem" >
                                 Photos
                             </UserProfileNavLinkWrapper>
                             {
                                 currentUser ? ( 
-                                    <UserProfileNavLinkWrapper path={`/${'Darshan Naik'}/archive`} extraClass="hideUserProfileMenuItem" >
+                                    <UserProfileNavLinkWrapper path={`/profile/${'Darshan Naik'}/archive`} extraClass="hideUserProfileMenuItem" >
                                         Story Archive
                                     </UserProfileNavLinkWrapper>
                                 ) : (
-                                    <UserProfileNavLinkWrapper path={`/${'Darshan Naik'}/videos`} extraClass="hideUserProfileMenuItem" >
+                                    <UserProfileNavLinkWrapper path={`/profile/${'Darshan Naik'}/videos`} extraClass="hideUserProfileMenuItem" >
                                         Videos
                                     </UserProfileNavLinkWrapper> 
                                 ) 
@@ -65,20 +65,20 @@ const UserProfileNavBar = ({currentUser}) => {
                                 </div>
                                 {
                                     userProfileMoreOptionsState ? (
-                                        <div className="userProfileMoreOptionsItemContainer flexBox">
-                                            <Link to={`/${'Darshan Naik'}/about`}>About</Link>
-                                            <Link to={`/${'Darshan Naik'}/friends`}>
+                                        <div className="userProfileMoreOptionsItemContainer flexBox" onClick={() => setUserProfileMoreOptionsState(false)}>
+                                            <Link to={`/profile/${'Darshan Naik'}/about`}>About</Link>
+                                            <Link to={`/profile/${'Darshan Naik'}/friends`}>
                                                 <span className="userProfileNavMenuName MoreOptionsItemBox">Friends</span>
                                                 <span className="userProfileNavMenuFriendsCount">1000</span>
                                             </Link>
-                                            <Link to={`/${'Darshan Naik'}/photos`}>Photos</Link>
+                                            <Link to={`/profile/${'Darshan Naik'}/photos`}>Photos</Link>
                                             {
                                                 currentUser ? ( 
-                                                    <Link to={`/${'Darshan Naik'}/archive`} >
+                                                    <Link to={`/profile/${'Darshan Naik'}/archive`} >
                                                         Story Archive
                                                     </Link>
                                                 ) : (
-                                                    <Link to={`/${'Darshan Naik'}/videos`} >
+                                                    <Link to={`/profile/${'Darshan Naik'}/videos`} >
                                                         Videos
                                                     </Link> 
                                                 ) 

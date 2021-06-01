@@ -55,6 +55,7 @@
 
   --placeholder-text: #8A8D91;
   --filter-invert: 0;
+  --filter-placeholder-icon: invert(59%) sepia(11%) saturate(200%) saturate(135%) hue-rotate(176deg) brightness(96%) contrast(94%);
 }
 
 .dark{

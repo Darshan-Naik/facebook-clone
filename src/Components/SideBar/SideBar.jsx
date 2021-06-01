@@ -10,7 +10,7 @@ function SideBar() {
     return (
         <div className="sideBarContainer">
             <div className="sideBarLinksContainer">
-                <Link className="flexBox sideBarContentLink" to={`/${userName}`}>
+                <Link className="flexBox sideBarContentLink" to={`/profile/${'Darshan Naik'}`}>
                     <SideBarContent label={userName} />
                 </Link>
                 <Link className="flexBox sideBarContentLink" to="/">
