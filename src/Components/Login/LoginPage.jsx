@@ -68,8 +68,8 @@ function LoginPage(){
         .then(res=>{
            const {uid} = res.user
            const payload = {uid,...signUpForm,dob}
-           database.collection("users").add(payload).then(()=>{
-                dispatch(signupSuccess(payload))
+           database.collection("users").add(payload).then((res)=>{
+                dispatch(signupSuccess({docID :res.id,...payload}))
            })
         }).catch((err)=>{
             dispatch(signUpFailure(err.message))
@@ -137,7 +137,7 @@ function LoginPage(){
             <input className="numPassInput" type="password" value={password}  placeholder="New password" name="password" onChange={handleSignUpForm} />
             <div className="dobSignUpContainer">
                 <p>Date of birth</p>
-                <select onChange={(e)=>handleChangeDob(e)} class="first" name="date_of_birth:day" tabindex="7">
+                <select onChange={(e)=>handleChangeDob(e)} className="first" name="date_of_birth:day" tabindex="7">
                     {days.map((el,i)=>(
                         <option key={el+i} value={el+i}>{el+i}</option>
                     ))}

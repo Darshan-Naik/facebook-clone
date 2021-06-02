@@ -82,7 +82,7 @@
   --shadow-5: rgba(0, 0, 0, 0.5);
   --shadow-7: rgba(0, 0, 0, 0.7);
   --shadow-8: rgba(0, 0, 0, 0.8);
-  --shadow-9: rgba(41, 41, 41, 0.7);
+  --shadow-9: rgba(7, 7, 7, 0.7);
 
   --primary-icon: #e4e6eb;
   --primary-text: #e4e6eb;
@@ -120,6 +120,10 @@ body {
   /* transition: all .3s ease-in-out; */
 }
 input,
-button {
+button,
+textarea {
   outline: none;
+}
+button{
+  cursor: pointer;
 }

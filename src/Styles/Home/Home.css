@@ -3,6 +3,7 @@
     padding:0 10px;
     overflow: hidden;
     height: calc(100vh - var(--navBar-height));
+    align-items: flex-start;
 }
 .mainPostsContainer{
     flex-grow: 1;

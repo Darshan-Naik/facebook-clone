@@ -1,7 +1,8 @@
+import { loadData, saveData } from "../../Utils/localStorage"
 import { LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, SIGNUP_FAILURE, SIGNUP_REQUEST, SIGNUP_SUCCESS } from "./actionTypes"
 
 
-const init ={
+const init = loadData("user") || {
     isAuth : false,
     user : {},
     isError : false,
@@ -25,7 +26,7 @@ const init ={
                     errorMessage : payload
                 }
             } case LOGIN_SUCCESS : {
-                return {
+                const updatedSate = {
                     ...state,
                     isLoading : false,
                     isError :false,
@@ -33,6 +34,8 @@ const init ={
                     errorMessage : "",
                     user : payload
                 }
+                saveData("user",updatedSate)
+                return updatedSate;
             } 
             case SIGNUP_REQUEST : {
                 return {
@@ -48,7 +51,8 @@ const init ={
                     errorMessage : payload
                 }
             } case SIGNUP_SUCCESS : {
-                return {
+
+                const updatedSate = {
                     ...state,
                     isLoading : false,
                     isError :false,
@@ -56,6 +60,8 @@ const init ={
                     errorMessage : "",
                     user : payload
                 }
+                saveData("user",updatedSate)
+                return updatedSate
             } 
             default : return state
     }
