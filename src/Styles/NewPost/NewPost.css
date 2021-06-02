@@ -1,0 +1,234 @@
+.newPostContainer{
+    max-width: 676px;
+    min-width: 400px;
+    width: 80%;
+    margin: auto;
+    border-radius: 8px;
+    padding: 10px;
+    background-color: var(--primary-background);
+    justify-content: space-around;
+    box-shadow:0 1px 2px var( --shadow-2);
+}
+.newPostUserImage{
+    justify-content: flex-start;
+    border-bottom: 1px solid var(--shadow-1);
+    padding: 5px;
+
+}
+.newPostUserImage img{
+    width: 45px;
+    height:45px;
+    border-radius: 50%;
+    margin:0 10px;
+    cursor: pointer;
+}
+.newPostUserImage>div{
+    background-color: var(--secondary-background-3);
+    cursor: pointer;
+    flex: 1;
+    text-align: left;
+    padding: 10px;
+    border-radius: 500px;
+    transition: all .2s ease-in-out;
+}
+.newPostUserImage>div:hover{
+    background-color: var(--hover-overlay-2);
+}
+.newPostIcons{
+    padding: 5px;
+    padding-bottom: 0;
+    justify-content: space-evenly;
+}
+.newPostIcons svg{
+    margin: 10px;
+    fill: var(--supplementary-2);
+}
+.newPostIcons  p{
+    font-size: 14px;
+}
+.newPostContainer p{
+    color: var(--secondary-text);
+}
+.newPostIcons >div{
+    padding:0 15px;
+    cursor: pointer;
+    border-radius: 8px;
+}
+.newPostIcons >div:hover{
+    background-color: var(--hover-overlay);
+   
+}
+.createNewPostModal{
+    position: fixed;
+    top:0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--shadow-9);
+    /* z-index: 1000; */
+    display: grid;
+    place-items: center;
+}
+.createNewPostContainer{
+    max-width: 500px;
+    min-width: 400px;
+    width: 80%;
+    border-radius: 8px;
+    background-color: var(--primary-background);
+    box-shadow:0 0 20px 10px var( --shadow-2);
+    border: 1px solid var(--shadow-1);
+}
+.createNewPostHeader{
+    justify-content: space-around;
+    padding: 15px;
+    border-bottom: 1px solid var(--shadow-1);
+}
+.createNewPostTitle{
+    flex: 1;
+}
+.createNewPostTitle p{
+    font-size: 14;
+    font-weight: 700;
+}
+.createNewPostCloseButton{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: var(--secondary-background-3);
+    cursor: pointer;
+}
+.createNewPostCloseButton:hover{
+    background-color: var(--hover-overlay-2);
+}
+.createNewPostCloseButton svg{
+    stroke: var(--secondary-icon);
+    width: 25px;
+    height: 25px;
+}
+.createNewPostUserImage{
+    justify-content: flex-start;
+    padding: 10px;
+}
+.createNewPostUserImage img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin: 0 10px;
+}
+.createNewPostUserImage >div>p{
+    font-weight: 600;
+    font-size: 14px;
+}
+.privacySelect{
+    border-radius: 4px;
+    padding: 2px;
+    background-color: var(--secondary-background-3);
+}
+.privacySelect svg{
+    width: 15px;
+    height: 15px;
+    fill: var(--secondary-icon);
+    margin: 0 5px;
+}
+.privacySelect p{
+    font-size: 12px;
+}
+.createNewPostInput{
+    padding:0 10px;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.createNewPostInput textarea{
+    font-size: 18px;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background-color: transparent;
+    resize: none;
+    flex: 1;
+}
+.inputTextBox{
+    justify-content: space-between;
+    width: 100%;
+}
+.blobImage{
+    width: 100%;
+    height: 400px;
+    margin: auto;
+    overflow: hidden;
+    border-radius: 8px 8px 0 0;
+    position: relative;
+}
+.blobImage img{
+    width: 100%;
+    border-radius: 8px 8px 0 0;
+}
+.blobImageCloseButton{
+    position: absolute;
+    top : 10px;
+    right: 10px;
+    background-color: var(--secondary-background-3);
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+}
+.blobImageCloseButton svg{
+    stroke: var(--primary-icon);
+}
+.createNewPostInput svg{
+    height: 20px;
+    width: 20px;
+    cursor: pointer;
+    fill: var(--secondary-icon);
+}
+.newPostAdd{
+    width: 95%;
+    margin:10px auto;
+    padding:0 10px;
+    border: 1px solid var(--shadow-1);
+    border-radius: 8px;
+}
+.newPostAddTitle{
+    flex: 1;
+    text-align: left;
+}
+.newPostAddTitle p{
+    font-size: 14px;
+    font-weight: 500;
+}
+.newPostAdd .iconWrap{
+    width: 35px;
+    height: 35px;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 50%;
+    margin: 5px;
+}
+.newPostAdd .iconWrap:hover{
+    background-color: var(--secondary-background-3);
+}
+.newPostAdd .iconWrap svg{
+    width: 25px;
+    height: 25px;
+    fill: var(--supplementary-2);
+    cursor: pointer;
+}
+.postButton{
+    width: 95%;
+    margin: auto;
+    padding: 5px 0;
+    margin-bottom: 10px;
+}
+.postButton button{
+    width: 100%;
+    padding: 8px;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--primary-1);
+    color: var(--white);
+}
+.postButton button:hover{
+    background-color: var(--secondary-6);
+}

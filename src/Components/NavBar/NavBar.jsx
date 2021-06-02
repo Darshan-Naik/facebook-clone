@@ -17,14 +17,12 @@ import IconWrapperCircle from './IconWrapperCircle'
 import { useHistory } from 'react-router'
 import AccountMenu from './AccountMenu'
 
-function NavBar() {
-    const[refresh,setRefresh] = React.useState(true)
+function NavBar({refresh,handleRefresh}) {
+
     const [searchBoxVisibility,setSearchBoxVisibility] = React.useState(false)
     const path = React.useRef(true)
     const history = useHistory()
-    const handleRefresh=()=>{
-        setRefresh(!refresh)
-    }
+
     const handleMenu=()=>{
         if(path.current){
             path.current = !path.current;
@@ -75,7 +73,7 @@ function NavBar() {
                <IconWrapperCircle label="Create" icon={ <CreateIcon /> }>
                     
                 </IconWrapperCircle >
-                <IconWrapperCircle label="Messenger" icon={ <MessageIcon /> }>
+                <IconWrapperCircle path="/messenger/new" label="Messenger" icon={ <MessageIcon /> }>
                     
                 </IconWrapperCircle>
                 <IconWrapperCircle label="Notifications" icon={ <NotificationIcon /> }>

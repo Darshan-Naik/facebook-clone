@@ -1,27 +1,20 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { database } from '../../Firebase/firebase';
 import {ReactComponent as CameraIcon} from  "../../Icons/cameraIcon.svg";
 import {ReactComponent as EmojiIcon} from  "../../Icons/happyFace.svg";
-
-const initState=[
-    {
-        img:"",
-        othersName:"xyz",
-        othersComments:"good"
-    },
-    {
-        img:"",
-        othersName:"xyz",
-        othersComments:"good"
-    }
-]
+import CommentBox from './CommentBox';
 
 
 
-function PostCardComment({img,othersName,othersComments,time}) {
-    const [addComments,setAddComments]=React.useState(initState);
+
+
+function PostCardComment({postId,comments}) {
+    
     const [comment,setComment]=React.useState("")
+    const {uid} = useSelector(store=>store.auth.user)
     const handleChange=(e)=>{
-        const {value} =e.target;
+        const {value} = e.target;
         setComment(value)
         
         
@@ -29,43 +22,25 @@ function PostCardComment({img,othersName,othersComments,time}) {
     const handleSubmit=(e)=>{
         if (e.key === 'Enter') {
             const payload={
-                img:"",
-                othersName:"JON",
-                othersComments:comment
+                comment,
+                time: new Date(),
+                author:uid
 
             }
-            setAddComments([...addComments,payload]);
+            database.collection("posts").doc(postId).collection("comments").add(payload);
+            
             setComment("")
           }
     }
+ 
 
 
     return (
         <div className="postCardCommentContainer flexBox">
             <p>View more comments</p>
-            {addComments?.map((el)=>
+            {comments?.map((el)=><CommentBox key={el.commentId}{...el}/>)}
             <div className="postCardInputBox flexBox">
-                <img src={el.img|| process.env.PUBLIC_URL + '/Images/userProfile_icon.png'} alt="otherspic" />
-                <div className="addComment flexBox">
-                    <div className="addCommentBox flexBox">
-                        <strong>{el.othersName||"friend"}</strong>
-                        <small>{el.othersComments||"Nice Clicksfdf"}</small>
-                    </div>
-                    <div className="postCardCommentLikeandReply flexBox">
-                        <small>Like  </small>
-                        <samp>·</samp>
-                        <small>Reply </small>
-                        <samp>·</samp>
-                        <p>{time||"1d"}</p>
-
-                    </div>
-                    
-                    
-                </div>
-
-            </div>)}
-            <div className="postCardInputBox flexBox">
-                <img src={img|| process.env.PUBLIC_URL + '/Images/userProfile_icon.png'} alt="mypic" />
+                <img src={ process.env.PUBLIC_URL + '/Images/userProfile_icon.png'} alt="mypic" />
                 <div className="addComment flexBox">
                     <div className="commentInput flexBox">
                         <input autoFocus type="text" name="comment" id="comment" value={comment} onChange={handleChange} onKeyDown={handleSubmit} placeholder="Write a comment..."/>

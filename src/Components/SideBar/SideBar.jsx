@@ -6,17 +6,18 @@ import "../../App.css";
 
 
 function SideBar() {
+    let userName = "Darshan Naik"
     return (
         <div className="sideBarContainer">
             <div className="sideBarLinksContainer">
-                <Link className="flexBox sideBarContentLink" to="/">
-                    <SideBarContent label="Darshan Naik" />
+                <Link className="flexBox sideBarContentLink" to={`/profile/${'Darshan Naik'}`}>
+                    <SideBarContent label={userName} />
                 </Link>
-                <Link className="flexBox sideBarContentLink" to="/">
+                <Link className="flexBox sideBarContentLink" to="/friends/profile">
                     <SideBarContent src={process.env.PUBLIC_URL + '/Images/friends_icon.png'} label="Friends" />
                 </Link>
                 <Link className="flexBox sideBarContentLink" to="/">
-                    <SideBarContent src={process.env.PUBLIC_URL + '/Images/marketPlace_icon.png'} label="Marketplace" />
+                    <SideBarContent src={process.env.PUBLIC_URL + '/Images/market_place_icon.png'} label="Marketplace" />
                 </Link>
                 <Link className="flexBox sideBarContentLink" to="/">
                     <SideBarContent src={process.env.PUBLIC_URL + '/Images/messenger_icon.png'} label="Messenger" />
