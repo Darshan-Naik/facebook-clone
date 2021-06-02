@@ -24,7 +24,7 @@ function Home() {
           
             <div className="mainPostsContainer scroll">
                 <NewPost />
-                {posts.map((post)=><PostCard key={posts.id} {...post}/>)}
+                {posts.map((post)=><PostCard key={post.id} {...post}/>)}
 
             </div>
             <div className="mainRightSidebarContainer scroll">

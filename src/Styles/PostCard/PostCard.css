@@ -2,16 +2,14 @@
     max-width: 676px;
     min-width: 400px;
     width: 80%;
-    /* border: 1px solid black; */
     margin: auto;
     border-radius: 8px;
     background-color: var(--primary-background);
-    justify-content: space-around;
     box-shadow:0 1px 2px var( --shadow-2);
+    text-align: left;
 }
 .postCardHeadContainer{
     padding: 0 15px;
-    /* border: 1px solid black; */
     
 }
 .postCardHeadBox1>img{
@@ -62,7 +60,7 @@
     background: var(--hover-overlay);
 }
 .postCardTags{
-    font-size: 15px;
+    font-size: 14px;
     line-height: 1.3333;
     color: var(--primary-text);
     text-align: left;
@@ -103,6 +101,7 @@
 }
 .postCardFooterBox{
     width: 30%;
+    margin: 2px 0;
 }
 .postCardFooterBox:hover{
     background: var(--hover-overlay);
@@ -112,10 +111,15 @@
 
 .postCardFooter svg{
     width: 18px;
+    height: 18px;
     fill: var(--secondary-icon);
     margin: 5px;
     cursor: pointer;
     
+    
+}
+.postCardFooterBox>.likeIcon{
+    fill: var(--primary-1);
     
 }
 .postCardFooter p{
@@ -124,24 +128,134 @@
     cursor: pointer;
     font-weight: 500;
 }
+.postCardFooter small{
+    color: var(--primary-1);
+    font-size: 15px;
+    cursor: pointer;
+    font-weight: 500;
+}
 .postCardCommentContainer{
-    margin: 0 15px;
+    margin: 0px 15px 10px 15px;
     border-top: 1px solid var( --secondary-text);
     flex-direction: column;
-    justify-content:space-between;
+    justify-content: flex-start;
+    align-items: flex-start;
+    
     
 }
-.PostCardInputBox img{
+.postCardCommentContainer p{
+    font-weight: 500;
+    color: var(--secondary-text);
+    font-size: 14px;
+    cursor: pointer;
+    
+    
+}
+.postCardCommentContainer p:hover{
+    text-decoration: underline;
+   
+}
+.postCardInputBox{
+    width: 100%;
+    justify-content: left;
+    margin: 2px 0;
+    justify-content: flex-start;
+    align-items: flex-start;
+  
+}
+.postCardInputBox img{
     width: 35px;
     height: 35px;
     border-radius: 50%;
+    margin: 0 5px;
+    cursor: pointer;
+}
+.addComment{
+    flex-direction: column;
+    width: 100%;
+    justify-content: flex-start;
+    align-items: flex-start;
+    
+}
+.addComment small{
+    color: var(--primary-text);
+    font-size: 10px;
+    
+}
+.addCommentBox{
+    border-radius: 10px;
+    padding: 5px 10px;
+    max-width: 85%;
+    min-width: 100px;
+    background-color: var(--secondary-background-1);
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    
 
 }
+.addCommentBox>strong{
+    font-size:12px ;
+    font-weight: 600;
+    color: var(--primary-text);
+    cursor: pointer;
+}
+.addCommentBox>strong:hover{
+    text-decoration: underline;
+}
+.addCommentBox>small{
+    font-size: 14px;
+    width: 100%;
+    color: var(--primary-text);
+    word-break: break-all;
+    display: -webkit-box;
+    word-wrap:break-word;
+    cursor: pointer;
+    
+}
+.postCardCommentLikeandReply>small{
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+
+}
+.postCardCommentLikeandReply>p{
+    font-size: 12px;
+    font-weight: 200;
+    cursor: pointer;
+
+}
+.postCardCommentLikeandReply>small:hover{
+    text-decoration: underline;
+
+}
+
+
 .commentInput{
-    flex:2;
+    flex:1;
+    border-radius: 25px;
+    height: 36px;
+    padding: 0 10px;
+    width: 100%;
+    background-color: var(--secondary-background-1);
+    
+}
+.commentInput input{
+    border: 0px;
+    background: transparent;
+    flex:1;
+    padding: 8px;
+    font-size: 14px;
+    
     
 }
 
+.commentInput svg{
+    fill:var(--secondary-icon);
+    width: 20px;
+    height: 20px;
+    padding: 2px;
+}
 
 @media only screen and (max-width: 992px) {
     .postCardContainer{
