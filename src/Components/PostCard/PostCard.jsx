@@ -6,12 +6,12 @@ import PostCardComment from './PostCardComment';
 
 //const 
 
-function PostCard({tag,img,likeCount,commentCount}) {
+function PostCard({title,image,likeCount,commentCount}) {
     return (
         <div className="postCardContainer">
             <PostCardHead/>
-            <div className="postCardTags">{tag||"Having fun!"}</div>
-            <div className="postCardImage"><img src={img|| process.env.PUBLIC_URL + '/Images/facebook_login_logo.png'} alt="img" /></div>
+            <div className="postCardTags">{title||"Having fun!"}</div>
+            <div className="postCardImage"><img src={image|| process.env.PUBLIC_URL + '/Images/facebook_login_logo.png'} alt="img" /></div>
             <div className="postCardLike flexBox">
                 <div className="flexBox"><LikeEmoji/> <p>{likeCount||"0"}</p></div>
                 <div className="flexBox"><p>{commentCount||"0"} Comments</p> </div>

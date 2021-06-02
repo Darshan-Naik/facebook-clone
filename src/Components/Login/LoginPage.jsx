@@ -43,7 +43,8 @@ function LoginPage(){
         .then(res=>{
            const {uid} = res.user
            const payload = {uid,...signUpForm}
-           database.collection("users").add(payload).then(()=>{
+           database.collection("users").add(payload).then((res)=>{
+               console.log(res.id)
                 dispatch(signupSuccess(payload))
            })
         }).catch((err)=>{
