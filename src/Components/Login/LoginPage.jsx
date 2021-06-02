@@ -109,17 +109,17 @@ function LoginPage(){
                 <p>Date of birth</p>
                 <select class="first" name="date_of_birth:day" tabindex="7">
                     {days.map((el,i)=>(
-                        <option value={el+i}>{el+i}</option>
+                        <option key={el+i} value={el+i}>{el+i}</option>
                     ))}
                 </select>
                 <select name="date_of_birth:mon" tabindex="8">
                     {months.map((el)=>(
-                        <option value={el}>{el}</option>
+                        <option key={el} value={el}>{el}</option>
                     ))}
                 </select>
                 <select name="date_of_birth:year" tabindex="9">
                     {years.map((el,i)=>(
-                        <option value={el+i}>{el+i}</option>
+                        <option key={el+i} value={el+i}>{el+i}</option>
                     ))}
                 </select>
             </div>
