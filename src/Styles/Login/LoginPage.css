@@ -130,7 +130,7 @@
 }
 .signUpContainer > .signUpbuttonClose {
   position: relative;
-  bottom: 67px;
+  bottom: 77px;
   left: 180px;
   background-color: transparent;
   border: transparent;
@@ -233,6 +233,18 @@
   text-align: left;
   color: var(--black);
   margin: 5px 30px;
+}
+.errorHandlingContainerSignUp {
+  width: 90%;
+  min-height: 0;
+  margin: 0 auto 10px;
+  background-color: var(--shadow-9);
+  border: 1px solid red;
+  padding: 4px;
+}
+.errorHandlingContainerSignUp > p {
+  font-size: 13px;
+  color: var(--black);
 }
 /*Media Queries*/
 @media only screen and (max-width: 900px) {

@@ -16,7 +16,7 @@ function Router() {
     }
     const isAuth = useSelector(store=>store.auth.isAuth)
     
-    return isAuth? <LoginPage/> : (
+    return !isAuth? <LoginPage/> : (
 
         <>
          <NavBar refresh={refresh} handleRefresh={handleRefresh} />

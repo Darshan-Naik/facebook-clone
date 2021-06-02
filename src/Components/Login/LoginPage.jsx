@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import "../../App.css";
 import "../../Styles/Login/LoginPage.css"
 import LoginLogo from './LoginLogo';
@@ -6,14 +6,15 @@ import LoginForm from './LoginForm';
 import {ReactComponent as CloseIcon} from  "../../Icons/close.svg"
 import { login, signup } from '../../Firebase/authentication';
 import { database } from '../../Firebase/firebase';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { loginFailure, loginRequest, loginSuccess, signUpFailure, signupRequest, signupSuccess } from '../../Redux/Auth/actions';
 
 const initFormSignup = {
     first_name :"",
     last_name : "",
     email : "",
-    password : ""
+    password : "",
+    gender: ""
 }
 const initFormLogin = {
     email : "",
@@ -23,16 +24,40 @@ function LoginPage(){
     const [isCreateClick, setIsCreateClick] = useState(false);
     const [signUpForm,setSignUpForm] = React.useState(initFormSignup)
     const [logInForm,setLogInForm] = React.useState(initFormLogin)
-    const {first_name , last_name,email, password} = signUpForm;
+    const {first_name , last_name,email, password, gender} = signUpForm;
+    const [dob, setDob] = useState("1, June, 1950");
+    const [day, setDay] = useState("1");
+    const [mon, setMon] = useState("June");
+    const [year, setYear] = useState("1950");
+    const {errorMessage, isError} = useSelector(store=>store.auth)
     const handleSignUpForm = (e)=>{
-            const {value,name} = e.target;
-            setSignUpForm({...signUpForm,[name]:value}) 
+        //console.log(e.target.value)
+        const {value,name} = e.target;
+        setSignUpForm({...signUpForm,[name]:value}) 
+        //console.log(signUpForm)
     }
 
     const handleLoginForm = (e)=>{
         const {value,name} = e.target;
         setLogInForm({...logInForm,[name]:value}) 
     }
+
+    const handleChangeDob = (e) => {
+        if(e.target.name == "date_of_birth:day"){
+            setDay(e.target.value);
+        } else if (e.target.name == "date_of_birth:mon"){
+            setMon(e.target.value);
+        } else if (e.target.name == "date_of_birth:year"){
+            setYear(e.target.value);
+        }
+        
+        //console.log(dob)
+    }
+
+    useEffect(()=>{
+        setDob(day+", "+mon+", "+year);
+        console.log(dob)
+    },[day, mon, year])
 
     const dispatch =useDispatch()
 
@@ -42,12 +67,12 @@ function LoginPage(){
         signup(email,password)
         .then(res=>{
            const {uid} = res.user
-           const payload = {uid,...signUpForm}
+           const payload = {uid,...signUpForm,dob}
            database.collection("users").add(payload).then(()=>{
                 dispatch(signupSuccess(payload))
            })
         }).catch((err)=>{
-            dispatch(signUpFailure(err))
+            dispatch(signUpFailure(err.message))
         })
 
     }
@@ -63,6 +88,7 @@ function LoginPage(){
                 res.docs.map(doc=>dispatch(loginSuccess(doc.data()) ))})
         })
         .catch((err)=>{
+            console.log("p",err);
             dispatch(loginFailure(err))
         })
     }
@@ -97,8 +123,12 @@ function LoginPage(){
             <h2 className="signUpH2">Sign Up</h2>
             <p className="signUpP">It's quick and easy.</p>
             <hr className="signUpHr"/>
+            {/* <br /> */}
             <button className="signUpbuttonClose" onClick={handleCloseClick}><CloseIcon /></button>
-            <br />
+            {isError && <div className="errorHandlingContainerSignUp">
+                <p>{errorMessage}</p>
+            </div>
+            }
             <div className="nameSignUpContainer" >
                 <input type="text" placeholder="First name" value={first_name} name="first_name"  onChange={handleSignUpForm} />
                 <input type="text" placeholder="Surname" value={last_name}  name="last_name" onChange={handleSignUpForm}/>
@@ -107,17 +137,17 @@ function LoginPage(){
             <input className="numPassInput" type="password" value={password}  placeholder="New password" name="password" onChange={handleSignUpForm} />
             <div className="dobSignUpContainer">
                 <p>Date of birth</p>
-                <select class="first" name="date_of_birth:day" tabindex="7">
+                <select onChange={(e)=>handleChangeDob(e)} class="first" name="date_of_birth:day" tabindex="7">
                     {days.map((el,i)=>(
                         <option key={el+i} value={el+i}>{el+i}</option>
                     ))}
                 </select>
-                <select name="date_of_birth:mon" tabindex="8">
+                <select onChange={(e)=>handleChangeDob(e)} name="date_of_birth:mon" tabindex="8">
                     {months.map((el)=>(
                         <option key={el} value={el}>{el}</option>
                     ))}
                 </select>
-                <select name="date_of_birth:year" tabindex="9">
+                <select onChange={(e)=>handleChangeDob(e)} name="date_of_birth:year" tabindex="9">
                     {years.map((el,i)=>(
                         <option key={el+i} value={el+i}>{el+i}</option>
                     ))}
@@ -127,15 +157,15 @@ function LoginPage(){
             <div className="dobSignUpContainer flexBox">
                 
                 <div>
-                    <input type="radio" value="MALE" name="gender"/> 
+                    <input type="radio" onChange={(e)=>handleSignUpForm(e)} value="MALE" name="gender"/> 
                     <p>Male</p>
                 </div>
                 <div>
-                    <input type="radio" value="FEMALE" name="gender"/>
+                    <input type="radio" onChange={(e)=>handleSignUpForm(e)} value="FEMALE" name="gender"/>
                     <p>Female</p>
                 </div>
                 <div>
-                    <input type="radio" value="OTHERS" name="gender"/>
+                    <input type="radio" onChange={(e)=>handleSignUpForm(e)} value="OTHERS" name="gender"/>
                     <p>Others</p>
                 </div>
             </div>
