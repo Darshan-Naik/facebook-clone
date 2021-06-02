@@ -60,7 +60,7 @@
     background: var(--hover-overlay);
 }
 .postCardTags{
-    font-size: 15px;
+    font-size: 14px;
     line-height: 1.3333;
     color: var(--primary-text);
     text-align: left;
@@ -118,8 +118,18 @@
     
     
 }
+.postCardFooterBox>.likeIcon{
+    fill: var(--primary-1);
+    
+}
 .postCardFooter p{
     color: var(--secondary-icon);
+    font-size: 15px;
+    cursor: pointer;
+    font-weight: 500;
+}
+.postCardFooter small{
+    color: var(--primary-1);
     font-size: 15px;
     cursor: pointer;
     font-weight: 500;
@@ -206,6 +216,12 @@
 .postCardCommentLikeandReply>small{
     font-size: 12px;
     font-weight: 600;
+    cursor: pointer;
+
+}
+.postCardCommentLikeandReply>p{
+    font-size: 12px;
+    font-weight: 200;
     cursor: pointer;
 
 }

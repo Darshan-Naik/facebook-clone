@@ -17,7 +17,7 @@ const initState=[
 
 
 
-function PostCardComment({img,othersName,othersComments}) {
+function PostCardComment({img,othersName,othersComments,time}) {
     const [addComments,setAddComments]=React.useState(initState);
     const [comment,setComment]=React.useState("")
     const handleChange=(e)=>{
@@ -55,6 +55,8 @@ function PostCardComment({img,othersName,othersComments}) {
                         <small>Like  </small>
                         <samp>·</samp>
                         <small>Reply </small>
+                        <samp>·</samp>
+                        <p>{time||"1d"}</p>
 
                     </div>
                     
