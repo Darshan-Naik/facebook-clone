@@ -71,6 +71,15 @@
 
 /* User Profile Posts Component CSS */
 
+.postsPagePostsComponentContainer {
+    margin-left: 10px;
+    margin-top: 14.5px;
+}
+
+.userPostsContainer {
+    display: grid;
+    gap: 15px;
+}
 
 /* User Proile Page Media Queries */
 
@@ -83,5 +92,10 @@
     .postsPageIntroComponentContainer {
         max-width: 500px;
         margin: auto;
+    }
+
+    .postsPagePostsComponentContainer {
+        max-width: 500px;
+        margin: 14.5px auto 0;
     }
 }

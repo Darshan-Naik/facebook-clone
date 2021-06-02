@@ -1,69 +1,21 @@
 import React from 'react'
+import { useSelector } from 'react-redux';
+import PostCard from "../../PostCard/PostCard";
+import NewPost from "../../NewPost/NewPost";
 
-function UserProfilePostsPagePosts() {
+function UserProfilePostsPagePosts({userProfileDetails}) {
+    
+    const { posts } = useSelector(state => state.posts);
+    console.log(posts);
+    console.log(userProfileDetails);
     return (
-        <div>
-            <h1>Posts</h1>
-            <h1>Posts</h1>
-            <h1>Posts</h1>
-            <h1>Posts</h1>
-            <h1>Posts</h1>
-            <h1>Posts</h1>
-            <h1>Posts</h1>
-            <h1>Posts</h1>
-            <h1>Posts</h1>
-            <h1>Posts</h1>
-            <h1>Posts</h1>
-            <h1>Posts</h1>
-            <h1>Posts</h1>
-            <h1>Posts</h1>
-            <h1>Posts</h1>
-            <h1>Posts</h1>
-            <h1>Posts</h1>
-            <h1>Posts</h1>
-            <h1>Posts</h1>
-            <h1>Posts</h1>
-            <h1>Posts</h1>
-            <h1>Posts</h1>
-            <h1>Posts</h1>
-            <h1>Posts</h1>
-            <h1>Posts</h1>
-            <h1>Posts</h1>
-            <h1>Posts</h1>
-            <h1>Posts</h1>
-            <h1>Posts</h1>
-            <h1>Posts</h1>
-            <h1>Posts</h1>
-            <h1>Posts</h1>
-            <h1>Posts</h1>
-            <h1>Posts</h1>
-            <h1>Posts</h1>
-            <h1>Posts</h1>
-            <h1>Posts</h1>
-            <h1>Posts</h1>
-            <h1>Posts</h1>
-            <h1>Posts</h1>
-            <h1>Posts</h1>
-            <h1>Posts</h1>
-            <h1>Posts</h1>
-            <h1>Posts</h1>
-            <h1>Posts</h1>
-            <h1>Posts</h1>
-            <h1>Posts</h1>
-            <h1>Posts</h1>
-            <h1>Posts</h1>
-            <h1>Posts</h1>
-            <h1>Posts</h1>
-            <h1>Posts</h1>
-            <h1>Posts</h1>
-            <h1>Posts</h1>
-            <h1>Posts</h1>
-            <h1>Posts</h1>
-            <h1>Posts</h1>
-            <h1>Posts</h1>
-            <h1>Posts</h1>
-            <h1>Posts</h1>
-            <h1>Posts</h1>
+        <div className="userPostsContainer">
+            <div>
+                <NewPost />
+            </div>
+            {
+                posts.map( el => el.author === userProfileDetails.uid ? <PostCard {...el} key={el.id} /> : null )
+            }
         </div>
     )
 }

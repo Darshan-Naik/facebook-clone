@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 
-function UserProfilePostsPageIntro({ studies = true, went = true, lives = true, from = true, relationship = true, joinedOn = true, alternativePath, currentUser }) {
+function UserProfilePostsPageIntro({ studies = true, went = true, lives = true, from = true, relationship = true, joinedOn = true, alternativePath, currentUser, userProfileDetails }) {
+    
     return (
         <div className="postsPageIntroMainContainer">
             {

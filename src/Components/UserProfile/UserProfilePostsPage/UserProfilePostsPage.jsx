@@ -10,10 +10,10 @@ const UserProfilePostsPage = ({forceRefresh, alternativePath, userProfileDetails
     return (
         <div className="postsPageMainContainer">
             <div className="postsPageIntroComponentContainer scroll"> 
-                <UserProfilePostsPageIntro {...userProfileDetails} alternativePath={alternativePath} />
+                <UserProfilePostsPageIntro userProfileDetails={userProfileDetails} alternativePath={alternativePath} />
             </div>
             <div className="postsPagePostsComponentContainer scroll">
-                <UserProfilePostsPagePosts />
+                <UserProfilePostsPagePosts userProfileDetails={userProfileDetails} />
             </div>
         </div>
     )
