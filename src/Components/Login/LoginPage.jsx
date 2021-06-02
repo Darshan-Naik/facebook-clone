@@ -68,8 +68,13 @@ function LoginPage(){
         .then(res=>{
            const {uid} = res.user
            const payload = {uid,...signUpForm,dob}
+<<<<<<< HEAD
            database.collection("users").add(payload).then((res)=>{
                 dispatch(signupSuccess({docID :res.id,...payload}))
+=======
+           database.collection("users").add(payload).then(()=>{
+                dispatch(signupSuccess(payload))
+>>>>>>> 782dda75d5bd7fb358be546ab4b11da45a9676d4
            })
         }).catch((err)=>{
             dispatch(signUpFailure(err.message))
@@ -88,6 +93,7 @@ function LoginPage(){
                 res.docs.map(doc=>dispatch(loginSuccess(doc.data()) ))})
         })
         .catch((err)=>{
+            console.log("p",err);
             dispatch(loginFailure(err))
         })
     }
