@@ -6,7 +6,7 @@ import LoginForm from './LoginForm';
 import {ReactComponent as CloseIcon} from  "../../Icons/close.svg"
 import { login, signup } from '../../Firebase/authentication';
 import { database } from '../../Firebase/firebase';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { loginFailure, loginRequest, loginSuccess, signUpFailure, signupRequest, signupSuccess } from '../../Redux/Auth/actions';
 
 const initFormSignup = {
@@ -29,6 +29,7 @@ function LoginPage(){
     const [day, setDay] = useState("1");
     const [mon, setMon] = useState("June");
     const [year, setYear] = useState("1950");
+    const {errorMessage, isError} = useSelector(store=>store.auth)
     const handleSignUpForm = (e)=>{
         //console.log(e.target.value)
         const {value,name} = e.target;
@@ -71,8 +72,7 @@ function LoginPage(){
                 dispatch(signupSuccess(payload))
            })
         }).catch((err)=>{
-            console.log(err)
-            dispatch(signUpFailure(err))
+            dispatch(signUpFailure(err.message))
         })
 
     }
@@ -88,6 +88,7 @@ function LoginPage(){
                 res.docs.map(doc=>dispatch(loginSuccess(doc.data()) ))})
         })
         .catch((err)=>{
+            console.log("p",err);
             dispatch(loginFailure(err))
         })
     }
@@ -122,8 +123,12 @@ function LoginPage(){
             <h2 className="signUpH2">Sign Up</h2>
             <p className="signUpP">It's quick and easy.</p>
             <hr className="signUpHr"/>
+            {/* <br /> */}
             <button className="signUpbuttonClose" onClick={handleCloseClick}><CloseIcon /></button>
-            <br />
+            {isError && <div className="errorHandlingContainerSignUp">
+                <p>{errorMessage}</p>
+            </div>
+            }
             <div className="nameSignUpContainer" >
                 <input type="text" placeholder="First name" value={first_name} name="first_name"  onChange={handleSignUpForm} />
                 <input type="text" placeholder="Surname" value={last_name}  name="last_name" onChange={handleSignUpForm}/>
