@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import UserProfilePicture from "./UserProfilePicture";
-import UserProfileNavBar from "./UserProfileNavBar";
 import { useSelector } from 'react-redux';
 import { ReactComponent as UpdateCoverPhotoIcon } from "../../../Icons/photos.svg";
 import "../../../Styles/UserProfile/UserProfile.css";
 
-const UserProfilePageHeader = ({ coverPhoto, currentUser, forceRefresh}) => {
+const UserProfilePageHeader = ({ coverPhoto, currentUser, forceRefresh, userProfileDetails}) => {
     const [userProfilePicOptions, setUserProfilePicOptions] = useState(true);
     const [addBioVisibility, setAddBioVisibility] = useState(false);
     const [editUserProfileCoverPhoto, setEditUserProfileCoverPhoto] = useState(false);
     const [textFieldQuery, setTextFieldQuery] = useState("");
     
-    const dark = useSelector(state => state.theme.dark)
+    const dark = useSelector(state => state.theme.dark);
+    const { first_name, last_name } = useSelector( state => state.auth.user );
     
     const handleOptionsVisibility = (e) => {
         e.stopPropagation();
@@ -32,9 +32,9 @@ const UserProfilePageHeader = ({ coverPhoto, currentUser, forceRefresh}) => {
             <div className="userProfileCoverPageBox" style={{backgroundImage: `url(${coverPhoto})`}}>
                 <div className="userProfileCoverPageOverlay">
                     <div className="userProfileCoverPhotoBox" style={coverPhoto ? {backgroundImage: `url(${coverPhoto})`} : ( dark ? {backgroundColor: `#18191a`} : {backgroundColor: `#f0f2f5`} )}>
-                        <UserProfilePicture userProfilePic={coverPhoto} userProfilePicOptions={userProfilePicOptions} handleOptionsVisibility={handleOptionsVisibility} />
+                        <UserProfilePicture currentUser={currentUser} userProfilePic={coverPhoto} userProfilePicOptions={userProfilePicOptions} handleOptionsVisibility={handleOptionsVisibility} />
                         {
-                            currentUser && (
+                            currentUser === `${first_name} ${last_name}` && (
                                 <React.Fragment>
                                     <div className="userProfileEditCoverPhotoContainer flexBox" onClick={() => setEditUserProfileCoverPhoto(!editUserProfileCoverPhoto)}>
                                         <div className="userProfileEditCoverPhotoBox">
@@ -60,13 +60,13 @@ const UserProfilePageHeader = ({ coverPhoto, currentUser, forceRefresh}) => {
                 </div>
             </div>
             <div className="userNameContainer">
-                <h1 className="userNamePlate">No Name</h1>
+                <h1 className="userNamePlate">{currentUser}</h1>
                 <React.Fragment>
                     {
-                        currentUser && !addBioVisibility && <p className="addUserBio" onClick={handleAddBioVisiblity}>Add Bio</p>
+                        currentUser === `${first_name} ${last_name}` && !addBioVisibility && <p className="addUserBio" onClick={handleAddBioVisiblity}>Add Bio</p>
                     }
                     {
-                        currentUser && addBioVisibility && (
+                        currentUser === `${first_name} ${last_name}` && addBioVisibility && (
                             <div className="addBoxTexFieldContainer">
                                 <textarea className="addBioTextField" value={textFieldQuery} onChange={(e) => setTextFieldQuery(e.target.value)} placeholder="Describe who you are"></textarea>
                                 <div className="addBioTextFieldCharCount">

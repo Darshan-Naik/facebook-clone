@@ -1,15 +1,24 @@
 .postsPageMainContainer {
     max-width: 875px;
     margin: auto;
+    overflow: hidden;
+    display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+
+.postsPageIntroComponentContainer {
+    max-width: 362px;
+    width: 100%;
+}
+
+.postsPagePostsComponentContainer {
+    overflow: auto;
 }
 
 /* User Profile Intro Component CSS */
 
 .postsPageIntroMainContainer {
-    max-width: 362px;
-    height: 100vh;
     width: 100%;
     text-align: left;
 }
@@ -18,7 +27,7 @@
     margin: 14.5px 4px 0 0;
     padding: 10px 14px;
     border-radius: 6px;
-    background-color: var(--secondary-background-1);
+    background-color: var(--primary-background);
 }
 
 .postsPageUserDetailsNamePlate {
@@ -45,4 +54,34 @@
     filter: var(--filter-placeholder-icon);
 }
 
+.postsPageFriendsNameBox {
+    justify-content: space-between;
+}
+
+.postsPageLinkToFriendsPage {
+    text-decoration: none;
+    padding: 8px 5px;
+    border-radius: 6px;
+    color: var(--primary-1);
+}
+
+.postsPageLinkToFriendsPage:hover {
+    background: var(--secondary-background-1);
+}
+
 /* User Profile Posts Component CSS */
+
+
+/* User Proile Page Media Queries */
+
+@media only screen and ( max-width: 924px ) {
+
+    .postsPageMainContainer {
+        flex-direction: column;
+    }
+    
+    .postsPageIntroComponentContainer {
+        max-width: 500px;
+        margin: auto;
+    }
+}

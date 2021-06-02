@@ -1,29 +1,64 @@
-import React from 'react';
-import { Switch, Route } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { Switch, Route, useHistory, useParams } from "react-router-dom";
 import UserProfilePostsPage from "../Components/UserProfile/UserProfilePostsPage/UserProfilePostsPage";
 import UserProfilePageHeader from "../Components/UserProfile/UserProfileHome/UserProfilePageHeader";
 import UserProfileNavBar from "../Components/UserProfile/UserProfileHome/UserProfileNavBar";
 import UserProfileAboutPage from "../Components/UserProfile/UserProfileAbout/UserProfileAboutPage";
 import UserProfileFriendsPage from "../Components/UserProfile/UserProfileFriends/UserProfileFriendsPage";
+import {database} from "../Firebase/firebase";
 
 function UserProfileRouter({ path, forceRefresh, refresh }) {
-    return (
+
+    const [isLoading, setIsLoading] = useState(true);
+    const [userData, setUserData] = useState({});
+    const { userId } = useParams();
+    
+    useEffect(() => {
+        if( userId ) {
+            const unsubscribe = database.collection("users").where("uid", "==", userId)
+            .onSnapshot((res) => {
+                res.docs.map( doc => {
+                    setUserData({ ...doc.data(), docUpdateId: doc.id });
+                    setIsLoading(false);
+                });
+            });
+
+            return () => {
+                unsubscribe();
+            }
+        }
+
+    }, [])
+
+    return userId ? (
         <React.Fragment>
-            <UserProfilePageHeader forceRefresh={forceRefresh} />
-            <UserProfileNavBar alternativePath={path} refresh={refresh} />
-            <Switch>
-                <Route path={`${path}/:user_name`} exact>
-                    <UserProfilePostsPage forceRefresh={forceRefresh} />
-                </Route>
-                <Route  path={`${path}/:user_name/about`}>
-                    <UserProfileAboutPage forceRefresh={forceRefresh} />
-                </Route>
-                <Route  path={`${path}/:user_name/friends`}>
-                    <UserProfileFriendsPage forceRefresh={forceRefresh} />
-                </Route>
-            </Switch>
+            {
+                isLoading ? <div>Loading...</div> : (
+                    <React.Fragment>
+                        <UserProfilePageHeader currentUser={`${userData.first_name} ${userData.last_name}`} userProfileDetails={userData} forceRefresh={forceRefresh} />
+                        <UserProfileNavBar currentUser={`${userData.first_name} ${userData.last_name}`} alternativePath={path} userProfileDetails={userData} refresh={refresh} />
+                        <Switch>
+                            <Route path={`${path}/${userData.uid}`} exact>
+                                <UserProfilePostsPage userProfileDetails={userData} alternativePath={path} forceRefresh={forceRefresh} />
+                            </Route>
+                            <Route  path={`${path}/${userData.uid}/about`}>
+                                <UserProfileAboutPage forceRefresh={forceRefresh} />
+                            </Route>
+                            <Route  path={`${path}/${userData.uid}/friends`}>
+                                <UserProfileFriendsPage forceRefresh={forceRefresh} />
+                            </Route>
+                        </Switch>
+                    </React.Fragment>
+                )
+            }
         </React.Fragment>
+    ) : (
+        <div>
+            select user 
+        </div>
     )
 }
 
 export default UserProfileRouter
+
+// db.collection("users").doc(docUpdateId).update({key: value})
