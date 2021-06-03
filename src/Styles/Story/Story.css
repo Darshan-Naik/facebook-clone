@@ -1,10 +1,27 @@
 .storyMainContainer {
   background-color: transparent;
+  width: 700px;
+  margin: auto;
+  margin-bottom: 10px;
 }
 .imageMainContainer {
-  max-width: 90px;
-  min-width: 0;
-  margin: 10px 0 10px 0;
-  height: 110px;
+  max-width: 111px;
+  padding: 2px;
+  margin: 10px 15px 10px 5px;
+  height: 170px;
   border-radius: 20px;
+}
+.imageMainContainer:hover {
+  transform: scale(1.03);
+}
+.pMainTag {
+  position: relative;
+  bottom: 64px;
+  text-align: left;
+  max-width: 60px;
+  padding: 1px;
+  font-size: 14px;
+  font-weight: 600;
+  margin-left: 10px;
+  color: var(--white);
 }
