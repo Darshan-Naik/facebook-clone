@@ -10,7 +10,6 @@ function CommentBox({comment,author,time}) {
     const history=useHistory();
     
     React.useEffect(() => {
-       
         const unsubscribe = database.collection("users").doc(author)
         .onSnapshot((doc) => {
             setUserData(doc.data());
@@ -19,8 +18,7 @@ function CommentBox({comment,author,time}) {
         return () => {
             unsubscribe();
         }
-    
-}, [])
+    }, [])
 
 
 

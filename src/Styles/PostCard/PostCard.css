@@ -118,7 +118,7 @@
     
     
 }
-.postCardFooterBox>.likeIcon{
+.postCardFooterBox .likeIcon{
     fill: var(--primary-1);
     
 }
@@ -136,6 +136,7 @@
 }
 .postCardCommentContainer{
     margin: 0px 15px 10px 15px;
+    padding: 5px 0px 5px 0px;
     border-top: 1px solid var( --secondary-text);
     flex-direction: column;
     justify-content: flex-start;
@@ -220,7 +221,7 @@
 
 }
 .postCardCommentLikeandReply>p{
-    font-size: 12px;
+    font-size: 10px;
     font-weight: 200;
     cursor: pointer;
 

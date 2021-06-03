@@ -6,7 +6,7 @@ import PostCardComment from './PostCardComment';
 import { database } from '../../Firebase/firebase';
 import { useSelector } from 'react-redux';
 
-//const 
+
 
 function PostCard({title,image,id,author,time}) {
     const[commentSection,setCommentSection]=React.useState(false);
@@ -47,16 +47,14 @@ function PostCard({title,image,id,author,time}) {
 
 
     React.useEffect(() => {
-       
-            const unsubscribe = database.collection("users").doc(author)
-            .onSnapshot((doc) => {
-                setUserData(doc.data());
-                
-            });
-            return () => {
-                unsubscribe();
-            }
-        
+        const unsubscribe = database.collection("users").doc(author)
+        .onSnapshot((doc) => {
+            setUserData(doc.data());
+            
+        });
+        return () => {
+            unsubscribe();
+        }
     }, [])
 
 
@@ -65,10 +63,10 @@ function PostCard({title,image,id,author,time}) {
         <div className="postCardContainer">
             <PostCardHead {...userData} time={time}/>
             {title && <div className="postCardTags">{title}</div>}
-            <div className="postCardImage"><img src={image|| process.env.PUBLIC_URL + '/Images/facebook_login_logo.png'} alt="img" /></div>
+            {image&&<div className="postCardImage"><img src={image|| process.env.PUBLIC_URL + '/Images/facebook_login_logo.png'} alt="img" /></div>}
             <div className="postCardLike flexBox">
                 <div className="flexBox"><LikeEmoji/> <p>{likes.length}</p></div>
-                <div className="flexBox"><p>{comments.length} Comments</p> </div>
+                <div className="flexBox"><p onClick={showComment}>{comments.length} Comments</p> </div>
             </div>
             <PostCardFooter handleDeleteLike={handleDeleteLike} handleLike={handleLike} like={JSON.stringify(likes).includes(uid)} showComment={showComment}/>
            {commentSection && <PostCardComment postId={id} comments={comments}/>}
