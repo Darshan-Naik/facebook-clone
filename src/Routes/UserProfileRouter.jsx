@@ -6,21 +6,24 @@ import UserProfileNavBar from "../Components/UserProfile/UserProfileHome/UserPro
 import UserProfileAboutPage from "../Components/UserProfile/UserProfileAbout/UserProfileAboutPage";
 import UserProfileFriendsPage from "../Components/UserProfile/UserProfileFriends/UserProfileFriendsPage";
 import {database} from "../Firebase/firebase";
+import { useSelector } from 'react-redux';
 
 function UserProfileRouter({ path, forceRefresh, refresh }) {
 
     const [isLoading, setIsLoading] = useState(true);
     const [userData, setUserData] = useState({});
     const { userId } = useParams();
+
+    const { docID } = useSelector(state => state.auth.user)
+    console.log(docID);
     
     useEffect(() => {
+
         if( userId ) {
-            const unsubscribe = database.collection("users").where("uid", "==", userId)
-            .onSnapshot((res) => {
-                res.docs.map( doc => {
-                    setUserData({ ...doc.data(), docUpdateId: doc.id });
-                    setIsLoading(false);
-                });
+            const unsubscribe = database.collection("users").doc(docID)
+            .onSnapshot((doc) => {
+                setUserData(doc.data());
+                setIsLoading(false);
             });
 
             return () => {
