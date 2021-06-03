@@ -1,0 +1,10 @@
+.storyMainContainer {
+  background-color: transparent;
+}
+.imageMainContainer {
+  max-width: 90px;
+  min-width: 0;
+  margin: 10px 0 10px 0;
+  height: 110px;
+  border-radius: 20px;
+}
