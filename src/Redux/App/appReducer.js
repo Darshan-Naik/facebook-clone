@@ -1,10 +1,11 @@
 import { contacts } from "../../Utils/localData";
-import { ADD_ACTIVE_MESSAGE, ADD_IN_ACTIVE_MESSAGE, ADD_IN_ACTIVE_MESSAGE_TO_ACTIVE_MESSAGE, CLOSE_ALL_MESSAGE, MINIMIZE_ALL_MESSAGE, REMOVE_ACTIVE_MESSAGE, REMOVE_IN_ACTIVE_MESSAGE } from "./actionTypes";
+import { ADD_ACTIVE_MESSAGE, ADD_IN_ACTIVE_MESSAGE, ADD_IN_ACTIVE_MESSAGE_TO_ACTIVE_MESSAGE, CLOSE_ALL_MESSAGE, GET_USERS, MINIMIZE_ALL_MESSAGE, REMOVE_ACTIVE_MESSAGE, REMOVE_IN_ACTIVE_MESSAGE } from "./actionTypes";
 
 const init = {
     activeMessages :[],
     inActiveMessages :[],
-    activeContacts: [...contacts]
+    activeContacts: [...contacts],
+    users :[]
 }
 
 export const appReducer = (state=init,{type,payload})=>{
@@ -74,7 +75,6 @@ export const appReducer = (state=init,{type,payload})=>{
                 let message = updateActiveMessage.shift();
                 updateInActiveMessage.push(message)
             }
-            console.log(chat,payload)
             return {
                 ...state,
                 activeMessages : [...chat,...updateActiveMessage],
@@ -94,6 +94,13 @@ export const appReducer = (state=init,{type,payload})=>{
                 ...state,
                 inActiveMessages : [...state.inActiveMessages,...state.activeMessages],
                 activeMessages : []
+            }
+        }
+        case GET_USERS :{
+            console.log(payload)
+            return {
+                ...state,
+                users : payload
             }
         }
         default : return state;
