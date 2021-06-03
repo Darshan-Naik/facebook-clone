@@ -1,12 +1,28 @@
 import React from "react"
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import './App.css';
+import { database } from "./Firebase/firebase";
 import Router from "./Routes/Router";
+import { getPosts } from './Redux/Posts/actions';
+import { getUsers } from "./Redux/App/actions";
 
 function App() {
 
+  const dispatch = useDispatch()
   const root = document.querySelector(':root');
   const dark = useSelector(store=>store.theme.dark)
+
+  React.useEffect(()=>{
+    database.collection("posts").orderBy("time","desc").onSnapshot(res=>{
+        const newPosts = res.docs.map(doc=>({id:doc.id,...doc.data()}))
+        dispatch(getPosts(newPosts))
+    })
+    database.collection("users").onSnapshot(res=>{
+      const newUsers = res.docs.map(doc=>doc.data())
+      dispatch(getUsers(newUsers))
+  })
+},[])
+
 
   React.useEffect(()=>{
     if(dark){

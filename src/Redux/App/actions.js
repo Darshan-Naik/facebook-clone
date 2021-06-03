@@ -1,4 +1,4 @@
-import { ADD_ACTIVE_MESSAGE, ADD_IN_ACTIVE_MESSAGE, ADD_IN_ACTIVE_MESSAGE_TO_ACTIVE_MESSAGE, CLOSE_ALL_MESSAGE, MINIMIZE_ALL_MESSAGE, REMOVE_ACTIVE_MESSAGE, REMOVE_IN_ACTIVE_MESSAGE } from "./actionTypes"
+import { ADD_ACTIVE_MESSAGE, ADD_IN_ACTIVE_MESSAGE, ADD_IN_ACTIVE_MESSAGE_TO_ACTIVE_MESSAGE, CLOSE_ALL_MESSAGE, GET_USERS, MINIMIZE_ALL_MESSAGE, REMOVE_ACTIVE_MESSAGE, REMOVE_IN_ACTIVE_MESSAGE } from "./actionTypes"
 
 const  addActiveMessage =(payload)=>{
     return {
@@ -40,4 +40,10 @@ const closeAllMessage = ()=>{
         type: CLOSE_ALL_MESSAGE
     }
 }
-export {closeAllMessage,minimizeAllMessage, addActiveMessage,removeActiveMessage,addInActiveMessage,removeInActiveMessage,addInActiveMessageToActiveMessage}
+const getUsers = (payload)=>{
+    return {
+        type: GET_USERS,
+        payload
+    }
+}   
+export {getUsers,closeAllMessage,minimizeAllMessage, addActiveMessage,removeActiveMessage,addInActiveMessage,removeInActiveMessage,addInActiveMessageToActiveMessage}
