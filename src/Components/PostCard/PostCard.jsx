@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PostCardFooter from './PostCardFooter';
 import PostCardHead from './PostCardHead';
 import {ReactComponent as LikeEmoji} from  "../../Icons/likeEmoji.svg"
@@ -45,19 +45,18 @@ function PostCard({title,image,id,author,time}) {
         })
     },[])
 
-    React.useEffect(()=>{
-      
-        const unsubscribe = database.collection("users").where("uid", "==", author)
-        .onSnapshot((res) => {
-            res.docs.map( doc => {
-                setUserData({ ...doc.data(), docUpdateId: doc.id });
+
+    React.useEffect(() => {
+       
+            const unsubscribe = database.collection("users").doc(author)
+            .onSnapshot((doc) => {
+                setUserData(doc.data());
                 
             });
-        });
-        return () => {
-            unsubscribe();
-        }
-            
+            return () => {
+                unsubscribe();
+            }
+        
     }, [])
 
 
