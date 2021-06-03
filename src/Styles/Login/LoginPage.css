@@ -52,6 +52,7 @@
   border: 1px solid var(--primary-1);
   border-radius: 8px;
   cursor: pointer;
+  height: 45px;
 }
 .loginFormMainDiv > button:hover {
   background-color: var(--secondary-6);
@@ -202,6 +203,7 @@
   border-radius: 8px;
   cursor: pointer;
   width: 180px;
+  height: 45px;
 }
 .signUpButton:hover {
   background-color: var(--secondary-5);
