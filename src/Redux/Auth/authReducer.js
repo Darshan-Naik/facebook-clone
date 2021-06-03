@@ -5,6 +5,7 @@ import { LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, SIGNUP_FAILURE, SIGNUP_REQ
 const init = loadData("user") || {
     isAuth : false,
     user : {},
+    friends:[],
     isError : false,
     isLoading :false,
     errorMessage : ""
