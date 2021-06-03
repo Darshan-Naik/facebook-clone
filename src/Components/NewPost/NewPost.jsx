@@ -10,7 +10,7 @@ import { database, storage } from '../../Firebase/firebase'
 
 function NewPost() {
     const [title,setTitle] = React.useState("")
-    const[buttonName,setButtonName] = React.useState("Post")
+    const[postState,setPostState] = React.useState(false)
     const [postModalVisibility,setPostModalVisibility] = React.useState(false)
     const {first_name,profilePic,uid,last_name} = useSelector(store=>store.auth.user)
     const imageRef = React.useRef()
@@ -29,7 +29,7 @@ function NewPost() {
         imageRef.current.value = "";
     }
     const handleNewPost=()=>{
-        setButtonName("Loading...")
+        setPostState(true)
       const uploadTask =  storage.ref(`postImages/${imageRef.current.files[0].name}`).put(imageRef.current.files[0])
 
       uploadTask.on("state_changed",
@@ -54,15 +54,17 @@ function NewPost() {
               }
               database.collection("posts").add(payload)
               .then(()=>{
-                setButtonName("Posted")
+                imageRef.current.value = "";
+                setTitle("")
                 setTimeout(()=>{
-                    setButtonName("Post")
+                    setPostState(false)
                     setPostModalVisibility(false)
                 },1000)
               })
         })
       })
     }
+
     return (
         <>
         <div className="newPostContainer">
@@ -139,7 +141,7 @@ function NewPost() {
                         
                     </div>
                     <div className="postButton">
-                        <button onClick={handleNewPost}>{buttonName}</button>
+                        <button onClick={handleNewPost}>Post</button>
                     </div>
             </div>
 
