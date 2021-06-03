@@ -1,11 +1,13 @@
 import { loadData, saveData } from "../../Utils/localStorage"
-import { LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, SIGNUP_FAILURE, SIGNUP_REQUEST, SIGNUP_SUCCESS } from "./actionTypes"
+import { GET_FRIENDS, GET_FRIEND_REQUEST, GET_SENT_REQUEST, LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, SIGNUP_FAILURE, SIGNUP_REQUEST, SIGNUP_SUCCESS } from "./actionTypes"
 
 
 const init = loadData("user") || {
     isAuth : false,
     user : {},
+    friendRequests: [],
     friends:[],
+    sentRequests: [],
     isError : false,
     isLoading :false,
     errorMessage : ""
@@ -64,6 +66,30 @@ const init = loadData("user") || {
                 saveData("user",updatedSate)
                 return updatedSate
             } 
+            case GET_FRIEND_REQUEST: {
+                const updatedState = {
+                    ...state,
+                    friendRequests: payload
+                }
+                saveData("user", updatedState);
+                return updatedState;
+            }
+            case GET_FRIENDS: {
+                const updatedState = {
+                    ...state,
+                    friends: payload
+                }
+                saveData("user", updatedState);
+                return updatedState;
+            }
+            case GET_SENT_REQUEST: {
+                const updatedState = {
+                    ...state,
+                    sentRequests: payload
+                }
+                saveData("user", updatedState);
+                return updatedState;
+            }
             default : return state
     }
 }

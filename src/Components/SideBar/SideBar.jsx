@@ -3,15 +3,17 @@ import SideBarContent from "./SideBarContent";
 import { Link } from "react-router-dom";
 import "../../Styles/SideBar/SideBar.css";
 import "../../App.css";
+import { useSelector } from 'react-redux';
 
 
 function SideBar() {
-    let userName = "Darshan Naik"
+    const { first_name, last_name, uid } = useSelector(state => state.auth.user);
+    
     return (
         <div className="sideBarContainer">
             <div className="sideBarLinksContainer">
-                <Link className="flexBox sideBarContentLink" to={`/profile/${'Darshan Naik'}`}>
-                    <SideBarContent label={userName} />
+                <Link className="flexBox sideBarContentLink" to={`/profile/${uid}`}>
+                    <SideBarContent label={`${first_name} ${last_name}`} />
                 </Link>
                 <Link className="flexBox sideBarContentLink" to="/friends/profile">
                     <SideBarContent src={process.env.PUBLIC_URL + '/Images/friends_icon.png'} label="Friends" />

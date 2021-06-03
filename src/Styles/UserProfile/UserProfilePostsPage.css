@@ -1,15 +1,24 @@
 .postsPageMainContainer {
     max-width: 875px;
     margin: auto;
+    overflow: hidden;
+    display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+
+.postsPageIntroComponentContainer {
+    max-width: 362px;
+    width: 100%;
+}
+
+.postsPagePostsComponentContainer {
+    overflow: auto;
 }
 
 /* User Profile Intro Component CSS */
 
 .postsPageIntroMainContainer {
-    max-width: 362px;
-    height: 100vh;
     width: 100%;
     text-align: left;
 }
@@ -18,7 +27,7 @@
     margin: 14.5px 4px 0 0;
     padding: 10px 14px;
     border-radius: 6px;
-    background-color: var(--secondary-background-1);
+    background-color: var(--primary-background);
 }
 
 .postsPageUserDetailsNamePlate {
@@ -45,4 +54,124 @@
     filter: var(--filter-placeholder-icon);
 }
 
+.postsPageEditUserDetailsTag {
+    padding: 4px 0 8px;
+}
+
+.postsPageEditUserDetialsBox button {
+    width: 100%;
+    padding: 9px 0;
+    font-size: 15px;
+    font-weight: 600;
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    color: var(--primary-text);
+    background-color: var(--secondary-background-1);
+}
+
+.postsPageEditUserDetialsBox button:hover {
+    background-color: var(--hover-overlay-2);
+}
+
+.postsPageEditUserDetailsModalContainer {
+    position: fixed;
+    width: 100%;
+    height: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 30;
+    background: var(--shadow-9);
+}
+
+.postsPageEditUserDetailsModalBox {
+    max-width: 700px;
+    max-height: 600px;
+    width: 100%;
+    height: 100%;
+    /* padding: 20px; */
+    position: absolute;
+    top: 0;
+    left: 50%;
+    bottom: 0;
+    right: 0;
+    border-radius: 10px;
+    background-color: var(--secondary-background-1);
+    transform: translate(-50%, 20%);
+}
+
+.postsPageEditUserDetailsModalHeader {
+    padding: 20px;
+    border-bottom: 1px solid var(--divider);
+}
+
+.postsPageEditDetailsModalHeaderNamePlate {
+    flex-grow: 1;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 500;
+    vertical-align: middle;
+}
+
+.editUserDetailsModalCloseIconBox {
+    border-radius: 50%;
+    padding: 3px;
+    cursor: pointer;
+    background-color: var(--hover-overlay);
+}
+
+.editUserDetailsModalCloseIconBox:hover {
+    background-color: var(--hover-overlay-2);
+}
+
+.editUserDetailsModalCloseIconBox .closeIcon {
+    stroke: var(--secondary-icon);
+}
+
+.postsPageFriendsNameBox {
+    justify-content: space-between;
+}
+
+.postsPageLinkToFriendsPage {
+    text-decoration: none;
+    padding: 8px;
+    border-radius: 6px;
+    color: var(--primary-1);
+}
+
+.postsPageLinkToFriendsPage:hover {
+    background: var(--secondary-background-1);
+}
+
 /* User Profile Posts Component CSS */
+
+.postsPagePostsComponentContainer {
+    margin-left: 10px;
+    margin-top: 14.5px;
+}
+
+.userPostsContainer {
+    display: grid;
+    gap: 15px;
+}
+
+/* User Proile Page Media Queries */
+
+@media only screen and ( max-width: 924px ) {
+
+    .postsPageMainContainer {
+        flex-direction: column;
+    }
+    
+    .postsPageIntroComponentContainer {
+        max-width: 500px;
+        margin: auto;
+    }
+
+    .postsPagePostsComponentContainer {
+        max-width: 500px;
+        margin: 14.5px auto 0;
+    }
+}

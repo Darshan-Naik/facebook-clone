@@ -1,7 +1,8 @@
 .postCardContainer{
     max-width: 676px;
     min-width: 400px;
-    width: 80%;
+    width: 100%;
+    /* border: 1px solid black; */
     margin: auto;
     border-radius: 8px;
     background-color: var(--primary-background);
