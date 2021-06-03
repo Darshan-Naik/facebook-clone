@@ -5,64 +5,125 @@ import {ReactComponent as EmojiIcon} from  "../../Icons/emoji.svg"
 import {ReactComponent as CloseIcon} from  "../../Icons/close.svg"
 import {ReactComponent as FriendsIcon} from  "../../Icons/friends.svg"
 import {ReactComponent as DownArrowIcon} from  "../../Icons/downArrow.svg"
+import { DisappearedLoading } from 'react-loadingg';
 import "../../Styles/NewPost/NewPost.css"
 import { database, storage } from '../../Firebase/firebase'
 
 function NewPost() {
     const [title,setTitle] = React.useState("")
-    const[postState,setPostState] = React.useState(false)
+    const[postState,setPostState] = React.useState(0)
     const [postModalVisibility,setPostModalVisibility] = React.useState(false)
     const {first_name,profilePic,uid,last_name} = useSelector(store=>store.auth.user)
     const imageRef = React.useRef()
     const [imageUrl,setImageUrl] = React.useState()
-
+    const [videoUrl,setVideoUrl] = React.useState()
     const preview =()=>{
         if(imageRef.current.files[0]){
-            const imageUrl =  URL.createObjectURL(imageRef.current.files[0]);
-            console.log(imageUrl)
-            setImageUrl(imageUrl)
+            if(imageRef.current.files[0]?.type.includes("image")){
+                const imageUrl =  URL.createObjectURL(imageRef.current.files[0]);
+                setImageUrl(imageUrl)
+            } else  if(imageRef.current.files[0]?.type.includes("video")){
+                const videoUrl =  URL.createObjectURL(imageRef.current.files[0]);
+                setVideoUrl(videoUrl)
+            } 
+            
         }
       
     }
     const handleBlobClose=()=>{
         setImageUrl(null)
+        setVideoUrl(null)
         imageRef.current.value = "";
     }
+
+
     const handleNewPost=()=>{
-        setPostState(true)
-      const uploadTask =  storage.ref(`postImages/${imageRef.current.files[0].name}`).put(imageRef.current.files[0])
+            setPostState(1)
+            if(imageRef.current?.files[0]?.name){
+                if(imageRef.current?.files[0]?.type.includes("image")){
+                    const uploadTask =  storage.ref(`postImages/${imageRef.current.files[0].name}`).put(imageRef.current.files[0])
 
-      uploadTask.on("state_changed",
-      snapshot =>{
+                    uploadTask.on("state_changed",
+                    snapshot =>{
+                        setPostState(Math.floor((snapshot.bytesTransferred/snapshot.totalBytes)*100))
+                    },
+                    error=>{
+    
+                    },
+                    ()=>{
+                        storage.ref("postImages")
+                        .child(imageRef.current.files[0].name)
+                        .getDownloadURL()
+                        .then(url=>{
+                            const payload ={
+                                image : url,
+                                imagePath : imageRef.current.files[0].name,
+                                title ,
+                                author : uid,
+                                time : new Date()
+                            }
+                            database.collection("posts").add(payload)
+                            .then(()=>{
+                                imageRef.current.value = "";
+                                setTitle("")
+                                setTimeout(()=>{
+                                    setPostState(0)
+                                    setPostModalVisibility(false)
+                                },1000)
+                            })
+                        })
+                    })
+                    } else if(imageRef.current?.files[0]?.type.includes("video")){
+                    const uploadTask =  storage.ref(`postVideos/${imageRef.current.files[0].name}`).put(imageRef.current.files[0])
 
-        console.log(snapshot)
-      },
-      error=>{
-
-      },
-      ()=>{
-          storage.ref("postImages")
-          .child(imageRef.current.files[0].name)
-          .getDownloadURL()
-          .then(url=>{
-              const payload ={
-                  image : url,
-                  imagePath : imageRef.current.files[0].name,
-                  title ,
-                  author : uid,
-                  time : new Date()
-              }
-              database.collection("posts").add(payload)
-              .then(()=>{
-                imageRef.current.value = "";
-                setTitle("")
-                setTimeout(()=>{
-                    setPostState(false)
-                    setPostModalVisibility(false)
-                },1000)
-              })
-        })
-      })
+                    uploadTask.on("state_changed",
+                    snapshot =>{
+                            
+                        setPostState(Math.floor((snapshot.bytesTransferred/snapshot.totalBytes)*100))
+                    },
+                    error=>{
+    
+                    },
+                    ()=>{
+                        storage.ref("postVideos")
+                        .child(imageRef.current.files[0].name)
+                        .getDownloadURL()
+                        .then(url=>{
+                            console.log(url)
+                            const payload ={
+                                video : url,
+                                videoPath : imageRef.current.files[0].name,
+                                title ,
+                                author : uid,
+                                time : new Date()
+                            }
+                            database.collection("posts").add(payload)
+                            .then(()=>{
+                                imageRef.current.value = "";
+                                setTitle("")
+                                setTimeout(()=>{
+                                    setPostState(0)
+                                    setPostModalVisibility(false)
+                                },1000)
+                            })
+                        })
+                    })
+                    } 
+                }else if(title){
+                    const payload ={
+                        title ,
+                        author : uid,
+                        time : new Date()
+                    }
+                    database.collection("posts").add(payload)
+                    .then(()=>{
+                    setTitle("")
+                    setTimeout(()=>{
+                        setPostState(0)
+                        setPostModalVisibility(false)
+                    },1000)
+                    })
+            }
     }
 
     return (
@@ -89,6 +150,20 @@ function NewPost() {
 
        {postModalVisibility && <div className="createNewPostModal">
             <div className="createNewPostContainer">
+              {postState?<div className="newPostProgressContainer flexBox">
+                    <div className="progressBox">
+                        <h2>Posting</h2> <br />
+                        <br />
+
+                        <DisappearedLoading size="small"/>
+                    </div>
+                    <div className="progressBarBox">
+                            <div className="progressBar" style={{width:`${postState}%`}}>
+            
+                            </div>
+                        </div>
+                </div>:null}
+
                     <div className="createNewPostHeader flexBox">
                         <div className="createNewPostTitle">
                             <p>Create post</p>
@@ -110,11 +185,18 @@ function NewPost() {
                     </div>
                     <div className="createNewPostInput flexBox">
                        <div className="flexBox inputTextBox">
-                        <textarea value={title} onChange={(e)=>setTitle(e.target.value)}  cols="30" rows={imageUrl?"1" : "5"} placeholder={`Whats on your mind, ${first_name || ""}?`}></textarea>
+                        <textarea value={title} onChange={(e)=>setTitle(e.target.value)}  cols="30" rows={videoUrl||imageUrl?"1" : "5"} placeholder={`Whats on your mind, ${first_name || ""}?`}></textarea>
                             <EmojiIcon />
                         </div>
                     {imageUrl && <div className="blobImage">
                         <img src={imageUrl} alt="img" />
+                        <div className="blobImageCloseButton flexBox" onClick={handleBlobClose}>
+                        <CloseIcon />
+                        </div>
+                       
+                    </div>}
+                    {videoUrl && <div className="blobImage">
+                        <video controls src={videoUrl}></video>
                         <div className="blobImageCloseButton flexBox" onClick={handleBlobClose}>
                         <CloseIcon />
                         </div>
