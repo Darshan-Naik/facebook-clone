@@ -4,6 +4,7 @@ import './App.css';
 import { database } from "./Firebase/firebase";
 import Router from "./Routes/Router";
 import { getPosts } from './Redux/Posts/actions';
+import { getUsers } from "./Redux/App/actions";
 
 function App() {
 
@@ -16,7 +17,12 @@ function App() {
         const newPosts = res.docs.map(doc=>({id:doc.id,...doc.data()}))
         dispatch(getPosts(newPosts))
     })
+    database.collection("users").onSnapshot(res=>{
+      const newUsers = res.docs.map(doc=>doc.data())
+      dispatch(getUsers(newUsers))
+  })
 },[])
+
 
   React.useEffect(()=>{
     if(dark){
