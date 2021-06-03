@@ -22,10 +22,16 @@ function Router() {
          <NavBar refresh={refresh} handleRefresh={handleRefresh} />
             <Switch>
                 <Route path="/friends/profile">
-                    <h1>SidBar Comes Here</h1>
-                    <UserProfileRouter path="/friends/profile" refresh={refresh} forceRefresh={handleRefresh} />
+                    <div className="flexBox" style={{flexDirection: `row`}}>  
+                        <div style={{minWidth: `362px`}}>
+                            <h1>SidBar Comes Here</h1>
+                        </div>
+                        <div style={{flex: `1`}}>
+                            <UserProfileRouter path="/friends/profile" refresh={refresh} forceRefresh={handleRefresh} />
+                        </div>
+                    </div>
                 </Route>
-                <Route path="/profile">
+                <Route path="/profile/:userId">
                     <UserProfileRouter path="/profile" refresh={refresh} forceRefresh={handleRefresh} />
                 </Route>
                 <Route path="/messenger/:chatId" >

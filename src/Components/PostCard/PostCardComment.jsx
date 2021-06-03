@@ -12,6 +12,7 @@ import CommentBox from './CommentBox';
 function PostCardComment({postId,comments}) {
     
     const [comment,setComment]=React.useState("")
+    const [limit, setLimit]=React.useState(2)
     const {uid} = useSelector(store=>store.auth.user)
     const handleChange=(e)=>{
         const {value} = e.target;
@@ -37,8 +38,9 @@ function PostCardComment({postId,comments}) {
 
     return (
         <div className="postCardCommentContainer flexBox">
-            <p>View more comments</p>
-            {comments?.map((el)=><CommentBox key={el.commentId}{...el}/>)}
+            {limit===2&&<p onClick={()=>setLimit(comments.length)}>View more {comments.length-2} comments</p>}
+            {comments?.filter((el,i)=>limit>i).map((el)=><CommentBox key={el.commentId}{...el} />)}
+            {limit===comments.length&&<p onClick={()=>setLimit(2)}>View less comments</p>}
             <div className="postCardInputBox flexBox">
                 <img src={ process.env.PUBLIC_URL + '/Images/userProfile_icon.png'} alt="mypic" />
                 <div className="addComment flexBox">
@@ -54,6 +56,7 @@ function PostCardComment({postId,comments}) {
                 </div>
                 
             </div>
+            
             
         </div>
     )
