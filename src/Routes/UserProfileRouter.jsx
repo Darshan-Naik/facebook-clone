@@ -12,19 +12,32 @@ function UserProfileRouter({ path, forceRefresh, refresh }) {
 
     const [isLoading, setIsLoading] = useState(true);
     const [userData, setUserData] = useState({});
+    const [userFriends, setUserFriends] = useState([]);
     const { userId } = useParams();
 
     useEffect(() => {
 
         if( userId ) {
-            const unsubscribe = database.collection("users").doc(userId)
+            const unsubscribe1 = database.collection("users").doc(userId)
             .onSnapshot((doc) => {
                 setUserData(doc.data());
                 setIsLoading(false);
             });
 
+            const unsubscribe2 = database.collection("users").doc(userId).collection('friends')
+            .onSnapshot(res=>{
+                const friends = res.docs.map(doc=>doc.data())
+                setUserFriends(friends);
+            });
+
+            // database.collection("users").onSnapshot(res=>{
+            //     const newUsers = res.docs.map(doc=>doc.data())
+            //     dispatch(getUsers(newUsers))
+            // });
+
             return () => {
-                unsubscribe();
+                unsubscribe1();
+                unsubscribe2();
             }
         }
 
@@ -35,8 +48,8 @@ function UserProfileRouter({ path, forceRefresh, refresh }) {
             {
                 isLoading ? <div>Loading...</div> : (
                     <React.Fragment>
-                        <UserProfilePageHeader currentUser={userData.uid} userProfileDetails={userData} forceRefresh={forceRefresh} />
-                        <UserProfileNavBar currentUser={userData.uid} alternativePath={path} userProfileDetails={userData} refresh={refresh} />
+                        <UserProfilePageHeader currentUser={userData.uid} userProfileDetails={userData} userFriends={userFriends} forceRefresh={forceRefresh} />
+                        <UserProfileNavBar currentUser={userData.uid} alternativePath={path} userFriends={userFriends} userProfileDetails={userData} refresh={refresh} />
                         <Switch>
                             <Route path={`${path}/${userData.uid}`} exact>
                                 <UserProfilePostsPage userProfileDetails={userData} alternativePath={path} forceRefresh={forceRefresh} />

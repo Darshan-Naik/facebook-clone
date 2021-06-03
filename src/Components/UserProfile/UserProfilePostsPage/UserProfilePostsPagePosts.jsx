@@ -10,11 +10,13 @@ function UserProfilePostsPagePosts({userProfileDetails}) {
 
     return (
         <div className="userPostsContainer">
-            <div>
-                {
-                    userProfileDetails.uid === uid && <NewPost />
-                }
-            </div>
+            {
+                userProfileDetails.uid === uid && (
+                    <div className="userPostsNewPostBox">
+                        <NewPost />
+                    </div>
+                )
+            }
             {
                 posts.map( el => el.author === userProfileDetails.uid ? <PostCard {...el} key={el.id} /> : null )
             }

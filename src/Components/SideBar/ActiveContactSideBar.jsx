@@ -4,16 +4,19 @@ import {ReactComponent as SearchIcon} from  "../../Icons/search.svg"
 import "../../Styles/SideBar/SideBar.css";
 import { useDispatch, useSelector } from 'react-redux';
 import { addActiveMessage } from '../../Redux/App/actions';
-import { ReactComponent as ContactBarDots } from "../../Icons/dots.svg"
-import { ReactComponent as VideoCallIcon } from "../../Icons/videoCallIcon.svg"
+import { ReactComponent as ContactBarDots } from "../../Icons/dots.svg";
+import { ReactComponent as VideoCallIcon } from "../../Icons/videoCallIcon.svg";
+import filterFriends from "../../Utils/filterFriends.js"
+import { useHistory } from 'react-router-dom';
 
 const ActiveContactSideBar = () => {
 
     const [peopleSuggested, setPeopleSuggested] = useState([]);
     console.log(peopleSuggested);
-
-    const { activeContacts, totalUsers} = useSelector( state => state.app ); 
-    const { userFriends } = useSelector( state => state.auth );
+    const { activeContacts, users} = useSelector( state => state.app ); 
+    const { friends, user } = useSelector( state => state.auth );
+    
+    const history = useHistory();
 
     const dispatch = useDispatch();
     const handleOpenChatBox = (id,userData) => {
@@ -21,33 +24,13 @@ const ActiveContactSideBar = () => {
             chatId: id,
             userDetails: userData
         };
-
+        
         dispatch( addActiveMessage( payload ) );
     };
-
+    
     useEffect(() => {
-
-        // let output = [{
-        //     first_name: "abdul"
-        // }];
-        // let suggestedPeople = [];
-
-        // for( let i=0; i<totalUsers; i++ ) {
-        //     for( let j=0; j<userFriends; j++ ) {
-        //         if( totalUsers[i].uid !== userFriends[i].uid ) {
-        //             output.push(totalUsers[i])
-        //         }
-        //     }
-        // }
-
-        // for( let i=0; i<5; i++ ) {
-        //     if( output[ Math.floor( Math.random() * output.length ) ] !== undefined ) {
-        //         suggestedPeople.push( output[ Math.floor( Math.random() * output.length ) ] )
-        //     }
-        // }
-
-        // setPeopleSuggested( suggestedPeople )
-    }, [])
+        setPeopleSuggested( filterFriends( users, friends ) )
+    }, [users])
 
     return (
         <div className="sideBarContainer">
@@ -59,9 +42,9 @@ const ActiveContactSideBar = () => {
                         </div>
                         {
                             peopleSuggested?.map( (el, i) => {
-                                return (
-                                    <div key={i} onClick={() => handleOpenChatBox(i, el)} className="flexBox sideBarContentLink">
-                                        <SideBarContent />
+                                return el.uid !== user.uid && (
+                                    <div key={i} onClick={() => history.push(`/profile/${el.uid}`)} className="flexBox sideBarContentLink">
+                                        <SideBarContent label={`${el.first_name} ${el.last_name}`} src={el.profilePic} />
                                     </div>
                                 )
                             })
