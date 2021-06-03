@@ -1,4 +1,4 @@
-import { LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, SIGNUP_FAILURE, SIGNUP_REQUEST, SIGNUP_SUCCESS } from "./actionTypes"
+import { GET_FRIENDS, GET_FRIEND_REQUEST, GET_SENT_REQUEST, LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, SIGNUP_FAILURE, SIGNUP_REQUEST, SIGNUP_SUCCESS } from "./actionTypes"
 
 
 const loginRequest = (payload)=>{
@@ -37,5 +37,23 @@ const signupSuccess = (payload)=>{
         payload
     }
 }
+const getFriendRequest = (payload) => {
+    return {
+        type: GET_FRIEND_REQUEST,
+        payload
+    }
+}
+const getFriends = (payload) => {
+    return {
+        type: GET_FRIENDS,
+        payload
+    }
+}
+const getSentRequest = (payload) => {
+    return {
+        type: GET_SENT_REQUEST,
+        payload
+    }
+}
 
-export { loginFailure,loginSuccess,loginRequest,signUpFailure,signupRequest,signupSuccess }
+export { loginFailure,loginSuccess,loginRequest,signUpFailure,signupRequest,signupSuccess, getFriendRequest, getFriends, getSentRequest }
