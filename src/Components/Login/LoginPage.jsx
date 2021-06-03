@@ -8,6 +8,7 @@ import { login, signup } from '../../Firebase/authentication';
 import { database } from '../../Firebase/firebase';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginFailure, loginRequest, loginSuccess, signUpFailure, signupRequest, signupSuccess } from '../../Redux/Auth/actions';
+import { WaveLoading } from "react-loadingg";
 
 const initFormSignup = {
     first_name :"",
@@ -29,7 +30,7 @@ function LoginPage(){
     const [day, setDay] = useState("1");
     const [mon, setMon] = useState("June");
     const [year, setYear] = useState("1950");
-    const {errorMessage, isError} = useSelector(store=>store.auth)
+    const {errorMessage, isError, isLoading} = useSelector(store=>store.auth);
     const handleSignUpForm = (e)=>{
         //console.log(e.target.value)
         const {value,name} = e.target;
@@ -110,7 +111,7 @@ function LoginPage(){
         <div>
             <div className="loginPageContainer flexBox">
                 <LoginLogo />
-                <LoginForm {...logInForm}  handleLoginForm={handleLoginForm} handleLogin={handleLogin} onClickCreate={handleCreateClick} />
+                <LoginForm {...logInForm} isLoading={isLoading}  handleLoginForm={handleLoginForm} handleLogin={handleLogin} onClickCreate={handleCreateClick} />
             </div>
             <div className="LoginPageFooter">
                 <p>English (UK)</p>
@@ -170,7 +171,7 @@ function LoginPage(){
                 </div>
             </div>
             <p className="termsSignUpContainer">By clicking Sign Up, you agree to our Terms, Data Policy and Cookie Policy. </p>
-            <button className="signUpButton" onClick={handleSingUp}>Sign-up</button>
+            <button disabled={isLoading} className="signUpButton" onClick={handleSingUp}>{!isLoading?"Sign-up":<WaveLoading size="small" color="var(--primary-background)" style={{margin: "0 auto", paddingTop: "0", paddingBottom: "0"}}/>}</button>
         </div>       
     </div>)}
     </>
