@@ -38,14 +38,14 @@ function PostCardComment({postId,comments}) {
 
     return (
         <div className="postCardCommentContainer flexBox">
-            {limit===2&&<p onClick={()=>setLimit(comments.length)}>View more {comments.length-2} comments</p>}
+            {comments.length>1?limit===2&&<p onClick={()=>setLimit(comments.length)}>View more {comments.length-2} comments</p>:null}
             {comments?.filter((el,i)=>limit>i).map((el)=><CommentBox key={el.commentId}{...el} />)}
             {limit===comments.length&&<p onClick={()=>setLimit(2)}>View less comments</p>}
             <div className="postCardInputBox flexBox">
                 <img src={ process.env.PUBLIC_URL + '/Images/userProfile_icon.png'} alt="mypic" />
                 <div className="addComment flexBox">
                     <div className="commentInput flexBox">
-                        <input autoFocus type="text" name="comment" id="comment" value={comment} onChange={handleChange} onKeyDown={handleSubmit} placeholder="Write a comment..."/>
+                        <input autoComplete ="off" autoFocus type="text" name="comment" id="comment" value={comment} onChange={handleChange} onKeyDown={handleSubmit} placeholder="Write a comment..."/>
                         <div className="flexBox">
                             <EmojiIcon/>
                             <CameraIcon/>
