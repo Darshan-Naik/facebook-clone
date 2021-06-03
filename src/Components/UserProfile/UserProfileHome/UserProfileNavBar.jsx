@@ -12,7 +12,7 @@ const UserProfileNavBar = ({currentUser, refresh, alternativePath, userProfileDe
 
     const userProfileNavBarRef = useRef();
     
-    const { first_name, last_name } = useSelector(state => state.auth.user);
+    const { uid } = useSelector(state => state.auth.user);
 
     window.addEventListener('scroll', function() {
         const position = userProfileNavBarRef.current?.getBoundingClientRect()
@@ -32,7 +32,7 @@ const UserProfileNavBar = ({currentUser, refresh, alternativePath, userProfileDe
     }
 
     return (
-        <div className="userProfileNavBarContainer" style={currentUser === `${first_name} ${last_name}` ? {paddingTop: `8px`} : {padding: `none`}} ref={userProfileNavBarRef}>
+        <div className="userProfileNavBarContainer" style={currentUser === uid ? {paddingTop: `8px`} : {padding: `none`}} ref={userProfileNavBarRef}>
             <nav className="userProfileNav flexBox">
                 {
                     userProfileNavBarState ? (
@@ -51,7 +51,7 @@ const UserProfileNavBar = ({currentUser, refresh, alternativePath, userProfileDe
                                 Photos
                             </UserProfileNavLinkWrapper>
                             {
-                                currentUser === `${first_name} ${last_name}` ? ( 
+                                currentUser === uid ? ( 
                                     <UserProfileNavLinkWrapper path={`${alternativePath}/${userProfileDetails.uid}/archive`} extraClass="hideUserProfileMenuItem" >
                                         Story Archive
                                     </UserProfileNavLinkWrapper>
@@ -76,7 +76,7 @@ const UserProfileNavBar = ({currentUser, refresh, alternativePath, userProfileDe
                                             </Link>
                                             <Link to={`${alternativePath}/${userProfileDetails.uid}/photos`}>Photos</Link>
                                             {
-                                                currentUser === `${first_name} ${last_name}` ? ( 
+                                                currentUser === uid ? ( 
                                                     <Link to={`${alternativePath}/${userProfileDetails.uid}/archive`} >
                                                         Story Archive
                                                     </Link>
@@ -102,7 +102,7 @@ const UserProfileNavBar = ({currentUser, refresh, alternativePath, userProfileDe
                 }
                 <div className="flexBox">
                     {
-                        currentUser === `${first_name} ${last_name}` ? (
+                        currentUser === uid ? (
                             <React.Fragment>
                                 <div className="flexBox userProfileNavButton addToStoryContainer">
                                     <img className="userProfileNavButtonIcons userProfileNavButtonIconsFilter" src={process.env.PUBLIC_URL + '/Images/plus_icon.png'} alt="plus"/>

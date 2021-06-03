@@ -14,13 +14,10 @@ function UserProfileRouter({ path, forceRefresh, refresh }) {
     const [userData, setUserData] = useState({});
     const { userId } = useParams();
 
-    const { docID } = useSelector(state => state.auth.user)
-    console.log(docID);
-    
     useEffect(() => {
 
         if( userId ) {
-            const unsubscribe = database.collection("users").doc(docID)
+            const unsubscribe = database.collection("users").doc(userId)
             .onSnapshot((doc) => {
                 setUserData(doc.data());
                 setIsLoading(false);
@@ -38,8 +35,8 @@ function UserProfileRouter({ path, forceRefresh, refresh }) {
             {
                 isLoading ? <div>Loading...</div> : (
                     <React.Fragment>
-                        <UserProfilePageHeader currentUser={`${userData.first_name} ${userData.last_name}`} userProfileDetails={userData} forceRefresh={forceRefresh} />
-                        <UserProfileNavBar currentUser={`${userData.first_name} ${userData.last_name}`} alternativePath={path} userProfileDetails={userData} refresh={refresh} />
+                        <UserProfilePageHeader currentUser={userData.uid} userProfileDetails={userData} forceRefresh={forceRefresh} />
+                        <UserProfileNavBar currentUser={userData.uid} alternativePath={path} userProfileDetails={userData} refresh={refresh} />
                         <Switch>
                             <Route path={`${path}/${userData.uid}`} exact>
                                 <UserProfilePostsPage userProfileDetails={userData} alternativePath={path} forceRefresh={forceRefresh} />

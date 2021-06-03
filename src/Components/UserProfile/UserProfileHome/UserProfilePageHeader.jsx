@@ -11,7 +11,7 @@ const UserProfilePageHeader = ({ coverPhoto, currentUser, forceRefresh, userProf
     const [textFieldQuery, setTextFieldQuery] = useState("");
     
     const dark = useSelector(state => state.theme.dark);
-    const { first_name, last_name } = useSelector( state => state.auth.user );
+    const { uid } = useSelector( state => state.auth.user );
     
     const handleOptionsVisibility = (e) => {
         e.stopPropagation();
@@ -34,7 +34,7 @@ const UserProfilePageHeader = ({ coverPhoto, currentUser, forceRefresh, userProf
                     <div className="userProfileCoverPhotoBox" style={coverPhoto ? {backgroundImage: `url(${coverPhoto})`} : ( dark ? {backgroundColor: `#18191a`} : {backgroundColor: `#f0f2f5`} )}>
                         <UserProfilePicture currentUser={currentUser} userProfilePic={coverPhoto} userProfilePicOptions={userProfilePicOptions} handleOptionsVisibility={handleOptionsVisibility} />
                         {
-                            currentUser === `${first_name} ${last_name}` && (
+                            currentUser === uid && (
                                 <React.Fragment>
                                     <div className="userProfileEditCoverPhotoContainer flexBox" onClick={() => setEditUserProfileCoverPhoto(!editUserProfileCoverPhoto)}>
                                         <div className="userProfileEditCoverPhotoBox">
@@ -60,13 +60,13 @@ const UserProfilePageHeader = ({ coverPhoto, currentUser, forceRefresh, userProf
                 </div>
             </div>
             <div className="userNameContainer">
-                <h1 className="userNamePlate">{currentUser}</h1>
+                <h1 className="userNamePlate">{`${userProfileDetails.first_name} ${userProfileDetails.last_name}`}</h1>
                 <React.Fragment>
                     {
-                        currentUser === `${first_name} ${last_name}` && !addBioVisibility && <p className="addUserBio" onClick={handleAddBioVisiblity}>Add Bio</p>
+                        currentUser === uid && !addBioVisibility && <p className="addUserBio" onClick={handleAddBioVisiblity}>Add Bio</p>
                     }
                     {
-                        currentUser === `${first_name} ${last_name}` && addBioVisibility && (
+                        currentUser === uid && addBioVisibility && (
                             <div className="addBoxTexFieldContainer">
                                 <textarea className="addBioTextField" value={textFieldQuery} onChange={(e) => setTextFieldQuery(e.target.value)} placeholder="Describe who you are"></textarea>
                                 <div className="addBioTextFieldCharCount">

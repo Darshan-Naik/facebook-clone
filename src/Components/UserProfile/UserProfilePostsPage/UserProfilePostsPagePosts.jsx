@@ -6,12 +6,14 @@ import NewPost from "../../NewPost/NewPost";
 function UserProfilePostsPagePosts({userProfileDetails}) {
     
     const { posts } = useSelector(state => state.posts);
-    console.log(posts);
-    console.log(userProfileDetails);
+    const { uid } = useSelector(state => state.auth.user);
+
     return (
         <div className="userPostsContainer">
             <div>
-                <NewPost />
+                {
+                    userProfileDetails.uid === uid && <NewPost />
+                }
             </div>
             {
                 posts.map( el => el.author === userProfileDetails.uid ? <PostCard {...el} key={el.id} /> : null )
