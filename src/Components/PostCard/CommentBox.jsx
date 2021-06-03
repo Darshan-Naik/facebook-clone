@@ -1,4 +1,5 @@
 import React from 'react'
+import { useHistory } from 'react-router';
 import { database } from '../../Firebase/firebase';
 
 function CommentBox({comment,author,time}) {
@@ -6,30 +7,29 @@ function CommentBox({comment,author,time}) {
     const {first_name,last_name,profilePic}=userData;
 
     const localTime =  new Date(time.toDate()).toLocaleTimeString();
-
-    React.useEffect(()=>{
-      
-        const unsubscribe = database.collection("users").where("uid", "==", author)
-        .onSnapshot((res) => {
-            res.docs.map( doc => {
-                setUserData({ ...doc.data(), docUpdateId: doc.id });
-                
-            });
+    const history=useHistory();
+    
+    React.useEffect(() => {
+       
+        const unsubscribe = database.collection("users").doc(author)
+        .onSnapshot((doc) => {
+            setUserData(doc.data());
+            
         });
         return () => {
             unsubscribe();
         }
-            
-    }, [])
+    
+}, [])
 
 
 
     return (
         <div className="postCardInputBox flexBox">
-                <img src={profilePic || process.env.PUBLIC_URL + '/Images/userProfile_icon.png'} alt="otherspic" />
+                <img onClick={()=>history.push(`/profile/${author}`)} src={profilePic || process.env.PUBLIC_URL + '/Images/userProfile_icon.png'} alt="otherspic" />
                 <div className="addComment flexBox">
                     <div className="addCommentBox flexBox">
-                        <strong>{`${first_name} ${last_name}`}</strong>
+                        <strong onClick={()=>history.push(`/profile/${author}`)}>{`${first_name} ${last_name}`}</strong>
                         <small>{comment}</small>
                     </div>
                     <div className="postCardCommentLikeandReply flexBox">
