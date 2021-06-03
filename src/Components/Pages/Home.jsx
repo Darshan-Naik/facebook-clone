@@ -11,7 +11,7 @@ function Home() {
     const dispatch = useDispatch()
     const posts = useSelector(store=>store.posts.posts)
     React.useEffect(()=>{
-        database.collection("posts").onSnapshot(res=>{
+        database.collection("posts").orderBy("time","desc").onSnapshot(res=>{
             const newPosts = res.docs.map(doc=>({id:doc.id,...doc.data()}))
             dispatch(getPosts(newPosts))
         })
