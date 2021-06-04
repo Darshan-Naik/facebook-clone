@@ -9,7 +9,7 @@ function UserProfilePostsPageIntro({ studies, went, lives, from, relationship, j
     const handleEditUserDetailsModal = () => {
         setEditUserDetailsModalState(!editUserDetailsModalState)
     }
-    
+
     return (
         <div className="postsPageIntroMainContainer">
             {
@@ -71,7 +71,8 @@ function UserProfilePostsPageIntro({ studies, went, lives, from, relationship, j
                                             </div>
                                         </div>
                                     </div>
-                                </div>)
+                                </div>
+                            )
                         }
                     </React.Fragment>
                 )
