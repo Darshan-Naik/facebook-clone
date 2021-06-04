@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 
 function SideBar() {
     const { first_name, last_name, uid, profilePic } = useSelector(state => state.auth.user);
-    console.log(profilePic);
+    
     return (
         <div className="sideBarContainer">
             <div className="sideBarLinksContainer">

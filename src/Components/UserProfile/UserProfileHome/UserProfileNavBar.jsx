@@ -127,7 +127,7 @@ const UserProfileNavBar = ({currentUser, refresh, alternativePath, userProfileDe
                     ) : (
                         <div className="flexBox userProfileNavMenuContainer">
                             <div className="userProfileNavAfterScrollBox flexBox" onClick={handleScrollToTop}>
-                                <img className="userProfileNavAfterScrollProfileImage" src={process.env.PUBLIC_URL + '/Images/userProfile_icon.png'} alt=""/>
+                                <img className="userProfileNavAfterScrollProfileImage" src={ userProfileDetails.profilePic || process.env.PUBLIC_URL + '/Images/userProfile_icon.png'} alt="profilePic"/>
                                 <span className="userProfileNavAfterScrollNamePlate">{`${userProfileDetails.first_name} ${userProfileDetails.last_name}`}</span>
                             </div>
                         </div>
@@ -182,8 +182,11 @@ const UserProfileNavBar = ({currentUser, refresh, alternativePath, userProfileDe
         </div>
         {
             JSON.stringify(friendRequests).includes(currentUser) && (  
-            <div className="confirmFriendRequestContainer">
-                <h1 className="confirmFriendRequestHeading">{`${userProfileDetails.first_name} sent you a friend request`}</h1>
+            <div className="confirmFriendRequestContainer flexBox">
+                <div className="flexBox">
+                    <img className="userProfileNavAfterScrollProfileImage" src={ userProfileDetails.profilePic || process.env.PUBLIC_URL + '/Images/userProfile_icon.png'} alt="profilePic"/>
+                    <h1 className="confirmFriendRequestHeading"> <span>{userProfileDetails.first_name}</span> sent you a friend request</h1>
+                </div>
                 <div className="flexBox">
                     <div className="userProfileNavButton addToStoryContainer confirmRequestColor" onClick={handleAcceptFriendRequest}>
                         Confirm Request

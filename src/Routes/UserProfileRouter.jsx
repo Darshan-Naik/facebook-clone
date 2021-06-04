@@ -13,7 +13,7 @@ function UserProfileRouter({ path, forceRefresh, refresh }) {
     const [userData, setUserData] = useState({});
     const [userFriends, setUserFriends] = useState([]);
     const { userId } = useParams();
-
+    
     useEffect(() => {
 
         if( userId ) {
@@ -35,7 +35,7 @@ function UserProfileRouter({ path, forceRefresh, refresh }) {
             }
         }
 
-    }, [])
+    }, [userId])
 
     return userId ? (
         <React.Fragment>
@@ -46,7 +46,7 @@ function UserProfileRouter({ path, forceRefresh, refresh }) {
                         <UserProfileNavBar currentUser={userData.uid} alternativePath={path} userFriends={userFriends} userProfileDetails={userData} refresh={refresh} />
                         <Switch>
                             <Route path={`${path}/${userData.uid}`} exact>
-                                <UserProfilePostsPage userProfileDetails={userData} alternativePath={path} forceRefresh={forceRefresh} />
+                                <UserProfilePostsPage userProfileDetails={userData} userFriends={userFriends} alternativePath={path} forceRefresh={forceRefresh} />
                             </Route>
                             <Route  path={`${path}/${userData.uid}/about`}>
                                 <UserProfileAboutPage forceRefresh={forceRefresh} />
