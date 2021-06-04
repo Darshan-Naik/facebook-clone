@@ -70,7 +70,10 @@ function LoginPage(){
            const {uid} = res.user
            const payload = {uid,...signUpForm,dob}
            database.collection("users").doc(uid).set(payload).then((res)=>{
-                dispatch(signupSuccess({...payload}))
+               database.collection("users").doc(uid)
+               .onSnapshot((doc) => {
+                   dispatch( signupSuccess(doc.data()) );
+               });
            })
         }).catch((err)=>{
             dispatch(signUpFailure(err.message))
@@ -84,9 +87,11 @@ function LoginPage(){
         dispatch(loginRequest())
         login(logInForm.email,logInForm.password)
         .then(res=>{
-            const {uid} = res.user
-            database.collection("users").where("uid","==",uid).get().then(res=>{
-                res.docs.map(doc=>dispatch(loginSuccess(doc.data()) ))})
+            const { uid } = res.user
+            database.collection("users").doc(uid)
+            .onSnapshot((doc) => {
+                dispatch( loginSuccess(doc.data()) );
+            });
         })
         .catch((err)=>{
             console.log("p",err);

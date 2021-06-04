@@ -30,11 +30,6 @@ function UserProfileRouter({ path, forceRefresh, refresh }) {
                 setUserFriends(friends);
             });
 
-            // database.collection("users").onSnapshot(res=>{
-            //     const newUsers = res.docs.map(doc=>doc.data())
-            //     dispatch(getUsers(newUsers))
-            // });
-
             return () => {
                 unsubscribe1();
                 unsubscribe2();
@@ -48,7 +43,7 @@ function UserProfileRouter({ path, forceRefresh, refresh }) {
             {
                 isLoading ? <div>Loading...</div> : (
                     <React.Fragment>
-                        <UserProfilePageHeader currentUser={userData.uid} userProfileDetails={userData} userFriends={userFriends} forceRefresh={forceRefresh} />
+                        <UserProfilePageHeader currentUser={userData.uid} userProfileDetails={userData} userFriends={userFriends} forceRefresh={forceRefresh} coverPhoto={userData.coverPic} />
                         <UserProfileNavBar currentUser={userData.uid} alternativePath={path} userFriends={userFriends} userProfileDetails={userData} refresh={refresh} />
                         <Switch>
                             <Route path={`${path}/${userData.uid}`} exact>
@@ -73,5 +68,3 @@ function UserProfileRouter({ path, forceRefresh, refresh }) {
 }
 
 export default UserProfileRouter
-
-// db.collection("users").doc(docUpdateId).update({key: value})

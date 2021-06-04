@@ -97,7 +97,6 @@ export const appReducer = (state=init,{type,payload})=>{
             }
         }
         case GET_USERS :{
-            console.log(payload)
             return {
                 ...state,
                 users : payload
