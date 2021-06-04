@@ -8,9 +8,26 @@ import StoryBox from './StoryBox';
 function StoryContainer(){
     const posts = useSelector(store=>store.posts.posts);
 
+    const [lenStory, setLenStory] = useState(5);
+
+    function handleLength(){
+        if(window.innerWidth>1210){
+            setLenStory(5)
+        } else if(window.innerWidth<1210 && window.innerWidth>600){
+            setLenStory(4);
+            console.log(lenStory)
+        } else if(window.innerWidth<600){
+            setLenStory(3);
+            console.log(lenStory)
+        }
+    }
+
+    window.addEventListener("resize", handleLength);
+    React.useEffect(handleLength,[])
+
     return (
         <div className="storyMainContainer flexBox">
-            {posts.filter((el)=>el.image).filter((el,i)=>i<5).map((post)=><StoryBox key={post.id} {...post} />)}
+            {posts.filter((el)=>el.image).filter((el,i)=>(i<lenStory)).map((post)=><StoryBox key={post.id} {...post} />)}
         </div>
     )
 }
