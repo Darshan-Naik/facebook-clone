@@ -10,6 +10,7 @@ function UserProfilePostsPageIntro({ studies, went, lives, from, relationship, j
     const [userFriendsList, setUserFriendsList] = useState([])
 
     const { users } = useSelector( state => state.app );
+    const { uid } = useSelector( state => state.auth.user );
     
     const handleEditUserDetailsModal = () => {
         setEditUserDetailsModalState(!editUserDetailsModalState)
@@ -65,9 +66,13 @@ function UserProfilePostsPageIntro({ studies, went, lives, from, relationship, j
                         <div className="postsPageUserDetailsContainer">
                             <h1 className="postsPageUserDetailsNamePlate">Intro</h1>
                             <p className="postsPageEditUserDetailsTag">Help people know about you...</p>
-                            <div className="postsPageEditUserDetialsBox">
-                                <button onClick={handleEditUserDetailsModal}>Edit Details</button>
-                            </div>
+                            {
+                                userProfileDetails.uid === uid && (
+                                    <div className="postsPageEditUserDetialsBox">
+                                        <button onClick={handleEditUserDetailsModal}>Edit Details</button>
+                                    </div>
+                                )
+                            }
                         </div>
                         {
                             editUserDetailsModalState && (
@@ -77,6 +82,25 @@ function UserProfilePostsPageIntro({ studies, went, lives, from, relationship, j
                                             <h1 className="postsPageEditDetailsModalHeaderNamePlate">Edit Details</h1>
                                             <div className="editUserDetailsModalCloseIconBox flexBox"  onClick={handleEditUserDetailsModal}>
                                                 <CloseIcon />
+                                            </div>
+                                        </div>
+                                        <div className="profilePicPreviewContainer">
+                                            <div className="profilePicPreviewNoteBox flexBox">
+                                                <form className="flexBox">
+                                                    <div>
+                                                        <input type="text" placeholder="name"/>
+                                                    </div>
+                                                    <input type="text" placeholder="name"/>
+                                                    <input type="text" placeholder="name"/>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div className="chooseProfilePicInputContainer flexBox">
+                                            <div className="chooseProfilePicInputBox">
+                                                <input type="file" />
+                                            </div>
+                                            <div className="userProfilePicEditOptionsBox">
+                                                <button>Update</button>
                                             </div>
                                         </div>
                                     </div>
@@ -97,14 +121,24 @@ function UserProfilePostsPageIntro({ studies, went, lives, from, relationship, j
                             {
                                 userFriendsList.map( el => {
                                     return (
-                                        <Link key={el.uid} to={`/profile/${el.uid}`}>
-                                            <div className="postsPageUserFriendsBox">
+                                        <div key={el.uid} className="postsPageUserFriendsBox">
+                                            <Link to={`/profile/${el.uid}`}>
                                                 <img className="postsPageFriendsImage" src={el.profilePic || process.env.PUBLIC_URL + '/Images/userProfile_icon.png'} alt={`${el.first_name}`}/>
-                                            </div>
-                                        </Link>
+                                            </Link>
+                                        </div>
                                     )
                                 })
                             }
+                            {/* <div className="postsPageUserFriendsBox">
+                                <Link to={``}>
+                                    <img className="postsPageFriendsImage" src={process.env.PUBLIC_URL + '/Images/userProfile_icon.png'} alt={`hi`}/>
+                                </Link>
+                            </div>
+                            <div className="postsPageUserFriendsBox">
+                                <Link to={``}>
+                                    <img className="postsPageFriendsImage" src={process.env.PUBLIC_URL + '/Images/userProfile_icon.png'} alt={`hi`}/>
+                                </Link>
+                            </div> */}
                         </div>
                     </div>
                 )
