@@ -18,7 +18,7 @@ function App() {
   const dark = useSelector(store=>store.theme.dark)
 
   React.useEffect(()=>{
-    
+    if(uid){
     const unsubscribe1 = database.collection("posts").orderBy("time","desc").onSnapshot(res=>{
         const newPosts = res.docs.map(doc=>({id:doc.id,...doc.data()}))
         dispatch(getPosts(newPosts))
@@ -57,6 +57,8 @@ function App() {
       unsubscribe5();
       unsubscribe6();
     }
+  }
+  
   },[isAuth])
 
   React.useEffect(()=>{
