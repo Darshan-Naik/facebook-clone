@@ -138,7 +138,7 @@ function NewPostModal({setPostModalVisibility}) {
                             <div className="progressBar" style={{width:`${postState}%`}}>
             
                             </div>
-                        </div>
+                    </div>
                 </div>:null}
 
                     <div className="createNewPostHeader flexBox">
