@@ -8,6 +8,7 @@ import { ReactComponent as ContactBarDots } from "../../Icons/dots.svg";
 import { ReactComponent as VideoCallIcon } from "../../Icons/videoCallIcon.svg";
 import filterFriends from "../../Utils/filterFriends.js"
 import { useHistory } from 'react-router-dom';
+import ActiveContacts from './ActiveContacts';
 
 const ActiveContactSideBar = () => {
 
@@ -79,13 +80,7 @@ const ActiveContactSideBar = () => {
                         </div>
                         <React.Fragment>
                             {
-                                activeContacts.map( (el, i) => {
-                                    return (
-                                        <div key={i} onClick={() => handleOpenChatBox(i, el)} className="flexBox sideBarContentLink">
-                                            <SideBarContent active label={`${el.first_name} ${el.last_name}`} src={el.profilePic} />
-                                        </div>
-                                    )
-                                })
+                                activeContacts.map( (el, i) => <ActiveContacts />)
                             }
                         </React.Fragment>
                     </div>

@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 
 
 
-function PostCard({title,image,id,author,time,video}) {
+function PostCard({title,image,id,author,time,video,activity}) {
     const[commentSection,setCommentSection]=React.useState(false);
     const[likes,setLikes]=React.useState([]);
     const [comments,setComments]=React.useState([]);
@@ -61,7 +61,7 @@ function PostCard({title,image,id,author,time,video}) {
 
     return (
         <div className="postCardContainer">
-            <PostCardHead {...userData} time={time}/>
+            <PostCardHead {...userData} time={time} activity={activity}/>
             {title && <div className="postCardTags">{title}</div>}
             {image&&<div className="postCardImage"><img src={image|| process.env.PUBLIC_URL + '/Images/facebook_login_logo.png'} alt="img" /></div>}
             {video&&<div className="postCardImage"><video width="676" height="500" controls >

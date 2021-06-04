@@ -47,3 +47,32 @@
   z-index: 999;
   box-shadow: 0px 0px 2px var(--shadow-8);
 }
+.emoji-mart{
+  width: 100%!important;
+  /* border-radius: 0!important; */
+  background-color: var(--primary-background)!important;
+  border-color:var(--shadow-1)!important ;
+}
+.emoji-mart *{
+  background-color: var(--primary-background);
+  border-color:var(--shadow-1)!important ;
+  fill: var(--primary-icon);
+  stroke: var(--secondary-icon);
+}
+.emoji-mart-category-label span{
+  background-color: var(--primary-background)!important;
+}
+.emoji-mart-preview{
+display: none;
+}
+.emoji-mart-category .emoji-mart-emoji:hover:before ,.emoji-mart-emoji:hover span{
+  background-color: var(--hover-overlay-2)!important;
+  cursor: pointer!important;
+}
+.emoji-mart-emoji:hover span{
+  background-color: transparent!important;
+}
+.emoji-mart-scroll::-webkit-scrollbar{
+  visibility: hidden;
+  width: 0;
+}

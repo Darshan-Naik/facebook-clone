@@ -3,10 +3,12 @@ import {ReactComponent as EmojiIcon} from  "../../Icons/emoji.svg"
 import {ReactComponent as CreateFilledIcon} from  "../../Icons/createFilled.svg"
 import {ReactComponent as LikeIcon} from  "../../Icons/like.svg"
 import {ReactComponent as PhotosIcon} from  "../../Icons/photos.svg"
+import EmojiMart from '../../SharedComponents/EmojiMart'
 
 function ChatBodyInput() {
     const [text,setText] =React.useState("") 
     return (
+        <>
         <div className="chatBodyInputContainer flexBox">
         <CreateFilledIcon />
           <PhotosIcon /> 
@@ -16,6 +18,8 @@ function ChatBodyInput() {
         </div>
         <LikeIcon />
     </div>
+    <EmojiMart />
+    </>
     )
 }
 
