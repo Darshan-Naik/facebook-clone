@@ -182,11 +182,15 @@ const UserProfileNavBar = ({currentUser, refresh, alternativePath, userProfileDe
         </div>
         {
             JSON.stringify(friendRequests).includes(currentUser) && (  
-            <div>
-                <h1>{`${userProfileDetails.first_name} sent you a friend request`}</h1>
-                <div>
-                    <button onClick={handleAcceptFriendRequest}>Confirm Request</button>
-                    <button onClick={handleDeleteFriendRequest}>Delete Request</button>
+            <div className="confirmFriendRequestContainer">
+                <h1 className="confirmFriendRequestHeading">{`${userProfileDetails.first_name} sent you a friend request`}</h1>
+                <div className="flexBox">
+                    <div className="userProfileNavButton addToStoryContainer confirmRequestColor" onClick={handleAcceptFriendRequest}>
+                        Confirm Request
+                    </div>
+                    <div className="editProfileContainer userProfileNavButton" onClick={handleDeleteFriendRequest}>
+                        Delete Request
+                    </div>
                 </div>
             </div>
             )

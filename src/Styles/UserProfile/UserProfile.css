@@ -114,6 +114,12 @@
     line-height: 2;
 }
 
+.userProfileBioContent {
+    max-width: 940px;
+    margin: auto;
+    padding: 0 10px 20px;
+}
+
 .addUserBio {
     position: absolute;
     color: var(--accent);
@@ -307,6 +313,138 @@
 }
 
 .userProfilePicEditOptionsBox button:hover {
+    background-color: var(--primary-1);
+}
+
+.editProfilePicModalContainer {
+    position: fixed;
+    width: 100%;
+    height: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 30;
+    background: var(--shadow-9);
+}
+
+.editProfilePicModalBox {
+    max-width: 700px;
+    max-height: 600px;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    bottom: 0;
+    right: 0;
+    border-radius: 10px;
+    background-color: var(--secondary-background-1);
+    transform: translate(-50%, 20%);
+}
+
+.editProfilePicModalHeader {
+    padding: 20px;
+    border-bottom: 1px solid var(--divider);
+}
+
+.editProfilePicModalHeaderNamePlate {
+    flex-grow: 1;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 500;
+    vertical-align: middle;
+}
+
+.editProfilePicModalCloseIconBox {
+    border-radius: 50%;
+    padding: 3px;
+    cursor: pointer;
+    background-color: var(--hover-overlay);
+}
+
+.editProfilePicModalCloseIconBox:hover {
+    background-color: var(--hover-overlay-2);
+}
+
+.editProfilePicModalCloseIconBox .closeIcon {
+    stroke: var(--secondary-icon);
+}
+
+.profilePicPreviewContainer {
+    max-height: 454px;
+    height: 100%;
+    padding: 0 30px;
+    overflow: hidden;
+    position: relative;
+}
+
+.profilePicPreviewNoteBox {
+    position: absolute;
+    left: 50%;
+    bottom: 50%;
+    z-index: -10;
+    transform: translate(-50%, -50%);
+}
+
+.profilePicPreviewImage {
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.profilePicPreviewCloseIconBox {
+    position: absolute;
+    right: 0;
+    top: 0;
+    border-radius: 50%;
+    padding: 3px;
+    cursor: pointer;
+    background-color: var(--secondary-background-3);
+    transform: translate(-150%, 50%);
+}
+
+.profilePicPreviewCloseIconBox:hover {
+    background-color: var(--hover-overlay);
+}
+
+.profilePicPreviewCloseIconBox .closeIcon {
+    stroke: var(--secondary-icon);
+}
+
+.profilePicPreviewCloseIconBox .closeIcon:hover {
+    stroke: red;
+}
+
+.chooseProfilePicInputContainer {
+    position: fixed;
+    bottom: 0;
+    border-top: 1px solid var(--divider);
+    width: 100%;
+    padding: 20px;
+    justify-content: flex-end;
+    transition: all 0.2s ease-in-out;
+}
+
+.chooseProfilePicInputBox {
+    width: 100px;
+    margin-right: 20px;
+    overflow: hidden;
+}
+
+.chooseProfilePicInputContainer input[type="file"]::-webkit-file-upload-button {
+    padding: 7px;
+    border-radius: 5px;
+    color: var(--white);
+    cursor: pointer;
+    outline: none;
+    border: none;
+    background-color: var(--primary-4);
+}
+
+.chooseProfilePicInputContainer input[type="file"]::-webkit-file-upload-button:hover {
     background-color: var(--primary-1);
 }
 
@@ -514,6 +652,32 @@
     color: var(--primary-text);
 }
 
+.confirmFriendRequestContainer {
+    max-width: 875px;
+    width: 100%;
+    margin: 14.5px auto 0;
+    padding: 10px 15px;
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--primary-background);
+}
+
+.confirmFriendRequestHeading {
+    font-size: 18px;
+    font-weight: 600;
+    vertical-align: middle;
+    color: var(--primary-text);
+}
+
+.confirmFriendRequestHeading::first-letter {
+    font-size: 35px;
+}
+
+.confirmRequestColor {
+    color: var(--white);
+}
+
 /* UserProfile Media Queries */
 
 @media only screen and ( max-width: 840px ) {
@@ -530,6 +694,15 @@
 
     .userProfileMoreOptionsItemContainer {
         display: flex;
+    }
+
+    .confirmFriendRequestContainer {
+        display: grid;
+        justify-content: center;
+    }
+
+    .confirmFriendRequestHeading {
+        padding-bottom: 10px;
     }
 }
 

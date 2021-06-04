@@ -9,7 +9,8 @@ import { getFriendRequest, getFriends, getSentRequest } from "./Redux/Auth/actio
 
 function App() {
 
-  const { uid } = useSelector(state => state.auth.user);
+  const uid = useSelector( state => state.auth.user.uid );
+  const isAuth = useSelector( state => state.auth.isAuth )
 
   const dispatch = useDispatch()
   const root = document.querySelector(':root');
@@ -17,32 +18,39 @@ function App() {
 
   React.useEffect(()=>{
     
-    database.collection("posts").orderBy("time","desc").onSnapshot(res=>{
+    const unsubscribe1 = database.collection("posts").orderBy("time","desc").onSnapshot(res=>{
         const newPosts = res.docs.map(doc=>({id:doc.id,...doc.data()}))
         dispatch(getPosts(newPosts))
     });
 
-    database.collection("users").onSnapshot(res=>{
+    const unsubscribe2 = database.collection("users").onSnapshot(res=>{
       const newUsers = res.docs.map(doc=>doc.data())
       dispatch(getUsers(newUsers))
     });
 
-    database.collection("users").doc(uid).collection('friendRequests').onSnapshot(res=>{
+    const unsubscribe3 = database.collection("users").doc(uid).collection('friendRequests').onSnapshot(res=>{
       const newFriendRequet = res.docs.map(doc=>doc.data())
       dispatch( getFriendRequest( newFriendRequet ) );
     });
 
-    database.collection("users").doc(uid).collection('friends').onSnapshot(res=>{
+    const unsubscribe4 = database.collection("users").doc(uid).collection('friends').onSnapshot(res=>{
       const newFriends = res.docs.map(doc=>doc.data())
       dispatch( getFriends( newFriends ) );
     });
 
-    database.collection("users").doc(uid).collection('sentRequests').onSnapshot(res=>{
+    const unsubscribe5 = database.collection("users").doc(uid).collection('sentRequests').onSnapshot(res=>{
       const sentFriendRequest = res.docs.map(doc=>doc.data())
       dispatch( getSentRequest( sentFriendRequest ) );
     });
 
-},[])
+    return () => {
+      unsubscribe1();
+      unsubscribe2();
+      unsubscribe3();
+      unsubscribe4();
+      unsubscribe5();
+    }
+  },[isAuth])
 
 
   React.useEffect(()=>{

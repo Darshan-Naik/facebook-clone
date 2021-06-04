@@ -6,7 +6,7 @@ function Like({handleLike}) {
     return (
         <div className="flexBox" onClick={handleLike}>
             <LikeIcon />
-            <p onClick={handleLike}>Like</p>
+            <p >Like</p>
             
         </div>
     )
