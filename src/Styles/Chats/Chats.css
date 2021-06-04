@@ -225,3 +225,34 @@
     background-color: var(--secondary-background-2);
 
 }
+.chatMessages{
+    height: 100%;
+    overflow: auto;
+    width: 100%;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+}
+.chatBoxMessage{
+    padding: 5px 10px;
+    background-color: var(--secondary-background-1);
+    margin: 5px;
+    border-radius: 10px 10px 10px 0;
+    margin-right: auto;
+    width: fit-content;
+    margin-right:auto ;
+    text-align: left;
+    margin-left: 0
+}
+.sentChat{
+    margin-left: auto;
+    margin-right: 0;
+    background-color: var(--primary-1);
+    border-radius: 10px 10px 0 10px;
+}
+.sentChat *{
+    color: var(--white);
+}
+.fillBox{
+  flex:1;
+}

@@ -80,7 +80,7 @@ const ActiveContactSideBar = () => {
                         </div>
                         <React.Fragment>
                             {
-                                activeContacts.map( (el, i) => <ActiveContacts />)
+                                activeContacts.map( (user) => <ActiveContacts key={user.friendId} {...user}/>)
                             }
                         </React.Fragment>
                     </div>

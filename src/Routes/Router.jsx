@@ -44,7 +44,8 @@ function Router() {
                         <Route path="/" exact>
                             <Home />
                         </Route>
-                        <Route path="/menu" exact>                           
+                        <Route path="/menu" exact>
+                                                  
                             <SideBar />
                         </Route>            
                     </Switch>

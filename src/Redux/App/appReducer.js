@@ -1,11 +1,12 @@
 
-import { ADD_ACTIVE_MESSAGE, ADD_IN_ACTIVE_MESSAGE, ADD_IN_ACTIVE_MESSAGE_TO_ACTIVE_MESSAGE, CLOSE_ALL_MESSAGE, GET_USERS, MINIMIZE_ALL_MESSAGE, REMOVE_ACTIVE_MESSAGE, REMOVE_IN_ACTIVE_MESSAGE, UPDATE_ACTIVE_CONTACTS } from "./actionTypes";
+import { ADD_ACTIVE_MESSAGE, ADD_IN_ACTIVE_MESSAGE, ADD_IN_ACTIVE_MESSAGE_TO_ACTIVE_MESSAGE, CLOSE_ALL_MESSAGE, GET_CHAT_ROOMS, GET_USERS, MINIMIZE_ALL_MESSAGE, REMOVE_ACTIVE_MESSAGE, REMOVE_IN_ACTIVE_MESSAGE, UPDATE_ACTIVE_CONTACTS } from "./actionTypes";
 
 const init = {
     activeMessages :[],
     inActiveMessages :[],
     activeContacts: [],
-    users :[]
+    users :[],
+    chatRooms : []
 }
 
 export const appReducer = (state=init,{type,payload})=>{
@@ -106,6 +107,12 @@ export const appReducer = (state=init,{type,payload})=>{
             return {
                 ...state,
                 activeContacts : payload
+            }
+        }
+        case GET_CHAT_ROOMS :{
+            return {
+                ...state,
+                chatRooms : payload
             }
         }
         default : return state;

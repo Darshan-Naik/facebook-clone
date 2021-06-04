@@ -6,7 +6,6 @@ import UserProfileNavBar from "../Components/UserProfile/UserProfileHome/UserPro
 import UserProfileAboutPage from "../Components/UserProfile/UserProfileAbout/UserProfileAboutPage";
 import UserProfileFriendsPage from "../Components/UserProfile/UserProfileFriends/UserProfileFriendsPage";
 import {database} from "../Firebase/firebase";
-import { useSelector } from 'react-redux';
 
 function UserProfileRouter({ path, forceRefresh, refresh }) {
 
