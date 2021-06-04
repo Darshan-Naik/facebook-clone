@@ -4,14 +4,15 @@ import './App.css';
 import { database } from "./Firebase/firebase";
 import Router from "./Routes/Router";
 import { getPosts } from './Redux/Posts/actions';
-import { getUsers } from "./Redux/App/actions";
+import { getUsers, updateActiveContacts } from "./Redux/App/actions";
 import { getFriendRequest, getFriends, getSentRequest } from "./Redux/Auth/actions";
 
 function App() {
 
   const uid = useSelector( state => state.auth.user.uid );
-  const isAuth = useSelector( state => state.auth.isAuth )
-
+  const isAuth = useSelector( state => state.auth.isAuth );
+  const friends = useSelector(store=>store.auth.friends)
+ 
   const dispatch = useDispatch()
   const root = document.querySelector(':root');
   const dark = useSelector(store=>store.theme.dark)
@@ -52,7 +53,10 @@ function App() {
     }
   },[isAuth])
 
-
+  React.useEffect(()=>{
+      dispatch(updateActiveContacts(friends))
+  },[friends])
+  
   React.useEffect(()=>{
     if(dark){
       root.classList.add("dark")
