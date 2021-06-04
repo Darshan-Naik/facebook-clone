@@ -280,7 +280,7 @@
     top: 30px;
     right: 0px;
     background-color: var(--primary-background);
-    padding: 20px;
+    padding: 8px;
     border-radius: 8px;
     border: 1px solid var(--shadow-1);
     box-shadow: 0 2px 4px var(--shadow-1),0 8px 18px var(--shadow-2);
@@ -300,6 +300,8 @@
 }
 .editPost{
     flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
 
 }
 .editPost >div{
@@ -309,6 +311,19 @@
 }
 .editPost>div:hover{
     background-color: var(--hover-overlay);
+}
+.editPost svg{
+    width: 30px;
+    height: 30px;
+    fill:var(--primary-icon);
+}
+.editPost p{
+    font-size: 15px;
+    color:var(--primary-text)
+}
+.editBox{
+    justify-content: flex-start;
+    align-items: flex-start;
 }
 
 @media only screen and (max-width: 992px) {

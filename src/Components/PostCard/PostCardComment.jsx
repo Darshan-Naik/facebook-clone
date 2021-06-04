@@ -12,7 +12,9 @@ function PostCardComment({postId,comments}) {
     const [comment,setComment]=React.useState("")
     const [limit, setLimit]=React.useState(2)
     const [emojiVisibility,setEmojiVisibility]=React.useState(false)
+    
     const {uid} = useSelector(store=>store.auth.user)
+
     const handleChange=(e)=>{
         const {value} = e.target;
         setComment(value)

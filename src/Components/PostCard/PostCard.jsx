@@ -61,7 +61,7 @@ function PostCard({title,image,id,author,time,video,activity}) {
 
     return (
         <div className="postCardContainer">
-            <PostCardHead {...userData} time={time} activity={activity}/>
+            <PostCardHead {...userData} time={time} author={author} activity={activity}/>
             {title && <div className="postCardTags">{title}</div>}
             {image&&<div className="postCardImage"><img src={image|| process.env.PUBLIC_URL + '/Images/facebook_login_logo.png'} alt="img" /></div>}
             {video&&<div className="postCardImage">

@@ -3,10 +3,12 @@ import "../../Styles/PostCard/PostCard.css";
 import {ReactComponent as DotsIcon} from  "../../Icons/dots.svg"
 import { useHistory } from 'react-router';
 import EditBox from './EditBox';
+import { useSelector } from 'react-redux';
 
-function PostCardHead({first_name,last_name,profilePic,time,uid,activity}) {
+function PostCardHead({first_name,last_name,profilePic,time,author,activity}) {
 
     const [editSection,setEditSection]=React.useState(false);
+    const {uid} = useSelector(store=>store.auth.user);
     //const localTime = new Date(time?.toDate()).toLocaleString();
     let localTime = new Date(time?.toDate()).toString().split(" ");
     localTime.length=4
@@ -33,6 +35,7 @@ function PostCardHead({first_name,last_name,profilePic,time,uid,activity}) {
             <div className="postCardHeadBox3 flexBox">
                 <DotsIcon onClick={()=>setEditSection(!editSection)}/>
                 {editSection&&<EditBox/>}
+                {/* author===uid */}
             </div>
            
         </div>
