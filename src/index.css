@@ -52,6 +52,12 @@
     rgba(255, 255, 255, 0.7),
     rgba(255, 255, 255, 0.4),
     rgba(255, 255, 255, 0)
+    );
+    
+  --cover-photo-over-lay-gradient: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.7) 10%,
+    rgba(0, 0, 0, 0.1) 50%
   );
 
   --divider: #ced0d4;
