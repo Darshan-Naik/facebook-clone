@@ -1,11 +1,12 @@
 .storyMainContainer {
   background-color: transparent;
-  width: 700px;
+  max-width: 676px;
+  width: 100%;
   margin: auto;
   margin-bottom: 10px;
 }
 .mainImgContainer {
-  width: 115px;
+  width: 20%;
   height: 170px;
   margin: 10px 10px 10px 10px;
   border-radius: 20px;
@@ -42,4 +43,17 @@
   color: var(--white);
   z-index: 1;
   text-shadow: 1px 1px var(--black);
+}
+@media only screen and (max-width: 992px) {
+  .storyMainContainer {
+    max-width: 500px;
+  }
+  .mainImgContainer {
+    width: 25%;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .mainImgContainer {
+    width: 28%;
+  }
 }
