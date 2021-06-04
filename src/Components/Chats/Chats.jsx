@@ -46,7 +46,7 @@ function Chats() {
 
             </div> : null}
             <div className="activeChatBubbleBox">
-            {inActiveMessages.map(({userDetails,chatId},i)=><ActiveChatBubble chatId={chatId} {...userDetails} />)}
+            {inActiveMessages.map((chatRoom,i)=><ActiveChatBubble key={chatRoom.chatID} {...chatRoom} />)}
             </div>
             <ChatBubble />
             <div className="chatsContainer flexBox">
