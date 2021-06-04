@@ -4,7 +4,7 @@ import './App.css';
 import { database } from "./Firebase/firebase";
 import Router from "./Routes/Router";
 import { getPosts } from './Redux/Posts/actions';
-import { getUsers, updateActiveContacts } from "./Redux/App/actions";
+import { getChatRooms, getUsers, updateActiveContacts } from "./Redux/App/actions";
 import { getFriendRequest, getFriends, getSentRequest } from "./Redux/Auth/actions";
 
 function App() {
@@ -18,7 +18,7 @@ function App() {
   const dark = useSelector(store=>store.theme.dark)
 
   React.useEffect(()=>{
-    
+    if(uid){
     const unsubscribe1 = database.collection("posts").orderBy("time","desc").onSnapshot(res=>{
         const newPosts = res.docs.map(doc=>({id:doc.id,...doc.data()}))
         dispatch(getPosts(newPosts))
@@ -44,19 +44,27 @@ function App() {
       dispatch( getSentRequest( sentFriendRequest ) );
     });
 
+    const unsubscribe6 = database.collection("chatRooms").where("authors", "array-contains",uid ).onSnapshot(res=>{
+      const newChatRooms = res.docs.map(doc=>({chatID:doc.id,...doc.data()}))
+      dispatch(getChatRooms(newChatRooms))
+    });
+
     return () => {
       unsubscribe1();
       unsubscribe2();
       unsubscribe3();
       unsubscribe4();
       unsubscribe5();
+      unsubscribe6();
     }
+  }
+  
   },[isAuth])
 
   React.useEffect(()=>{
       dispatch(updateActiveContacts(friends))
   },[friends])
-  
+
   React.useEffect(()=>{
     if(dark){
       root.classList.add("dark")

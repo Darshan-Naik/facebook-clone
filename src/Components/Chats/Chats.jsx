@@ -46,11 +46,11 @@ function Chats() {
 
             </div> : null}
             <div className="activeChatBubbleBox">
-            {inActiveMessages.map(({userDetails,chatId},i)=><ActiveChatBubble chatId={chatId} {...userDetails} />)}
+            {inActiveMessages.map((chatRoom,i)=><ActiveChatBubble key={chatRoom.chatID} {...chatRoom} />)}
             </div>
             <ChatBubble />
             <div className="chatsContainer flexBox">
-            {activeMessages.map(({userDetails,chatId},i)=><ChatBox chatId={chatId} data={userDetails} active={activeChatIndex === i} handleActiveChatBox={handleActiveChatBox} index={i}/>)}
+            {activeMessages.map((chatRoom,i)=><ChatBox key={chatRoom.chatID} {...chatRoom} active={activeChatIndex === i} handleActiveChatBox={handleActiveChatBox} index={i}/>)}
         </div>
         </div>
         

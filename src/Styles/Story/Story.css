@@ -1,0 +1,45 @@
+.storyMainContainer {
+  background-color: transparent;
+  width: 700px;
+  margin: auto;
+  margin-bottom: 10px;
+}
+.mainImgContainer {
+  width: 115px;
+  height: 170px;
+  margin: 10px 10px 10px 10px;
+  border-radius: 20px;
+  overflow: hidden;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+.mainImgContainer:hover {
+  transform: scale(1.03);
+}
+.imageMainContainer {
+  width: 40px;
+  height: 40px;
+  position: relative;
+  top: 10px;
+  right: 25%;
+  border-radius: 50%;
+  border: 3.5px solid var(--accent);
+}
+.imageMainContainer:hover {
+  transform: scale(1.01);
+}
+.pMainTag {
+  position: relative;
+  top: 70px;
+  text-align: left;
+  max-width: 60px;
+  padding: 1px;
+  font-size: 15px;
+  font-weight: 600;
+  margin-left: 10px;
+  color: var(--white);
+  z-index: 1;
+  text-shadow: 1px 1px var(--black);
+}

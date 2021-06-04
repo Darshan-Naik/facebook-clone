@@ -1,27 +1,28 @@
 
-import { ADD_ACTIVE_MESSAGE, ADD_IN_ACTIVE_MESSAGE, ADD_IN_ACTIVE_MESSAGE_TO_ACTIVE_MESSAGE, CLOSE_ALL_MESSAGE, GET_USERS, MINIMIZE_ALL_MESSAGE, REMOVE_ACTIVE_MESSAGE, REMOVE_IN_ACTIVE_MESSAGE, UPDATE_ACTIVE_CONTACTS } from "./actionTypes";
+import { ADD_ACTIVE_MESSAGE, ADD_IN_ACTIVE_MESSAGE, ADD_IN_ACTIVE_MESSAGE_TO_ACTIVE_MESSAGE, CLOSE_ALL_MESSAGE, GET_CHAT_ROOMS, GET_USERS, MINIMIZE_ALL_MESSAGE, REMOVE_ACTIVE_MESSAGE, REMOVE_IN_ACTIVE_MESSAGE, UPDATE_ACTIVE_CONTACTS } from "./actionTypes";
 
 const init = {
     activeMessages :[],
     inActiveMessages :[],
     activeContacts: [],
-    users :[]
+    users :[],
+    chatRooms : []
 }
 
 export const appReducer = (state=init,{type,payload})=>{
 
     switch (type) {
         case ADD_ACTIVE_MESSAGE : {
-            if( state.activeMessages.find( el => el.chatId === payload.chatId ) ) {
+            if( state.activeMessages.find( el => el.chatID === payload.chatID ) ) {
                 return state;
             }
-            const updatedInActiveMessages = state.inActiveMessages.filter(el=>el.chatId !==payload.chatId)
+            const updatedInActiveMessages = state.inActiveMessages.filter(el=>el.chatID !==payload.chatID)
             if( state.activeMessages.length >= 3 ) {
                 let data = [...state.activeMessages];
                const message = data.shift();
                 data = [payload,...data]
                
-                if( state.inActiveMessages.find( el => el.chatId === message.chatId ) ) {
+                if( state.inActiveMessages.find( el => el.chatID === message.chatID ) ) {
                     return  {
                         ...state,
                         activeMessages: data,
@@ -45,13 +46,13 @@ export const appReducer = (state=init,{type,payload})=>{
         case REMOVE_ACTIVE_MESSAGE : {
             return {
                 ...state,
-                activeMessages : state.activeMessages.filter(item=>item.chatId !== payload)
+                activeMessages : state.activeMessages.filter(item=>item.chatID !== payload)
             }
         }
 
         case ADD_IN_ACTIVE_MESSAGE :{
-            const chat = state.activeMessages.filter(el=> el.chatId ===payload)
-            const updateActiveMessage =  state.activeMessages.filter(el => el.chatId !==payload)
+            const chat = state.activeMessages.filter(el=> el.chatID ===payload)
+            const updateActiveMessage =  state.activeMessages.filter(el => el.chatID !==payload)
 
             return {
                 ...state,
@@ -63,13 +64,13 @@ export const appReducer = (state=init,{type,payload})=>{
         case REMOVE_IN_ACTIVE_MESSAGE : {
             return {
                 ...state,
-                inActiveMessages : state.inActiveMessages.filter(item=>item.chatId !== payload)
+                inActiveMessages : state.inActiveMessages.filter(item=>item.chatID !== payload)
             }
         }
 
         case ADD_IN_ACTIVE_MESSAGE_TO_ACTIVE_MESSAGE :{
-            const chat = state.inActiveMessages.filter(el=> el.chatId ===payload)
-            const updateInActiveMessage =  state.inActiveMessages.filter(el => el.chatId !==payload)
+            const chat = state.inActiveMessages.filter(el=> el.chatID ===payload)
+            const updateInActiveMessage =  state.inActiveMessages.filter(el => el.chatID !==payload)
             const updateActiveMessage = [...state.activeMessages]
             if(state.activeMessages.length >=3){
                 let message = updateActiveMessage.shift();
@@ -106,6 +107,12 @@ export const appReducer = (state=init,{type,payload})=>{
             return {
                 ...state,
                 activeContacts : payload
+            }
+        }
+        case GET_CHAT_ROOMS :{
+            return {
+                ...state,
+                chatRooms : payload
             }
         }
         default : return state;
