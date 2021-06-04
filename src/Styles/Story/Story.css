@@ -4,11 +4,21 @@
   margin: auto;
   margin-bottom: 10px;
 }
-.imageMainContainer {
-  max-width: 111px;
-  padding: 2px;
-  margin: 10px 15px 10px 5px;
+.mainImgContainer {
+  width: 115px;
   height: 170px;
+  margin: 10px 10px 10px 10px;
+  border-radius: 20px;
+  overflow: hidden;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.mainImgContainer:hover {
+  transform: scale(1.03);
+}
+.imageMainContainer {
+  height: 100%;
   border-radius: 20px;
 }
 .imageMainContainer:hover {
