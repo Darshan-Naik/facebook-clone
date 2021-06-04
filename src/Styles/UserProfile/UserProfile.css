@@ -31,6 +31,16 @@
     background-size: cover;
 }
 
+.userProfileCoverPhotoBoxOveryLay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    z-index: 2;
+    background: var(--cover-photo-over-lay-gradient);
+}
+
 .userProfileEditCoverPhotoContainer {
     max-width: 170px;
     position: absolute;
@@ -38,6 +48,7 @@
     bottom: 0%;
     border-radius: 6px;
     cursor: pointer;
+    z-index: 8;
     background-color: var(--white);
     transform: translate(-20%, -40%);
 }
@@ -64,42 +75,6 @@
     font-weight: 500;
     color: var(--black);
     vertical-align: middle;
-}
-
-.editUserProfileCoverPhotoModalBox {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    z-index: 20;
-    padding: 8px 10px;
-    border-radius: 6px;
-    background-color: var(--nav-bar-background);
-    box-shadow: 0px 0px 10px 5px var(--shadow-1);
-    transform: translate(0, 80%);
-}
-
-.editUserProfileCoverPhotoIconBox .photosIcon {
-    margin-right: 5px;
-    fill: var(--primary-icon);
-}
-
-.editUserProfileCoverPhotoIconBox p {
-    margin-right: 5px;
-}
-
-.editUserProfileCoverPhotoUpdateButton {
-    padding: 5px;
-    border-radius: 6px;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    color: var(--white);
-    font-weight: 500;
-    background-color: var(--primary-1);
-}
-
-.editUserProfileCoverPhotoUpdateButton:hover {
-    background-color: var(--primary-button-hover);
 }
 
 .userNameContainer {
@@ -280,28 +255,6 @@
     transform: translate(4%, 18%);
 }
 
-.userProfilePicEditOptionsContainer {
-    width: 350px;
-    padding: 10px;
-    border-radius: 5px;
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    z-index: 20;
-    background: var(--nav-bar-background);
-    box-shadow: 0px 0px 10px 5px var(--shadow-1);
-    transform: translate(-50%, 150%);
-}
-
-.userProfilePicEditOptionsBox {
-    justify-content: space-between;
-}
-
-.userProfilePicEditOptionNamePlate .photosIcon {
-    margin-right: 10px;
-    fill: var(--primary-icon)
-}
-
 .userProfilePicEditOptionsBox button {
     padding: 7px 10px;
     border-radius: 5px;
@@ -319,28 +272,23 @@
 .editProfilePicModalContainer {
     position: fixed;
     width: 100%;
-    height: auto;
+    height: 100vh;
     top: 0;
     left: 0;
     bottom: 0;
     right: 0;
     z-index: 30;
+    display: grid;
+    place-items: center;
     background: var(--shadow-9);
 }
 
 .editProfilePicModalBox {
-    max-width: 700px;
-    max-height: 600px;
+    max-width: 500px;
+    min-height: 200px;
     width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 50%;
-    bottom: 0;
-    right: 0;
     border-radius: 10px;
-    background-color: var(--secondary-background-1);
-    transform: translate(-50%, 20%);
+    background-color: var(--primary-background);
 }
 
 .editProfilePicModalHeader {
@@ -372,27 +320,22 @@
 }
 
 .profilePicPreviewContainer {
-    max-height: 454px;
-    height: 100%;
     padding: 0 30px;
     overflow: hidden;
     position: relative;
 }
 
 .profilePicPreviewNoteBox {
-    position: absolute;
-    left: 50%;
-    bottom: 50%;
-    z-index: -10;
-    transform: translate(-50%, -50%);
+    min-height: 200px;
 }
 
 .profilePicPreviewImage {
     width: 100%;
-    height: 100%;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+    max-height: 400px;
+}
+
+.profilePicPreviewImage img {
+    width: 100%;
 }
 
 .profilePicPreviewCloseIconBox {
@@ -411,6 +354,8 @@
 }
 
 .profilePicPreviewCloseIconBox .closeIcon {
+    width: 20px;
+    height: 20px;
     stroke: var(--secondary-icon);
 }
 
@@ -419,10 +364,7 @@
 }
 
 .chooseProfilePicInputContainer {
-    position: fixed;
-    bottom: 0;
     border-top: 1px solid var(--divider);
-    width: 100%;
     padding: 20px;
     justify-content: flex-end;
     transition: all 0.2s ease-in-out;

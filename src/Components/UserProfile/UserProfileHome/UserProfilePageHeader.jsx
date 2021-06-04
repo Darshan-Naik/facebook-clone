@@ -105,13 +105,19 @@ const UserProfilePageHeader = ({ coverPhoto, currentUser, forceRefresh, userProf
                                                         </div>
                                                     </div>
                                                     <div className="profilePicPreviewContainer">
-                                                        <div className="profilePicPreviewNoteBox">
-                                                            Choose some image
-                                                        </div>
+                                                        {
+                                                            !coverPicImagePreview && (
+                                                                <div className="profilePicPreviewNoteBox flexBox">
+                                                                    Choose some image
+                                                                </div>
+                                                            )
+                                                        }
                                                         {
                                                             coverPicImagePreview && (
                                                                 <React.Fragment>
-                                                                    <div className="profilePicPreviewImage" style={{backgroundImage: `url(${coverPicImagePreview})`}}></div>
+                                                                    <div className="profilePicPreviewImage">
+                                                                        <img src={coverPicImagePreview} alt="coverImage"/>
+                                                                    </div>
                                                                     <div className="profilePicPreviewCloseIconBox flexBox" onClick={handleRemvoeCoverPicPreview}>
                                                                         <CloseIcon />
                                                                     </div>
@@ -134,6 +140,7 @@ const UserProfilePageHeader = ({ coverPhoto, currentUser, forceRefresh, userProf
                                 </React.Fragment>
                             )
                         }
+                        <div className="userProfileCoverPhotoBoxOveryLay" ></div>
                     </div>
                 </div>
             </div>
