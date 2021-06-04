@@ -50,7 +50,7 @@ function Chats() {
             </div>
             <ChatBubble />
             <div className="chatsContainer flexBox">
-            {activeMessages.map(({userDetails,chatId},i)=><ChatBox chatId={chatId} data={userDetails} active={activeChatIndex === i} handleActiveChatBox={handleActiveChatBox} index={i}/>)}
+            {activeMessages.map((chatRoom,i)=><ChatBox key={chatRoom.chatID} {...chatRoom} active={activeChatIndex === i} handleActiveChatBox={handleActiveChatBox} index={i}/>)}
         </div>
         </div>
         
