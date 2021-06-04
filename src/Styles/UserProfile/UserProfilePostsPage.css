@@ -145,6 +145,24 @@
     background: var(--secondary-background-1);
 }
 
+.postsPageUserFriendsContainer {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.postsPageUserFriendsContainer > a {
+    flex-grow: 1;
+}
+
+.postsPageUserFriendsBox {
+    width: 100px;
+}
+
+.postsPageFriendsImage {
+    width: 100%;
+    height: 100%;
+}
+
 /* User Profile Posts Component CSS */
 
 .postsPagePostsComponentContainer {

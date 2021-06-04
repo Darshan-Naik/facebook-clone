@@ -1,14 +1,23 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
 import { ReactComponent as CloseIcon } from "../../../Icons/close.svg";
+import friendsList from '../../../Utils/friendsList';
 
-function UserProfilePostsPageIntro({ studies, went, lives, from, relationship, joinedOn, alternativePath, userProfileDetails }) {
+function UserProfilePostsPageIntro({ studies, went, lives, from, relationship, joinedOn, alternativePath, userProfileDetails, userFriends }) {
 
     const [editUserDetailsModalState, setEditUserDetailsModalState] = useState(false);
+    const [userFriendsList, setUserFriendsList] = useState([])
 
+    const { users } = useSelector( state => state.app );
+    
     const handleEditUserDetailsModal = () => {
         setEditUserDetailsModalState(!editUserDetailsModalState)
     }
+
+    useEffect(() => {
+        setUserFriendsList( friendsList( users, userFriends ) )
+    }, [users, userFriends])
 
     return (
         <div className="postsPageIntroMainContainer">
@@ -77,15 +86,29 @@ function UserProfilePostsPageIntro({ studies, went, lives, from, relationship, j
                     </React.Fragment>
                 )
             }
-            <div className="postsPageUserDetailsContainer">
-                <div className="flexBox postsPageFriendsNameBox">
-                    <h1 className="postsPageUserDetailsNamePlate">Friends</h1>
-                    <Link to={`${alternativePath}/${userProfileDetails.uid}/friends`} className="postsPageLinkToFriendsPage">See all Friends</Link>
-                </div>
-                <div>
-                    Friends
-                </div>
-            </div>
+            {
+                userFriends.length > 0 && (
+                    <div className="postsPageUserDetailsContainer">
+                        <div className="flexBox postsPageFriendsNameBox">
+                            <h1 className="postsPageUserDetailsNamePlate">Friends</h1>
+                            <Link to={`${alternativePath}/${userProfileDetails.uid}/friends`} className="postsPageLinkToFriendsPage">See all Friends</Link>
+                        </div>
+                        <div className="flexBox postsPageUserFriendsContainer">
+                            {
+                                userFriendsList.map( el => {
+                                    return (
+                                        <Link key={el.uid} to={`/profile/${el.uid}`}>
+                                            <div className="postsPageUserFriendsBox">
+                                                <img className="postsPageFriendsImage" src={el.profilePic || process.env.PUBLIC_URL + '/Images/userProfile_icon.png'} alt={`${el.first_name}`}/>
+                                            </div>
+                                        </Link>
+                                    )
+                                })
+                            }
+                        </div>
+                    </div>
+                )
+            }
         </div>
     )
 }

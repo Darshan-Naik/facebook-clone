@@ -1,10 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 import UserProfilePicture from "./UserProfilePicture";
 import { useSelector } from 'react-redux';
-import { ReactComponent as UpdateCoverPhotoIcon } from "../../../Icons/photos.svg";
+import { DisappearedLoading } from 'react-loadingg';
+import EmojiMart from "../../../SharedComponents/EmojiMart";
 import { ReactComponent as CloseIcon } from "../../../Icons/close.svg";
+import { ReactComponent as EmojiIocn } from "../../../Icons/emoji.svg";
 import "../../../Styles/UserProfile/UserProfile.css";
 import { database, storage } from '../../../Firebase/firebase';
+import emoji from 'emoji-mart/dist-es/components/emoji/emoji';
 
 const UserProfilePageHeader = ({ coverPhoto, currentUser, forceRefresh, userProfileDetails}) => {
 
@@ -12,6 +15,8 @@ const UserProfilePageHeader = ({ coverPhoto, currentUser, forceRefresh, userProf
     const [textFieldQuery, setTextFieldQuery] = useState("");
     const [showCoverPicModal, setShowCoverPicModal] = useState(false);
     const [coverPicImagePreview, setCoverPicImagePreview] = useState();
+    const [picUploadState, setPicUploadState] = useState(0);
+    const [showEmojiMart, setShowEmojiMart] = useState(false);
 
     const coverPicImageRef = useRef();
     
@@ -37,10 +42,11 @@ const UserProfilePageHeader = ({ coverPhoto, currentUser, forceRefresh, userProf
 
     const handleUpdateCoverPic = () => {
         const uploadTask =  storage.ref(`coverPicImages/${coverPicImageRef.current.files[0].name}`).put(coverPicImageRef.current.files[0])
+        setPicUploadState(1);
 
         uploadTask.on("state_changed",
             snapshot => {
-                console.log(snapshot)
+                setPicUploadState(Math.floor((snapshot.bytesTransferred/snapshot.totalBytes)*100)+1)
             },
             error => {
 
@@ -62,6 +68,7 @@ const UserProfilePageHeader = ({ coverPhoto, currentUser, forceRefresh, userProf
                     .then(()=>{
                         coverPicImageRef.current.value = "";
                         setShowCoverPicModal(false);
+                        setPicUploadState(0);
                     })
                 })
         })
@@ -73,6 +80,10 @@ const UserProfilePageHeader = ({ coverPhoto, currentUser, forceRefresh, userProf
         .then(() => {
             setTextFieldQuery("");
         })
+    }
+
+    const handleBioEmoji = (emoji) => {
+        setTextFieldQuery( textFieldQuery + emoji.native )
     }
 
     useEffect(() => {
@@ -98,6 +109,21 @@ const UserProfilePageHeader = ({ coverPhoto, currentUser, forceRefresh, userProf
                                         showCoverPicModal && (
                                             <div className="editProfilePicModalContainer">
                                                 <div className="editProfilePicModalBox">
+                                                    {
+                                                        picUploadState ? (
+                                                            <div className="newPostProgressContainer flexBox">
+                                                                <div className="progressBox">
+                                                                    <h2>updateing</h2> <br />
+                                                                    <br />
+
+                                                                    <DisappearedLoading size="small"/>
+                                                                </div>
+                                                                <div className="progressBarBox">
+                                                                        <div className="progressBar" style={{width:`${picUploadState}%`}}></div>
+                                                                </div>
+                                                            </div>
+                                                        ) : null
+                                                    }
                                                     <div className="editProfilePicModalHeader flexBox">
                                                         <h1 className="editProfilePicModalHeaderNamePlate">Edit Cover Pic</h1>
                                                         <div className="editProfilePicModalCloseIconBox flexBox"  onClick={() => setShowCoverPicModal(false)}>
@@ -159,9 +185,19 @@ const UserProfilePageHeader = ({ coverPhoto, currentUser, forceRefresh, userProf
                     {
                         currentUser === uid && addBioVisibility && (
                             <div className="addBoxTexFieldContainer">
-                                <textarea className="addBioTextField" value={textFieldQuery} onChange={(e) => setTextFieldQuery(e.target.value)} placeholder="Describe who you are"></textarea>
-                                <div className="addBioTextFieldCharCount">
+                                <textarea className="addBioTextField scroll" value={textFieldQuery} onChange={(e) => setTextFieldQuery(e.target.value)} placeholder="Describe who you are"></textarea>
+                                <div className="addBioTextFieldCharCount flexBox">
                                     {`${101 - textFieldQuery.length} characters remaining`}
+                                    <div className="addBioTextFieldEmojiMart flexBox" onClick={() => setShowEmojiMart(!showEmojiMart)}>
+                                        <EmojiIocn />
+                                        {
+                                            showEmojiMart && (
+                                                <div className="addBioEmojiContainer">
+                                                    <EmojiMart handleEmoji={handleBioEmoji} />
+                                                </div>
+                                            )
+                                        }
+                                    </div>
                                 </div>
                                 <div className="flexBox addBioButtonContainer">
                                     <div className="flexBox">
