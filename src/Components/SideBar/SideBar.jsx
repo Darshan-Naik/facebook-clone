@@ -7,13 +7,13 @@ import { useSelector } from 'react-redux';
 
 
 function SideBar() {
-    const { first_name, last_name, uid } = useSelector(state => state.auth.user);
-    
+    const { first_name, last_name, uid, profilePic } = useSelector(state => state.auth.user);
+    console.log(profilePic);
     return (
         <div className="sideBarContainer">
             <div className="sideBarLinksContainer">
                 <Link className="flexBox sideBarContentLink" to={`/profile/${uid}`}>
-                    <SideBarContent label={`${first_name} ${last_name}`} />
+                    <SideBarContent src={profilePic} label={`${first_name} ${last_name}`} />
                 </Link>
                 <Link className="flexBox sideBarContentLink" to="/friends/profile">
                     <SideBarContent src={process.env.PUBLIC_URL + '/Images/friends_icon.png'} label="Friends" />

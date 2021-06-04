@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import SideBarContent from "./SideBarContent";
 import {ReactComponent as SearchIcon} from  "../../Icons/search.svg"
 import "../../Styles/SideBar/SideBar.css";
@@ -8,14 +8,16 @@ import { ReactComponent as ContactBarDots } from "../../Icons/dots.svg";
 import { ReactComponent as VideoCallIcon } from "../../Icons/videoCallIcon.svg";
 import filterFriends from "../../Utils/filterFriends.js"
 import { useHistory } from 'react-router-dom';
+import ActiveContacts from './ActiveContacts';
 
 const ActiveContactSideBar = () => {
 
     const [peopleSuggested, setPeopleSuggested] = useState([]);
-    console.log(peopleSuggested);
+    
     const { activeContacts, users} = useSelector( state => state.app ); 
     const { friends, user } = useSelector( state => state.auth );
-    
+    const delayTimeRef = useRef();
+
     const history = useHistory();
 
     const dispatch = useDispatch();
@@ -29,8 +31,15 @@ const ActiveContactSideBar = () => {
     };
     
     useEffect(() => {
-        setPeopleSuggested( filterFriends( users, friends ) )
-    }, [users])
+
+        delayTimeRef.current = setTimeout(() => {
+            setPeopleSuggested( filterFriends( users, friends, user ) )
+        }, 2000)
+
+        return () => {
+            clearTimeout(delayTimeRef.current)
+        }
+    }, [ users, friends ])
 
     return (
         <div className="sideBarContainer">
@@ -43,7 +52,7 @@ const ActiveContactSideBar = () => {
                         {
                             peopleSuggested?.map( (el, i) => {
                                 return el.uid !== user.uid && (
-                                    <div key={i} onClick={() => history.push(`/profile/${el.uid}`)} className="flexBox sideBarContentLink">
+                                    <div key={el.uid} onClick={() => history.push(`/profile/${el.uid}`)} className="flexBox sideBarContentLink">
                                         <SideBarContent label={`${el.first_name} ${el.last_name}`} src={el.profilePic} />
                                     </div>
                                 )
@@ -71,13 +80,7 @@ const ActiveContactSideBar = () => {
                         </div>
                         <React.Fragment>
                             {
-                                activeContacts.map( (el, i) => {
-                                    return (
-                                        <div key={i} onClick={() => handleOpenChatBox(i, el)} className="flexBox sideBarContentLink">
-                                            <SideBarContent active label={`${el.first_name} ${el.last_name}`} src={el.profilePic} />
-                                        </div>
-                                    )
-                                })
+                                activeContacts.map( (el, i) => <ActiveContacts />)
                             }
                         </React.Fragment>
                     </div>

@@ -1,10 +1,10 @@
-import { contacts } from "../../Utils/localData";
-import { ADD_ACTIVE_MESSAGE, ADD_IN_ACTIVE_MESSAGE, ADD_IN_ACTIVE_MESSAGE_TO_ACTIVE_MESSAGE, CLOSE_ALL_MESSAGE, GET_USERS, MINIMIZE_ALL_MESSAGE, REMOVE_ACTIVE_MESSAGE, REMOVE_IN_ACTIVE_MESSAGE } from "./actionTypes";
+
+import { ADD_ACTIVE_MESSAGE, ADD_IN_ACTIVE_MESSAGE, ADD_IN_ACTIVE_MESSAGE_TO_ACTIVE_MESSAGE, CLOSE_ALL_MESSAGE, GET_USERS, MINIMIZE_ALL_MESSAGE, REMOVE_ACTIVE_MESSAGE, REMOVE_IN_ACTIVE_MESSAGE, UPDATE_ACTIVE_CONTACTS } from "./actionTypes";
 
 const init = {
     activeMessages :[],
     inActiveMessages :[],
-    activeContacts: [...contacts],
+    activeContacts: [],
     users :[]
 }
 
@@ -97,10 +97,15 @@ export const appReducer = (state=init,{type,payload})=>{
             }
         }
         case GET_USERS :{
-            console.log(payload)
             return {
                 ...state,
                 users : payload
+            }
+        }
+        case UPDATE_ACTIVE_CONTACTS :{
+            return {
+                ...state,
+                activeContacts : payload
             }
         }
         default : return state;

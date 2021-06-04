@@ -1,4 +1,4 @@
-function filterFriends(users, friends) {
+function filterFriends(users, friends, user) {
     
     if( friends.length === 0 ) {
         return users
@@ -8,10 +8,8 @@ function filterFriends(users, friends) {
     let suggestedPeople = [];
 
     for( let i=0; i<users.length; i++ ) {
-        for( let j=0; j<friends.length; j++ ) {
-            if( users[i].uid !== friends[j].friendId) {
-                output.push(users[i])
-            }
+        if( !JSON.stringify(friends).includes( users[i].uid ) ) {
+            output.push( users[i] )
         }
     }
 
@@ -19,9 +17,7 @@ function filterFriends(users, friends) {
         return [];
     }
 
-    // for( let i=0; i<output.length; i++ ) {
-    //     if(  )
-    // }
+    output = output.filter(el => el.uid !== user.uid);
 
     let check = [];
     for( let i=0; i<output.length; i++ ) {

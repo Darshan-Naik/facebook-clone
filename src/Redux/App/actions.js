@@ -1,4 +1,4 @@
-import { ADD_ACTIVE_MESSAGE, ADD_IN_ACTIVE_MESSAGE, ADD_IN_ACTIVE_MESSAGE_TO_ACTIVE_MESSAGE, CLOSE_ALL_MESSAGE, GET_USERS, MINIMIZE_ALL_MESSAGE, REMOVE_ACTIVE_MESSAGE, REMOVE_IN_ACTIVE_MESSAGE } from "./actionTypes"
+import { ADD_ACTIVE_MESSAGE, ADD_IN_ACTIVE_MESSAGE, ADD_IN_ACTIVE_MESSAGE_TO_ACTIVE_MESSAGE, CLOSE_ALL_MESSAGE, GET_USERS, MINIMIZE_ALL_MESSAGE, REMOVE_ACTIVE_MESSAGE, REMOVE_IN_ACTIVE_MESSAGE, UPDATE_ACTIVE_CONTACTS } from "./actionTypes"
 
 const  addActiveMessage =(payload)=>{
     return {
@@ -46,4 +46,10 @@ const getUsers = (payload)=>{
         payload
     }
 }   
-export {getUsers,closeAllMessage,minimizeAllMessage, addActiveMessage,removeActiveMessage,addInActiveMessage,removeInActiveMessage,addInActiveMessageToActiveMessage}
+const updateActiveContacts = (payload)=>{
+    return {
+        type: UPDATE_ACTIVE_CONTACTS,
+        payload
+    }
+} 
+export {getUsers,closeAllMessage,minimizeAllMessage, addActiveMessage,removeActiveMessage,addInActiveMessage,removeInActiveMessage,addInActiveMessageToActiveMessage,updateActiveContacts}
