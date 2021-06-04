@@ -23,7 +23,7 @@ function ChatBox({chatID,authors,active,handleActiveChatBox,index}) {
     },[])
     return (
         <div className={`chatBoxContainer flexBox ${active && "activeBox"}`} onClick={()=>handleActiveChatBox(index)}>
-            <ChatBoxHeader  authors={authors} chatID={chatID} />
+            <ChatBoxHeader  authors={authors} chatID={chatID}/>
             <div className="chatMessages scroll">
                 <div className="fillBox">
 

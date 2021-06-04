@@ -18,46 +18,47 @@ function App() {
   const dark = useSelector(store=>store.theme.dark)
 
   React.useEffect(()=>{
-    if( uid ) {
-      const unsubscribe1 = database.collection("posts").orderBy("time","desc").onSnapshot(res=>{
-          const newPosts = res.docs.map(doc=>({id:doc.id,...doc.data()}))
-          dispatch(getPosts(newPosts))
-      });
-  
-      const unsubscribe2 = database.collection("users").onSnapshot(res=>{
-        const newUsers = res.docs.map(doc=>doc.data())
-        dispatch(getUsers(newUsers))
-      });
-  
-      const unsubscribe3 = database.collection("users").doc(uid).collection('friendRequests').onSnapshot(res=>{
-        const newFriendRequet = res.docs.map(doc=>doc.data())
-        dispatch( getFriendRequest( newFriendRequet ) );
-      });
-  
-      const unsubscribe4 = database.collection("users").doc(uid).collection('friends').onSnapshot(res=>{
-        const newFriends = res.docs.map(doc=>doc.data())
-        dispatch( getFriends( newFriends ) );
-      });
-  
-      const unsubscribe5 = database.collection("users").doc(uid).collection('sentRequests').onSnapshot(res=>{
-        const sentFriendRequest = res.docs.map(doc=>doc.data())
-        dispatch( getSentRequest( sentFriendRequest ) );
-      });
-  
-      const unsubscribe6 = database.collection("chatRooms").where("authors", "array-contains",uid ).onSnapshot(res=>{
-        const newChatRooms = res.docs.map(doc=>({chatID:doc.id,...doc.data()}))
-        dispatch(getChatRooms(newChatRooms))
-      });
-  
-      return () => {
-        unsubscribe1();
-        unsubscribe2();
-        unsubscribe3();
-        unsubscribe4();
-        unsubscribe5();
-        unsubscribe6();
-      }
+    if(uid){
+    const unsubscribe1 = database.collection("posts").orderBy("time","desc").onSnapshot(res=>{
+        const newPosts = res.docs.map(doc=>({id:doc.id,...doc.data()}))
+        dispatch(getPosts(newPosts))
+    });
+
+    const unsubscribe2 = database.collection("users").onSnapshot(res=>{
+      const newUsers = res.docs.map(doc=>doc.data())
+      dispatch(getUsers(newUsers))
+    });
+
+    const unsubscribe3 = database.collection("users").doc(uid).collection('friendRequests').onSnapshot(res=>{
+      const newFriendRequet = res.docs.map(doc=>doc.data())
+      dispatch( getFriendRequest( newFriendRequet ) );
+    });
+
+    const unsubscribe4 = database.collection("users").doc(uid).collection('friends').onSnapshot(res=>{
+      const newFriends = res.docs.map(doc=>doc.data())
+      dispatch( getFriends( newFriends ) );
+    });
+
+    const unsubscribe5 = database.collection("users").doc(uid).collection('sentRequests').onSnapshot(res=>{
+      const sentFriendRequest = res.docs.map(doc=>doc.data())
+      dispatch( getSentRequest( sentFriendRequest ) );
+    });
+
+    const unsubscribe6 = database.collection("chatRooms").where("authors", "array-contains",uid ).onSnapshot(res=>{
+      const newChatRooms = res.docs.map(doc=>({chatID:doc.id,...doc.data()}))
+      dispatch(getChatRooms(newChatRooms))
+    });
+
+    return () => {
+      unsubscribe1();
+      unsubscribe2();
+      unsubscribe3();
+      unsubscribe4();
+      unsubscribe5();
+      unsubscribe6();
     }
+  }
+  
   },[isAuth])
 
   React.useEffect(()=>{
