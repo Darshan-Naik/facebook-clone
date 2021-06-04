@@ -2,7 +2,6 @@
     max-width: 676px;
     min-width: 400px;
     width: 100%;
-    /* border: 1px solid black; */
     margin: auto;
     border-radius: 8px;
     background-color: var(--primary-background);
@@ -10,7 +9,7 @@
     text-align: left;
 }
 .postCardHeadContainer{
-    padding: 0 15px;
+    padding: 0 15px 5px 15px;
     
 }
 .postCardHeadBox1>img{
@@ -102,11 +101,11 @@
 }
 .postCardFooterBox{
     width: 30%;
-    margin: 2px 0;
+    margin: 5px 0;
 }
 .postCardFooterBox:hover{
     background: var(--hover-overlay);
-    border-radius: 2px;
+    border-radius: 4px;
     width: 30%;
 }
 
