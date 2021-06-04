@@ -61,6 +61,7 @@
     height: 36px;
     border-radius: 50%;
     cursor: pointer;
+    position: relative;
 }
 .postCardHeadBox3:hover {
     background: var(--hover-overlay);
@@ -247,6 +248,15 @@
     background-color: var(--secondary-background-1);
     
 }
+.commentInput1{
+    flex:1;
+    border-radius: 25px;
+    height: 36px;
+    padding: 0 10px;
+    width: 100%;
+    
+    
+}
 .commentInput input{
     border: 0px;
     background: transparent;
@@ -262,6 +272,43 @@
     width: 20px;
     height: 20px;
     padding: 2px;
+}
+
+.editPostContainer{
+    position: absolute;
+    min-width: 200px;
+    top: 30px;
+    right: 0px;
+    background-color: var(--primary-background);
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid var(--shadow-1);
+    box-shadow: 0 2px 4px var(--shadow-1),0 8px 18px var(--shadow-2);
+
+}
+.editPostContainer::after{
+    content: "";
+    width: 11px;
+    height: 11px;
+    position: absolute;
+    top: -7px;
+    right: 10px;
+    background-color: var(--primary-background);
+    transform: rotate(45deg);
+    border-top: 1px solid var(--shadow-1);
+    border-left: 1px solid var(--shadow-1);
+}
+.editPost{
+    flex-direction: column;
+
+}
+.editPost >div{
+    width: 100%;
+    border-radius: 4px;
+
+}
+.editPost>div:hover{
+    background-color: var(--hover-overlay);
 }
 
 @media only screen and (max-width: 992px) {

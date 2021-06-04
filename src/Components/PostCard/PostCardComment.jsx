@@ -4,15 +4,14 @@ import { database } from '../../Firebase/firebase';
 import {ReactComponent as CameraIcon} from  "../../Icons/cameraIcon.svg";
 import {ReactComponent as EmojiIcon} from  "../../Icons/happyFace.svg";
 import CommentBox from './CommentBox';
-
-
-
+import EmojiMart from "../../SharedComponents/EmojiMart"
 
 
 function PostCardComment({postId,comments}) {
     
     const [comment,setComment]=React.useState("")
     const [limit, setLimit]=React.useState(2)
+    const [emojiVisibility,setEmojiVisibility]=React.useState(false)
     const {uid} = useSelector(store=>store.auth.user)
     const handleChange=(e)=>{
         const {value} = e.target;
@@ -33,7 +32,10 @@ function PostCardComment({postId,comments}) {
             setComment("")
           }
     }
- 
+    
+    const handleEmoji=(emoji)=>{
+        setComment(comment + emoji.native)
+    }
 
 
     return (
@@ -47,10 +49,13 @@ function PostCardComment({postId,comments}) {
                     <div className="commentInput flexBox">
                         <input autoComplete ="off" autoFocus type="text" name="comment" id="comment" value={comment} onChange={handleChange} onKeyDown={handleSubmit} placeholder="Write a comment..."/>
                         <div className="flexBox">
-                            <EmojiIcon/>
+                            <EmojiIcon onClick={()=>setEmojiVisibility(!emojiVisibility)}/>
                             <CameraIcon/>
                         </div>
                     </div>
+                    {emojiVisibility&&<div className="commentInput1">
+                        <EmojiMart handleEmoji={handleEmoji}/>
+                        </div>}
                     <small>Press Enter to post.</small>
 
                 </div>

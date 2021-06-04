@@ -157,7 +157,7 @@
 }
 .blobImage{
     width: 100%;
-    height: 400px;
+    max-height: 350px;
     margin: auto;
     overflow: hidden;
     border-radius: 8px 8px 0 0;

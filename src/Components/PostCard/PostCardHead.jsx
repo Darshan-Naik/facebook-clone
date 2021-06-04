@@ -2,9 +2,11 @@ import React from 'react';
 import "../../Styles/PostCard/PostCard.css";
 import {ReactComponent as DotsIcon} from  "../../Icons/dots.svg"
 import { useHistory } from 'react-router';
+import EditBox from './EditBox';
 
 function PostCardHead({first_name,last_name,profilePic,time,uid,activity}) {
 
+    const [editSection,setEditSection]=React.useState(false);
     //const localTime = new Date(time?.toDate()).toLocaleString();
     let localTime = new Date(time?.toDate()).toString().split(" ");
     localTime.length=4
@@ -28,8 +30,11 @@ function PostCardHead({first_name,last_name,profilePic,time,uid,activity}) {
                 
                 <div><span>{`${localTime.join(" ")}, ${localTime1}`}</span></div> 
             </div>
-            <div className="postCardHeadBox3 flexBox"><DotsIcon/></div>
-            
+            <div className="postCardHeadBox3 flexBox">
+                <DotsIcon onClick={()=>setEditSection(!editSection)}/>
+                {editSection&&<EditBox/>}
+            </div>
+           
         </div>
     )
 }

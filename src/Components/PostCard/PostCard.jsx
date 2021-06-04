@@ -64,9 +64,10 @@ function PostCard({title,image,id,author,time,video,activity}) {
             <PostCardHead {...userData} time={time} activity={activity}/>
             {title && <div className="postCardTags">{title}</div>}
             {image&&<div className="postCardImage"><img src={image|| process.env.PUBLIC_URL + '/Images/facebook_login_logo.png'} alt="img" /></div>}
-            {video&&<div className="postCardImage"><video width="676" height="500" controls >
-                <source src={video} type="video/mp4"/>
-            </video>
+            {video&&<div className="postCardImage">
+                <video width="100%" height="500" controls >
+                    <source src={video} type="video/mp4"/>
+                </video>
             </div>}
             <div className="postCardLike flexBox">
                 <div className="flexBox"><LikeEmoji/> <p>{likes.length}</p></div>
