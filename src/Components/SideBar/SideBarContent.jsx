@@ -3,7 +3,7 @@ import StatusDot from "../../SharedComponents/StatusDot"
 import "../../Styles/SideBar/SideBar.css";
 
 
-const SideBarContent = ({ src=`${process.env.PUBLIC_URL + '/Images/userProfile_icon.png'}`, label="Anonymous", active }) => {
+const SideBarContent = ({ src=`${process.env.PUBLIC_URL + '/Images/userProfile_icon.png'}`, label="Anonymous", active=true }) => {
     return (
         <div className="sideBarContentContainer flexBox">
             <div className="sideBarContentUserImageBox">

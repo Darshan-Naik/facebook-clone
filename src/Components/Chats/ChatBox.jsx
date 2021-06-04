@@ -7,6 +7,7 @@ import Message from './Message'
 
 function ChatBox({chatID,authors,active,handleActiveChatBox,index}) {
     const [messages,setMessages] = React.useState([])
+    const scroll = React.useRef()
     const uid = useSelector(store=>store.auth.user.uid)
     React.useEffect(()=>{
         database.collection("chatRooms").doc(chatID).collection("messages").orderBy("time","asc")
@@ -21,10 +22,13 @@ function ChatBox({chatID,authors,active,handleActiveChatBox,index}) {
 
     })
     },[])
+    React.useEffect(()=>{
+        scroll.current.scroll(0,200000)
+    },[messages])
     return (
         <div className={`chatBoxContainer flexBox ${active && "activeBox"}`} onClick={()=>handleActiveChatBox(index)}>
             <ChatBoxHeader  authors={authors} chatID={chatID}/>
-            <div className="chatMessages scroll">
+            <div className="chatMessages scroll" ref={scroll}>
                 <div className="fillBox">
 
                 </div>
