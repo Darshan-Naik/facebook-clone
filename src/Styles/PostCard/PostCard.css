@@ -312,18 +312,24 @@
 .editPost>div:hover{
     background-color: var(--hover-overlay);
 }
-.editPost svg{
-    width: 30px;
-    height: 30px;
-    fill:var(--primary-icon);
+.editPost img{
+    width: 20px;
+    height: 20px;
+    filter:invert(var(--filter-invert));
+}
+.editPost1 img{
+    transform: rotate(45deg);
 }
 .editPost p{
     font-size: 15px;
-    color:var(--primary-text)
+    color:var(--primary-text);
+    margin-left: 5px;
 }
 .editBox{
     justify-content: flex-start;
     align-items: flex-start;
+    padding: 5px 10px;
+    margin: 5px 0px;
 }
 
 @media only screen and (max-width: 992px) {
