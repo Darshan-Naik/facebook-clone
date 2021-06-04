@@ -82,13 +82,19 @@ const UserProfilePicture = ({userProfilePic=(process.env.PUBLIC_URL + '/Images/u
                                 </div>
                             </div>
                             <div className="profilePicPreviewContainer">
-                                <div className="profilePicPreviewNoteBox">
-                                    Choose some image
-                                </div>
+                                {
+                                    !profileImagePreview && (
+                                        <div className="profilePicPreviewNoteBox flexBox">
+                                            Choose some image
+                                        </div>
+                                    )
+                                }
                                 {
                                     profileImagePreview && (
                                         <React.Fragment>
-                                            <div className="profilePicPreviewImage" style={{backgroundImage: `url(${profileImagePreview})`}}></div>
+                                            <div className="profilePicPreviewImage">
+                                                <img src={profileImagePreview} alt=""/>
+                                            </div>
                                             <div className="profilePicPreviewCloseIconBox flexBox" onClick={handleRemovePreview}>
                                                 <CloseIcon />
                                             </div>

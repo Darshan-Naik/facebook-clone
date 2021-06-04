@@ -5,7 +5,7 @@ import {ReactComponent as CloseIcon} from  "../../Icons/close.svg"
 import { useDispatch, useSelector } from 'react-redux'
 import { addInActiveMessage, removeActiveMessage } from '../../Redux/App/actions'
 function ChatBoxHeader({chatID,authors,activeStatus}) {
-
+    
     const users = useSelector(store=>store.app.users)
     const uid = useSelector(store=>store.auth.user.uid)
     const [useDetails,setUserDetails] = React.useState({})
