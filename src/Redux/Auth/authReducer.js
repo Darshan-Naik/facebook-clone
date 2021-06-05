@@ -8,6 +8,7 @@ const init = loadData("user") || {
     friendRequests: [],
     friends:[],
     sentRequests: [],
+    notifications : [],
     isError : false,
     isLoading :false,
     errorMessage : ""

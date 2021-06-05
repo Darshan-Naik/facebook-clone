@@ -32,7 +32,7 @@ const handleChat =()=>{
 }
     return (
         <div className="flexBox sideBarContentLink" onClick={handleChat}>
-            <SideBarContent label={`${userDetails?.first_name} ${userDetails?.last_name}`} src={userDetails?.profilePic} />
+            <SideBarContent label={`${userDetails?.first_name} ${userDetails?.last_name}`} src={userDetails?.profilePic} active />
         </div>
     )
 }
