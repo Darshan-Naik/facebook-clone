@@ -2,7 +2,9 @@ import React from 'react'
 import StatusDot from '../../SharedComponents/StatusDot'
 import {ReactComponent as Alert} from  "../../Icons/alert.svg"
 
+
 function ChatBodyHeader({handleUserDetailsVisibility,profilePic,first_name ="User",last_name="Name",time="Active Now"}) {
+    
     return (
         <div className="chatBodyHeaderContainer flexBox">
             <div className="chatBodyHeaderUserDetails flexBox">

@@ -242,7 +242,12 @@
     width: fit-content;
     margin-right:auto ;
     text-align: left;
-    margin-left: 0
+    margin-left: 0;
+    box-shadow: 0 5px 10px 0 var(--shadow-2);
+    
+}
+.chatBoxMessage p{
+    font-size: 13px;
 }
 .sentChat{
     margin-left: auto;

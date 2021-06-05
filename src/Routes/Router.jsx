@@ -8,6 +8,7 @@ import Chats from '../Components/Chats/Chats';
 import SideBar from '../Components/SideBar/SideBar';
 import Messenger from '../Components/Messenger/Messenger';
 import { useSelector } from 'react-redux';
+import Videos from '../Components/Pages/Videos';
 
 function Router() {
     const[refresh,setRefresh] = React.useState(true)
@@ -34,7 +35,7 @@ function Router() {
                 <Route path="/profile/:userId">
                     <UserProfileRouter path="/profile" refresh={refresh} forceRefresh={handleRefresh} />
                 </Route>
-                <Route path="/messenger/:chatId" >
+                <Route path="/messenger/:chatID" >
                    <Messenger handleRefresh={handleRefresh} />
                 </Route>
                 <Route path="/">
@@ -44,8 +45,10 @@ function Router() {
                         <Route path="/" exact>
                             <Home />
                         </Route>
-                        <Route path="/menu" exact>
-                                                  
+                        <Route path="/videos" exact>
+                            <Videos />
+                        </Route>
+                        <Route path="/menu" exact>                            
                             <SideBar />
                         </Route>            
                     </Switch>

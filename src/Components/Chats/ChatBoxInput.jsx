@@ -25,12 +25,18 @@ function ChatBoxInput({chatID,uid}) {
                 isRead : false
             }
             database.collection("chatRooms").doc(chatID).collection("messages").add(payload)
-            .then(()=>{
                 setText("")
-            })
         }
-
     }
+    const handleSendLike=()=>{
+        const payload ={
+            text: "👍",
+            time : new Date(),
+            author : uid,
+            isRead : false
+        }
+        database.collection("chatRooms").doc(chatID).collection("messages").add(payload)
+}
     return (
         <div className={`chatBoxInputContainer flexBox`}>
             <CreateFilledIcon />
@@ -39,7 +45,7 @@ function ChatBoxInput({chatID,uid}) {
                 <input  type="text"  value={text} placeholder="Aa" autoFocus onChange={(e)=>setText(e.target.value)} onKeyDown={handleSend}/>
                 <EmojiIcon />
             </div>
-            <LikeIcon />
+            <LikeIcon  onClick={handleSendLike}/>
         </div>
     )
 }
