@@ -2,7 +2,7 @@ import React from 'react'
 import { useHistory } from 'react-router'
 import NotificationBubble from '../../SharedComponents/NotificationBubble'
 import ToolTip from "../../SharedComponents/ToolTip"
-function IconWrapperCircle({children,label,icon,path}) {
+function IconWrapperCircle({children,label,icon,path,number}) {
     const [hoverState,setHoverState] = React.useState(false) 
     const [clickState,setClickState] = React.useState(false) 
     const history = useHistory()
@@ -16,7 +16,7 @@ function IconWrapperCircle({children,label,icon,path}) {
                     {icon}
                     {clickState && children}
                     {hoverState && <ToolTip label={label} />}
-                    <NotificationBubble number={1}/>
+                    <NotificationBubble number={number}/>
         </div>
     )
 }

@@ -118,7 +118,26 @@
 .navBarUserBox .iconWrapper-2:hover{
     background-color: var(--hover-overlay-2);
 }
-
+.userProfileCard{
+    cursor: pointer;
+    border-radius: 150px;
+    margin: 5px;
+}
+.userProfileCard:hover{
+    background-color: var(--hover-overlay);
+}
+.userProfileCard img{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin:3px 5px;
+}
+.userProfileCard p{
+    font-size: 12px;
+    font-weight: 500;
+    margin:3px 10px;
+    margin-left: 0;
+}
 .accountMenuContainer{
     position: absolute;
     min-width: 200px;
@@ -161,21 +180,14 @@
 
 @media only screen and (max-width: 992px) {
 
-    .navBarSearchBoxInput{
+    .navBarSearchBoxInput,.userProfileCard,.mainSearchIcon{
         display: none;
-        width: 150px;
     }
     .navBarSearchBox{
         padding: 10px;
         cursor: pointer;
     }
-    .navBarMenu{
-        display: flex;
-    }
-    .mainSearchIcon{
-        display: none;
-    }
-    .mainSearchIconResponse{
+    .mainSearchIconResponse,.navBarMenu{
         display: flex;
     }
 }
