@@ -179,7 +179,11 @@
 }
 
 .chatRoomMessageBox{
+    display: flex;
+    flex-direction: column;
     flex: 2;
+    width: 100%;
+    padding: 10px;
 }
 .chatBodyInputContainer{
     width: 100%;
@@ -211,7 +215,40 @@
     width: 80%;
     min-width: 150px;
 }
+.MessengerBoxMessage{
+    padding: 5px 10px;
+    background-color: var(--secondary-background-1);
+    margin: 5px;
+    border-radius: 10px 10px 10px 0;
+    margin-right: auto;
+    width: fit-content;
+    margin-right:auto ;
+    text-align: left;
+    margin-left: 0;
+    box-shadow: 0 5px 10px 0 var(--shadow-2);
+}
+.MessengerSentChat{
+    margin-left: auto;
+    margin-right: 0;
+    background-color: var(--primary-1);
+    border-radius: 10px 10px 0 10px;
+}
+.MessengerSentChat *{
+    color: var(--white);
+}
+.messengerFillBox{
+    flex: 1;
+}
+.newMessengerWelcomeBox{
+    flex: 1;
+    height: 100%;
+    flex-direction: column;
+}
+.newMessengerWelcomeBox svg{
+    width: 100px;
+    height: 100px;
 
+}
 @media only screen and (max-width: 992px) {
     .chatRoomUserDetailsContainer{
         display: none;

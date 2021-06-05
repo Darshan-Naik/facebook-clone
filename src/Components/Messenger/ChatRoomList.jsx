@@ -3,13 +3,12 @@ import { useSelector } from 'react-redux'
 import ChatListHeader from './ChatListHeader'
 import ChatRoomCard from './ChatRoomCard'
 
-function ChatRoomList() {
-    const chats = useSelector(store=>store.app.activeContacts)
+function ChatRoomList({chatRooms}) {
     return (
         <div className="chatRoomListContainer scroll flexBox">
             <ChatListHeader />
             <div className="chatRoomListBox">
-                {chats.map((chat)=><ChatRoomCard  {...chat} />)}
+                {chatRooms.map((chatRoom)=><ChatRoomCard key={chatRoom.chatID} {...chatRoom} />)}
             </div>
         </div>
     )
