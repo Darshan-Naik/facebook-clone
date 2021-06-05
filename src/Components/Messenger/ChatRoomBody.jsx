@@ -42,7 +42,7 @@ function ChatRoomBody({handleUserDetailsVisibility,data}) {
     return chatID !== "new"? (
         <div className="chatRoomBodyContainer flexBox" >
            <ChatBodyHeader handleUserDetailsVisibility={handleUserDetailsVisibility} {...senderData} />
-           <div className="chatRoomMessageBox" ref={scroll}>
+           <div className="chatRoomMessageBox scroll" ref={scroll}>
                <div className="messengerFillBox">
 
                </div>
