@@ -8,6 +8,7 @@
 }
 .scroll{
   overflow: auto;
+  scroll-behavior: smooth;
 }
 .scroll::-webkit-scrollbar{
   width: 0;
