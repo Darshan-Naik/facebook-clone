@@ -5,7 +5,7 @@ import { database } from "./Firebase/firebase";
 import Router from "./Routes/Router";
 import { getPosts } from './Redux/Posts/actions';
 import { getChatRooms, getUsers, updateActiveContacts } from "./Redux/App/actions";
-import { getFriendRequest, getFriends, getSentRequest } from "./Redux/Auth/actions";
+import { getFriendRequest, getFriends, getSentRequest, loginSuccess } from "./Redux/Auth/actions";
 
 function App() {
 
@@ -48,6 +48,11 @@ function App() {
       const newChatRooms = res.docs.map(doc=>({chatID:doc.id,...doc.data()}))
       dispatch(getChatRooms(newChatRooms))
     });
+    const unsubscribe7 =   database.collection("users").doc(uid)
+    .onSnapshot((doc) => {
+       dispatch(loginSuccess(doc.data()));
+        
+    });
 
     return () => {
       unsubscribe1();
@@ -56,6 +61,7 @@ function App() {
       unsubscribe4();
       unsubscribe5();
       unsubscribe6();
+      unsubscribe7();
     }
   }
   
