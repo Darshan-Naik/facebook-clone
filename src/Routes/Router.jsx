@@ -43,10 +43,10 @@ function Router() {
                     <Chats />
                     <Switch>
                         <Route path="/" exact>
-                            <Home />
+                            <Home  handleRefresh={handleRefresh}/>
                         </Route>
                         <Route path="/videos" exact>
-                            <Videos />
+                            <Videos handleRefresh={handleRefresh} />
                         </Route>
                         <Route path="/menu" exact>                            
                             <SideBar />

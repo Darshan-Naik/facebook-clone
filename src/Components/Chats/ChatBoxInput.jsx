@@ -4,15 +4,16 @@ import {ReactComponent as CreateFilledIcon} from  "../../Icons/createFilled.svg"
 import {ReactComponent as LikeIcon} from  "../../Icons/like.svg"
 import {ReactComponent as PhotosIcon} from  "../../Icons/photos.svg"
 import { database } from '../../Firebase/firebase'
-
-function ChatBoxInput({chatID,uid}) {
-    const [iconVisibility,setIconVisibility] = React.useState(true)
+import EmojiMart from "../../SharedComponents/EmojiMart"
+function ChatBoxInput({active,chatID,uid}) {
+    const [inputBoxIcon,setInputBoxIcon] = React.useState(true)
+    const [emojiMartVisibility,setEmojiMartVisibility] = React.useState(false)
     const [text,setText] =React.useState("") 
     React.useEffect(()=>{
         if(text){
-            setIconVisibility(false)
+            setInputBoxIcon(false)
         } else {
-            setIconVisibility(true)
+            setInputBoxIcon(true)
         }
     },[text])
 
@@ -36,16 +37,28 @@ function ChatBoxInput({chatID,uid}) {
             isRead : false
         }
         database.collection("chatRooms").doc(chatID).collection("messages").add(payload)
-}
+        }
+        const handleEmoji=(emoji)=>{
+            setText(text + emoji.native)
+            setEmojiMartVisibility(false)
+        }
     return (
         <div className={`chatBoxInputContainer flexBox`}>
             <CreateFilledIcon />
-             { iconVisibility && <>  <PhotosIcon /> </>}
+             { inputBoxIcon && <>  <PhotosIcon /> </>}
             <div className="chatBoxInput flexBox">
                 <input  type="text"  value={text} placeholder="Aa" autoFocus onChange={(e)=>setText(e.target.value)} onKeyDown={handleSend}/>
-                <EmojiIcon />
+                <div className="flexBox chatBoxEmojiContainer">
+                {emojiMartVisibility && active && <div className="chatBoxEmojiMart">
+                    <EmojiMart handleEmoji={handleEmoji} />
+                </div>}
+                <EmojiIcon onClick={()=>setEmojiMartVisibility(!emojiMartVisibility)} />
+                </div>  
             </div>
-            <LikeIcon  onClick={handleSendLike}/>
+            <div className="flexBox chatBoxInputLikeButton">
+             <LikeIcon  onClick={handleSendLike}/>
+            </div>
+            
         </div>
     )
 }

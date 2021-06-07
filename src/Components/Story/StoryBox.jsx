@@ -14,7 +14,7 @@ function StoryBox({image, author}){
     },[users])
     return (
         <div style={{backgroundImage: `url("${image}")`}} className="mainImgContainer">
-            <img className="imageMainContainer" src={userDetails?.profilePic} alt="" />
+            <img className="imageMainContainer" src={userDetails?.profilePic || process.env.PUBLIC_URL + '/Images/userProfile_icon.png' } alt="" />
             <p className="pMainTag">{userDetails?.first_name+" "+userDetails?.last_name}</p>
         </div>)
 }
