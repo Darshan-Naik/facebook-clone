@@ -8,10 +8,10 @@ import StoryContainer from '../Story/StoryContainer';
 
 import {  useSelector } from 'react-redux';
 
-function Home() {
+function Home({handleRefresh}) {
 
     const posts = useSelector(store=>store.posts.posts)
-
+    React.useEffect(handleRefresh,[])
     return (
         <div className="MainContainer">
             <div className="mainLeftSidebarContainer scroll">

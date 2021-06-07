@@ -1,11 +1,13 @@
 import React from 'react'
+
 import { useDispatch, useSelector } from 'react-redux';
 import { database } from '../../Firebase/firebase';
 import { addActiveMessage } from '../../Redux/App/actions';
 import SideBarContent from './SideBarContent'
+import ActiveContactsSkeleton from './Skeleton/ActiveContactsSkeleton';
 
 function ActiveContacts({friendId}) {
-const [userDetails,setUserDetails] = React.useState({})
+const [userDetails,setUserDetails] = React.useState(null)
 const users = useSelector(store=>store.app.users)
 const uid = useSelector(store=>store.auth.user.uid)
 const chatRooms = useSelector(store=>store.app.chatRooms) 
@@ -16,6 +18,8 @@ React.useEffect(()=>{
 },[users])
 
 const handleChat =()=>{
+    if(userDetails){
+
             if(JSON.stringify(chatRooms).includes(friendId)){
                 const chatRoom = chatRooms.filter((item)=>JSON.stringify(item).includes(friendId))
                 dispatch(addActiveMessage(chatRoom[0]))
@@ -29,12 +33,15 @@ const handleChat =()=>{
                     })
                 })
             }
+        }
 }
-    return (
+    return userDetails? (
         <div className="flexBox sideBarContentLink" onClick={handleChat}>
-            <SideBarContent label={`${userDetails?.first_name} ${userDetails?.last_name}`} src={userDetails?.profilePic} active />
+           <SideBarContent label={`${userDetails?.first_name} ${userDetails?.last_name}`} src={userDetails?.profilePic} active /> 
         </div>
-    )
+    ) : (<div className="flexBox sideBarContentLink"> 
+            <ActiveContactsSkeleton />
+        </div>)
 }
 
 export default ActiveContacts
