@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PostCardFooter from './PostCardFooter';
 import PostCardHead from './PostCardHead';
 import {ReactComponent as LikeEmoji} from  "../../Icons/likeEmoji.svg"
@@ -15,9 +15,30 @@ function PostCard({title,image,id,author,time,video,activity}) {
     const [userData,setUserData]=React.useState({});
 
     const {uid} = useSelector(store=>store.auth.user)
+
     const showComment =()=>{
         setCommentSection(!commentSection)
     }
+
+    const handleEditPost=(editTitle) => {
+        const payload={
+            title:editTitle
+        }
+        database.collection("posts").doc(id).update(payload);
+      
+    }
+
+    const handleSetProfilePic=()=>{
+        database.collection("users").doc(uid).update({profilePic:image});
+        
+
+    }
+
+    const handleDeletePost=()=>{
+        //database.collection("posts").doc(id).delete();
+        
+    }
+
     const handleLike=()=>{
         const payload={
             like:"like",
@@ -70,7 +91,7 @@ function PostCard({title,image,id,author,time,video,activity}) {
 
     return (
         <div className="postCardContainer">
-            <PostCardHead {...userData} time={time} author={author} activity={activity}/>
+            <PostCardHead {...userData} postEditFunction={{handleEditPost,handleDeletePost,handleSetProfilePic}} time={time} author={author} image={image} activity={activity}/>
             {title && <div className="postCardTags">{title}</div>}
             {image&&<div className="postCardImage"><img src={image|| process.env.PUBLIC_URL + '/Images/facebook_login_logo.png'} alt="img" /></div>}
             {video&&<div className="postCardImage">
