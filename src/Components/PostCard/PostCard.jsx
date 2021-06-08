@@ -25,7 +25,16 @@ function PostCard({title,image,id,author,time,video,activity}) {
             author:uid
 
         }
+        const notificationPayload={
+            author:uid, 
+            time : new Date(),
+            action:"liked your post.",
+            isRead:false,
+            tag:"like"
+        }
+
         database.collection("posts").doc(id).collection("likes").add(payload);
+        database.collection("users").doc(userData.uid).collection("notifications").add(notificationPayload);
     }
 
     const handleDeleteLike=()=>{
@@ -74,7 +83,7 @@ function PostCard({title,image,id,author,time,video,activity}) {
                 <div className="flexBox"><p onClick={showComment}>{comments.length} Comments</p> </div>
             </div>
             <PostCardFooter handleDeleteLike={handleDeleteLike} handleLike={handleLike} like={JSON.stringify(likes).includes(uid)} showComment={showComment}/>
-           {commentSection && <PostCardComment postId={id} comments={comments}/>}
+           {commentSection && <PostCardComment postId={id} comments={comments} userData={userData}/>}
         </div>
     )
 }

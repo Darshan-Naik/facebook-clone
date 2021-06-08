@@ -7,13 +7,13 @@ import CommentBox from './CommentBox';
 import EmojiMart from "../../SharedComponents/EmojiMart"
 
 
-function PostCardComment({postId,comments}) {
+function PostCardComment({postId,comments,userData}) {
     
     const [comment,setComment]=React.useState("")
     const [limit, setLimit]=React.useState(2)
     const [emojiVisibility,setEmojiVisibility]=React.useState(false)
 
-    const {uid} = useSelector(store=>store.auth.user)
+    const {uid,profilePic} = useSelector(store=>store.auth.user)
 
     const handleChange=(e)=>{
         const {value} = e.target;
@@ -29,8 +29,16 @@ function PostCardComment({postId,comments}) {
                 author:uid
 
             }
+            const notificationPayload={
+                author:uid, 
+                time : new Date(),
+                action:"commented on your post.",
+                comment,
+                isRead:false,
+                tag:"comment"
+            }
             database.collection("posts").doc(postId).collection("comments").add(payload);
-            
+            database.collection("users").doc(userData.uid).collection("notifications").add(notificationPayload);
             setComment("")
           }
     }
@@ -46,7 +54,7 @@ function PostCardComment({postId,comments}) {
             {comments?.filter((el,i)=>(comments.length-limit)<=i).map((el)=><CommentBox key={el.commentId}{...el} />)}
             {limit===comments.length&&comments.length>2&&<p onClick={()=>setLimit(2)}>View less comments</p>}
             <div className="postCardInputBox flexBox">
-                <img src={ process.env.PUBLIC_URL + '/Images/userProfile_icon.png'} alt="mypic" />
+                <img src={profilePic || process.env.PUBLIC_URL + '/Images/userProfile_icon.png'} alt="mypic" />
                 <div className="addComment flexBox">
                     <div className="commentInput flexBox">
                         <input autoComplete ="off" autoFocus type="text" name="comment" id="comment" value={comment} onChange={handleChange} onKeyDown={handleSubmit} placeholder="Write a comment..."/>

@@ -4,18 +4,20 @@ import {ReactComponent as DotsIcon} from  "../../Icons/dots.svg"
 import { useHistory } from 'react-router';
 import EditBox from './EditBox';
 import { useSelector } from 'react-redux';
+import timeConverter from "../../Utils/timeConverter";
 
 function PostCardHead({first_name,last_name,profilePic,time,author,activity}) {
 
     const [editSection,setEditSection]=React.useState(false);
     const {uid} = useSelector(store=>store.auth.user);
-    //const localTime = new Date(time?.toDate()).toLocaleString();
-    let localTime = new Date(time?.toDate()).toString().split(" ");
-    localTime.length=4
-    // const date = new Date(time?.toDate()).toLocaleDateString().split("/").join("-");
+
+    //let localTime = new Date(time?.toDate()).toString().split(" ");
+    //localTime.length=4
+    //{`${localTime.join(" ")}, ${localTime1}`}
+
     const localTime1 = new Date(time?.toDate()).toLocaleTimeString();
  
-    
+    const localTime = timeConverter(time)
     const history = useHistory();
    
 
@@ -30,7 +32,7 @@ function PostCardHead({first_name,last_name,profilePic,time,author,activity}) {
                     {activity&&<div><span>{activity}</span></div>} 
                 </div>
                 
-                <div><span>{`${localTime.join(" ")}, ${localTime1}`}</span></div> 
+                <div><span>{`${localTime}`}</span></div> 
             </div>
             <div className="postCardHeadBox3 flexBox">
                 <DotsIcon onClick={()=>setEditSection(!editSection)}/>
