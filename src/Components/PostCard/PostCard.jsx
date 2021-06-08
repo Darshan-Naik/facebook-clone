@@ -5,6 +5,7 @@ import {ReactComponent as LikeEmoji} from  "../../Icons/likeEmoji.svg"
 import PostCardComment from './PostCardComment';
 import { database } from '../../Firebase/firebase';
 import { useSelector } from 'react-redux';
+import PostModal from '../PostModal/PostModal';
 
 
 
@@ -60,6 +61,7 @@ function PostCard({title,image,id,author,time,video,activity}) {
 
 
     return (
+        <>
         <div className="postCardContainer">
             <PostCardHead {...userData} time={time} activity={activity}/>
             {title && <div className="postCardTags">{title}</div>}
@@ -75,6 +77,8 @@ function PostCard({title,image,id,author,time,video,activity}) {
             <PostCardFooter handleDeleteLike={handleDeleteLike} handleLike={handleLike} like={JSON.stringify(likes).includes(uid)} showComment={showComment}/>
            {commentSection && <PostCardComment postId={id} comments={comments}/>}
         </div>
+        <PostModal uid={uid} image={image} video={video} time={time} userData={userData} activity={activity} likes={likes} comments={comments} title={title} handleDeleteLike={handleDeleteLike} handleLike={handleLike}/>
+        </>
     )
 }
 
