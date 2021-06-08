@@ -22,69 +22,70 @@ function UserProfilePostsPageIntro({ education, lives, from, relationship, joine
 
     return (
         <div className="postsPageIntroMainContainer">
-                <div className="postsPageUserDetailsContainer">
-                    <h1 className="postsPageUserDetailsNamePlate">Intro</h1>
-                    {
-                        !userProfileDetails.education && !userProfileDetails.lives && !userProfileDetails.from && !userProfileDetails.relationship && userProfileDetails.uid === uid && (
-                            <p className="postsPageEditUserDetailsTag">Help people know about you...</p>
-                        )
-                    }
-                    <div className="postsPageUserDetailsInfoBox flexBox">
-                        {
-                            userProfileDetails.education && (
-                                <div  className="postsPageUserDetalisCoverBox">
-                                    <img className="postsPageUserDetailsInfoIcon" src={process.env.PUBLIC_URL + '/Images/studied_at_icon.png'} alt="studied"/>
-                                    <span>{userProfileDetails.education}</span>
-                                </div>
-                            )
-                        }
-                        {
-                            userProfileDetails.lives && (      
-                                <div  className="postsPageUserDetalisCoverBox">
-                                    <img className="postsPageUserDetailsInfoIcon" src={process.env.PUBLIC_URL + '/Images/lives_in_home_icon.png'} alt="home"/>
-                                    <span>{userProfileDetails.lives}</span>
-                                </div>
-                            )
-                        }
-                        {
-                            userProfileDetails.from && (
-                                <div  className="postsPageUserDetalisCoverBox">
-                                    <img className="postsPageUserDetailsInfoIcon" src={process.env.PUBLIC_URL + '/Images/location_icon.png'} alt="location"/>
-                                    <span>{userProfileDetails.from}</span>
-                                </div>
-                            )
-                        }
-                        {
-                            userProfileDetails.relationship && (
-                                <div className="postsPageUserDetialsCoverBox">
-                                    <img className="postsPageUserDetailsInfoIcon" src={process.env.PUBLIC_URL + '/Images/relationship_status_icon.png'} alt="relationship"/>
-                                    <span>{userProfileDetails.relationship}</span>
-                                </div>
-                            )
-                        }
-                    </div>
-                    <React.Fragment>
-                        {
-                            userProfileDetails.uid === uid && (
-                                <React.Fragment>
-                                    {/* <div className="postsPageUserDetailsContainer"> */}
-                                        {/* <h1 className="postsPageUserDetailsNamePlate">Intro</h1> */}
-                                        <div className="postsPageEditUserDetialsBox">
-                                            <button onClick={handleEditUserDetailsModal}>Edit Details</button>
+                {
+                    !userProfileDetails.education && !userProfileDetails.lives && !userProfileDetails.from && !userProfileDetails.relationship && userProfileDetails.uid !== uid ? null : (
+                        <div className="postsPageUserDetailsContainer">
+                            <h1 className="postsPageUserDetailsNamePlate">Intro</h1>
+                            {
+                                !userProfileDetails.education && !userProfileDetails.lives && !userProfileDetails.from && !userProfileDetails.relationship && userProfileDetails.uid === uid && (
+                                    <p className="postsPageEditUserDetailsTag">Help people know about you...</p>
+                                )
+                            }
+                            <div className="postsPageUserDetailsInfoBox flexBox">
+                                {
+                                    userProfileDetails.education && (
+                                        <div  className="postsPageUserDetalisCoverBox">
+                                            <img className="postsPageUserDetailsInfoIcon" src={process.env.PUBLIC_URL + '/Images/studied_at_icon.png'} alt="studied"/>
+                                            <span>{userProfileDetails.education}</span>
                                         </div>
-                                    {/* </div> */}
-                                    {
-                                        editUserDetailsModalState && (
-                                            <React.Fragment>
-                                                <EditProfileDataModal handleEditUserDetailsModal={handleEditUserDetailsModal} />
-                                            </React.Fragment>
-                                        )
-                                    }
-                                </React.Fragment>
-                            )
-                        }
-                    </React.Fragment>
-                </div>
+                                    )
+                                }
+                                {
+                                    userProfileDetails.lives && (      
+                                        <div  className="postsPageUserDetalisCoverBox">
+                                            <img className="postsPageUserDetailsInfoIcon" src={process.env.PUBLIC_URL + '/Images/lives_in_home_icon.png'} alt="home"/>
+                                            <span>{userProfileDetails.lives}</span>
+                                        </div>
+                                    )
+                                }
+                                {
+                                    userProfileDetails.from && (
+                                        <div  className="postsPageUserDetalisCoverBox">
+                                            <img className="postsPageUserDetailsInfoIcon" src={process.env.PUBLIC_URL + '/Images/location_icon.png'} alt="location"/>
+                                            <span>{userProfileDetails.from}</span>
+                                        </div>
+                                    )
+                                }
+                                {
+                                    userProfileDetails.relationship && (
+                                        <div className="postsPageUserDetialsCoverBox">
+                                            <img className="postsPageUserDetailsInfoIcon" src={process.env.PUBLIC_URL + '/Images/relationship_status_icon.png'} alt="relationship"/>
+                                            <span>{userProfileDetails.relationship}</span>
+                                        </div>
+                                    )
+                                }
+                            </div>
+                            <React.Fragment>
+                                {
+                                    userProfileDetails.uid === uid && (
+                                        <React.Fragment>
+                                                <div className="postsPageEditUserDetialsBox">
+                                                    <button onClick={handleEditUserDetailsModal}>Edit Details</button>
+                                                </div>
+                                            {
+                                                editUserDetailsModalState && (
+                                                    <React.Fragment>
+                                                        <EditProfileDataModal handleEditUserDetailsModal={handleEditUserDetailsModal} />
+                                                    </React.Fragment>
+                                                )
+                                            }
+                                        </React.Fragment>
+                                    )
+                                }
+                            </React.Fragment>
+                        </div>
+                    )  
+                }
             {
                 userFriends.length > 0 && (
                     <div className="postsPageUserDetailsContainer">
