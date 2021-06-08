@@ -1,5 +1,4 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
 import ChatListHeader from './ChatListHeader'
 import ChatRoomCard from './ChatRoomCard'
 

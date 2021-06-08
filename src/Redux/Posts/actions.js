@@ -1,4 +1,4 @@
-import { GET_POSTS } from "./actionTypes"
+import { CLEAR_POSTS, GET_POSTS } from "./actionTypes"
 
 
 const getPosts=(payload)=>{
@@ -7,5 +7,10 @@ const getPosts=(payload)=>{
         payload
     }
 }
+const clearPosts=()=>{
+    return {
+        type : CLEAR_POSTS,
+    }
+}
 
-export {getPosts}
+export {getPosts,clearPosts}

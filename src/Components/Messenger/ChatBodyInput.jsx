@@ -10,7 +10,7 @@ function ChatBodyInput({chatID,uid}) {
     const [text,setText] =React.useState("") 
     const [emojiMartVisibility,setEmojiMartVisibility] = React.useState(false)
     const handleSend=(e)=>{
-        if(e.keyCode == 13 && text){
+        if(e.keyCode === 13 && text){
             const payload ={
                 text,
                 time : new Date(),

@@ -6,7 +6,7 @@ import NewPostModal from './NewPostModal'
 
 function NewPost() {
     const [postModalVisibility,setPostModalVisibility] = React.useState(false)
-    const {first_name,profilePic,uid,last_name} = useSelector(store=>store.auth.user)
+    const {first_name,profilePic} = useSelector(store=>store.auth.user)
     return (
         <>
         <div className="newPostContainer">

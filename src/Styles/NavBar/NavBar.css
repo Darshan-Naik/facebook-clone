@@ -138,9 +138,10 @@
     margin:3px 10px;
     margin-left: 0;
 }
-.accountMenuContainer{
+.accountMenuContainer,.notificationsContainer{
     position: absolute;
-    min-width: 200px;
+    min-width: 300px;
+    width: 15vw;
     top: 50px;
     right: 0;
     background-color: var(--primary-background);
@@ -148,7 +149,11 @@
     border-radius: 8px;
     box-shadow: 0 2px 4px var(--shadow-1),0 8px 18px var(--shadow-2);
 }
-.accountMenuContainer::after{
+
+.accountMenuContainer hr{
+    border-color: var(--shadow-1);
+}
+.accountMenuContainer::after,.notificationsContainer::after{
     content: "";
     width: 15px;
     height: 15px;
@@ -159,25 +164,110 @@
     transform: rotate(45deg);
 }
 .darkModeBox{
-    justify-content: space-between;
+    justify-content: flex-start;
+    padding:5px 10px;
+    border-radius: 8px;
+    margin: 5px;
+}
+.darkModeBox:hover,.logOutBox:hover{
+    background-color: var(--hover-overlay);
+}
+.darkModeBox .darkModeIcon{
+    fill: var(--secondary-icon);
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: var(--shadow-1);
+    margin-right: 10px;
 }
 
 .themeButton{
-    width: 50px;
-    height: 28px;
+    width: 40px;
+    height: 20px;
     border-radius: 500px;
     background-color: var(--secondary-background-1);
-
+    margin:0 15px;
     border: 1px solid teal;
 }
 .themeButtonBubble{
     background-color: var(--supplementary-3);
-    height: 24px;
-    width: 24px;
+    height: 18px;
+    width: 18px;
     border-radius: 50%;
     cursor: pointer;
 }
-
+.AccountMenuUserProfileCard,.logOutBox{
+    justify-content: flex-start;
+    padding: 5px 10px;
+    border-radius: 8px;
+    margin: 5px;
+}
+.AccountMenuUserProfileCard:hover{
+    background-color: var(--hover-overlay);
+}
+.AccountMenuUserProfileCard img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right:  15px;
+}
+.AccountMenuUserProfileCard p{
+    font-size: 14px;
+    text-align: left;
+}
+.AccountMenuUserProfileCard small{
+    font-size: 12px;
+    text-align: left;
+    color: var(--secondary-text);
+}
+.logoutIconWrap{
+    padding: 5px;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    background-color: var(--shadow-1);
+    margin-right: 10px;
+}
+.logOutBox svg{
+    fill: var(--secondary-icon);
+    width: 30px;
+    height: 30px;    
+}
+.notificationsHeader{
+    justify-content: space-between;
+}
+.notificationsHeader h1{
+    font-size: 20px;
+    font-weight: 600;
+}
+.notificationsHeader svg{
+    fill: var(--secondary-icon);
+}
+.notificationAuthorImage{
+    position: relative;
+}
+.notificationAuthorImage img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+.tagIconWrap{
+    position: absolute;
+    bottom: 0px;
+    right: -8px;
+    width: 20px;
+    height: 20px;
+    background-color: var(--secondary-background-1);
+    padding: 2px;
+    border-radius: 50%;
+}
+.tagIconWrap svg{
+    width: 12px;
+    height: 12px;
+}
+.notificationAuthorImage .likeIcon{
+    fill: var(--primary-1);
+}
 @media only screen and (max-width: 992px) {
 
     .navBarSearchBoxInput,.userProfileCard,.mainSearchIcon{

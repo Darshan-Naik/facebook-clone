@@ -1,4 +1,4 @@
-import {  GET_FRIENDS, GET_FRIEND_REQUEST, GET_NOTIFICATIONS, GET_SENT_REQUEST, LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, SIGNUP_FAILURE, SIGNUP_REQUEST, SIGNUP_SUCCESS } from "./actionTypes"
+import {  GET_FRIENDS, GET_FRIEND_REQUEST, GET_NOTIFICATIONS, GET_SENT_REQUEST, LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, LOG_OUT_SUCCESS, SIGNUP_FAILURE, SIGNUP_REQUEST, SIGNUP_SUCCESS } from "./actionTypes"
 
 
 const loginRequest = (payload)=>{
@@ -62,4 +62,10 @@ const getNotifications = (payload) => {
     }
 }
 
-export { loginFailure,loginSuccess,loginRequest,signUpFailure,signupRequest,signupSuccess, getFriendRequest, getFriends, getSentRequest,getNotifications }
+const logoutSuccess = ()=>{
+    return {
+        type : LOG_OUT_SUCCESS
+    }
+}
+
+export { loginFailure,loginSuccess,loginRequest,signUpFailure,signupRequest,signupSuccess, getFriendRequest, getFriends, getSentRequest,getNotifications,logoutSuccess}

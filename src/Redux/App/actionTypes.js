@@ -11,3 +11,5 @@ export const GET_USERS = "GET_USERS"
 export const UPDATE_ACTIVE_CONTACTS = "UPDATE_ACTIVE_CONTACTS";
 
 export const GET_CHAT_ROOMS = "GET_CHAT_ROOMS"
+
+export const RESET_APP = "RESET_APP"

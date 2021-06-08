@@ -2,8 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import SideBarContent from "./SideBarContent";
 import {ReactComponent as SearchIcon} from  "../../Icons/search.svg"
 import "../../Styles/SideBar/SideBar.css";
-import { useDispatch, useSelector } from 'react-redux';
-import { addActiveMessage } from '../../Redux/App/actions';
+import { useSelector } from 'react-redux';
 import { ReactComponent as ContactBarDots } from "../../Icons/dots.svg";
 import { ReactComponent as VideoCallIcon } from "../../Icons/videoCallIcon.svg";
 import filterFriends from "../../Utils/filterFriends.js"
@@ -19,17 +18,7 @@ const ActiveContactSideBar = () => {
     const delayTimeRef = useRef();
 
     const history = useHistory();
-
-    const dispatch = useDispatch();
-    const handleOpenChatBox = (id,userData) => {
-        const payload = {
-            chatId: id,
-            userDetails: userData
-        };
-        
-        dispatch( addActiveMessage( payload ) );
-    };
-    
+   
     useEffect(() => {
 
         delayTimeRef.current = setTimeout(() => {
@@ -39,7 +28,7 @@ const ActiveContactSideBar = () => {
         return () => {
             clearTimeout(delayTimeRef.current)
         }
-    }, [ users, friends ])
+    }, [ users, friends ,user])
 
     return (
         <div className="sideBarContainer">

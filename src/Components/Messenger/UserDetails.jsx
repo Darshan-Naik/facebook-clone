@@ -22,7 +22,7 @@ function UserDetails({time="Active Now"}) {
      })
     })
 
-    },[chatID])
+    },[chatID,uid])
     return (
         <div className="chatRoomUserDetailsContainer flexBox scroll">
             <div className="chatRoomUserDetailsImage">
