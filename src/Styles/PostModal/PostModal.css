@@ -263,5 +263,30 @@
   height: 100%;
 }
 .postDetailsModalCommentBox {
-  flex: 1;
+  min-height: 64vh;
+  max-height: 67vh;
+  width: 100%;
+  overflow-y: scroll;
+}
+.postDetailsModalClose {
+  height: 0;
+  position: absolute;
+  top: 25px;
+  left: 30px;
+  background-color: transparent;
+  border: transparent;
+}
+.postDetailsModalClose:hover {
+  transform: scale(1.01);
+}
+.postDetailsModalClose > svg {
+  stroke: var(--white);
+}
+.postDetailsModalIcon {
+  height: 0;
+  position: absolute;
+  top: 15px;
+  left: 80px;
+  background-color: transparent;
+  border: transparent;
 }

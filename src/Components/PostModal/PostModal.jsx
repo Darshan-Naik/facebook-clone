@@ -4,6 +4,8 @@ import PictureCardFooter from "./PictureCardFooter";
 import PictureCardHeader from "./PictureCardHeader";
 import {ReactComponent as LikeEmoji} from  "../../Icons/likeEmoji.svg";
 import '../../Styles/PostModal/PostModal.css';
+import {ReactComponent as CloseIcon} from  "../../Icons/close.svg";
+import {ReactComponent as MainLogo} from  "../../Icons/main-logo.svg";
 
 function PostModal({uid, image, video, time, userData, activity, likes, comments, title, handleLike, handleDeleteLike}){
 
@@ -13,6 +15,8 @@ function PostModal({uid, image, video, time, userData, activity, likes, comments
             <div>
             {/* <PictureCardHeader {...userData} time={time} activity={activity}/>
             {title && <div className="postCardTags">{title}</div>} */}
+            <button className="postDetailsModalClose"><CloseIcon /></button>
+            <button className="postDetailsModalIcon"><MainLogo /></button>
             {image&&<div className="postDetailsCardImage"><img src={image|| process.env.PUBLIC_URL + '/Images/facebook_login_logo.png'} alt="img" /></div>}
             {video&&<div className="postDetailsCardImage"><video width="1076" height="700" controls >
                 <source src={video} type="video/mp4"/>
