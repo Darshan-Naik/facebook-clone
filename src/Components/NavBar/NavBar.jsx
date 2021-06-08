@@ -16,13 +16,15 @@ import IconWrapper from './IconWrapper'
 import IconWrapperCircle from './IconWrapperCircle'
 import { useHistory } from 'react-router'
 import AccountMenu from './AccountMenu'
+import { useSelector } from 'react-redux'
 
 function NavBar({refresh,handleRefresh}) {
 
     const [searchBoxVisibility,setSearchBoxVisibility] = React.useState(false)
     const path = React.useRef(true)
     const history = useHistory()
-
+    const {profilePic,first_name,uid} = useSelector(store=>store.auth.user)
+    const notifications = useSelector(store=>store.auth.notifications)
     const handleMenu=()=>{
         if(path.current){
             path.current = !path.current;
@@ -70,13 +72,18 @@ function NavBar({refresh,handleRefresh}) {
                 </IconWrapper>
             </div>
             <div className="navBarUserBox flexBox">
+                <div className="userProfileCard flexBox" onClick={()=>{history.push(`/profile/${uid}`)}}>
+                    <img src={profilePic || process.env.PUBLIC_URL + '/Images/userProfile_icon.png'} alt="Profile" />
+                    <p>{first_name}</p>
+
+                </div>
                <IconWrapperCircle label="Create" icon={ <CreateIcon /> }>
                     
                 </IconWrapperCircle >
-                <IconWrapperCircle path="/messenger/new" label="Messenger" icon={ <MessageIcon /> }>
+                <IconWrapperCircle path="/messenger/new" label="Messenger" icon={ <MessageIcon /> } number={0}>
                     
                 </IconWrapperCircle>
-                <IconWrapperCircle label="Notifications" icon={ <NotificationIcon /> }>
+                <IconWrapperCircle label="Notifications" icon={ <NotificationIcon /> } number={notifications?.length}>
                     
                 </IconWrapperCircle>
                 <IconWrapperCircle label="Account" icon={ <DownArrowIcon/> }>

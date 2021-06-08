@@ -15,6 +15,7 @@
   background-size: cover;
   background-repeat: no-repeat;
   cursor: pointer;
+  box-shadow:0 1px 5px var( --shadow-2);
 }
 .mainImgContainer:hover {
   transform: scale(1.03);
@@ -27,6 +28,7 @@
   right: 25%;
   border-radius: 50%;
   border: 3.5px solid var(--accent);
+  box-shadow:0 1px 5px var( --shadow-2);
 }
 .imageMainContainer:hover {
   transform: scale(1.01);

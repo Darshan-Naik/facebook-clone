@@ -102,10 +102,21 @@
 .chatBoxInputContainer .likeIcon{
     width: 30px;
     height:30px;
-    padding: 5px;
+    border-radius: 0;
+
 }
-.chatBoxInputContainer svg:hover{
+.chatBoxInputLikeButton{
+    width: 32px;
+    height:32px;
+    padding: 1px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.chatBoxInputContainer svg:hover,.chatBoxInputLikeButton:hover{
     background-color: var(--secondary-background-3);
+}
+.chatBoxInputContainer .likeIcon:hover{
+    background-color: transparent;
 }
 .chatBoxInput{
     flex:1;
@@ -242,7 +253,12 @@
     width: fit-content;
     margin-right:auto ;
     text-align: left;
-    margin-left: 0
+    margin-left: 0;
+    box-shadow: 0 5px 10px 0 var(--shadow-2);
+    
+}
+.chatBoxMessage p{
+    font-size: 13px;
 }
 .sentChat{
     margin-left: auto;
@@ -255,4 +271,28 @@
 }
 .fillBox{
   flex:1;
+}
+.chatBoxEmojiContainer{
+    position: relative;
+}
+.chatBoxEmojiMart{
+    position: absolute;
+    width: 250px;
+    bottom: 30px;
+    right: 0;
+}
+.chatBoxEmojiMart::after{
+    content: "";
+    width: 12px;
+    height: 12px;
+    background-color:  var(--primary-background);
+    position: absolute;
+    bottom: 0px;
+    right: 10px;
+    transform: rotate(45deg);
+    border-bottom: 1px solid var(--shadow-1);
+    border-right: 1px solid var(--shadow-1);
+}
+.chatBoxEmojiMart .emoji-mart-bar,.chatBoxEmojiMart .emoji-mart-search{
+    display: none;
 }
