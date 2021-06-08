@@ -16,10 +16,10 @@
     width: 35px;
     height: 35px;
     border-radius: 50%;
-    box-shadow: 0px 0px 0px 2px var(--white), 0px 0px 0px 4px var(--primary-1);
     margin: 0 10px;
     margin-top: 10px;
     margin-left: 0;
+    box-shadow: 0 0 5px var(--shadow-1);
     cursor: pointer;
     
 }
@@ -61,6 +61,7 @@
     height: 36px;
     border-radius: 50%;
     cursor: pointer;
+    position: relative;
 }
 .postCardHeadBox3:hover {
     background: var(--hover-overlay);
@@ -171,10 +172,11 @@
   
 }
 .postCardInputBox img{
-    width: 35px;
-    height: 35px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     margin: 0 5px;
+    box-shadow: 0 0 5px var(--shadow-1);
     cursor: pointer;
 }
 .addComment{
@@ -247,6 +249,15 @@
     background-color: var(--secondary-background-1);
     
 }
+.commentInput1{
+    flex:1;
+    border-radius: 25px;
+    height: 36px;
+    padding: 0 10px;
+    width: 100%;
+    
+    
+}
 .commentInput input{
     border: 0px;
     background: transparent;
@@ -262,6 +273,64 @@
     width: 20px;
     height: 20px;
     padding: 2px;
+}
+
+.editPostContainer{
+    position: absolute;
+    min-width: 200px;
+    top: 30px;
+    right: 0px;
+    background-color: var(--primary-background);
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid var(--shadow-1);
+    box-shadow: 0 2px 4px var(--shadow-1),0 8px 18px var(--shadow-2);
+
+}
+.editPostContainer::after{
+    content: "";
+    width: 11px;
+    height: 11px;
+    position: absolute;
+    top: -7px;
+    right: 10px;
+    background-color: var(--primary-background);
+    transform: rotate(45deg);
+    border-top: 1px solid var(--shadow-1);
+    border-left: 1px solid var(--shadow-1);
+}
+.editPost{
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+}
+.editPost >div{
+    width: 100%;
+    border-radius: 4px;
+
+}
+.editPost>div:hover{
+    background-color: var(--hover-overlay);
+}
+.editPost img{
+    width: 20px;
+    height: 20px;
+    filter:invert(var(--filter-invert));
+}
+.editPost1 img{
+    transform: rotate(45deg);
+}
+.editPost p{
+    font-size: 15px;
+    color:var(--primary-text);
+    margin-left: 5px;
+}
+.editBox{
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 5px 10px;
+    margin: 5px 0px;
 }
 
 @media only screen and (max-width: 992px) {
