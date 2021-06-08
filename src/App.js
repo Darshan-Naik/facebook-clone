@@ -5,11 +5,11 @@ import { database } from "./Firebase/firebase";
 import Router from "./Routes/Router";
 import { getPosts } from './Redux/Posts/actions';
 import { getChatRooms, getUsers, updateActiveContacts } from "./Redux/App/actions";
-import { getFriendRequest, getFriends, getSentRequest } from "./Redux/Auth/actions";
+import { getFriendRequest, getFriends, getNotifications, getSentRequest, loginSuccess } from "./Redux/Auth/actions";
 
 function App() {
 
-  const uid = useSelector( state => state.auth.user.uid );
+  const uid = useSelector( state => state.auth.user?.uid );
   const isAuth = useSelector( state => state.auth.isAuth );
   const friends = useSelector(store=>store.auth.friends)
  
@@ -18,7 +18,7 @@ function App() {
   const dark = useSelector(store=>store.theme.dark)
 
   React.useEffect(()=>{
-    if(uid){
+    if(uid && isAuth){
     const unsubscribe1 = database.collection("posts").orderBy("time","desc").onSnapshot(res=>{
         const newPosts = res.docs.map(doc=>({id:doc.id,...doc.data()}))
         dispatch(getPosts(newPosts))
@@ -48,6 +48,15 @@ function App() {
       const newChatRooms = res.docs.map(doc=>({chatID:doc.id,...doc.data()}))
       dispatch(getChatRooms(newChatRooms))
     });
+    const unsubscribe7 =   database.collection("users").doc(uid)
+    .onSnapshot((doc) => {
+       dispatch(loginSuccess(doc.data()));
+        
+    });
+    const unsubscribe8 = database.collection("users").doc(uid).collection("notifications").onSnapshot(res=>{
+      const newNotifications = res.docs.map(doc=>({notificationID:doc.id,...doc.data()}))
+     dispatch(getNotifications(newNotifications))
+    });
 
     return () => {
       unsubscribe1();
@@ -56,6 +65,8 @@ function App() {
       unsubscribe4();
       unsubscribe5();
       unsubscribe6();
+      unsubscribe7();
+      unsubscribe8();
     }
   }
   
