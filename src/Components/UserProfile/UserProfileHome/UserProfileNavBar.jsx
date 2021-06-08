@@ -4,7 +4,7 @@ import { ReactComponent as ThreeDots } from "../../../Icons/dots.svg";
 import { ReactComponent as DownArrowIcon } from "../../../Icons/downArrow.svg";
 import UserProfileNavLinkWrapper from "./UserProfileNavLinkWrapper";
 import EditProfileDataModal from "../UserProfilePostsPage/EditProfileDataModal";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useSelector } from 'react-redux';
 import { database } from '../../../Firebase/firebase';
 
@@ -12,12 +12,16 @@ const UserProfileNavBar = ({currentUser, refresh, alternativePath, userProfileDe
     const [userProfileNavBarState, setUserProfileNavBarState] = useState(true);
     const [userProfileMoreOptionsState, setUserProfileMoreOptionsState] = useState(false);
     const [editUserDetailsModalState, setEditUserDetailsModalState] = useState(false);
+    const [messengerIsLoading, setMessengerIsLoading] = useState(false);
 
     const userProfileNavBarRef = useRef();
     
     const { uid } = useSelector(state => state.auth.user);
     const { friendRequests, sentRequests, friends } = useSelector(state => state.auth);
+    const chatRooms = useSelector( state => state.app.chatRooms );
 
+    const history = useHistory();
+    
     window.addEventListener('scroll', function() {
         const position = userProfileNavBarRef.current?.getBoundingClientRect()
         if( position?.top >= 47 ) {
@@ -33,6 +37,23 @@ const UserProfileNavBar = ({currentUser, refresh, alternativePath, userProfileDe
             left: 0,
             behavior: 'smooth'
         });
+    }
+
+    const redirectToMessenger = () => {
+        setMessengerIsLoading(true);
+        const chatRoom = chatRooms.filter( el => el.authors.includes(userProfileDetails.uid) );
+        if( chatRoom[0]?.chatID ) {
+            history.push(`/messenger/${chatRoom[0].chatID}`)
+        } else {
+            const payload = {
+                authors: [uid, userProfileDetails.uid]
+            }
+            database.collection('chatRooms').add(payload)
+            .then((res) => {
+                setMessengerIsLoading(false);
+                history.push(`/messenger/${res.id}`)
+            });
+        }
     }
 
     const handleEditUserDetailsModal = () => {
@@ -161,9 +182,11 @@ const UserProfileNavBar = ({currentUser, refresh, alternativePath, userProfileDe
                                             <span>Cancle Request</span>
                                         </div>
                                     ) : JSON.stringify(friends).includes(currentUser) ? (
-                                        <div className="editProfileContainer userProfileNavButton flexBox">
+                                        <div className="editProfileContainer userProfileNavButton flexBox" onClick={redirectToMessenger}>
                                             <MessengerIcon />
-                                            <span>Message</span>
+                                            {
+                                                !messengerIsLoading ? <span>Message</span> : <span>loading</span>
+                                            }
                                         </div>
                                     ) : (
                                         <div className="flexBox userProfileNavButton addToStoryContainer" onClick={handleAddFriend}>
