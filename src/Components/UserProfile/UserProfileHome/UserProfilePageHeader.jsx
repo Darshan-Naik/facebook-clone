@@ -7,16 +7,16 @@ import { ReactComponent as CloseIcon } from "../../../Icons/close.svg";
 import { ReactComponent as EmojiIocn } from "../../../Icons/emoji.svg";
 import "../../../Styles/UserProfile/UserProfile.css";
 import { database, storage } from '../../../Firebase/firebase';
-import emoji from 'emoji-mart/dist-es/components/emoji/emoji';
 
 const UserProfilePageHeader = ({ coverPhoto, currentUser, forceRefresh, userProfileDetails}) => {
-
+    console.log(coverPhoto);
     const [addBioVisibility, setAddBioVisibility] = useState(false);
     const [textFieldQuery, setTextFieldQuery] = useState("");
     const [showCoverPicModal, setShowCoverPicModal] = useState(false);
     const [coverPicImagePreview, setCoverPicImagePreview] = useState();
     const [picUploadState, setPicUploadState] = useState(0);
     const [showEmojiMart, setShowEmojiMart] = useState(false);
+    const [errorImagePreview, setErrorImagePreview] = useState(false);
 
     const coverPicImageRef = useRef();
     
@@ -29,49 +29,62 @@ const UserProfilePageHeader = ({ coverPhoto, currentUser, forceRefresh, userProf
     };
 
     const handleChangeCoverPicPreview = () => {
-        if( coverPicImageRef.current.files[0] ){
+        
+        if( !coverPicImageRef.current?.files[0]?.type.includes(`image`) ) {
+            
+            setErrorImagePreview(true);
+
+        } else if ( coverPicImageRef.current.files[0] ){
+            
             const imageUrl = URL.createObjectURL( coverPicImageRef.current.files[0] )
             setCoverPicImagePreview(imageUrl)
+            setErrorImagePreview(false);
+        
         }
+
     }
 
     const handleRemvoeCoverPicPreview = () => {
         setCoverPicImagePreview(null);
-        coverPicImageRef.current.value = "";
     }
 
     const handleUpdateCoverPic = () => {
-        const uploadTask =  storage.ref(`coverPicImages/${coverPicImageRef.current.files[0].name}`).put(coverPicImageRef.current.files[0])
         setPicUploadState(1);
 
-        uploadTask.on("state_changed",
-            snapshot => {
-                setPicUploadState(Math.floor((snapshot.bytesTransferred/snapshot.totalBytes)*100)+1)
-            },
-            error => {
-
-            },
-            () => {
-                storage.ref("coverPicImages")
-                .child(coverPicImageRef.current.files[0].name)
-                .getDownloadURL()
-                .then(url=>{
-                    const payload ={
-                        image : url,
-                        imagePath : coverPicImageRef.current.files[0].name,
-                        activity: `updated his cover photo.` ,
-                        author : uid,
-                        time : new Date()
-                    }
-                    database.collection("users").doc(uid).update({coverPic: url, coverPicPath: coverPicImageRef.current.files[0].name })
-                    database.collection("posts").add(payload)
-                    .then(()=>{
-                        coverPicImageRef.current.value = "";
-                        setShowCoverPicModal(false);
-                        setPicUploadState(0);
-                    })
+        if( coverPicImageRef.current?.files[0]?.name ) {
+            if( coverPicImageRef.current?.files[0]?.type.includes(`image`) ) {
+                const uploadTask =  storage.ref(`coverPicImages/${coverPicImageRef.current.files[0].name}`).put(coverPicImageRef.current.files[0])
+        
+                uploadTask.on("state_changed",
+                    snapshot => {
+                        setPicUploadState(Math.floor((snapshot.bytesTransferred/snapshot.totalBytes)*100)+1)
+                    },
+                    error => {
+        
+                    },
+                    () => {
+                        storage.ref("coverPicImages")
+                        .child(coverPicImageRef.current.files[0].name)
+                        .getDownloadURL()
+                        .then(url=>{
+                            const payload ={
+                                image : url,
+                                imagePath : coverPicImageRef.current.files[0].name,
+                                activity: `updated his cover photo.` ,
+                                author : uid,
+                                time : new Date()
+                            }
+                            database.collection("users").doc(uid).update({coverPic: url, coverPicPath: coverPicImageRef.current.files[0].name })
+                            database.collection("posts").add(payload)
+                            .then(()=>{
+                                coverPicImageRef.current.value = "";
+                                setShowCoverPicModal(false);
+                                setPicUploadState(0);
+                            })
+                        })
                 })
-        })
+            }
+        }
     };
 
     const handleUpdateUserBio = () => {
@@ -92,9 +105,9 @@ const UserProfilePageHeader = ({ coverPhoto, currentUser, forceRefresh, userProf
     
     return (
         <div className="userProfileContainer">
-            <div className="userProfileCoverPageBox" style={{backgroundImage: `url(${coverPhoto})`}}>
+            <div className="userProfileCoverPageBox" style={{backgroundImage: `url("${coverPhoto}")`}}>
                 <div className="userProfileCoverPageOverlay">
-                    <div className="userProfileCoverPhotoBox" style={coverPhoto ? {backgroundImage: `url(${coverPhoto})`} : ( dark ? {backgroundColor: `#18191a`} : {backgroundColor: `#f0f2f5`} )}>
+                    <div className="userProfileCoverPhotoBox" style={true ? {backgroundImage: `url("${coverPhoto}")`} : ( dark ? {backgroundColor: `#18191a`} : {backgroundColor: `#f0f2f5`} )}>
                         <UserProfilePicture currentUser={currentUser} userProfileDetails={userProfileDetails} />
                         {
                             currentUser === uid && (
@@ -113,9 +126,9 @@ const UserProfilePageHeader = ({ coverPhoto, currentUser, forceRefresh, userProf
                                                         picUploadState ? (
                                                             <div className="newPostProgressContainer flexBox">
                                                                 <div className="progressBox">
-                                                                    <h2>updateing</h2> <br />
+                                                                    <h2>Hakuna Matata!</h2> 
                                                                     <br />
-
+                                                                    <br />
                                                                     <DisappearedLoading size="small"/>
                                                                 </div>
                                                                 <div className="progressBarBox">
@@ -133,9 +146,21 @@ const UserProfilePageHeader = ({ coverPhoto, currentUser, forceRefresh, userProf
                                                     <div className="profilePicPreviewContainer">
                                                         {
                                                             !coverPicImagePreview && (
-                                                                <div className="profilePicPreviewNoteBox flexBox">
-                                                                    Choose some image
-                                                                </div>
+                                                                <React.Fragment>
+                                                                    {
+                                                                        errorImagePreview && (
+                                                                            <div className="errorCoverPicMessage">
+                                                                                <p>Choose only image...</p>
+                                                                            </div>
+                                                                        )
+                                                                    }
+                                                                    <div className="profilePicPreviewNoteBox flexBox">   
+                                                                        <div className="chooseProfilePicInputBox">
+                                                                            <label htmlFor="coverPicFileInput">Cover Pic</label>
+                                                                            <input ref={coverPicImageRef} id="coverPicFileInput" type="file" onChange={handleChangeCoverPicPreview} style={{visibility: `hidden`}}/>
+                                                                        </div>
+                                                                    </div>
+                                                                </React.Fragment>
                                                             )
                                                         }
                                                         {
@@ -152,11 +177,8 @@ const UserProfilePageHeader = ({ coverPhoto, currentUser, forceRefresh, userProf
                                                         }
                                                     </div>
                                                     <div className="chooseProfilePicInputContainer flexBox">
-                                                        <div className="chooseProfilePicInputBox">
-                                                            <input ref={coverPicImageRef} type="file" onChange={handleChangeCoverPicPreview}/>
-                                                        </div>
                                                         <div className="userProfilePicEditOptionsBox">
-                                                            <button onClick={handleUpdateCoverPic}>Update</button>
+                                                            <button disabled={!coverPicImagePreview} onClick={handleUpdateCoverPic}>Update</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -188,8 +210,8 @@ const UserProfilePageHeader = ({ coverPhoto, currentUser, forceRefresh, userProf
                                 <textarea className="addBioTextField scroll" value={textFieldQuery} onChange={(e) => setTextFieldQuery(e.target.value)} placeholder="Describe who you are"></textarea>
                                 <div className="addBioTextFieldCharCount flexBox">
                                     {`${101 - textFieldQuery.length} characters remaining`}
-                                    <div className="addBioTextFieldEmojiMart flexBox" onClick={() => setShowEmojiMart(!showEmojiMart)}>
-                                        <EmojiIocn />
+                                    <div className="addBioTextFieldEmojiMart flexBox">
+                                        <EmojiIocn onClick={() => setShowEmojiMart(!showEmojiMart)} />
                                         {
                                             showEmojiMart && (
                                                 <div className="addBioEmojiContainer">
