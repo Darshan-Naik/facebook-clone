@@ -3,6 +3,7 @@ import { ReactComponent as MessengerIcon } from "../../../Icons/message.svg";
 import { ReactComponent as ThreeDots } from "../../../Icons/dots.svg";
 import { ReactComponent as DownArrowIcon } from "../../../Icons/downArrow.svg";
 import UserProfileNavLinkWrapper from "./UserProfileNavLinkWrapper";
+import EditProfileDataModal from "../UserProfilePostsPage/EditProfileDataModal";
 import { Link } from "react-router-dom";
 import { useSelector } from 'react-redux';
 import { database } from '../../../Firebase/firebase';
@@ -10,6 +11,7 @@ import { database } from '../../../Firebase/firebase';
 const UserProfileNavBar = ({currentUser, refresh, alternativePath, userProfileDetails, userFriends}) => {
     const [userProfileNavBarState, setUserProfileNavBarState] = useState(true);
     const [userProfileMoreOptionsState, setUserProfileMoreOptionsState] = useState(false);
+    const [editUserDetailsModalState, setEditUserDetailsModalState] = useState(false);
 
     const userProfileNavBarRef = useRef();
     
@@ -33,11 +35,24 @@ const UserProfileNavBar = ({currentUser, refresh, alternativePath, userProfileDe
         });
     }
 
+    const handleEditUserDetailsModal = () => {
+        setEditUserDetailsModalState(!editUserDetailsModalState)
+    }
+
     const handleAddFriend = () => {
         let time = new Date();
 
         database.collection('users').doc(currentUser).collection('friendRequests').doc(`${currentUser}${uid}`).set({ senderId: uid, time });
         database.collection('users').doc(uid).collection('sentRequests').doc(`${currentUser}${uid}`).set({ reciverId: currentUser, time });
+        
+        const payload = {
+            author: uid,
+            isRead: false,
+            tag: `friend`,
+            action: `sent you a friend request.`,
+            time: new Date()
+        }
+        database.collection('users').doc(currentUser).collection('notifications').add(payload);
     }
     
     const handleCancleRequest = () => {
@@ -52,6 +67,15 @@ const UserProfileNavBar = ({currentUser, refresh, alternativePath, userProfileDe
         database.collection('users').doc(uid).collection('friends').add({ friendId: currentUser, time });
         database.collection('users').doc(currentUser).collection('sentRequests').doc(`${uid}${currentUser}`).delete();
         database.collection('users').doc(uid).collection('friendRequests').doc(`${uid}${currentUser}`).delete();
+
+        const payload = {
+            author: uid,
+            isRead: false,
+            tag: `friend`,
+            action: `accepted your friend request.`,
+            time: new Date()
+        }
+        database.collection('users').doc(currentUser).collection('notifications').add(payload);
     }
 
     const handleDeleteFriendRequest = () => {
@@ -71,9 +95,6 @@ const UserProfileNavBar = ({currentUser, refresh, alternativePath, userProfileDe
                             <UserProfileNavLinkWrapper path={`${alternativePath}/${userProfileDetails.uid}`} >
                                 Posts
                             </UserProfileNavLinkWrapper>
-                            <UserProfileNavLinkWrapper path={`${alternativePath}/${userProfileDetails.uid}/about`} extraClass="hideUserProfileMenuItem" >
-                                About
-                            </UserProfileNavLinkWrapper>
                             <UserProfileNavLinkWrapper path={`${alternativePath}/${userProfileDetails.uid}/friends`} label="Posts" extraClass="hideUserProfileMenuItem" >
                                 <span className="userProfileNavMenuName">Friends</span>
                                 {
@@ -83,17 +104,6 @@ const UserProfileNavBar = ({currentUser, refresh, alternativePath, userProfileDe
                             <UserProfileNavLinkWrapper path={`${alternativePath}/${userProfileDetails.uid}/photos`} extraClass="hideUserProfileMenuItem" >
                                 Photos
                             </UserProfileNavLinkWrapper>
-                            {
-                                currentUser === uid ? ( 
-                                    <UserProfileNavLinkWrapper path={`${alternativePath}/${userProfileDetails.uid}/archive`} extraClass="hideUserProfileMenuItem" >
-                                        Story Archive
-                                    </UserProfileNavLinkWrapper>
-                                ) : (
-                                    <UserProfileNavLinkWrapper path={`${alternativePath}/${userProfileDetails.uid}/videos`} extraClass="hideUserProfileMenuItem" >
-                                        Videos
-                                    </UserProfileNavLinkWrapper> 
-                                ) 
-                            }
                             <div className="userProfileMoreOptions">
                                 <div className="userProfileNavMenuNameBox" onClick={() => setUserProfileMoreOptionsState(!userProfileMoreOptionsState)}>
                                     <span className="userProfileNavMenuName">More</span>
@@ -102,23 +112,11 @@ const UserProfileNavBar = ({currentUser, refresh, alternativePath, userProfileDe
                                 {
                                     userProfileMoreOptionsState ? (
                                         <div className="userProfileMoreOptionsItemContainer flexBox" onClick={() => setUserProfileMoreOptionsState(false)}>
-                                            <Link to={`${alternativePath}/${userProfileDetails.uid}/about`}>About</Link>
                                             <Link to={`${alternativePath}/${userProfileDetails.uid}/friends`}>
                                                 <span className="userProfileNavMenuName MoreOptionsItemBox">Friends</span>
-                                                <span className="userProfileNavMenuFriendsCount">1000</span>
+                                                <span className="userProfileNavMenuFriendsCount">{userFriends.length}</span>
                                             </Link>
                                             <Link to={`${alternativePath}/${userProfileDetails.uid}/photos`}>Photos</Link>
-                                            {
-                                                currentUser === uid ? ( 
-                                                    <Link to={`${alternativePath}/${userProfileDetails.uid}/archive`} >
-                                                        Story Archive
-                                                    </Link>
-                                                ) : (
-                                                    <Link to={`${alternativePath}/${userProfileDetails.uid}/videos`} >
-                                                        Videos
-                                                    </Link> 
-                                                ) 
-                                            }
                                         </div>
                                     ) : null
                                 }
@@ -141,13 +139,16 @@ const UserProfileNavBar = ({currentUser, refresh, alternativePath, userProfileDe
                                     <img className="userProfileNavButtonIcons userProfileNavButtonIconsFilter" src={process.env.PUBLIC_URL + '/Images/plus_icon.png'} alt="plus"/>
                                     <span>Add to Story</span>
                                 </div>
-                                <div className="editProfileContainer userProfileNavButton flexBox">
+                                <div className="editProfileContainer userProfileNavButton flexBox" onClick={handleEditUserDetailsModal}>
                                     <img className="userProfileNavButtonIcons" src={process.env.PUBLIC_URL + '/Images/edit_icon.png'} alt="edit"/>
                                     <span>Edit Profile</span>
                                 </div>
                                 <div className="userProfileNavDotsBox">
                                     <ThreeDots />
                                 </div>
+                                {
+                                    editUserDetailsModalState && <EditProfileDataModal handleEditUserDetailsModal={handleEditUserDetailsModal} />
+                                }
                             </React.Fragment>
                         ) : (
                             <React.Fragment>

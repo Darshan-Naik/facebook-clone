@@ -3,7 +3,6 @@ import { Switch, Route, useHistory, useParams } from "react-router-dom";
 import UserProfilePostsPage from "../Components/UserProfile/UserProfilePostsPage/UserProfilePostsPage";
 import UserProfilePageHeader from "../Components/UserProfile/UserProfileHome/UserProfilePageHeader";
 import UserProfileNavBar from "../Components/UserProfile/UserProfileHome/UserProfileNavBar";
-import UserProfileAboutPage from "../Components/UserProfile/UserProfileAbout/UserProfileAboutPage";
 import UserProfileFriendsPage from "../Components/UserProfile/UserProfileFriends/UserProfileFriendsPage";
 import {database} from "../Firebase/firebase";
 
@@ -48,11 +47,8 @@ function UserProfileRouter({ path, forceRefresh, refresh }) {
                             <Route path={`${path}/${userData.uid}`} exact>
                                 <UserProfilePostsPage userProfileDetails={userData} userFriends={userFriends} alternativePath={path} forceRefresh={forceRefresh} />
                             </Route>
-                            <Route  path={`${path}/${userData.uid}/about`}>
-                                <UserProfileAboutPage forceRefresh={forceRefresh} />
-                            </Route>
                             <Route  path={`${path}/${userData.uid}/friends`}>
-                                <UserProfileFriendsPage forceRefresh={forceRefresh} />
+                                <UserProfileFriendsPage userFriends={userFriends} forceRefresh={forceRefresh} />
                             </Route>
                         </Switch>
                     </React.Fragment>
