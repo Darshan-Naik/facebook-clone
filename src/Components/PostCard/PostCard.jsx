@@ -25,7 +25,16 @@ function PostCard({title,image,id,author,time,video,activity}) {
             author:uid
 
         }
+        const notificationPayload={
+            author:uid, 
+            time : new Date(),
+            action:"liked your post.",
+            isRead:false,
+            tag:"like"
+        }
+
         database.collection("posts").doc(id).collection("likes").add(payload);
+        database.collection("users").doc(userData.uid).collection("notifications").add(notificationPayload);
     }
 
     const handleDeleteLike=()=>{
@@ -61,19 +70,20 @@ function PostCard({title,image,id,author,time,video,activity}) {
 
     return (
         <div className="postCardContainer">
-            <PostCardHead {...userData} time={time} activity={activity}/>
+            <PostCardHead {...userData} time={time} author={author} activity={activity}/>
             {title && <div className="postCardTags">{title}</div>}
             {image&&<div className="postCardImage"><img src={image|| process.env.PUBLIC_URL + '/Images/facebook_login_logo.png'} alt="img" /></div>}
-            {video&&<div className="postCardImage"><video width="676" height="500" controls >
-                <source src={video} type="video/mp4"/>
-            </video>
+            {video&&<div className="postCardImage">
+                <video width="100%" height="500" controls >
+                    <source src={video} type="video/mp4"/>
+                </video>
             </div>}
             <div className="postCardLike flexBox">
                 <div className="flexBox"><LikeEmoji/> <p>{likes.length}</p></div>
                 <div className="flexBox"><p onClick={showComment}>{comments.length} Comments</p> </div>
             </div>
             <PostCardFooter handleDeleteLike={handleDeleteLike} handleLike={handleLike} like={JSON.stringify(likes).includes(uid)} showComment={showComment}/>
-           {commentSection && <PostCardComment postId={id} comments={comments}/>}
+           {commentSection && <PostCardComment postId={id} comments={comments} userData={userData}/>}
         </div>
     )
 }
