@@ -17,9 +17,11 @@ import IconWrapperCircle from './IconWrapperCircle'
 import { useHistory } from 'react-router'
 import AccountMenu from './AccountMenu'
 import { useSelector } from 'react-redux'
+import NewPostModal from '../NewPost/NewPostModal'
+import Notifications from './Notifications'
 
 function NavBar({refresh,handleRefresh}) {
-
+    const [postModalVisibility,setPostModalVisibility] = React.useState(false)
     const [searchBoxVisibility,setSearchBoxVisibility] = React.useState(false)
     const path = React.useRef(true)
     const history = useHistory()
@@ -77,20 +79,21 @@ function NavBar({refresh,handleRefresh}) {
                     <p>{first_name}</p>
 
                 </div>
-               <IconWrapperCircle label="Create" icon={ <CreateIcon /> }>
+               <IconWrapperCircle label="Create" icon={ <CreateIcon  onClick={()=>setPostModalVisibility(true)}/> } >
                     
                 </IconWrapperCircle >
                 <IconWrapperCircle path="/messenger/new" label="Messenger" icon={ <MessageIcon /> } number={0}>
                     
                 </IconWrapperCircle>
-                <IconWrapperCircle label="Notifications" icon={ <NotificationIcon /> } number={notifications?.length}>
-                    
+                <IconWrapperCircle label="Notifications" icon={ <NotificationIcon /> } number={notifications.filter(item=>!item.isRead)?.length}>
+                    <Notifications notifications={notifications}/>
                 </IconWrapperCircle>
                 <IconWrapperCircle label="Account" icon={ <DownArrowIcon/> }>
                     <AccountMenu />
                 </IconWrapperCircle>
+               
             </div>
-            
+        { postModalVisibility &&   <NewPostModal setPostModalVisibility={setPostModalVisibility} />}
         </div>
     )
 }

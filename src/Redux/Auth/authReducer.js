@@ -1,5 +1,5 @@
 import { loadData, saveData } from "../../Utils/localStorage"
-import {  GET_FRIENDS, GET_FRIEND_REQUEST, GET_NOTIFICATIONS, GET_SENT_REQUEST, LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, SIGNUP_FAILURE, SIGNUP_REQUEST, SIGNUP_SUCCESS } from "./actionTypes"
+import {  GET_FRIENDS, GET_FRIEND_REQUEST, GET_NOTIFICATIONS, GET_SENT_REQUEST, LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, LOG_OUT_SUCCESS, SIGNUP_FAILURE, SIGNUP_REQUEST, SIGNUP_SUCCESS } from "./actionTypes"
 
 
 const init = loadData("user") || {
@@ -99,7 +99,21 @@ const init = loadData("user") || {
                 saveData("user", updatedState);
                 return updatedState;
             }
-
+            case LOG_OUT_SUCCESS : {
+                const initState = {
+                    isAuth : false,
+                    user : {},
+                    friendRequests: [],
+                    friends:[],
+                    sentRequests: [],
+                    notifications : [],
+                    isError : false,
+                    isLoading :false,
+                    errorMessage : ""
+                }
+                saveData("user", initState);
+                return initState
+            }
             default : return state
     }
 }

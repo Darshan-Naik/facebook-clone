@@ -9,13 +9,23 @@ import { getFriendRequest, getFriends, getNotifications, getSentRequest, loginSu
 
 function App() {
 
-  const uid = useSelector( state => state.auth.user?.uid );
+  const {uid,activeStatus} = useSelector( state => state.auth.user );
   const isAuth = useSelector( state => state.auth.isAuth );
   const friends = useSelector(store=>store.auth.friends)
  
   const dispatch = useDispatch()
   const root = document.querySelector(':root');
   const dark = useSelector(store=>store.theme.dark)
+
+  const handleActiveStatus = (e)=>{
+    e.stopPropagation(); 
+    if((new Date() - activeStatus)>1559367580871){
+      // console.log(new Date() - activeStatus)
+   // database.collection("users").doc(uid).update({activeStatus : new Date()})
+    }  
+  }
+
+  window.addEventListener("click",handleActiveStatus)
 
   React.useEffect(()=>{
     if(uid && isAuth){
@@ -30,8 +40,8 @@ function App() {
     });
 
     const unsubscribe3 = database.collection("users").doc(uid).collection('friendRequests').onSnapshot(res=>{
-      const newFriendRequet = res.docs.map(doc=>doc.data())
-      dispatch( getFriendRequest( newFriendRequet ) );
+      const newFriendRequest = res.docs.map(doc=>doc.data())
+      dispatch( getFriendRequest( newFriendRequest ) );
     });
 
     const unsubscribe4 = database.collection("users").doc(uid).collection('friends').onSnapshot(res=>{
@@ -70,11 +80,14 @@ function App() {
     }
   }
   
-  },[isAuth])
+  },[isAuth,uid,dispatch])
 
   React.useEffect(()=>{
+    if(isAuth){
       dispatch(updateActiveContacts(friends))
-  },[friends])
+    }
+      
+  },[friends,dispatch,isAuth])
 
   React.useEffect(()=>{
     if(dark){
@@ -83,7 +96,7 @@ function App() {
       root.classList.remove("dark")
     }
   },[dark,root])
-  
+
  
   
   return (

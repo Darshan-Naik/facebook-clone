@@ -50,7 +50,8 @@
 }
 .emoji-mart{
   width: 100%!important;
-  /* border-radius: 0!important; */
+  border: none!important;
+  height : 100%!important;
   background-color: var(--primary-background)!important;
   border-color:var(--shadow-1)!important ;
 }
@@ -59,6 +60,7 @@
   border-color:var(--shadow-1)!important ;
   fill: var(--primary-icon);
   stroke: var(--secondary-icon);
+ 
 }
 .emoji-mart-category-label span{
   background-color: var(--primary-background)!important;

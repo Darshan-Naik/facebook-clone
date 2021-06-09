@@ -13,7 +13,7 @@ function ChatRoomCard({chatID,authors,message ="Text",time="while ago"}) {
         const senderID = authors.filter(id=>id !==uid)
         const user = users.filter(item=>item.uid === senderID[0])
         setUserDetails(user[0])
-    },[])
+    },[uid,users,authors])
     return (
         <div className="chatRoomCardBox flexBox" onClick={()=>history.push(`/messenger/${chatID}`)}>
             <div className="chatRoomUserImage">

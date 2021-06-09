@@ -25,7 +25,7 @@ function LoginPage(){
     const [isCreateClick, setIsCreateClick] = useState(false);
     const [signUpForm,setSignUpForm] = React.useState(initFormSignup)
     const [logInForm,setLogInForm] = React.useState(initFormLogin)
-    const {first_name , last_name,email, password, gender} = signUpForm;
+    const {first_name , last_name,email, password} = signUpForm;
     const [dob, setDob] = useState("1, June, 1950");
     const [day, setDay] = useState("1");
     const [mon, setMon] = useState("June");
@@ -44,11 +44,11 @@ function LoginPage(){
     }
 
     const handleChangeDob = (e) => {
-        if(e.target.name == "date_of_birth:day"){
+        if(e.target.name === "date_of_birth:day"){
             setDay(e.target.value);
-        } else if (e.target.name == "date_of_birth:mon"){
+        } else if (e.target.name === "date_of_birth:mon"){
             setMon(e.target.value);
-        } else if (e.target.name == "date_of_birth:year"){
+        } else if (e.target.name === "date_of_birth:year"){
             setYear(e.target.value);
         }
         
@@ -57,7 +57,6 @@ function LoginPage(){
 
     useEffect(()=>{
         setDob(day+", "+mon+", "+year);
-        console.log(dob)
     },[day, mon, year])
 
     const dispatch =useDispatch()
