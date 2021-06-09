@@ -126,7 +126,7 @@ const UserProfilePageHeader = ({ coverPhoto, currentUser, forceRefresh, userProf
                                                         picUploadState ? (
                                                             <div className="newPostProgressContainer flexBox">
                                                                 <div className="progressBox">
-                                                                    <h2>upoading...</h2> 
+                                                                    <h2>uploading...</h2> 
                                                                     <br />
                                                                     <br />
                                                                     <DisappearedLoading size="small"/>

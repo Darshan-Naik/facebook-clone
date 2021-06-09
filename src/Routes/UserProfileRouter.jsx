@@ -5,7 +5,8 @@ import UserProfilePageHeader from "../Components/UserProfile/UserProfileHome/Use
 import UserProfileNavBar from "../Components/UserProfile/UserProfileHome/UserProfileNavBar";
 import UserProfileFriendsPage from "../Components/UserProfile/UserProfileFriends/UserProfileFriendsPage";
 import {database} from "../Firebase/firebase";
-import { SemipolarLoading } from "react-loadingg";
+import UserProfilePageHeaderSkeleton from "../Components/UserProfile/UserProfileHome/UserProfileHomeSkeleton/UserProfilePageHeaderSkeleton";
+import UserProfileNavBarSkeleton from "../Components/UserProfile/UserProfileHome/UserProfileHomeSkeleton/UserProfileNavBarSkeleton";
 
 function UserProfileRouter({ path, forceRefresh, refresh }) {
 
@@ -40,7 +41,14 @@ function UserProfileRouter({ path, forceRefresh, refresh }) {
     return userId ? (
         <React.Fragment>
             {
-                isLoading ? <SemipolarLoading color="#1877f2" /> : (
+                isLoading ? (
+                    <React.Fragment>
+                        <div style={{height:"93.66vh"}}>
+                            <UserProfilePageHeaderSkeleton />
+                            <UserProfileNavBarSkeleton />
+                        </div>
+                    </React.Fragment>
+                ) : (
                     <React.Fragment>
                         <UserProfilePageHeader currentUser={userData.uid} userProfileDetails={userData} userFriends={userFriends} forceRefresh={forceRefresh} coverPhoto={userData.coverPic} />
                         <UserProfileNavBar currentUser={userData.uid} alternativePath={path} userFriends={userFriends} userProfileDetails={userData} refresh={refresh} />
