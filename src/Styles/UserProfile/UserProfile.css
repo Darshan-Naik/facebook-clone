@@ -726,6 +726,13 @@
     color: var(--white);
 }
 
+.messageLoading {
+    width: 119px;
+    height: 37px;
+    padding: 8px 11px;
+    position: relative;
+}
+
 /* UserProfile Media Queries */
 
 @media only screen and ( max-width: 840px ) {
@@ -767,4 +774,9 @@
     .addToStoryContainer span, .editProfileContainer span {
         display: none;
     }
+    
+    .messageLoading {
+        width: 47px;
+    }
+
 }
