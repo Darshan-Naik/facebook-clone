@@ -5,7 +5,7 @@ import EditPostModal from './EditPostModal';
 function EditBox({first_name,image,last_name,profilePic,title,handleEditPost,handleDeletePost,handleSetProfilePic}) {
     const [editTitle,setEditTitle]=React.useState(title)
     const [editModal,setEditModal]=React.useState(false);
-
+    
    
     return (
         <div className="editPostContainer">
@@ -23,7 +23,7 @@ function EditBox({first_name,image,last_name,profilePic,title,handleEditPost,han
                     <p>Delete Post</p>
                 </div>
             </div>
-           {editModal && <EditPostModal setEditTitle={setEditTitle} editTitle={editTitle} handleEditPost={handleEditPost} setEditModal={setEditModal} first_name={first_name} last_name={last_name} profilePic={profilePic} title={title}/>}
+           {editModal && <EditPostModal editModal={editModal} setEditModal={setEditModal} setEditTitle={setEditTitle} editTitle={editTitle} handleEditPost={handleEditPost} setEditModal={setEditModal} first_name={first_name} last_name={last_name} profilePic={profilePic} title={title}/>}
             
         </div>
     )

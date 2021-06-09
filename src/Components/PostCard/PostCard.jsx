@@ -91,7 +91,7 @@ function PostCard({title,image,id,author,time,video,activity}) {
 
     return (
         <div className="postCardContainer">
-            <PostCardHead {...userData} postEditFunction={{handleEditPost,handleDeletePost,handleSetProfilePic}} time={time} author={author} image={image} activity={activity}/>
+            <PostCardHead {...userData} postEditFunction={{handleEditPost,handleDeletePost,handleSetProfilePic}} time={time} author={author} image={image}title={title} activity={activity}/>
             {title && <div className="postCardTags">{title}</div>}
             {image&&<div className="postCardImage"><img src={image|| process.env.PUBLIC_URL + '/Images/facebook_login_logo.png'} alt="img" /></div>}
             {video&&<div className="postCardImage">
