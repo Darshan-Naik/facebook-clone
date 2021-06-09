@@ -15,7 +15,7 @@ function ActiveChatBubble({chatID,authors}) {
         const senderID = authors.filter(id=>id !==uid)
         const user = users.filter(item=>item.uid === senderID[0])
         setUserDetails(user[0])
-    })
+    },[authors,users,uid])
 
     const [closeButtonVisibility,setCloseButtonVisibility] = React.useState(false)
     const dispatch = useDispatch()

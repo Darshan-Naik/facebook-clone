@@ -1,4 +1,4 @@
-import { ADD_ACTIVE_MESSAGE, ADD_IN_ACTIVE_MESSAGE, ADD_IN_ACTIVE_MESSAGE_TO_ACTIVE_MESSAGE, CLOSE_ALL_MESSAGE, GET_CHAT_ROOMS, GET_USERS, MINIMIZE_ALL_MESSAGE, REMOVE_ACTIVE_MESSAGE, REMOVE_IN_ACTIVE_MESSAGE, UPDATE_ACTIVE_CONTACTS } from "./actionTypes"
+import { ADD_ACTIVE_MESSAGE, ADD_IN_ACTIVE_MESSAGE, ADD_IN_ACTIVE_MESSAGE_TO_ACTIVE_MESSAGE, CLOSE_ALL_MESSAGE, GET_CHAT_ROOMS, GET_USERS, MINIMIZE_ALL_MESSAGE, REMOVE_ACTIVE_MESSAGE, REMOVE_IN_ACTIVE_MESSAGE, RESET_APP, UPDATE_ACTIVE_CONTACTS } from "./actionTypes"
 
 const  addActiveMessage =(payload)=>{
     return {
@@ -58,4 +58,10 @@ const getChatRooms = (payload) => {
         payload
     }
 }
-export {getUsers,closeAllMessage,minimizeAllMessage, addActiveMessage,removeActiveMessage,addInActiveMessage,removeInActiveMessage,addInActiveMessageToActiveMessage,updateActiveContacts,getChatRooms}
+
+const resetApp = ()=>{
+    return {
+         type : RESET_APP
+    }
+}
+export {resetApp,getUsers,closeAllMessage,minimizeAllMessage, addActiveMessage,removeActiveMessage,addInActiveMessage,removeInActiveMessage,addInActiveMessageToActiveMessage,updateActiveContacts,getChatRooms}

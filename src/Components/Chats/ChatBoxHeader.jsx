@@ -14,7 +14,7 @@ function ChatBoxHeader({chatID,authors,activeStatus}) {
         const senderID = authors.filter(id=>id !==uid)
         const user = users.filter(item=>item.uid === senderID[0])
         setUserDetails(user[0])
-    })
+    },[users,uid,authors])
 
     const dispatch = useDispatch()
     const handleClose =()=>{

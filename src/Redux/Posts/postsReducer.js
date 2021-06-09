@@ -1,4 +1,4 @@
-import { GET_POSTS } from "./actionTypes"
+import { CLEAR_POSTS, GET_POSTS } from "./actionTypes"
 
 const init = {
     posts :[]
@@ -11,6 +11,11 @@ export const postsReducer= (state=init,{type,payload})=>{
                 ...state,
                 posts : payload
                 
+            }
+        }
+        case CLEAR_POSTS : {
+            return {
+                posts :[]
             }
         }
         default : return state

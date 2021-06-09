@@ -33,12 +33,12 @@ function ChatRoomBody({handleUserDetailsVisibility,data}) {
                 }))
             })
         }
-    },[chatID])
+    },[chatID,uid])
     React.useEffect(()=>{
         if(chatID !=="new") {
         scroll.current.scroll(0,200000)
         }
-    },[messages])
+    },[messages,chatID])
     return chatID !== "new"? (
         <div className="chatRoomBodyContainer flexBox" >
            <ChatBodyHeader handleUserDetailsVisibility={handleUserDetailsVisibility} {...senderData} />

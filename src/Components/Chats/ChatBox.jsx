@@ -21,7 +21,7 @@ function ChatBox({chatID,authors,active,handleActiveChatBox,index}) {
         }))
 
     })
-    },[])
+    },[chatID,uid])
     React.useEffect(()=>{
         scroll.current.scroll(0,200000)
     },[messages])
