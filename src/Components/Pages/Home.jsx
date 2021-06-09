@@ -21,8 +21,19 @@ function Home({handleRefresh}) {
           
             <div className="mainPostsContainer scroll">
                 <StoryContainer />
-                {/* <PostCardSkeleton/> */}
                 <NewPost />
+                {!posts?.length &&<div className="postCardContainer" >
+                    <PostCardSkeleton/>
+                </div>}
+                {!posts?.length &&<div className="postCardContainer" >
+                    <PostCardSkeleton/>
+                </div>}
+                {!posts?.length &&<div className="postCardContainer" >
+                    <PostCardSkeleton/>
+                </div>}
+                {!posts?.length &&<div className="postCardContainer" >
+                    <PostCardSkeleton/>
+                </div>}
                 {posts.map((post)=><PostCard key={post.id} {...post}/>)}
 
             </div>

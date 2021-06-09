@@ -535,7 +535,7 @@
     flex:1;
     padding: 0 15px 0 20px;
     justify-content: space-between;
-    border-bottom: 1px solid var(--divider);
+    border-bottom: 1px solid var(--shadow-1);
     font-weight: 500;
     font-size: 24px;
 
@@ -570,17 +570,27 @@
 .deletePostModaleFooter{
     flex:1;
     width: 100%;
-    border-top: 1px solid var(--divider);
+    border-top: 1px solid var(--shadow-1);
    
 }
 .deletePostModaleFooter button{
     padding: 7px 10px;
     border-radius: 5px;
+    width: 100px;
     border: none;
     cursor: pointer;
     color: var(--white);
+    margin:0 10px;
     background-color: var(--primary-4);
     transition: all 0.2s ease-in-out;
+
+}
+.deletePostModaleFooter .postDeleteButton{
+    background-color: var(--supplementary-1);
+
+}
+.deletePostModaleFooter .postDeleteButton:hover{
+    background-color: red;
 
 }
 .deletePostModaleFooter button:hover{

@@ -15,7 +15,8 @@ function DeletePostModal({handleCancel,handleDelete}) {
                     <p className="">Are you sure, you will never get this post again...</p>
                 </div>
                 <div className="deletePostModaleFooter flexBox">
-                    <button  onClick={handleDelete}>Yes</button>
+                    <button className="postDeleteButton"  onClick={handleDelete}>Yes</button>
+                    <button  onClick={handleCancel}>No</button>
                 </div>
             </div>
         </div>

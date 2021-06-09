@@ -11,28 +11,30 @@ function PostCardSkeleton() {
                     <Skeleton style={{margin:"0 5px"}} circle={true} height={35} width={35} />
                 </div>
                 <div className="postCardHeadBox2">
-                    <div className="postCardActivity flexBox">
-                        <Skeleton style={{borderRadius:"25px"}} width={130} height={15}/>
-                        <Skeleton style={{borderRadius:"25px"}} width={130} height={15}/>
-                    </div>
-                    <div className="postCardHeadBox3 flexBox">
-                        <Skeleton style={{margin:"0 5px"}} circle={true} height={35} width={35} />
+                    <div className="postCardActivity ">
+                        <div>
+                            <Skeleton style={{borderRadius:"25px"}} width={90} height={10}/>
+                        </div>
+                        
+                        <div>
+                            <Skeleton style={{borderRadius:"25px"}} width={100} height={10}/>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div className="postCardImage">
-
+            <div className="postCardImage" style={{width:"676px",height:"120px"}}>
+            
             </div>
-            <div className="postCardFooter flexBox">
-                <div className="postCardFooterBox flexBox">
-                    <Skeleton style={{borderRadius:"25px"}} width={130} height={15}/>
-                </div>
-                <div className="postCardFooterBox flexBox">
-                    <Skeleton style={{borderRadius:"25px"}} width={130} height={15}/>
-                </div>
-                <div className="postCardFooterBox flexBox">
-                <Skeleton style={{borderRadius:"25px"}} width={130} height={15}/>
-                </div>
+            <div className="postCardFooter flexBox" style={{border:"none",padding:"16px 0"}}>
+            
+                <Skeleton style={{borderRadius:"25px"}} width={80} height={10}/>
+            
+            
+                <Skeleton style={{borderRadius:"25px"}} width={80} height={10}/>
+            
+            
+                <Skeleton style={{borderRadius:"25px"}} width={80} height={10}/>
+               
 
             </div>
         </SkeletonTheme> 
