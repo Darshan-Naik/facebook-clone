@@ -11,7 +11,8 @@ var firebaseConfig = {
     storageBucket: "facebook-45269.appspot.com",
     messagingSenderId: "761576697175",
     appId: "1:761576697175:web:11a1cc6fd22137a7b5e212"
-};
+  };
+
 
 
 

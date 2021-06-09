@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { database, storage } from '../../../Firebase/firebase';
-import {ReactComponent as UpdateProfilePictureIcon} from "../../../Icons/photos.svg";
+import { DisappearedLoading } from 'react-loadingg';
 import { ReactComponent as CloseIcon } from "../../../Icons/close.svg";
 import "../../../Styles/UserProfile/UserProfile.css";
 
@@ -9,53 +9,69 @@ const UserProfilePicture = ({userProfilePic=(process.env.PUBLIC_URL + '/Images/u
     
     const [showProfilePicModal, setShowProfilePicModal] = useState(false);
     const [profileImagePreview, setProfileImagePreview] = useState();
+    const [coverPicUploadState, setCoverPicUploadState] = useState(0);
+    const [errorImagePreview, setErrorImagePreview] = useState(false);
+
     const profilePicImageRef = useRef();
 
     const { uid } = useSelector( state => state.auth.user );
 
     const handleProfilePicPreview = () => {
-        if( profilePicImageRef.current.files[0] ) {
-            const imageUrl = URL.createObjectURL( profilePicImageRef.current.files[0] )
+
+        if( !profilePicImageRef.current?.files[0]?.type.includes(`image`) ) {
             
+            setErrorImagePreview(true);
+            
+        } else if ( profilePicImageRef.current.files[0] ){
+            
+            const imageUrl = URL.createObjectURL( profilePicImageRef.current.files[0] )
             setProfileImagePreview(imageUrl)
+            setErrorImagePreview(false);
+        
         }
+
     }
 
     const handleRemovePreview = () => {
         setProfileImagePreview(null);
-        profilePicImageRef.current.value = "";
     }
 
     const handleUpdateProfilePic=()=>{
-        const uploadTask =  storage.ref(`profilePicImages/${profilePicImageRef.current.files[0].name}`).put(profilePicImageRef.current.files[0])
-
-        uploadTask.on("state_changed",
-            snapshot => {
-                console.log(snapshot)
-            },
-            error => {
-
-            },
-            () => {
-                storage.ref("profilePicImages")
-                .child(profilePicImageRef.current.files[0].name)
-                .getDownloadURL()
-                .then(url=>{
-                    const payload ={
-                        image : url,
-                        imagePath : profilePicImageRef.current.files[0].name,
-                        activity: `updated his profile picture.` ,
-                        author : uid,
-                        time : new Date()
-                    }
-                    database.collection("users").doc(uid).update({profilePic: url, profilePicPath: profilePicImageRef.current.files[0].name })
-                    database.collection("posts").add(payload)
-                    .then(()=>{
-                        profilePicImageRef.current.value = "";
-                        setShowProfilePicModal(false)
-                    })
+        setCoverPicUploadState(1);
+        if( profilePicImageRef.current.files[0].name ) {
+            if( profilePicImageRef.current.files[0].type.includes(`image`) ) {
+                const uploadTask =  storage.ref(`profilePicImages/${profilePicImageRef.current.files[0].name}`).put(profilePicImageRef.current.files[0])
+        
+                uploadTask.on("state_changed",
+                    snapshot => {
+                        setCoverPicUploadState(Math.floor((snapshot.bytesTransferred/snapshot.totalBytes)*100)+1);
+                    },
+                    error => {
+                        console.log("error is occuring");
+                    },
+                    () => {
+                        storage.ref("profilePicImages")
+                        .child(profilePicImageRef.current.files[0].name)
+                        .getDownloadURL()
+                        .then(url=>{
+                            const payload ={
+                                image : url,
+                                imagePath : profilePicImageRef.current.files[0].name,
+                                activity: `updated his profile picture.` ,
+                                author : uid,
+                                time : new Date()
+                            }
+                            database.collection("users").doc(uid).update({profilePic: url, profilePicPath: profilePicImageRef.current.files[0].name })
+                            database.collection("posts").add(payload)
+                            .then(()=>{
+                                profilePicImageRef.current.value = "";
+                                setShowProfilePicModal(false);
+                                setCoverPicUploadState(0);
+                            })
+                        })
                 })
-        })
+            }
+        }
     }
 
     return (
@@ -75,6 +91,21 @@ const UserProfilePicture = ({userProfilePic=(process.env.PUBLIC_URL + '/Images/u
                 showProfilePicModal && (
                     <div className="editProfilePicModalContainer">
                         <div className="editProfilePicModalBox">
+                            {
+                                coverPicUploadState ? (
+                                    <div className="newPostProgressContainer flexBox">
+                                        <div className="progressBox">
+                                            <h2>uploading...</h2> 
+                                            <br />
+                                            <br />
+                                            <DisappearedLoading size="small"/>
+                                        </div>
+                                        <div className="progressBarBox">
+                                                <div className="progressBar" style={{width:`${coverPicUploadState}%`}}></div>
+                                        </div>
+                                    </div>
+                                ) : null
+                            }
                             <div className="editProfilePicModalHeader flexBox">
                                 <h1 className="editProfilePicModalHeaderNamePlate">Edit Profile Pic</h1>
                                 <div className="editProfilePicModalCloseIconBox flexBox"  onClick={() => setShowProfilePicModal(false)}>
@@ -82,13 +113,21 @@ const UserProfilePicture = ({userProfilePic=(process.env.PUBLIC_URL + '/Images/u
                                 </div>
                             </div>
                             <div className="profilePicPreviewContainer">
-                                {
-                                    !profileImagePreview && (
-                                        <div className="profilePicPreviewNoteBox flexBox">
-                                            Choose some image
+                                <div style={profileImagePreview ? {display: `none`}: {display: `block`}}>
+                                    {
+                                        errorImagePreview && (
+                                            <div className="errorCoverPicMessage">
+                                                <p>Choose only image...</p>
+                                            </div>
+                                        )
+                                    }
+                                    <div className="profilePicPreviewNoteBox flexBox">   
+                                        <div className="chooseProfilePicInputBox">
+                                            <label htmlFor="coverPicFileInput">Profile Pic</label>
+                                            <input ref={profilePicImageRef} id="coverPicFileInput" type="file" onChange={handleProfilePicPreview} style={{visibility: `hidden`}}/>
                                         </div>
-                                    )
-                                }
+                                    </div>
+                                </div>
                                 {
                                     profileImagePreview && (
                                         <React.Fragment>
@@ -103,11 +142,8 @@ const UserProfilePicture = ({userProfilePic=(process.env.PUBLIC_URL + '/Images/u
                                 }
                             </div>
                             <div className="chooseProfilePicInputContainer flexBox">
-                                <div className="chooseProfilePicInputBox">
-                                    <input ref={profilePicImageRef} type="file" onChange={handleProfilePicPreview}/>
-                                </div>
                                 <div className="userProfilePicEditOptionsBox">
-                                    <button onClick={handleUpdateProfilePic}>Update</button>
+                                    <button disabled={!profileImagePreview} onClick={handleUpdateProfilePic}>Update</button>
                                 </div>
                             </div>
                         </div>

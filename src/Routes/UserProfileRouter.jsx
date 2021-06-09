@@ -3,9 +3,10 @@ import { Switch, Route, useHistory, useParams } from "react-router-dom";
 import UserProfilePostsPage from "../Components/UserProfile/UserProfilePostsPage/UserProfilePostsPage";
 import UserProfilePageHeader from "../Components/UserProfile/UserProfileHome/UserProfilePageHeader";
 import UserProfileNavBar from "../Components/UserProfile/UserProfileHome/UserProfileNavBar";
-import UserProfileAboutPage from "../Components/UserProfile/UserProfileAbout/UserProfileAboutPage";
 import UserProfileFriendsPage from "../Components/UserProfile/UserProfileFriends/UserProfileFriendsPage";
 import {database} from "../Firebase/firebase";
+import UserProfilePageHeaderSkeleton from "../Components/UserProfile/UserProfileHome/UserProfileHomeSkeleton/UserProfilePageHeaderSkeleton";
+import UserProfileNavBarSkeleton from "../Components/UserProfile/UserProfileHome/UserProfileHomeSkeleton/UserProfileNavBarSkeleton";
 
 function UserProfileRouter({ path, forceRefresh, refresh }) {
 
@@ -40,7 +41,14 @@ function UserProfileRouter({ path, forceRefresh, refresh }) {
     return userId ? (
         <React.Fragment>
             {
-                isLoading ? <div>Loading...</div> : (
+                isLoading ? (
+                    <React.Fragment>
+                        <div style={{height:"93.66vh"}}>
+                            <UserProfilePageHeaderSkeleton />
+                            <UserProfileNavBarSkeleton />
+                        </div>
+                    </React.Fragment>
+                ) : (
                     <React.Fragment>
                         <UserProfilePageHeader currentUser={userData.uid} userProfileDetails={userData} userFriends={userFriends} forceRefresh={forceRefresh} coverPhoto={userData.coverPic} />
                         <UserProfileNavBar currentUser={userData.uid} alternativePath={path} userFriends={userFriends} userProfileDetails={userData} refresh={refresh} />
@@ -48,11 +56,8 @@ function UserProfileRouter({ path, forceRefresh, refresh }) {
                             <Route path={`${path}/${userData.uid}`} exact>
                                 <UserProfilePostsPage userProfileDetails={userData} userFriends={userFriends} alternativePath={path} forceRefresh={forceRefresh} />
                             </Route>
-                            <Route  path={`${path}/${userData.uid}/about`}>
-                                <UserProfileAboutPage forceRefresh={forceRefresh} />
-                            </Route>
                             <Route  path={`${path}/${userData.uid}/friends`}>
-                                <UserProfileFriendsPage forceRefresh={forceRefresh} />
+                                <UserProfileFriendsPage userFriends={userFriends} forceRefresh={forceRefresh} />
                             </Route>
                         </Switch>
                     </React.Fragment>
