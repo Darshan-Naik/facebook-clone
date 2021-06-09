@@ -85,7 +85,7 @@ function NavBar({refresh,handleRefresh}) {
                 <IconWrapperCircle path="/messenger/new" label="Messenger" icon={ <MessageIcon /> } number={0}>
                     
                 </IconWrapperCircle>
-                <IconWrapperCircle label="Notifications" icon={ <NotificationIcon /> } number={notifications?.length}>
+                <IconWrapperCircle label="Notifications" icon={ <NotificationIcon /> } number={notifications.filter(item=>!item.isRead)?.length}>
                     <Notifications notifications={notifications}/>
                 </IconWrapperCircle>
                 <IconWrapperCircle label="Account" icon={ <DownArrowIcon/> }>

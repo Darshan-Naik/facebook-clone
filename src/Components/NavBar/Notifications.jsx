@@ -9,7 +9,7 @@ function Notifications({notifications}) {
                 <h1>Notifications</h1>
                 <DotsIcon/>
             </div>
-            <div className="notificationsBox">
+            <div className="notificationsBox flexBox scroll">
             { notifications.map(item=><NotificationCard key={item.notificationID} {...item}/>)   }
             </div>
         </div>

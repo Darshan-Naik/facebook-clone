@@ -20,7 +20,7 @@ function App() {
   const handleActiveStatus = (e)=>{
     e.stopPropagation(); 
     if((new Date() - activeStatus)>1559367580871){
-      console.log(new Date() - activeStatus)
+      // console.log(new Date() - activeStatus)
    // database.collection("users").doc(uid).update({activeStatus : new Date()})
     }  
   }
