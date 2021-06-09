@@ -256,25 +256,28 @@
 }
 .postEmojiMartContainer{
     position:relative;
+    cursor: pointer;
 }
 .commentInput1{
     position: absolute;
-    top: -360px;
-    right: -18px;
+    bottom: 28px;
+    right: -20px;
     z-index: 1000;
     width: 20vw;
     /* height: 350px; */
     border-radius: 5px;
+    padding:5px;
     box-shadow:0 0 20px 10px var( --shadow-2);
+    background-color: var(--primary-background);
   
 }
 .commentInput1::after{
     content: "";
-    width: 15px;
-    height: 15px;
+    width: 12px;
+    height: 12px;
     position: absolute;
-    bottom: -9px;
-    right: 20px;
+    bottom: -7px;
+    right: 23px;
     background-color: var(--primary-background);
     transform: rotate(45deg);
     border-bottom: 1px solid var(--shadow-1);

@@ -40,7 +40,10 @@ function PostCardComment({postId,comments,userData}) {
                 tag:"comment"
             }
             database.collection("posts").doc(postId).collection("comments").add(payload);
-            database.collection("users").doc(userData.uid).collection("notifications").add(notificationPayload);
+            if(uid!==userData.uid){
+                database.collection("users").doc(userData.uid).collection("notifications").add(notificationPayload);
+            }
+            
             setComment("")
           }
     }
