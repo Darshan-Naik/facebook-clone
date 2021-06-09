@@ -1,6 +1,7 @@
 import React from 'react';
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import { useSelector } from 'react-redux';
+import UserProfilePictureSkeleton from "./UserProfilePictureSkeleton";
 import "../../../../Styles/UserProfile/UserProfile.css";
 
 function UserProfilePageHeaderSkeleton() {
@@ -13,6 +14,7 @@ function UserProfilePageHeaderSkeleton() {
                     <div className="userProfileCoverPageOverlay">
                         <div className="userProfileCoverPhotoBox">
                             <Skeleton style={{borderBottomLeftRadius: "8px", borderBottomRightRadius: "8px"}} width="100%" height="100%" />
+                            <UserProfilePictureSkeleton />
                         </div>
                     </div>
                 </div>
