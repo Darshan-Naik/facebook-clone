@@ -2,6 +2,8 @@
   width: 100%;
   height: 100vh;
   margin: auto;
+  display: flex;
+  flex-direction: row;
   border-radius: 8px;
   background-color: var(--primary-background);
   box-shadow: 0 1px 2px var(--shadow-2);
@@ -79,7 +81,7 @@
   object-fit: contain;
   width: 1150px;
   max-width: 100%;
-  height: 715px;
+  height: 100vh;
   background-color: var(--black);
 }
 .postDetailsCardImage video {
@@ -152,6 +154,8 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+  display: flex;
+  flex-direction: column;
 }
 .postDetailsCardCommentContainer p {
   font-weight: 500;
@@ -251,25 +255,23 @@
   padding: 2px;
 }
 
-@media only screen and (max-width: 992px) {
+@media only screen and (max-width: 1224px) {
   .postDetailsCardContainer {
-    max-width: 500px;
+    flex-direction: column;
   }
 }
 
 /* */
 .PicInfoContainer {
-  max-width: 400px;
+  flex-grow: 1;
   height: 100%;
 }
 .postDetailsModalCommentBox {
-  min-height: 64vh;
-  max-height: 67vh;
-  width: 100%;
-  overflow-y: scroll;
+  min-height: 66vh;
+  max-height: 69vh;
 }
 .postDetailsModalClose {
-  height: 0;
+  height: 35px;
   position: absolute;
   top: 25px;
   left: 30px;
@@ -278,6 +280,8 @@
 }
 .postDetailsModalClose:hover {
   transform: scale(1.01);
+  border-radius: 50%;
+  background-color: var(--hover-overlay);
 }
 .postDetailsModalClose > svg {
   stroke: var(--white);

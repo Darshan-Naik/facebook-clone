@@ -37,9 +37,9 @@ function PictureCardComment({postId,comments}) {
 
 
     return (
-        <div className="postDetailsCardCommentContainer flexBox">
+        <div className="postDetailsCardCommentContainer">
             
-            <div className="postDetailsModalCommentBox">{comments?.map((el)=><CommentBox key={el.commentId}{...el} />)}</div>
+            <div className="postDetailsModalCommentBox scroll">{comments?.map((el)=><CommentBox key={el.commentId}{...el} />)}</div>
             <div className="postDetailsCardInputBox flexBox">
                 <img src={ process.env.PUBLIC_URL + '/Images/userProfile_icon.png'} alt="mypic" />
                 <div className="addComment flexBox">
