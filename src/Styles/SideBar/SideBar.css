@@ -86,13 +86,13 @@
     fill: var(--primary-icon);
 }
 
-.contactIconContainer .DotsIcon {
+.contactIconContainer .dotsIcon {
     width: 19px;
     height: 17px;
     opacity: 0.6;
     vertical-align: middle;
 }
 
-.contactHeaderContentContainer .DotsIcon path {
+.contactHeaderContentContainer .dotsIcon {
     fill: var(--primary-icon);
 }

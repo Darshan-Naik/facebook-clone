@@ -28,8 +28,9 @@ function PictureCardComment({postId,comments}) {
                 author:uid
 
             }
-            database.collection("posts").doc(postId).collection("comments").add(payload);
-            
+            database.collection("posts").doc(postId).collection("comments").add(payload)
+            .then(res=>console.log(res))
+            console.log(comment)
             setComment("")
           }
     }
