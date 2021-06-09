@@ -63,7 +63,7 @@ function App() {
        dispatch(loginSuccess(doc.data()));
         
     });
-    const unsubscribe8 = database.collection("users").doc(uid).collection("notifications").onSnapshot(res=>{
+    const unsubscribe8 = database.collection("users").doc(uid).collection("notifications").orderBy("time","desc").onSnapshot(res=>{
       const newNotifications = res.docs.map(doc=>({notificationID:doc.id,...doc.data()}))
      dispatch(getNotifications(newNotifications))
     });
