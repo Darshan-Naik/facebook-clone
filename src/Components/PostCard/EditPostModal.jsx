@@ -5,9 +5,16 @@ import {ReactComponent as FriendsIcon} from  "../../Icons/friends.svg"
 import {ReactComponent as DownArrowIcon} from  "../../Icons/downArrow.svg";
 import EmojiMart from "../../SharedComponents/EmojiMart";
 
-function EditPostModal({profilePic,first_name,last_name,title,setEditModal,handleEditPost,editTitle,setEditTitle}) {
+function EditPostModal({profilePic,handleEditSection,handleEditModal,first_name,last_name,title,setEditModal,handleEditPost,editTitle,setEditTitle}) {
 
-    const [emojiMartVisibility,setEmojiMartVisibility] = React.useState(false)
+    const [emojiMartVisibility,setEmojiMartVisibility] = React.useState(false);
+
+    const handleEditPostButton=()=>{
+        handleEditPost(editTitle)
+        handleEditSection();
+        handleEditModal();
+
+    }
 
     const handleEmoji=(emoji)=>{
         setEditTitle(title + emoji.native)
@@ -48,7 +55,7 @@ function EditPostModal({profilePic,first_name,last_name,title,setEditModal,handl
                         </div>   
                     </div>
                     <div className="editPostButton">
-                        <button onClick={()=>handleEditPost(editTitle)}>Edit Post</button>
+                        <button onClick={handleEditPostButton}>Edit Post</button>
                     </div>
             </div>
 

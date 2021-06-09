@@ -71,6 +71,8 @@
 .postCardHeadBox3>.dotsIcon{
   fill: var(--primary-icon);
 }
+
+/*-----------Middle-part--------------*/
 .postCardTags{
     font-size: 14px;
     line-height: 1.3333;
@@ -104,6 +106,8 @@
     margin: 5px;
     cursor: pointer;
 }
+
+/*---------Footer-part---------------------------------------*/
 
 .postCardFooter {
     justify-content: space-around;
@@ -146,6 +150,9 @@
     cursor: pointer;
     font-weight: 500;
 }
+
+/*--------Comment-section------------------*/
+
 .postCardCommentContainer{
     margin: 0px 15px 10px 15px;
     padding: 5px 0px 5px 0px;
@@ -299,6 +306,8 @@
     height: 20px;
     padding: 2px;
 }
+
+ /*-----------EDit-Sections-----------*/
 
 .editPostContainer{
     position: absolute;
@@ -496,6 +505,88 @@
 .editPostButton button:hover{
     background-color: var(--secondary-6);
 }
+
+/*-------------------------DeleteModal-----------------------------*/
+
+.deletePostModalContainer{
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 30;
+    display: grid;
+    place-items: center;
+    background: var(--shadow-9);
+}
+.deletePostModalBox{
+    max-width: 500px;
+    min-height: 200px;
+    position: relative;
+    width: 100%;
+    border-radius: 10px;
+    background-color: var(--primary-background);
+    flex-direction: column;
+}
+.deletePostModaleHeader{
+    width: 100%;
+    flex:1;
+    padding: 0 15px 0 20px;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--divider);
+    font-weight: 500;
+    font-size: 24px;
+
+}
+.deletePostModaleHeader h1{
+    width: 100%;
+    flex-grow:1;
+    font-weight: 500;
+    font-size: 24px;
+    text-align: center;
+}
+.deletePostModaleHeader svg{
+    stroke:var(--primary-icon);
+
+}
+.deletePostModaleHeader div{
+    border-radius: 50%;
+    padding: 3px;
+    
+
+}
+.deletePostModaleHeader div:hover{
+    background-color: var(--hover-overlay)
+    
+
+}
+.deletePostModaleMiddle{
+    flex:2;
+    padding:10px 0 10px 0;
+
+}
+.deletePostModaleFooter{
+    flex:1;
+    width: 100%;
+    border-top: 1px solid var(--divider);
+   
+}
+.deletePostModaleFooter button{
+    padding: 7px 10px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    color: var(--white);
+    background-color: var(--primary-4);
+    transition: all 0.2s ease-in-out;
+
+}
+.deletePostModaleFooter button:hover{
+    background-color: var(--primary-1);
+}
+
 
 @media only screen and (max-width: 992px) {
     .postCardContainer{

@@ -13,7 +13,10 @@ function PostCardHead({first_name,last_name,profilePic,time,author,activity,titl
     let localTime = new Date(time?.toDate()).toString().split(" ");
     localTime.length=4;
     const localTime1 = new Date(time?.toDate()).toLocaleTimeString();
- 
+    
+    const handleEditSection=()=>{
+        setEditSection(false);
+    }
  
     const history = useHistory();
    
@@ -33,7 +36,7 @@ function PostCardHead({first_name,last_name,profilePic,time,author,activity,titl
             </div>
             <div className="postCardHeadBox3 flexBox">
                 <DotsIcon onClick={()=>setEditSection(!editSection)}/>
-                {author===uid&&editSection&&<EditBox first_name={first_name} last_name={last_name} profilePic={profilePic} title={title} {...postEditFunction} image={image}/>}
+                {author===uid&&editSection&&<EditBox handleEditSection={handleEditSection} first_name={first_name} last_name={last_name} profilePic={profilePic} title={title} {...postEditFunction} image={image}/>}
                 {/* author===uid */}
             </div>
            
