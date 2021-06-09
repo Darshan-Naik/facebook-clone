@@ -69,6 +69,7 @@ function PostCard({title,image,id,author,time,video,activity}) {
 
 
     return (
+        <>
         <div className="postCardContainer">
             <PostCardHead {...userData} time={time} author={author} activity={activity}/>
             {title && <div className="postCardTags">{title}</div>}
@@ -85,6 +86,7 @@ function PostCard({title,image,id,author,time,video,activity}) {
             <PostCardFooter handleDeleteLike={handleDeleteLike} handleLike={handleLike} like={JSON.stringify(likes).includes(uid)} showComment={showComment}/>
            {commentSection && <PostCardComment postId={id} comments={comments} userData={userData}/>}
         </div>
+        </>
     )
 }
 

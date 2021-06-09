@@ -1,0 +1,296 @@
+.postDetailsCardContainer {
+  width: 100%;
+  height: 100vh;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  border-radius: 8px;
+  background-color: var(--primary-background);
+  box-shadow: 0 1px 2px var(--shadow-2);
+  text-align: left;
+  align-items: flex-start;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 50000;
+}
+.postDetailsCardHeadContainer {
+  padding: 0 15px 5px 15px;
+}
+.postDetailsCardHeadBox1 > img {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  box-shadow: 0px 0px 0px 2px var(--white), 0px 0px 0px 4px var(--primary-1);
+  margin: 0 10px;
+  margin-top: 10px;
+  margin-left: 0;
+  cursor: pointer;
+}
+
+.postDetailsCardHeadBox2 {
+  color: var(--primary-text);
+  flex: 1;
+  text-align: left;
+  flex-direction: column;
+  width: 272px;
+}
+.postDetailsCardHeadBox2 strong {
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-right: 4px;
+}
+.postDetailsCardHeadBox2 strong:hover {
+  text-decoration: underline;
+}
+.postDetailsCardHeadBox2 span {
+  font-size: 12px;
+  font-weight: 400;
+  cursor: pointer;
+}
+.postDetailsCardHeadBox2 span:hover {
+  text-decoration: underline;
+}
+.postDetailsCardActivity {
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.postDetailsCardHeadBox3 {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.postDetailsCardHeadBox3:hover {
+  background: var(--hover-overlay);
+}
+.postDetailsCardTags {
+  font-size: 14px;
+  line-height: 1.3333;
+  color: var(--primary-text);
+  text-align: left;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 0 15px;
+}
+.postDetailsCardImage img {
+  object-fit: contain;
+  width: 1150px;
+  max-width: 100%;
+  height: 100vh;
+  background-color: var(--black);
+}
+.postDetailsCardImage video {
+  object-fit: contain;
+  width: 1150px;
+  max-width: 100%;
+  height: 715px;
+}
+.postDetailsCardLike {
+  justify-content: space-between;
+  margin: 5px 15px;
+}
+.postDetailsCardLike p {
+  font-size: 14px;
+  color: var(--secondary-icon);
+  cursor: pointer;
+}
+.postDetailsCardLike p:hover {
+  text-decoration: underline;
+}
+.postDetailsCardLike svg {
+  width: 18px;
+  height: 18px;
+  fill: var(--white);
+  margin: 5px;
+  cursor: pointer;
+}
+
+.postDetailsCardFooter {
+  justify-content: space-around;
+  margin: 0 15px;
+  border-top: 1px solid var(--secondary-text);
+}
+.postDetailsCardFooterBox {
+  width: 30%;
+  margin: 5px 0;
+}
+.postDetailsCardFooterBox:hover {
+  background: var(--hover-overlay);
+  border-radius: 4px;
+  width: 30%;
+}
+
+.postDetailsCardFooter svg {
+  width: 18px;
+  height: 18px;
+  fill: var(--secondary-icon);
+  margin: 5px;
+  cursor: pointer;
+}
+.postDetailsCardFooterBox .likeIcon {
+  fill: var(--primary-1);
+}
+.postDetailsCardFooter p {
+  color: var(--secondary-icon);
+  font-size: 15px;
+  cursor: pointer;
+  font-weight: 500;
+}
+.postDetailsCardFooter small {
+  color: var(--primary-1);
+  font-size: 15px;
+  cursor: pointer;
+  font-weight: 500;
+}
+.postDetailsCardCommentContainer {
+  margin: 0px 15px 10px 15px;
+  padding: 5px 0px 5px 0px;
+  border-top: 1px solid var(--secondary-text);
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+}
+.postDetailsCardCommentContainer p {
+  font-weight: 500;
+  color: var(--secondary-text);
+  font-size: 14px;
+  cursor: pointer;
+}
+.postDetailsCardCommentContainer p:hover {
+  text-decoration: underline;
+}
+.postDetailsCardInputBox {
+  width: 100%;
+  justify-content: left;
+  margin: 2px 0;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.postDetailsCardInputBox img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  margin: 0 5px;
+  cursor: pointer;
+}
+.addComment {
+  flex-direction: column;
+  width: 100%;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.addComment small {
+  color: var(--primary-text);
+  font-size: 10px;
+}
+.addCommentBox {
+  border-radius: 10px;
+  padding: 5px 10px;
+  max-width: 85%;
+  min-width: 100px;
+  background-color: var(--secondary-background-1);
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.addCommentBox > strong {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--primary-text);
+  cursor: pointer;
+}
+.addCommentBox > strong:hover {
+  text-decoration: underline;
+}
+.addCommentBox > small {
+  font-size: 14px;
+  width: 100%;
+  color: var(--primary-text);
+  word-break: break-all;
+  display: -webkit-box;
+  word-wrap: break-word;
+  cursor: pointer;
+}
+.postDetailsCardCommentLikeandReply > small {
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.postDetailsCardCommentLikeandReply > p {
+  font-size: 10px;
+  font-weight: 200;
+  cursor: pointer;
+}
+.postDetailsCardCommentLikeandReply > small:hover {
+  text-decoration: underline;
+}
+
+.commentInput {
+  flex: 1;
+  border-radius: 25px;
+  height: 36px;
+  padding: 0 10px;
+  width: 100%;
+  background-color: var(--secondary-background-1);
+}
+.commentInput input {
+  border: 0px;
+  background: transparent;
+  flex: 1;
+  padding: 8px;
+  font-size: 14px;
+}
+
+.commentInput svg {
+  fill: var(--secondary-icon);
+  width: 20px;
+  height: 20px;
+  padding: 2px;
+}
+
+@media only screen and (max-width: 1224px) {
+  .postDetailsCardContainer {
+    flex-direction: column;
+  }
+}
+
+/* */
+.PicInfoContainer {
+  flex-grow: 1;
+  height: 100%;
+}
+.postDetailsModalCommentBox {
+  min-height: 66vh;
+  max-height: 69vh;
+}
+.postDetailsModalClose {
+  height: 35px;
+  position: absolute;
+  top: 25px;
+  left: 30px;
+  background-color: transparent;
+  border: transparent;
+}
+.postDetailsModalClose:hover {
+  transform: scale(1.01);
+  border-radius: 50%;
+  background-color: var(--hover-overlay);
+}
+.postDetailsModalClose > svg {
+  stroke: var(--white);
+}
+.postDetailsModalIcon {
+  height: 0;
+  position: absolute;
+  top: 15px;
+  left: 80px;
+  background-color: transparent;
+  border: transparent;
+}
