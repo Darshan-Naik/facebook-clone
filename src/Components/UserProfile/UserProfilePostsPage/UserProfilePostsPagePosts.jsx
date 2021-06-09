@@ -9,7 +9,7 @@ function UserProfilePostsPagePosts({userProfileDetails}) {
     const { uid } = useSelector(state => state.auth.user);
 
     return (
-        <div className="userPostsContainer">
+        <div className="userPostsContainer scroll">
             {
                 userProfileDetails.uid === uid && (
                     <div className="userPostsNewPostBox">

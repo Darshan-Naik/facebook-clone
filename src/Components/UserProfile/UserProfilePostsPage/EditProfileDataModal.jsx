@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { database } from '../../../Firebase/firebase';
 import { ReactComponent as CloseIcon } from "../../../Icons/close.svg";
+import { DisappearedLoading } from "react-loadingg";
 
 const initState = {
     education: "",
@@ -13,6 +14,7 @@ const initState = {
 function EditProfileDataModal ({handleEditUserDetailsModal}){
 
     const [updateUserDetails, setUpdateUserDetails] = useState(initState);
+    const [updateIsLoading, setUpdateIsLoading] = useState(false);
     
     const user = useSelector( state => state.auth.user );
 
@@ -22,13 +24,18 @@ function EditProfileDataModal ({handleEditUserDetailsModal}){
     }
 
     const handleUpdateUserDetails = () =>{
+        setUpdateIsLoading(true);
         const payload = {}
         for(let key in updateUserDetails ) {
             if( updateUserDetails[key] ) {
                 payload[key] = updateUserDetails[key]
             }
         }
-        database.collection("users").doc(user.uid).update(payload);
+        database.collection("users").doc(user.uid).update(payload)
+        .then((res) => {
+            setUpdateIsLoading(false)
+            handleEditUserDetailsModal();
+        })
     }
 
     useEffect(() => {
@@ -69,22 +76,34 @@ function EditProfileDataModal ({handleEditUserDetailsModal}){
                             <div className="flexBox">
                                 <select value={updateUserDetails.relationship} name="relationship" onChange={handleUpdateChange} >
                                     <option defaultValue value="">Status</option>
-                                    <option value="single" >Single</option>
+                                    <option value="Single" >Single</option>
                                     <option value="In a relationship" >In a relationship </option>
-                                    <option value="married">Married</option>
-                                    <option value="engaged">Engaged</option>
-                                    <option value="it's complicated">It's complicated</option>
-                                    <option value="in an open relationship">In an open relationship</option>
+                                    <option value="Married">Married</option>
+                                    <option value="Engaged">Engaged</option>
+                                    <option value="It's complicated">It's complicated</option>
+                                    <option value="In an open relationship">In an open relationship</option>
                                 </select>
                             </div>
                         </form>
                     </div>
                 </div>
-                <div className="chooseProfilePicInputContainer flexBox">
-                    <div className="userProfilePicEditOptionsBox">
-                        <button onClick={handleUpdateUserDetails}>Update</button>
-                    </div>
-                </div>
+                {
+                    updateIsLoading ? (
+                        <div className="chooseProfilePicInputContainer flexBox">
+                            <div className="userProfilePicEditOptionsBox updateDetailsLoading">
+                                <button disabled={true}>
+                                    <DisappearedLoading color="#1877f2" size="small" style={{width: `40px`, height: `0`, marginLeft: "6px"}} />
+                                </button>
+                            </div>
+                        </div>
+                    ) : (
+                        <div className="chooseProfilePicInputContainer flexBox">
+                            <div className="userProfilePicEditOptionsBox">
+                                <button onClick={handleUpdateUserDetails}>Update</button>
+                            </div>
+                        </div>
+                    )
+                }
             </div>
         </div>
     )
