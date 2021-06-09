@@ -38,8 +38,8 @@ const UserProfilePicture = ({userProfilePic=(process.env.PUBLIC_URL + '/Images/u
 
     const handleUpdateProfilePic=()=>{
         setCoverPicUploadState(1);
-        if( profilePicImageRef.current?.files[0]?.name ) {
-            if( profilePicImageRef.current?.files[0]?.type.includes(`image`) ) {
+        if( profilePicImageRef.current.files[0].name ) {
+            if( profilePicImageRef.current.files[0].type.includes(`image`) ) {
                 const uploadTask =  storage.ref(`profilePicImages/${profilePicImageRef.current.files[0].name}`).put(profilePicImageRef.current.files[0])
         
                 uploadTask.on("state_changed",
@@ -47,7 +47,7 @@ const UserProfilePicture = ({userProfilePic=(process.env.PUBLIC_URL + '/Images/u
                         setCoverPicUploadState(Math.floor((snapshot.bytesTransferred/snapshot.totalBytes)*100)+1);
                     },
                     error => {
-        
+                        console.log("error is occuring");
                     },
                     () => {
                         storage.ref("profilePicImages")
@@ -95,7 +95,7 @@ const UserProfilePicture = ({userProfilePic=(process.env.PUBLIC_URL + '/Images/u
                                 coverPicUploadState ? (
                                     <div className="newPostProgressContainer flexBox">
                                         <div className="progressBox">
-                                            <h2>Enjoying the vibe...</h2> 
+                                            <h2>uploading...</h2> 
                                             <br />
                                             <br />
                                             <DisappearedLoading size="small"/>
@@ -113,25 +113,21 @@ const UserProfilePicture = ({userProfilePic=(process.env.PUBLIC_URL + '/Images/u
                                 </div>
                             </div>
                             <div className="profilePicPreviewContainer">
-                                {
-                                    !profileImagePreview && (
-                                        <React.Fragment>
-                                            {
-                                                errorImagePreview && (
-                                                    <div className="errorCoverPicMessage">
-                                                        <p>Choose only image...</p>
-                                                    </div>
-                                                )
-                                            }
-                                            <div className="profilePicPreviewNoteBox flexBox">   
-                                                <div className="chooseProfilePicInputBox">
-                                                    <label htmlFor="coverPicFileInput">Profile Pic</label>
-                                                    <input ref={profilePicImageRef} id="coverPicFileInput" type="file" onChange={handleProfilePicPreview} style={{visibility: `hidden`}}/>
-                                                </div>
+                                <div style={profileImagePreview ? {display: `none`}: {display: `block`}}>
+                                    {
+                                        errorImagePreview && (
+                                            <div className="errorCoverPicMessage">
+                                                <p>Choose only image...</p>
                                             </div>
-                                        </React.Fragment>
-                                    )
-                                }
+                                        )
+                                    }
+                                    <div className="profilePicPreviewNoteBox flexBox">   
+                                        <div className="chooseProfilePicInputBox">
+                                            <label htmlFor="coverPicFileInput">Profile Pic</label>
+                                            <input ref={profilePicImageRef} id="coverPicFileInput" type="file" onChange={handleProfilePicPreview} style={{visibility: `hidden`}}/>
+                                        </div>
+                                    </div>
+                                </div>
                                 {
                                     profileImagePreview && (
                                         <React.Fragment>

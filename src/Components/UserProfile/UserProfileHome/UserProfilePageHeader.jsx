@@ -9,7 +9,7 @@ import "../../../Styles/UserProfile/UserProfile.css";
 import { database, storage } from '../../../Firebase/firebase';
 
 const UserProfilePageHeader = ({ coverPhoto, currentUser, forceRefresh, userProfileDetails}) => {
-    console.log(coverPhoto);
+    
     const [addBioVisibility, setAddBioVisibility] = useState(false);
     const [textFieldQuery, setTextFieldQuery] = useState("");
     const [showCoverPicModal, setShowCoverPicModal] = useState(false);
@@ -126,7 +126,7 @@ const UserProfilePageHeader = ({ coverPhoto, currentUser, forceRefresh, userProf
                                                         picUploadState ? (
                                                             <div className="newPostProgressContainer flexBox">
                                                                 <div className="progressBox">
-                                                                    <h2>Hakuna Matata!</h2> 
+                                                                    <h2>uploading...</h2> 
                                                                     <br />
                                                                     <br />
                                                                     <DisappearedLoading size="small"/>
@@ -144,25 +144,21 @@ const UserProfilePageHeader = ({ coverPhoto, currentUser, forceRefresh, userProf
                                                         </div>
                                                     </div>
                                                     <div className="profilePicPreviewContainer">
-                                                        {
-                                                            !coverPicImagePreview && (
-                                                                <React.Fragment>
-                                                                    {
-                                                                        errorImagePreview && (
-                                                                            <div className="errorCoverPicMessage">
-                                                                                <p>Choose only image...</p>
-                                                                            </div>
-                                                                        )
-                                                                    }
-                                                                    <div className="profilePicPreviewNoteBox flexBox">   
-                                                                        <div className="chooseProfilePicInputBox">
-                                                                            <label htmlFor="coverPicFileInput">Cover Pic</label>
-                                                                            <input ref={coverPicImageRef} id="coverPicFileInput" type="file" onChange={handleChangeCoverPicPreview} style={{visibility: `hidden`}}/>
-                                                                        </div>
+                                                        <div style={coverPicImagePreview ? {display: `none`} : {display: `block`} }>
+                                                            {
+                                                                errorImagePreview && (
+                                                                    <div className="errorCoverPicMessage">
+                                                                        <p>Choose only image...</p>
                                                                     </div>
-                                                                </React.Fragment>
-                                                            )
-                                                        }
+                                                                )
+                                                            }
+                                                            <div className="profilePicPreviewNoteBox flexBox">   
+                                                                <div className="chooseProfilePicInputBox">
+                                                                    <label htmlFor="coverPicFileInput">Cover Pic</label>
+                                                                    <input ref={coverPicImageRef} id="coverPicFileInput" type="file" onChange={handleChangeCoverPicPreview} style={{visibility: `hidden`}}/>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                         {
                                                             coverPicImagePreview && (
                                                                 <React.Fragment>

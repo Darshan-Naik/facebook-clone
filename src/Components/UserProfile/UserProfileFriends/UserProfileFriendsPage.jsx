@@ -6,8 +6,6 @@ function UserProfileFriendsPage({ forceRefresh, userFriends }) {
 
     const [userFriendsList, setUserFriendsList] = useState([]);
     const { users } = useSelector( state => state.app );
-
-    console.log(userFriendsList);
     
     useEffect(() => {
         forceRefresh();

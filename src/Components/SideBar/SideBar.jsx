@@ -15,19 +15,19 @@ function SideBar() {
                 <Link className="flexBox sideBarContentLink" to={`/profile/${uid}`}>
                     <SideBarContent src={profilePic} label={`${first_name} ${last_name}`} />
                 </Link>
-                <Link className="flexBox sideBarContentLink" to="/friends/profile">
+                <Link className="flexBox sideBarContentLink" to="/friends">
                     <SideBarContent src={process.env.PUBLIC_URL + '/Images/friends_icon.png'} label="Friends" />
                 </Link>
                 <Link className="flexBox sideBarContentLink" to="/">
                     <SideBarContent src={process.env.PUBLIC_URL + '/Images/market_place_icon.png'} label="Marketplace" />
                 </Link>
-                <Link className="flexBox sideBarContentLink" to="/">
+                <Link className="flexBox sideBarContentLink" to="/messenger/new">
                     <SideBarContent src={process.env.PUBLIC_URL + '/Images/messenger_icon.png'} label="Messenger" />
                 </Link>
                 <Link className="flexBox sideBarContentLink" to="/">
                     <SideBarContent src={process.env.PUBLIC_URL + '/Images/memories_icon.png'} label="Memories" />
                 </Link>
-                <Link className="flexBox sideBarContentLink" to="/">
+                <Link className="flexBox sideBarContentLink" to="/videos">
                     <SideBarContent src={process.env.PUBLIC_URL + '/Images/watch_icon.png'} label="Watch" />
                 </Link>
                 <Link className="flexBox sideBarContentLink" to="/">
