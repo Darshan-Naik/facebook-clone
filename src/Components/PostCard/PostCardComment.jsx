@@ -60,14 +60,15 @@ function PostCardComment({postId,comments,userData}) {
                 <div className="addComment flexBox">
                     <div className="commentInput flexBox">
                         <input autoComplete ="off" autoFocus type="text" name="comment" id="comment" value={comment} onChange={handleChange} onKeyDown={handleSubmit} placeholder="Write a comment..."/>
-                        <div className="flexBox">
+                        <div className="postEmojiMartContainer flexBox">
                             <EmojiIcon onClick={()=>setEmojiVisibility(!emojiVisibility)}/>
                             {/* <CameraIcon/> */}
+                            {emojiVisibility&&<div className="commentInput1">
+                                <EmojiMart handleEmoji={handleEmoji}/>
+                            </div>}
                         </div>
                     </div>
-                    {emojiVisibility&&<div className="commentInput1">
-                        <EmojiMart handleEmoji={handleEmoji}/>
-                        </div>}
+                    
                     <small>Press Enter to post.</small>
 
                 </div>

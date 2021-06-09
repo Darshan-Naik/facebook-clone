@@ -254,14 +254,30 @@
     background-color: var(--secondary-background-1);
     
 }
+.postEmojiMartContainer{
+    position:relative;
+}
 .commentInput1{
-    flex:1;
-    border-radius: 25px;
-    height: 36px;
-    padding: 0 10px;
-    width: 100%;
-    
-    
+    position: absolute;
+    top: -370px;
+    right: -18px;
+    z-index: 1000;
+    width: 20vw;
+    border-radius: 5px;
+    box-shadow:0 0 20px 10px var( --shadow-2);
+  
+}
+.commentInput1::before{
+    content: "";
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    bottom: -7px;
+    right: 20px;
+    background-color: var(--primary-background);
+    transform: rotate(45deg);
+    border-top: 1px solid var(--shadow-1);
+    border-left: 1px solid var(--shadow-1);
 }
 .commentInput input{
     border: 0px;
