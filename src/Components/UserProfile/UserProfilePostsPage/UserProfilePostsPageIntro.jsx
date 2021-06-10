@@ -1,24 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
 import EditProfileDataModal from "./EditProfileDataModal";
-import friendsList from '../../../Utils/friendsList';
+import UserFriendCard from "./UserFriendsCard";
+import PostPageFriendsSkeleton from "../UserProfileHome/Skeleton/PostPageFriendsSkeleton";
 
-function UserProfilePostsPageIntro({ education, lives, from, relationship, joinedOn, alternativePath, userProfileDetails, userFriends }) {
+function UserProfilePostsPageIntro({ alternativePath, userProfileDetails, userFriends }) {
 
     const [editUserDetailsModalState, setEditUserDetailsModalState] = useState(false);
-    const [userFriendsList, setUserFriendsList] = useState([])
     
-    const { users } = useSelector( state => state.app );
     const { uid } = useSelector( state => state.auth.user );
     
     const handleEditUserDetailsModal = () => {
         setEditUserDetailsModalState(!editUserDetailsModalState)
     }
-
-    useEffect(() => {
-        setUserFriendsList( friendsList( users, userFriends ) )
-    }, [users, userFriends])
 
     return (
         <div className="postsPageIntroMainContainer">
@@ -87,37 +82,40 @@ function UserProfilePostsPageIntro({ education, lives, from, relationship, joine
                     )  
                 }
             {
-                userFriends.length > 0 && (
-                    <div className="postsPageUserDetailsContainer">
-                        <div className="flexBox postsPageFriendsNameBox">
-                            <h1 className="postsPageUserDetailsNamePlate">Friends</h1>
-                            <Link to={`${alternativePath}/${userProfileDetails.uid}/friends`} className="postsPageLinkToFriendsPage">See all Friends</Link>
-                        </div>
-                        <div className="postsPageFriendsCount">
-                            <span>{userFriendsList.length}</span>
-                            <span>
+                userFriends ? (
+                    userFriends.length > 0 ? (
+                        <div className="postsPageUserDetailsContainer">
+                            <div className="flexBox postsPageFriendsNameBox">
+                                <h1 className="postsPageUserDetailsNamePlate">Friends</h1>
+                                <Link to={`${alternativePath}/${userProfileDetails.uid}/friends`} className="postsPageLinkToFriendsPage">See all Friends</Link>
+                            </div>
+                            <div className="postsPageFriendsCount">
+                                <span>{userFriends.length}</span>
+                                <span>
+                                    {
+                                        userFriends.length > 1 ? ` friends` : ` friend`
+                                    }
+                                </span>
+                            </div>
+                            <div className="flexBox postsPageUserFriendsContainer">
                                 {
-                                    userFriendsList.length > 1 ? ` friends` : ` friend`
+                                    userFriends.map( (el, i) => {
+                                        return i < 9 && (
+                                            <UserFriendCard key={el.friendId} {...el} />
+                                        )
+                                    })
                                 }
-                            </span>
+                            </div>
                         </div>
-                        <div className="flexBox postsPageUserFriendsContainer">
-                            {
-                                userFriendsList.map( el => {
-                                    return (
-                                        <div key={el.uid} className="flexBox postsPageUserFriendsBox">
-                                            <Link className="postsPageUserFriendsLink" to={`/profile/${el.uid}`}>
-                                                <img className="postsPageFriendsImage" src={el.profilePic || process.env.PUBLIC_URL + '/Images/userProfile_icon.png'} alt={`${el.first_name}`}/>
-                                            </Link>
-                                            <Link className="postsPageUserFriendsNamePlate" to={`/profile/${el.uid}`}>
-                                                {`${el.first_name} ${el.last_name}`}
-                                            </Link>
-                                        </div>
-                                    )
-                                })
-                            }
+                    ) : (
+                        <div className="postsPageUserDetailsContainer">
+                            <h1>No Friends to show</h1>
                         </div>
-                    </div>
+                    )
+                ) : (
+                    <React.Fragment>
+                        <PostPageFriendsSkeleton userFriends={userFriends} />
+                    </React.Fragment>
                 )
             }
         </div>

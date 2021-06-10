@@ -164,14 +164,29 @@
 }
 
 .addBioEmojiContainer {
-    max-width: 250px;
+    width: auto;
+    height: auto;
     position: absolute;
     z-index: 25;
     top: 0;
     right: 50%;
-    border-radius: 6px;
+    border-radius: 4px;
+    background-color: var(--primary-background);
     transform: translate(10%, 7%);
     box-shadow: 0 0 20px 10px var( --shadow-2);
+}
+
+.addBioEmojiContainer .emoji-mart {
+    border: none !important;
+}
+
+.addBioEmojiContainer .emoji-mart-scroll {
+    background-color: transparent !important;
+    padding: 0 !important;
+}
+
+.addBioEmojiContainer .emoji-mart-bar {
+    background-color: transparent !important;
 }
 
 .addBioEmojiContainer::before {
@@ -671,7 +686,7 @@
 }
 
 .userProfileNavDotsBox path {
-    fill: var(--secondary-icon);
+    fill: var(--primary-text);
 }
 
 .userProfileNavAfterScrollBox {

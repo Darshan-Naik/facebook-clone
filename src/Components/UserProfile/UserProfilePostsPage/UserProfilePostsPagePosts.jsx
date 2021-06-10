@@ -1,12 +1,26 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import PostCard from "../../PostCard/PostCard";
 import NewPost from "../../NewPost/NewPost";
+import { database } from '../../../Firebase/firebase';
 
 function UserProfilePostsPagePosts({userProfileDetails}) {
-    
-    const { posts } = useSelector(state => state.posts);
+    const [userPosts, setUserPosts] = useState([]);
+
     const { uid } = useSelector(state => state.auth.user);
+
+    useEffect(() => {
+        const unsubscribe = database.collection('posts').where('author', "==", userProfileDetails.uid).orderBy("time","desc")
+        .onSnapshot( res => {
+            const newPosts = res.docs.map(doc=>({id:doc.id,...doc.data()}))
+            setUserPosts( newPosts );
+        });
+
+        return () => {
+            unsubscribe();
+        }
+
+    }, [userProfileDetails])
 
     return (
         <div className="userPostsContainer scroll">
@@ -18,7 +32,7 @@ function UserProfilePostsPagePosts({userProfileDetails}) {
                 )
             }
             {
-                posts.map( el => el.author === userProfileDetails.uid ? <PostCard {...el} key={el.id} /> : null )
+                userPosts.map( el => <PostCard {...el} key={el.id} /> )
             }
         </div>
     )
