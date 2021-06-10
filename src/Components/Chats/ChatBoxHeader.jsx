@@ -4,17 +4,22 @@ import {ReactComponent as MinimizeIcon} from  "../../Icons/minimize.svg"
 import {ReactComponent as CloseIcon} from  "../../Icons/close.svg"
 import { useDispatch, useSelector } from 'react-redux'
 import { addInActiveMessage, removeActiveMessage } from '../../Redux/App/actions'
+import { database } from '../../Firebase/firebase'
 function ChatBoxHeader({chatID,authors,activeStatus}) {
-    
-    const users = useSelector(store=>store.app.users)
     const uid = useSelector(store=>store.auth.user.uid)
     const [useDetails,setUserDetails] = React.useState({})
 
     React.useEffect(()=>{
         const senderID = authors.filter(id=>id !==uid)
-        const user = users.filter(item=>item.uid === senderID[0])
-        setUserDetails(user[0])
-    },[users,uid,authors])
+            const unsubscribe = database.collection("users").doc(senderID[0])
+            .onSnapshot((doc) => {
+                setUserDetails(doc.data());             
+            });
+            return () => {
+                unsubscribe();
+            }
+
+    },[uid,authors])
 
     const dispatch = useDispatch()
     const handleClose =()=>{

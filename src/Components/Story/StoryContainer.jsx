@@ -15,10 +15,8 @@ function StoryContainer(){
             setLenStory(5)
         } else if(window.innerWidth<1210 && window.innerWidth>600){
             setLenStory(4);
-            console.log(lenStory)
         } else if(window.innerWidth<600){
             setLenStory(3);
-            console.log(lenStory)
         }
     }
 

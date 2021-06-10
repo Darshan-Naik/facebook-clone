@@ -1,19 +1,23 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router'
+import { database } from '../../Firebase/firebase'
 import StatusDot from "../../SharedComponents/StatusDot"
 
 function ChatRoomCard({chatID,authors,message ="Text",time="while ago"}) {
-
-    const users = useSelector(store=>store.app.users)
     const uid = useSelector(store=>store.auth.user.uid)
     const [useDetails,setUserDetails] = React.useState({})
     const history =useHistory()
     React.useEffect(()=>{
         const senderID = authors.filter(id=>id !==uid)
-        const user = users.filter(item=>item.uid === senderID[0])
-        setUserDetails(user[0])
-    },[uid,users,authors])
+            const unsubscribe = database.collection("users").doc(senderID[0])
+            .onSnapshot((doc) => {
+                setUserDetails(doc.data());
+            });
+            return () => {
+                unsubscribe();
+            }
+    },[uid,authors])
     return (
         <div className="chatRoomCardBox flexBox" onClick={()=>history.push(`/messenger/${chatID}`)}>
             <div className="chatRoomUserImage">

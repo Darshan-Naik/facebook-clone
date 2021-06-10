@@ -7,9 +7,13 @@ import NewPost from '../NewPost/NewPost';
 import StoryContainer from '../Story/StoryContainer';
 
 import {  useSelector } from 'react-redux';
+import { database } from '../../Firebase/firebase';
 
 function Home({handleRefresh}) {
-
+    const uid = useSelector(store=>store.auth.user.uid)
+    React.useEffect(()=>{
+        database.collection("users").doc(uid).update({activeStatus : new Date()}) 
+   },[uid])
     const posts = useSelector(store=>store.posts.posts)
     React.useEffect(handleRefresh,[])
     return (

@@ -10,7 +10,6 @@ function UserDetails({time="Active Now"}) {
     const uid = useSelector(store=>store.auth.user.uid)
     const [senderData,setSenderData] = React.useState(null)
     React.useEffect(()=>{
-
        database.collection("chatRooms").doc(chatID).get()
        .then((docRef) =>{ 
            const data = docRef.data()
@@ -18,7 +17,6 @@ function UserDetails({time="Active Now"}) {
         database.collection("users").doc(sendID[0]).get()
         .then((docRef) =>{         
             setSenderData( docRef.data()) 
-     
      })
     })
 

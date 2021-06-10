@@ -10,7 +10,7 @@ function ChatBox({chatID,authors,active,handleActiveChatBox,index}) {
     const scroll = React.useRef()
     const uid = useSelector(store=>store.auth.user.uid)
     React.useEffect(()=>{
-        database.collection("chatRooms").doc(chatID).collection("messages").orderBy("time","asc")
+      const unsubscribe =   database.collection("chatRooms").doc(chatID).collection("messages").orderBy("time","asc")
         .onSnapshot(snapshot=>{
             setMessages(snapshot.docs.map(doc=>{
             if(doc.data().author !==uid && !doc.data().isRead){
@@ -21,6 +21,11 @@ function ChatBox({chatID,authors,active,handleActiveChatBox,index}) {
         }))
 
     })
+
+    return ()=>{
+        unsubscribe()
+    }
+
     },[chatID,uid])
     React.useEffect(()=>{
         scroll.current.scroll(0,200000)
