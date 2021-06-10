@@ -1,0 +1,108 @@
+.userFriendsPageContainer {
+    max-width: 875px;
+    width: 100%;
+    margin: auto;
+    margin-top: 14.5px;
+    border-radius: 6px;
+    padding: 15px;
+    background-color: var(--primary-background);
+}
+
+.userFriendsPageHeaderBox {
+    justify-content: space-between;
+}
+
+.userFriendsPageHeaderTitle {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.friendsPageHeaderLinks {
+    font-size: 15px;
+    font-weight: 500;
+    padding: 8px 12px;
+    border-radius: 5px;
+    margin-right: 8px;
+    text-decoration: none;
+    color: var(--primary-1);
+    transition: all 0.3s ease-in-out;
+}
+
+.friendsPageHeaderLinks:hover {
+    background-color: var(--secondary-background-1);
+}
+
+/* Friends Card CSS */
+
+.friendsCardMainContainer {
+    width: 100%;
+    gap: 13px;
+    margin-top: 14.5px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.friendsCardMainBox {
+    max-width: 415px;
+    width: 100%;
+    padding: 16px;
+    border-radius: 6px;
+    justify-content: flex-start;
+    border: 1px solid var(--shadow-1);
+}
+
+.friendsCardBox {
+    width: 100%;
+}
+
+.friendsProfilePicCover {
+    width: 80px;
+    height: 80px;
+}
+
+.fiendsProfilePic {
+    width: 100%;
+    height: 100%;
+    border-radius: 6px;
+}
+
+.fiendsProfilePic:hover {
+    filter: contrast(90%);
+}
+
+.friendsCardNamePlateBox {
+    flex: 1;
+    padding: 0 15px;
+    text-align: left;
+}
+
+.friendsCardNamePlateBox a {
+    text-decoration: none;
+}
+
+.friendsCardThreeDotsBox {
+    border-radius: 50px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.friendsCardThreeDotsBox:hover {
+    background-color: var(--secondary-background-1);
+}
+
+.friendsCardThreeDotsBox .DotsIcon {
+    fill: var(--primary-text);
+}
+
+@media only screen and ( max-width: 880px ) {
+    .friendsCardMainBox {
+        max-width: 500px;
+        width: 100%;
+        margin: auto;
+    }
+
+    .friendsProfilePicCover {
+        width: 100px;
+        height: 100px;
+    }
+}
