@@ -3,15 +3,17 @@ import { useSelector } from 'react-redux'
 import {ReactComponent as PhotosIcon} from  "../../Icons/photos.svg"
 import {ReactComponent as EmojiIcon} from  "../../Icons/emoji.svg"
 import NewPostModal from './NewPostModal'
+import { useHistory } from 'react-router'
 
 function NewPost() {
     const [postModalVisibility,setPostModalVisibility] = React.useState(false)
-    const {first_name,profilePic} = useSelector(store=>store.auth.user)
+    const {first_name,profilePic,uid} = useSelector(store=>store.auth.user)
+    const history = useHistory()
     return (
         <>
         <div className="newPostContainer">
             <div className="newPostUserImage flexBox">
-                <img  src={profilePic || process.env.PUBLIC_URL + '/Images/userProfile_icon.png'}  alt="User" />
+                <img onClick={()=>history.push(`/profile/${uid}`)} src={profilePic || process.env.PUBLIC_URL + '/Images/userProfile_icon.png'}  alt="User" />
                 <div onClick={()=>setPostModalVisibility(true)}>
                     <p>{`Whats on your mind, ${first_name || ""}?`} </p>
                 </div>

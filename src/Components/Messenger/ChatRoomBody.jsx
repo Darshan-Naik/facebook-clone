@@ -19,8 +19,7 @@ function ChatRoomBody({handleUserDetailsVisibility,data}) {
                 .then((docRef) =>{ 
                     const data = docRef.data()
                     const  sendID = data.authors.filter(item=> item !==uid)
-                    database.collection("users").doc(sendID[0]).get()
-                    .then((docRef) =>{         
+                    database.collection("users").doc(sendID[0]).onSnapshot(docRef =>{         
                         setSenderData( docRef.data())                
                 })
                 })
