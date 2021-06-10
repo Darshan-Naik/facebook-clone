@@ -76,6 +76,7 @@
     border-radius: 8px;
     transition: all .2s ease-in-out;
     cursor: pointer;
+    position: relative;
 }
 .chatRoomCardBox:hover{
     background-color: var(--hover-overlay);
@@ -96,14 +97,15 @@
     flex: 1;
     text-align: left;
 }
-.chatRoomUserDetails p{
+.chatRoomUserDetails h2{
     font-size: 14px;
     font-weight: 400;
 }
-.chatRoomUserDetails small,.chatRoomUserDetails span{
+.chatRoomUserDetails small,.chatRoomUserDetails span,.chatRoomUserDetails p{
     font-size: 11px;
     font-weight: 400;
     color: var(--secondary-text);
+    justify-content: space-between;
 }
 .chatRoomUserDetailsImage{
     width: 100px;
@@ -226,6 +228,13 @@
     text-align: left;
     margin-left: 0;
     box-shadow: 0 5px 10px 0 var(--shadow-2);
+    max-width: 30vw;
+    white-space: pre-wrap;
+    word-wrap:break-word;
+}
+.MessengerBoxMessage small{
+    font-size: 12px;
+    color: var(--secondary-text);
 }
 .MessengerSentChat{
     margin-left: auto;
@@ -234,7 +243,7 @@
     border-radius: 10px 10px 0 10px;
 }
 .MessengerSentChat *{
-    color: var(--white);
+    color: var(--white)!important;
 }
 .messengerFillBox{
     flex: 1;
@@ -248,6 +257,12 @@
     width: 100px;
     height: 100px;
 
+}
+.messengerText{
+    max-width: 50px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 @media only screen and (max-width: 992px) {
     .chatRoomUserDetailsContainer{

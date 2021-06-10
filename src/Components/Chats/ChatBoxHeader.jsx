@@ -5,10 +5,24 @@ import {ReactComponent as CloseIcon} from  "../../Icons/close.svg"
 import { useDispatch, useSelector } from 'react-redux'
 import { addInActiveMessage, removeActiveMessage } from '../../Redux/App/actions'
 import { database } from '../../Firebase/firebase'
-function ChatBoxHeader({chatID,authors,activeStatus}) {
+import checkActive from '../../Utils/checkActive'
+function ChatBoxHeader({chatID,authors}) {
     const uid = useSelector(store=>store.auth.user.uid)
     const [useDetails,setUserDetails] = React.useState({})
+    const [activeState,setActiveState]=React.useState(false);
+   
+   
+    React.useEffect(()=>{
+        if(useDetails?.activeStatus){
+            if(checkActive(useDetails?.activeStatus)==="Active Now"){
+                setActiveState(true);
+            }else{
+                setActiveState(false);
+            }
 
+        }
+        
+    },[useDetails?.activeStatus])
     React.useEffect(()=>{
         const senderID = authors.filter(id=>id !==uid)
             const unsubscribe = database.collection("users").doc(senderID[0])
@@ -33,11 +47,11 @@ function ChatBoxHeader({chatID,authors,activeStatus}) {
             <div className="chatBoxUser flexBox">     
                 <div className="chatBoxUserImage">
                         <img  src={useDetails.profilePic || process.env.PUBLIC_URL + '/Images/userProfile_icon.png'}  alt="User" />
-                        <StatusDot bottom={5} right={2} width="12px" height="12px"/>
+                      {activeState &&  <StatusDot bottom={5} right={2} width="12px" height="12px"/>}
                 </div>
                 <div className="chatBoxUserDetails flexBox">
                     <h4>{ useDetails.first_name? `${useDetails.first_name} ${useDetails.last_name}` : "User"}</h4>
-                    <small>{activeStatus || "While ago"}</small>
+                    <small>{checkActive(useDetails?.activeStatus)}</small>
                 </div>
             </div>
             <div className="chatBoxHeaderIcons flexBox">

@@ -258,10 +258,17 @@
     text-align: left;
     margin-left: 0;
     box-shadow: 0 5px 10px 0 var(--shadow-2);
-    
+    max-width: 70%; 
 }
 .chatBoxMessage p{
     font-size: 13px;
+
+    white-space: pre-wrap;
+    word-wrap:break-word;
+}
+.chatBoxMessage small{
+    font-size: 12px;
+    color: var(--secondary-text);
 }
 .sentChat{
     margin-left: auto;
@@ -270,7 +277,7 @@
     border-radius: 10px 10px 0 10px;
 }
 .sentChat *{
-    color: var(--white);
+    color: var(--white)!important;
 }
 .fillBox{
   flex:1;

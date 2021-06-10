@@ -13,7 +13,7 @@ function Home({handleRefresh}) {
     const uid = useSelector(store=>store.auth.user.uid)
     React.useEffect(()=>{
         database.collection("users").doc(uid).update({activeStatus : new Date()}) 
-   },[uid])
+    },[uid])
     const posts = useSelector(store=>store.posts.posts)
     React.useEffect(handleRefresh,[])
     return (
