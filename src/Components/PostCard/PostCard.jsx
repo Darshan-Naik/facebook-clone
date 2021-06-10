@@ -3,9 +3,10 @@ import PostCardFooter from './PostCardFooter';
 import PostCardHead from './PostCardHead';
 import {ReactComponent as LikeEmoji} from  "../../Icons/likeEmoji.svg"
 import PostCardComment from './PostCardComment';
-import { database } from '../../Firebase/firebase';
+import { database, storage } from '../../Firebase/firebase';
 import { useSelector } from 'react-redux';
 import PostModal from '../PostModal/PostModal';
+import PostCardSkeleton from './Skeleton/PostCardSkeleton';
 
 
 
@@ -13,9 +14,9 @@ function PostCard({title,image,imagePath,id,author,time,video,activity}) {
     const[commentSection,setCommentSection]=React.useState(false);
     const[likes,setLikes]=React.useState([]);
     const [comments,setComments]=React.useState([]);
-    const [userData,setUserData]=React.useState({});
+    const [userData,setUserData]=React.useState(null);
     const [postModalVisibility,setPostModalVisibility]=React.useState(false);
-
+    const [loading, setLoading]=React.useState(true);
     const {uid} = useSelector(store=>store.auth.user)
 
     const showComment =()=>{
@@ -44,9 +45,11 @@ function PostCard({title,image,imagePath,id,author,time,video,activity}) {
         
 
     }
+   
 
     const handleDeletePost=()=>{
-        //database.collection("posts").doc(id).delete();
+        database.collection("posts").doc(id).delete();
+        storage.ref("postImages").child(imagePath).delete();
         
     }
 
@@ -93,7 +96,7 @@ function PostCard({title,image,imagePath,id,author,time,video,activity}) {
         })
     },[])
 
-
+   
     React.useEffect(() => {
         const unsubscribe = database.collection("users").doc(author)
         .onSnapshot((doc) => {
@@ -109,10 +112,10 @@ function PostCard({title,image,imagePath,id,author,time,video,activity}) {
 
     return (
         <>
-        <div className="postCardContainer">
+        <div className="postCardContainer" style={{display:loading||!userData?"none":"block"}}>
             <PostCardHead {...userData} postEditFunction={{handleEditPost,handleDeletePost,handleSetProfilePic}} time={time} author={author} image={image}title={title} activity={activity}/>
             {title && <div className="postCardTags">{title}</div>}
-            {image&&<div onClick={()=>setPostModalVisibility(true)} className="postCardImage"><img src={image|| process.env.PUBLIC_URL + '/Images/facebook_login_logo.png'} alt="img" /></div>}
+            {image&&<div onClick={()=>setPostModalVisibility(true)} className="postCardImage"><img onLoad={()=>setLoading(false)} src={image|| process.env.PUBLIC_URL + '/Images/facebook_login_logo.png'} alt="img" /></div>}
             {video&&<div className="postCardImage">
                 <video width="100%" height="500" controls >
                     <source src={video} type="video/mp4"/>
@@ -127,8 +130,12 @@ function PostCard({title,image,imagePath,id,author,time,video,activity}) {
            
         </div>
         {postModalVisibility &&<PostModal handleClosePostModal={handleClosePostModal} uid={uid} image={image} video={video} time={time} userData={userData}  activity={activity} id={id} likes={likes} comments={comments} title={title} handleLike={handleLike} handleDeleteLike={handleDeleteLike} />}
-        </>
-    )
+       
+    
+        <div className="postCardContainer" style={{display:loading||!userData?"block":"none"}}>
+            <PostCardSkeleton/>
+        </div>
+        </>)
 }
 
 export default PostCard
