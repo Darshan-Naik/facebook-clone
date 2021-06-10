@@ -12,7 +12,7 @@ function DeletePostModal({handleCancel,handleDelete}) {
                     </div> 
                 </div>
                 <div className="deletePostModaleMiddle">      
-                    <p className="">Are you sure, you will never get this post again...</p>
+                    <p>Are you sure, you will never get this post again...</p>
                 </div>
                 <div className="deletePostModaleFooter flexBox">
                     <button className="postDeleteButton"  onClick={handleDelete}>Yes</button>

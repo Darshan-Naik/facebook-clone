@@ -45,7 +45,7 @@ function PostCard({title,image,imagePath,id,author,time,video,activity}) {
         
 
     }
-    console.log(imagePath)
+   
 
     const handleDeletePost=()=>{
         database.collection("posts").doc(id).delete();
@@ -96,7 +96,7 @@ function PostCard({title,image,imagePath,id,author,time,video,activity}) {
         })
     },[])
 
-
+   
     React.useEffect(() => {
         const unsubscribe = database.collection("users").doc(author)
         .onSnapshot((doc) => {
