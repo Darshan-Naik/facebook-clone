@@ -5,6 +5,7 @@ import {ReactComponent as CameraIcon} from  "../../Icons/cameraIcon.svg";
 import {ReactComponent as EmojiIcon} from  "../../Icons/happyFace.svg";
 import CommentBox from './CommentBox';
 import EmojiMart from "../../SharedComponents/EmojiMart"
+import { useHistory } from 'react-router';
 
 
 function PostCardComment({postId,comments,userData}) {
@@ -13,6 +14,7 @@ function PostCardComment({postId,comments,userData}) {
     const [limit, setLimit]=React.useState(2)
     const [emojiVisibility,setEmojiVisibility]=React.useState(false)
 
+    const history =useHistory();
     const {uid,profilePic} = useSelector(store=>store.auth.user)
 
     const handleChange=(e)=>{
@@ -38,7 +40,10 @@ function PostCardComment({postId,comments,userData}) {
                 tag:"comment"
             }
             database.collection("posts").doc(postId).collection("comments").add(payload);
-            database.collection("users").doc(userData.uid).collection("notifications").add(notificationPayload);
+            if(uid!==userData.uid){
+                database.collection("users").doc(userData.uid).collection("notifications").add(notificationPayload);
+            }
+            
             setComment("")
           }
     }
@@ -54,18 +59,19 @@ function PostCardComment({postId,comments,userData}) {
             {comments?.filter((el,i)=>(comments.length-limit)<=i).map((el)=><CommentBox key={el.commentId}{...el} />)}
             {limit===comments.length&&comments.length>2&&<p onClick={()=>setLimit(2)}>View less comments</p>}
             <div className="postCardInputBox flexBox">
-                <img src={profilePic || process.env.PUBLIC_URL + '/Images/userProfile_icon.png'} alt="mypic" />
+                <img src={profilePic || process.env.PUBLIC_URL + '/Images/userProfile_icon.png'} onClick={()=>history.push(`/profile/${uid}`)} alt="mypic" />
                 <div className="addComment flexBox">
                     <div className="commentInput flexBox">
                         <input autoComplete ="off" autoFocus type="text" name="comment" id="comment" value={comment} onChange={handleChange} onKeyDown={handleSubmit} placeholder="Write a comment..."/>
-                        <div className="flexBox">
+                        <div className="postEmojiMartContainer flexBox">
                             <EmojiIcon onClick={()=>setEmojiVisibility(!emojiVisibility)}/>
                             {/* <CameraIcon/> */}
+                            {emojiVisibility&&<div className="commentInput1">
+                                <EmojiMart handleEmoji={handleEmoji}/>
+                            </div>}
                         </div>
                     </div>
-                    {emojiVisibility&&<div className="commentInput1">
-                        <EmojiMart handleEmoji={handleEmoji}/>
-                        </div>}
+                    
                     <small>Press Enter to post.</small>
 
                 </div>

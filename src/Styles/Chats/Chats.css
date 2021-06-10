@@ -283,14 +283,18 @@
     width: 250px;
     bottom: 30px;
     right: 0;
+    border: 1px solid var(--shadow-1);
+    border-radius: 8px;
+    padding: 2px;
+    background-color: var(--primary-background);
 }
 .chatBoxEmojiMart::after{
     content: "";
-    width: 12px;
-    height: 12px;
+    width: 10px;
+    height: 10px;
     background-color:  var(--primary-background);
     position: absolute;
-    bottom: 0px;
+    bottom: -6px;
     right: 10px;
     transform: rotate(45deg);
     border-bottom: 1px solid var(--shadow-1);
