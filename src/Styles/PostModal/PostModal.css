@@ -17,17 +17,21 @@
   z-index: 50000;
 }
 .postDetailsCardHeadContainer {
-  padding: 0 15px 5px 15px;
+  padding: 5px 10px;
+}
+.postDetailsCardHeadBox1{
+  position: relative;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  margin: 0 10px ;
+  box-shadow: 0 0 5px var(--shadow-1);
+  cursor: pointer;
 }
 .postDetailsCardHeadBox1 > img {
-  width: 38px;
-  height: 38px;
+  width: 35px;
+  height: 35px;
   border-radius: 50%;
-  box-shadow: 0px 0px 0px 2px var(--white), 0px 0px 0px 4px var(--primary-1);
-  margin: 0 10px;
-  margin-top: 10px;
-  margin-left: 0;
-  cursor: pointer;
 }
 
 .postDetailsCardHeadBox2 {
@@ -68,6 +72,11 @@
 .postDetailsCardHeadBox3:hover {
   background: var(--hover-overlay);
 }
+.postDetailsCardHeadBox3>.dotsIcon{
+  fill: var(--primary-icon);
+}
+
+/*-----------Middle-part--------------*/
 .postDetailsCardTags {
   font-size: 14px;
   line-height: 1.3333;
@@ -147,6 +156,8 @@
   cursor: pointer;
   font-weight: 500;
 }
+
+/*--------Comment-section------------------*/
 .postDetailsCardCommentContainer {
   margin: 0px 15px 10px 15px;
   padding: 5px 0px 5px 0px;
@@ -157,7 +168,7 @@
   display: flex;
   flex-direction: column;
 }
-.postDetailsCardCommentContainer p {
+.postDetailsCardCommentContainer  {
   font-weight: 500;
   color: var(--secondary-text);
   font-size: 14px;

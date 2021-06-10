@@ -20,6 +20,10 @@ function EditBox({handleEditSection,first_name,image,last_name,profilePic,title,
         handleEditSection();
         setDeleteModal(false);
     }
+    const handleSetProfile=()=>{
+        handleEditSection();
+        handleSetProfilePic();
+    }
    
     return (
         <div className="editPostContainer">
@@ -28,8 +32,8 @@ function EditBox({handleEditSection,first_name,image,last_name,profilePic,title,
                     <img src={process.env.PUBLIC_URL + '/Images/edit_icon.png'} alt="editIcon" />
                     <p>Edit Post</p>
                 </div>
-                {image&&<div onClick={handleEditSection} className="editBox flexBox" onClick={handleSetProfilePic}>
-                <img src={process.env.PUBLIC_URL + '/Images/plus_icon.png'} alt="setIcon" />
+                {image&&<div className="editBox flexBox" onClick={handleSetProfile}>
+                    <img src={process.env.PUBLIC_URL + '/Images/plus_icon.png'} alt="setIcon" />
                     <p>Set as Profile Pic</p>
                 </div>}
                 <div className="editBox editPost1 flexBox" onClick={()=>setDeleteModal(true)}>
@@ -37,7 +41,7 @@ function EditBox({handleEditSection,first_name,image,last_name,profilePic,title,
                     <p>Delete Post</p>
                 </div>
             </div>
-           {editModal && <EditPostModal handleEditSection={handleEditSection} handleEditModal={handleEditModal} setEditTitle={setEditTitle} editTitle={editTitle} handleEditPost={handleEditPost} setEditModal={setEditModal} first_name={first_name} last_name={last_name} profilePic={profilePic} title={title}/>}
+            {editModal && <EditPostModal handleEditSection={handleEditSection} handleEditModal={handleEditModal} setEditTitle={setEditTitle} editTitle={editTitle} handleEditPost={handleEditPost} setEditModal={setEditModal} first_name={first_name} last_name={last_name} profilePic={profilePic} title={title}/>}
             {deleteModal && <DeletePostModal handleDelete={handleDelete} handleCancel={handleCancel}/>}
         </div>
     )

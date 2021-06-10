@@ -48,16 +48,20 @@ function PostCardHead({first_name,last_name,profilePic,time,author,activity,titl
             </div>
             <div className="postCardHeadBox2">
                 <div className="postCardActivity flexBox">
-                    <div onClick={()=>history.push(`/profile/${author}`)}><strong>{`${first_name} ${last_name}`}</strong></div>
-                    {activity&&<div><span>{activity}</span></div>} 
+                    <div onClick={()=>history.push(`/profile/${author}`)}>
+                        <strong>{`${first_name} ${last_name}`}</strong>
+                    </div>
+                    {activity&&<div>
+                        <span>{activity}</span>
+                    </div>} 
                 </div>
-                
-                <div><span>{checkTime[0]===originalTime[0]?localTime1:`${localTime.join(" ")}, ${localTime1}`}</span></div> 
+                <div>
+                    <span>{checkTime[0]===originalTime[0]?localTime1:`${localTime.join(" ")}, ${localTime1}`}</span>
+                </div> 
             </div>
             <div className="postCardHeadBox3 flexBox">
                 <DotsIcon onClick={()=>setEditSection(!editSection)}/>
                 {author===uid&&editSection&&<EditBox handleEditSection={handleEditSection} first_name={first_name} last_name={last_name} profilePic={profilePic} title={title} {...postEditFunction} image={image}/>}
-                {/* author===uid */}
             </div>
            
         </div>

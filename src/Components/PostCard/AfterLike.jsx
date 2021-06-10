@@ -6,8 +6,6 @@ function AfterLike({handleDeleteLike}) {
         <div onClick={handleDeleteLike} className="flexBox">
             <LikeIconBlue />
             <small >Like</small>
-            
-            
         </div>
     )
 }
