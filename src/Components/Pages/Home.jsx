@@ -7,6 +7,7 @@ import NewPost from '../NewPost/NewPost';
 import StoryContainer from '../Story/StoryContainer';
 
 import {  useSelector } from 'react-redux';
+import PostCardSkeleton from '../PostCard/Skeleton/PostCardSkeleton';
 
 function Home({handleRefresh}) {
 
@@ -21,6 +22,18 @@ function Home({handleRefresh}) {
             <div className="mainPostsContainer scroll">
                 <StoryContainer />
                 <NewPost />
+                {!posts?.length &&<div className="postCardContainer" >
+                    <PostCardSkeleton/>
+                </div>}
+                {!posts?.length &&<div className="postCardContainer" >
+                    <PostCardSkeleton/>
+                </div>}
+                {!posts?.length &&<div className="postCardContainer" >
+                    <PostCardSkeleton/>
+                </div>}
+                {!posts?.length &&<div className="postCardContainer" >
+                    <PostCardSkeleton/>
+                </div>}
                 {posts.map((post)=><PostCard key={post.id} {...post}/>)}
 
             </div>
