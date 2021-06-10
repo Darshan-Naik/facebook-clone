@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { database } from '../../Firebase/firebase';
 import "../../Styles/Story/Story.css";
 import StoryContainerSkeleton from './StorySkeleton/StoryContainerSkeleton';
 
 function StoryBox({image, author}){
-    const [userDetails, setUserDetails] = useState({});
-    const users = useSelector(state=>state.app.users);
-
+    const [userDetails, setUserDetails] = useState(null);
     useEffect(()=>{
-        const user = users.filter((el)=>el.uid===author)
-        setUserDetails(user[0])
-    },[users])
+            const unsubscribe = database.collection("users").doc(author)
+            .onSnapshot((doc) => {
+                setUserDetails(doc.data());              
+            });
+            return () => {
+                unsubscribe();
+            }
+    },[])
 
     return userDetails?(
         <div style={{backgroundImage: `url("${image}")`}} className="mainImgContainer">

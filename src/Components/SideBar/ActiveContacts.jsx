@@ -8,14 +8,18 @@ import ActiveContactsSkeleton from './Skeleton/ActiveContactsSkeleton';
 
 function ActiveContacts({friendId}) {
 const [userDetails,setUserDetails] = React.useState(null)
-const users = useSelector(store=>store.app.users)
 const uid = useSelector(store=>store.auth.user.uid)
 const chatRooms = useSelector(store=>store.app.chatRooms) 
 const dispatch = useDispatch()
 React.useEffect(()=>{
-    const user = users.filter((item)=>item.uid === friendId)
-    setUserDetails(user[0])
-},[users])
+        const unsubscribe = database.collection("users").doc(friendId)
+        .onSnapshot((doc) => {
+            setUserDetails(doc.data());
+        });
+        return () => {
+            unsubscribe();
+        }
+},[])
 
 const handleChat =()=>{
     if(userDetails){

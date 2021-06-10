@@ -6,10 +6,11 @@ import Router from "./Routes/Router";
 import { getPosts } from './Redux/Posts/actions';
 import { getChatRooms, getUsers, updateActiveContacts } from "./Redux/App/actions";
 import { getFriendRequest, getFriends, getNotifications, getSentRequest, loginSuccess } from "./Redux/Auth/actions";
+import timeConverter from "./Utils/timeConverter";
 
 function App() {
 
-  const {uid,activeStatus} = useSelector( state => state.auth.user );
+  const uid = useSelector( state => state.auth.user.uid );
   const isAuth = useSelector( state => state.auth.isAuth );
   const friends = useSelector(store=>store.auth.friends)
  
@@ -17,28 +18,19 @@ function App() {
   const root = document.querySelector(':root');
   const dark = useSelector(store=>store.theme.dark)
 
-  const handleActiveStatus = (e)=>{
-    e.stopPropagation(); 
-    if((new Date() - activeStatus)>1559367580871){
-      // console.log(new Date() - activeStatus)
-   // database.collection("users").doc(uid).update({activeStatus : new Date()})
-    }  
-  }
-
-  window.addEventListener("click",handleActiveStatus)
 
   React.useEffect(()=>{
+    
+   
     if(uid && isAuth){
+      database.collection("users").get().then(res=>{
+        const newUsers = res.docs.map(doc=>doc.data())
+        dispatch(getUsers(newUsers))     
+      });
     const unsubscribe1 = database.collection("posts").orderBy("time","desc").onSnapshot(res=>{
         const newPosts = res.docs.map(doc=>({id:doc.id,...doc.data()}))
         dispatch(getPosts(newPosts))
     });
-
-    const unsubscribe2 = database.collection("users").onSnapshot(res=>{
-      const newUsers = res.docs.map(doc=>doc.data())
-      dispatch(getUsers(newUsers))
-    });
-
     const unsubscribe3 = database.collection("users").doc(uid).collection('friendRequests').onSnapshot(res=>{
       const newFriendRequest = res.docs.map(doc=>doc.data())
       dispatch( getFriendRequest( newFriendRequest ) );
@@ -63,14 +55,13 @@ function App() {
        dispatch(loginSuccess(doc.data()));
         
     });
-    const unsubscribe8 = database.collection("users").doc(uid).collection("notifications").onSnapshot(res=>{
+    const unsubscribe8 = database.collection("users").doc(uid).collection("notifications").orderBy("time","desc").onSnapshot(res=>{
       const newNotifications = res.docs.map(doc=>({notificationID:doc.id,...doc.data()}))
      dispatch(getNotifications(newNotifications))
     });
 
     return () => {
       unsubscribe1();
-      unsubscribe2();
       unsubscribe3();
       unsubscribe4();
       unsubscribe5();
@@ -97,8 +88,6 @@ function App() {
     }
   },[dark,root])
 
- 
-  
   return (
     <div className="App">
         <Router/>

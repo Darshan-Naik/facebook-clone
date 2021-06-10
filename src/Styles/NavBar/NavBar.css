@@ -149,7 +149,9 @@
     border-radius: 8px;
     box-shadow: 0 2px 4px var(--shadow-1),0 8px 18px var(--shadow-2);
 }
-
+.notificationsContainer{
+    right: -50px;
+}
 .accountMenuContainer hr{
     border-color: var(--shadow-1);
 }
@@ -162,6 +164,9 @@
     right: 12px;
     background-color: var(--primary-background);
     transform: rotate(45deg);
+}
+.notificationsContainer::after{
+    right: 62px;
 }
 .darkModeBox{
     justify-content: flex-start;

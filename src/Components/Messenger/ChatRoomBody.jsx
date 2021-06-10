@@ -13,6 +13,7 @@ function ChatRoomBody({handleUserDetailsVisibility,data}) {
     const uid = useSelector(store=>store.auth.user.uid)
     const [senderData,setSenderData] = React.useState(null)
     React.useEffect(()=>{
+       let unsubscribe;
         if(chatID !=="new") {
             database.collection("chatRooms").doc(chatID).get()
                 .then((docRef) =>{ 
@@ -23,7 +24,7 @@ function ChatRoomBody({handleUserDetailsVisibility,data}) {
                         setSenderData( docRef.data())                
                 })
                 })
-                database.collection("chatRooms").doc(chatID).collection("messages").orderBy("time","asc")
+          unsubscribe = database.collection("chatRooms").doc(chatID).collection("messages").orderBy("time","asc")
                 .onSnapshot(snapshot=>{
                     setMessages(snapshot.docs.map(doc=>{
                     if(doc.data().author !==uid && !doc.data().isRead){
@@ -32,6 +33,11 @@ function ChatRoomBody({handleUserDetailsVisibility,data}) {
                 return {id:doc.id,...doc.data()}
                 }))
             })
+
+            
+        }
+        return()=>{
+          unsubscribe && unsubscribe();
         }
     },[chatID,uid])
     React.useEffect(()=>{
