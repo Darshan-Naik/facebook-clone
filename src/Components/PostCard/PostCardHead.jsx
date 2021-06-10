@@ -61,7 +61,8 @@ function PostCardHead({first_name,last_name,profilePic,time,author,activity,titl
             </div>
             <div className="postCardHeadBox3 flexBox">
                 <DotsIcon onClick={()=>setEditSection(!editSection)}/>
-                {author===uid&&editSection&&<EditBox handleEditSection={handleEditSection} first_name={first_name} last_name={last_name} profilePic={profilePic} title={title} {...postEditFunction} image={image}/>}
+                {author===uid&&editSection&&<EditBox handleEditSection={handleEditSection}author={author} uid={uid}  first_name={first_name} last_name={last_name} profilePic={profilePic} title={title} {...postEditFunction} image={image}/>}
+                {author!==uid&&editSection&&<EditBox handleEditSection={handleEditSection} author={author} uid={uid} />}
             </div>
            
         </div>

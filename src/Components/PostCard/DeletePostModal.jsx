@@ -11,7 +11,8 @@ function DeletePostModal({handleCancel,handleDelete}) {
                         <CloseIcon onClick={handleCancel}/>
                     </div> 
                 </div>
-                <div className="deletePostModaleMiddle">      
+                <div className="deletePostModaleMiddle flexBox">
+                    <img src={process.env.PUBLIC_URL + '/Images/trash.png'}  alt="trash" />      
                     <p>Are you sure, you will never get this post again...</p>
                 </div>
                 <div className="deletePostModaleFooter flexBox">
