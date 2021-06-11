@@ -65,6 +65,7 @@
 
   --primary-button-hover: #216fdb;
   --disabled-button-text: #bcc0c4;
+  --secondary-button-background: #e4e6eb;
 
   --placeholder-text: #8a8d91;
   --filter-invert: 0;
@@ -107,6 +108,8 @@
   );
 
   --filter-invert: 100%;
+
+  --secondary-button-background: #ffffff1a;
 }
 
 body {
