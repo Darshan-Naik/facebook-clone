@@ -2,20 +2,18 @@ import React from 'react'
 import { useHistory } from 'react-router'
 import NotificationBubble from '../../SharedComponents/NotificationBubble'
 import ToolTip from "../../SharedComponents/ToolTip"
-function IconWrapperCircle({children,label,icon,path,number}) {
+function IconWrapperCircle({children,label,icon,path,number,childVisibility}) {
     const [hoverState,setHoverState] = React.useState(false) 
-    const [clickState,setClickState] = React.useState(false) 
     const history = useHistory()
     const handleMenu = (e)=>{
         setHoverState(false)
-        setClickState(!clickState)
          path &&  history.push(path)
     }
     return (
-        <div className="iconWrapper-2 flexBox" onMouseEnter={()=> !clickState && setHoverState(true)} onMouseLeave={()=>setHoverState(false)} onClick={handleMenu}>
+        <div className="iconWrapper-2 flexBox" onMouseEnter={()=> setHoverState(true)} onMouseLeave={()=>setHoverState(false)} onClick={handleMenu}>
                     {icon}
-                    {clickState && children}
-                    {hoverState && <ToolTip label={label} />}
+                    { children}
+                    {!childVisibility && hoverState && <ToolTip label={label} />}
                     <NotificationBubble number={number}/>
         </div>
     )

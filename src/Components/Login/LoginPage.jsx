@@ -67,7 +67,7 @@ function LoginPage(){
         signup(email,password)
         .then(res=>{
            const {uid} = res.user
-           const payload = {uid,...signUpForm,dob}
+           const payload = {uid,...signUpForm,dob,accessibility:true}
            database.collection("users").doc(uid).set(payload).then((res)=>{
                database.collection("users").doc(uid)
                .onSnapshot((doc) => {
