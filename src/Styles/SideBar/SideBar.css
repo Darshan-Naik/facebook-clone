@@ -1,98 +1,120 @@
 .sideBarContainer {
-    min-width: 200px;
-    max-width: 350px;
-    width: 25vw;
-    padding: 10px;
+  min-width: 200px;
+  max-width: 350px;
+  width: 25vw;
+  padding: 10px;
 }
 
 .sideBarContentLink {
-    padding: 7px;
-    margin-left: 0.5%;
-    text-decoration: none;
-    color: var(--primary-text);
-    border-radius: 4px;
-    cursor: pointer;
-    justify-content: left;
-    transition: all 0.3s ease-in-out;
+  padding: 7px;
+  margin-left: 0.5%;
+  text-decoration: none;
+  color: var(--primary-text);
+  border-radius: 4px;
+  cursor: pointer;
+  justify-content: left;
+  transition: all 0.3s ease-in-out;
 }
 
 .sideBarContentLink:hover {
-    background: var(--hover-overlay);
+  background: var(--hover-overlay);
 }
 
 .sideBarContentUserImageBox {
-    position: relative;
+  position: relative;
 }
 
 .sideBarContentImage {
-    width: 35px;
-    height: 35px;
-    border-radius: 100%;
-    margin: auto;
+  width: 35px;
+  height: 35px;
+  border-radius: 100%;
+  margin: auto;
 }
 
 .sideBarContentLabel {
-    font-size: 0.9375rem;
-    font-weight: 500;
-    margin-left: 10px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  margin-left: 10px;
 }
 
 .activeContactHeader {
-    margin: 1%;
-    justify-content: space-between;
+  margin: 1%;
+  justify-content: space-between;
 }
 
 .contactHeaderTitle {
-    text-align: left;
-    font-weight: 500;
-    color: var(--secondary-text);
+  text-align: left;
+  font-weight: 500;
+  color: var(--secondary-text);
 }
 
 .videoCallIcon {
-    width: 20px;
-    height: 20px;
-    opacity: 0.6;
-    vertical-align: middle;
+  width: 20px;
+  height: 20px;
+  opacity: 0.6;
+  vertical-align: middle;
 }
 
 .contactHeaderContentContainer {
-    flex-grow: 0.1;
-    justify-content: space-around;
+  flex-grow: 0.1;
+  justify-content: space-around;
 }
 
 .contactIconContainer {
-    border-radius: 50px;
-    padding: 5px 6px;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
+  border-radius: 50px;
+  padding: 5px 6px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
 }
 
 .contactIconContainer:hover {
-    background: var(--hover-overlay);
+  background: var(--hover-overlay);
 }
 
 .contactHeaderContentContainer .videoCallIcon {
-    width: 20px;
-    height: 20px;
-    vertical-align: middle;
-    fill: var(--primary-icon);
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+  fill: var(--primary-icon);
 }
 
 .contactHeaderContentContainer .searchIcon {
-    width: 19px;
-    height: 19px;
-    opacity: 0.6;
-    vertical-align: middle;
-    fill: var(--primary-icon);
+  width: 19px;
+  height: 19px;
+  opacity: 0.6;
+  vertical-align: middle;
+  fill: var(--primary-icon);
 }
 
 .contactIconContainer .dotsIcon {
-    width: 19px;
-    height: 17px;
-    opacity: 0.6;
-    vertical-align: middle;
+  width: 19px;
+  height: 17px;
+  opacity: 0.6;
+  vertical-align: middle;
 }
 
 .contactHeaderContentContainer .dotsIcon {
-    fill: var(--primary-icon);
+  fill: var(--primary-icon);
+}
+
+/*birthday card container css */
+
+.birthdayCardContainer {
+  background-color: var(--hover-overlay);
+  width: 100%;
+  height: auto;
+  padding: 15px 5px 20px 20px;
+  border-radius: 11px;
+  text-align: left;
+  margin: 5px auto 12px;
+}
+.birthdayCardIcon {
+  justify-content: left;
+}
+.birthdayCardIcon > h3 {
+  padding-left: 15px;
+}
+.birthdayRemiderPTag {
+  margin-top: 10px;
+  width: 80%;
 }
