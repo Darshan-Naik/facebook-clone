@@ -27,7 +27,7 @@ function AccountMenu() {
         database.collection("users").doc(uid).update({accessibility : !accessibility})
     }
     return (
-        <div className="accountMenuContainer">
+        <div className="accountMenuContainer" >
              <div className="AccountMenuUserProfileCard flexBox" onClick={()=>{history.push(`/profile/${uid}`)}}>
                     <img src={profilePic || process.env.PUBLIC_URL + '/Images/userProfile_icon.png'} alt="Profile" />
                    <div>
@@ -36,7 +36,7 @@ function AccountMenu() {
                     </div> 
             </div>
             <hr />
-            <div className="darkModeBox flexBox">
+            <div className="darkModeBox flexBox" onClick={(e)=> e.stopPropagation()}>
                 <DarkModeIcon onClick={handleTheme}/>
                 <p>Dark Mode</p>
                 <div className="themeButton flexBox" onClick={handleTheme} style={{justifyContent:dark?"flex-end" : 'flex-start'}}>
@@ -45,7 +45,7 @@ function AccountMenu() {
                     </div>
                 </div>
             </div>
-            <div className="accessibilityBox flexBox">
+            <div className="accessibilityBox flexBox" onClick={(e)=> e.stopPropagation()}>
                 <Alert onClick={handleTheme}/>
                 <p>Accessibility</p>
                 <div className="accessibilityButton flexBox" onClick={handleAccessibility} style={{justifyContent:accessibility?"flex-end" : 'flex-start'}}>
