@@ -7,7 +7,7 @@ import Like from '../PostCard/Like';
 
 function PictureCardFooter({showComment,handleLike,like,handleDeleteLike}) {
     return (
-        <div className="postCardFooter flexBox">
+        <div className="postDetailsCardFooter flexBox">
             <div className="postDetailsCardFooterBox flexBox" >
                 {like?<AfterLike handleDeleteLike={handleDeleteLike}/>:<Like handleLike={handleLike}/>}
             </div>

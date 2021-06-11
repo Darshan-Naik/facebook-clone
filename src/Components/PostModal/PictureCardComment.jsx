@@ -1,8 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router';
 import { database } from '../../Firebase/firebase';
-import {ReactComponent as CameraIcon} from  "../../Icons/cameraIcon.svg";
 import {ReactComponent as EmojiIcon} from  "../../Icons/happyFace.svg";
 import CommentBox from '../PostCard/CommentBox';
 import EmojiMart from "../../SharedComponents/EmojiMart";
@@ -13,7 +11,7 @@ function PictureCardComment({postId,comments,userData}) {
     const [comment,setComment]=React.useState("");
     const [emojiVisibility,setEmojiVisibility]=React.useState(false);
 
-    const history = useHistory();
+    
     const {uid,profilePic} = useSelector(store=>store.auth.user)
     const handleChange=(e)=>{
         const {value} = e.target;
@@ -51,7 +49,7 @@ function PictureCardComment({postId,comments,userData}) {
     }
 
     return (
-        <div className="postDetailsCardCommentContainer">
+        <div className="postDetailsCardCommentContainer flexBox">
             <div className="postDetailsModalCommentBox scroll">
                 {comments?.map((el)=><CommentBox key={el.commentId}{...el} />)}
             </div>

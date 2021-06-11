@@ -59,6 +59,7 @@ function PictureCardHeader({first_name,last_name,profilePic,time,author,activity
             <div className="postDetailsCardHeadBox3 flexBox">
                 <DotsIcon onClick={()=>setEditSection(!editSection)}/>
                 {author===uid&&editSection&&<EditBox handleEditSection={handleEditSection} first_name={first_name} last_name={last_name} profilePic={profilePic} title={title} {...postEditFunction} image={image}/>}
+                {author!==uid&&editSection&&<EditBox handleEditSection={handleEditSection} author={author} uid={uid} />}
             </div>
             
         </div>

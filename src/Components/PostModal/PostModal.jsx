@@ -12,7 +12,7 @@ function PostModal({postEditFunction,handleClosePostModal,uid, id, image,author,
     return (
         <div className="postDetailsCardContainer">
             <div className="PicImageContainer">
-                <button onClick={handleClosePostModal} className="postDetailsModalClose"><CloseIcon /></button>
+                <button onClick={handleClosePostModal} className="postDetailsModalClose flexBox"><CloseIcon /></button>
                 <button className="postDetailsModalIcon"><MainLogo /></button>
                 {image&&<div className="postDetailsCardImage">
                     <img src={image|| process.env.PUBLIC_URL + '/Images/facebook_login_logo.png'} alt="img" />

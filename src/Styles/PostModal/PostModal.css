@@ -76,6 +76,12 @@
   fill: var(--primary-icon);
 }
 
+.postDetailsCardHeadBox3 .editPostContainer {
+  top: 40px;
+  right: 10px;
+
+}
+
 /*-----------Middle-part--------------*/
 .postDetailsCardTags {
   font-size: 14px;
@@ -134,7 +140,7 @@
   width: 30%;
 }
 
-.postDetailsCardFooter svg {
+.postDetailsCardFooterBox svg {
   width: 18px;
   height: 18px;
   fill: var(--secondary-icon);
@@ -144,13 +150,13 @@
 .postDetailsCardFooterBox .likeIcon {
   fill: var(--primary-1);
 }
-.postDetailsCardFooter p {
+.postDetailsCardFooterBox p {
   color: var(--secondary-icon);
   font-size: 15px;
   cursor: pointer;
   font-weight: 500;
 }
-.postDetailsCardFooter small {
+.postDetailsCardFooterBox small {
   color: var(--primary-1);
   font-size: 15px;
   cursor: pointer;
@@ -158,9 +164,12 @@
 }
 
 /*--------Comment-section------------------*/
+
+
 .postDetailsCardCommentContainer {
   margin: 0px 15px 10px 15px;
   padding: 5px 0px 5px 0px;
+  height: 77vh;
   border-top: 1px solid var(--secondary-text);
   flex-direction: column;
   justify-content: flex-start;
@@ -168,13 +177,14 @@
   display: flex;
   flex-direction: column;
 }
-.postDetailsCardCommentContainer  {
+.postDetailsModalCommentBox  {
   font-weight: 500;
   color: var(--secondary-text);
   font-size: 14px;
   cursor: pointer;
+  flex: 1;
 }
-.postDetailsCardCommentContainer p:hover {
+.postDetailsModalCommentBox p:hover {
   text-decoration: underline;
 }
 .postDetailsCardInputBox {
@@ -201,10 +211,10 @@
   color: var(--primary-text);
   font-size: 10px;
 }
-.addCommentBox {
+.postDetailsModalCommentBox .addCommentBox {
   border-radius: 10px;
   padding: 5px 10px;
-  max-width: 85%;
+  max-width: 90%;
   min-width: 100px;
   background-color: var(--secondary-background-1);
   flex-direction: column;
@@ -283,8 +293,9 @@
 }
 .postDetailsModalClose {
   height: 35px;
+  width: 35px;
   position: absolute;
-  top: 25px;
+  top: 15px;
   left: 30px;
   background-color: transparent;
   border: transparent;
