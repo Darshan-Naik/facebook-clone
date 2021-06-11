@@ -4,7 +4,7 @@ import { database } from '../../../Firebase/firebase';
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import { useSelector } from 'react-redux';
 
-function UserFriendsCard({friendId}) {
+function UserFriendsCard({ friendId, alternativePath}) {
     const [userDetails, setUserDetails] = useState(null);
 
     const dark = useSelector( state => state.theme.dark );
@@ -18,10 +18,10 @@ function UserFriendsCard({friendId}) {
 
     return userDetails ? (
         <div className="flexBox postsPageUserFriendsBox">
-            <Link className="postsPageUserFriendsLink" to={`/profile/${userDetails.uid}`}>
+            <Link className="postsPageUserFriendsLink" to={`${alternativePath}/${userDetails.uid}`}>
                 <img className="postsPageFriendsImage" src={userDetails.profilePic || process.env.PUBLIC_URL + '/Images/userProfile_icon.png'} alt={`${userDetails.first_name}`}/>
             </Link>
-            <Link className="postsPageUserFriendsNamePlate" to={`/profile/${userDetails.uid}`}>
+            <Link className="postsPageUserFriendsNamePlate" to={`${alternativePath}/${userDetails.uid}`}>
                 {`${userDetails.first_name} ${userDetails.last_name}`}
             </Link>
         </div>

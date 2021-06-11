@@ -66,7 +66,7 @@ function NavBar({refresh,handleRefresh}) {
                 <IconWrapper path="/videos" label="Videos" handleRefresh={handleRefresh}>
                     <VideoIcon/>
                 </IconWrapper>
-                <IconWrapper path="/friends" label="Friends" handleRefresh={handleRefresh}>
+                <IconWrapper path="/friends/new" label="Friends" handleRefresh={handleRefresh}>
                     <UsersIcon/>
                 </IconWrapper>
                 <IconWrapper path="/games" label="Games" handleRefresh={handleRefresh}>

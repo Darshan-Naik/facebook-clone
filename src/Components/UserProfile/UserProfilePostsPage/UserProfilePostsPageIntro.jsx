@@ -101,7 +101,7 @@ function UserProfilePostsPageIntro({ alternativePath, userProfileDetails, userFr
                                 {
                                     userFriends.map( (el, i) => {
                                         return i < 9 && (
-                                            <UserFriendCard key={el.friendId} {...el} />
+                                            <UserFriendCard key={el.friendId} {...el} alternativePath={alternativePath} />
                                         )
                                     })
                                 }

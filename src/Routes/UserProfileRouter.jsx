@@ -7,6 +7,9 @@ import UserProfileFriendsPage from "../Components/UserProfile/UserProfileFriends
 import {database} from "../Firebase/firebase";
 import UserProfilePageHeaderSkeleton from "../Components/UserProfile/UserProfileHome/Skeleton/UserProfilePageHeaderSkeleton";
 import UserProfileNavBarSkeleton from "../Components/UserProfile/UserProfileHome/Skeleton/UserProfileNavBarSkeleton";
+import FriendsPageSideBar from "../Components/FriendsPage/FriendsPageSideBar";
+import {ReactComponent as StatePeople} from  "../Icons/states_people.svg";
+import "../Styles/FriendsPage/FriendsPage.css";
 
 function UserProfileRouter({ path, forceRefresh, refresh }) {
 
@@ -14,8 +17,10 @@ function UserProfileRouter({ path, forceRefresh, refresh }) {
     const [userData, setUserData] = useState({});
     const [userFriends, setUserFriends] = useState([]);
     const { userId } = useParams();
-    
+    const { profileId } = useParams();
+
     useEffect(() => {
+        setIsLoading(true);
 
         if( userId ) {
             const unsubscribe1 = database.collection("users").doc(userId)
@@ -35,8 +40,27 @@ function UserProfileRouter({ path, forceRefresh, refresh }) {
                 unsubscribe2();
             }
         }
+        
+        if( profileId !== "new" ) {
+            const unsubscribe1 = database.collection("users").doc(profileId)
+            .onSnapshot((doc) => {
+                setUserData(doc.data());
+                setIsLoading(false);
+            });
+    
+            const unsubscribe2 = database.collection("users").doc(profileId).collection('friends')
+            .onSnapshot(res=>{
+                const friends = res.docs.map(doc=>doc.data())
+                setUserFriends(friends);
+            });
+    
+            return () => {
+                unsubscribe1();
+                unsubscribe2();
+            }
+        }
 
-    }, [userId])
+    }, [userId, profileId])
 
     return userId ? (
         <React.Fragment>
@@ -56,7 +80,7 @@ function UserProfileRouter({ path, forceRefresh, refresh }) {
                             <Route path={`${path}/${userData.uid}`} exact>
                                 <UserProfilePostsPage userProfileDetails={userData} userFriends={userFriends} alternativePath={path} forceRefresh={forceRefresh} />
                             </Route>
-                            <Route  path={`${path}/${userData.uid}/friends`}>
+                            <Route  path={`${path}/${userData.uid}/friends`} exact>
                                 <UserProfileFriendsPage userFriends={userFriends} forceRefresh={forceRefresh} />
                             </Route>
                         </Switch>
@@ -65,9 +89,45 @@ function UserProfileRouter({ path, forceRefresh, refresh }) {
             }
         </React.Fragment>
     ) : (
-        <div>
-            This page is under progress
-        </div>
+        <React.Fragment>
+            <div className="flexBox">
+                <div className="friendsPageSideBarMainContainer scroll">
+                    <FriendsPageSideBar forceRefresh={forceRefresh} />
+                </div>
+                <div className="friendsProfileData scroll">
+                    {
+                        profileId !== "new" ? isLoading ? (
+                            <React.Fragment>
+                                <div style={{height:"93.66vh"}}>
+                                    <UserProfilePageHeaderSkeleton />
+                                    <UserProfileNavBarSkeleton />
+                                </div>
+                            </React.Fragment>
+                        ) : (
+                            <React.Fragment>
+                                <UserProfilePageHeader currentUser={userData.uid} userProfileDetails={userData} userFriends={userFriends} forceRefresh={forceRefresh} coverPhoto={userData.coverPic} />
+                                <UserProfileNavBar currentUser={userData.uid} alternativePath={path} userFriends={userFriends} userProfileDetails={userData} refresh={refresh} />
+                                <Switch>
+                                    <Route path={`${path}/${userData.uid}`} exact>
+                                        <UserProfilePostsPage userProfileDetails={userData} userFriends={userFriends} alternativePath={path} forceRefresh={forceRefresh} />
+                                    </Route>
+                                    <Route  path={`${path}/${userData.uid}/friends`} exact>
+                                        <UserProfileFriendsPage userFriends={userFriends} alternativePath={path} forceRefresh={forceRefresh} />
+                                    </Route>
+                                </Switch>
+                            </React.Fragment>
+                        ) : (
+                            <div className="friendsPageWellcomeContainer">
+                                <div className="friendsPageWellcomeBox">
+                                    <StatePeople/>
+                                    <h2>Select people's names to preview their profile.</h2>
+                                </div>
+                            </div>
+                        )
+                    }
+                </div>
+            </div>
+        </React.Fragment>
     )
 }
 
