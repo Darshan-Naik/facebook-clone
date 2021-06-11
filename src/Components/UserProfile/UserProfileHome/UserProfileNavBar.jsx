@@ -67,7 +67,7 @@ const UserProfileNavBar = ({currentUser, refresh, alternativePath, userProfileDe
         let time = new Date();
 
         database.collection('users').doc(currentUser).collection('friendRequests').doc(`${currentUser}${uid}`).set({ senderId: uid, time });
-        database.collection('users').doc(uid).collection('sentRequests').doc(`${currentUser}${uid}`).set({ reciverId: currentUser, time });
+        database.collection('users').doc(uid).collection('sentRequests').doc(`${currentUser}${uid}`).set({ receiverId: currentUser, time });
         
         const payload = {
             author: uid,
@@ -79,7 +79,7 @@ const UserProfileNavBar = ({currentUser, refresh, alternativePath, userProfileDe
         database.collection('users').doc(currentUser).collection('notifications').add(payload);
     }
     
-    const handleCancleRequest = () => {
+    const handleCancelRequest = () => {
         database.collection('users').doc(currentUser).collection('friendRequests').doc(`${currentUser}${uid}`).delete();
         database.collection('users').doc(uid).collection('sentRequests').doc(`${currentUser}${uid}`).delete();
     }
@@ -178,9 +178,9 @@ const UserProfileNavBar = ({currentUser, refresh, alternativePath, userProfileDe
                                         JSON.stringify(friendRequests).includes(currentUser) ? (
                                             null
                                         ) : JSON.stringify(sentRequests).includes(currentUser) ? (
-                                            <div className="flexBox userProfileNavButton addToStoryContainer" onClick={handleCancleRequest}>
+                                            <div className="flexBox userProfileNavButton addToStoryContainer" onClick={handleCancelRequest}>
                                                 <img className="userProfileNavButtonIcons userProfileNavButtonIconsFilter" src={process.env.PUBLIC_URL + '/Images/cancle_request_icon.png'} alt="plus"/>
-                                                <span>Cancle Request</span>
+                                                <span>Cancel Request</span>
                                             </div>
                                         ) : JSON.stringify(friends).includes(currentUser) ? (
                                             <React.Fragment>

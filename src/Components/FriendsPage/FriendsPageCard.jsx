@@ -3,8 +3,9 @@ import { useSelector } from 'react-redux';
 import { database } from '../../Firebase/firebase';
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import { Link } from "react-router-dom";
+import timeConverter from '../../Utils/timeConverter';
 
-function FriendsPageCard({ senderId }) {
+function FriendsPageCard({ senderId, time }) {
     
     const [senderDetails, setSenderDetails] = useState(null);
     
@@ -49,9 +50,14 @@ function FriendsPageCard({ senderId }) {
                 </Link>
             </div>
             <div className="flexBox senderDetailsBox">
-                <Link className="senderDetailsLink" to={`/friends/${senderId}`}>
-                    <p>{senderDetails.first_name}</p>
-                </Link>
+                <div className="senderDetailsLinkCover flexBox">
+                    <Link className="senderDetailsLink" to={`/friends/${senderId}`}>
+                        <p>{senderDetails.first_name}</p>
+                    </Link>
+                    <div className="senderDetailsTimeConverter">
+                        {timeConverter(time)}
+                    </div>
+                </div>
                 <div className="flexBox senderDetailsButtons">
                     <button onClick={handleAcceptFriendRequest}>Confirm</button>
                     <button onClick={handleDeleteFriendRequest}>Delete</button>

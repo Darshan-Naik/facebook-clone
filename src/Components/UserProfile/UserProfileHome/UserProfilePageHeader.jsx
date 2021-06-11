@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { DisappearedLoading } from 'react-loadingg';
 import EmojiMart from "../../../SharedComponents/EmojiMart";
 import { ReactComponent as CloseIcon } from "../../../Icons/close.svg";
-import { ReactComponent as EmojiIocn } from "../../../Icons/emoji.svg";
+import { ReactComponent as EmojiIcon } from "../../../Icons/emoji.svg";
 import "../../../Styles/UserProfile/UserProfile.css";
 import { database, storage } from '../../../Firebase/firebase';
 
@@ -23,7 +23,7 @@ const UserProfilePageHeader = ({ coverPhoto, currentUser, forceRefresh, userProf
     const dark = useSelector(state => state.theme.dark);
     const { uid } = useSelector( state => state.auth.user );
     
-    const handleAddBioVisiblity = () => {
+    const handleAddBioVisibility = () => {
         setAddBioVisibility(!addBioVisibility);
         setTextFieldQuery("");
     };
@@ -44,7 +44,7 @@ const UserProfilePageHeader = ({ coverPhoto, currentUser, forceRefresh, userProf
 
     }
 
-    const handleRemvoeCoverPicPreview = () => {
+    const handleRemoveCoverPicPreview = () => {
         setCoverPicImagePreview(null);
     }
 
@@ -165,7 +165,7 @@ const UserProfilePageHeader = ({ coverPhoto, currentUser, forceRefresh, userProf
                                                                     <div className="profilePicPreviewImage">
                                                                         <img src={coverPicImagePreview} alt="coverImage"/>
                                                                     </div>
-                                                                    <div className="profilePicPreviewCloseIconBox flexBox" onClick={handleRemvoeCoverPicPreview}>
+                                                                    <div className="profilePicPreviewCloseIconBox flexBox" onClick={handleRemoveCoverPicPreview}>
                                                                         <CloseIcon />
                                                                     </div>
                                                                 </React.Fragment>
@@ -184,7 +184,7 @@ const UserProfilePageHeader = ({ coverPhoto, currentUser, forceRefresh, userProf
                                 </React.Fragment>
                             )
                         }
-                        <div className="userProfileCoverPhotoBoxOveryLay" ></div>
+                        <div className="userProfileCoverPhotoBoxOverLay" ></div>
                     </div>
                 </div>
             </div>
@@ -195,10 +195,10 @@ const UserProfilePageHeader = ({ coverPhoto, currentUser, forceRefresh, userProf
                        userProfileDetails.userBio && <p className="userProfileBioContent">{userProfileDetails.userBio}</p>
                     }
                     {
-                        currentUser === uid && !addBioVisibility && !userProfileDetails.userBio && <p className="addUserBio" onClick={handleAddBioVisiblity}>Add Bio</p>
+                        currentUser === uid && !addBioVisibility && !userProfileDetails.userBio && <p className="addUserBio" onClick={handleAddBioVisibility}>Add Bio</p>
                     }
                     {
-                        currentUser === uid && !addBioVisibility && userProfileDetails.userBio && <p className="addUserBio" onClick={handleAddBioVisiblity}>Edit Bio</p>
+                        currentUser === uid && !addBioVisibility && userProfileDetails.userBio && <p className="addUserBio" onClick={handleAddBioVisibility}>Edit Bio</p>
                     }
                     {
                         currentUser === uid && addBioVisibility && (
@@ -207,7 +207,7 @@ const UserProfilePageHeader = ({ coverPhoto, currentUser, forceRefresh, userProf
                                 <div className="addBioTextFieldCharCount flexBox">
                                     {`${101 - textFieldQuery.length} characters remaining`}
                                     <div className="addBioTextFieldEmojiMart flexBox">
-                                        <EmojiIocn onClick={() => setShowEmojiMart(!showEmojiMart)} />
+                                        <EmojiIcon onClick={() => setShowEmojiMart(!showEmojiMart)} />
                                         {
                                             showEmojiMart && (
                                                 <div className="addBioEmojiContainer">
@@ -223,7 +223,7 @@ const UserProfilePageHeader = ({ coverPhoto, currentUser, forceRefresh, userProf
                                         <span>Public</span>
                                     </div>
                                     <div className="addBioButtonBox">
-                                        <button onClick={handleAddBioVisiblity}>Cancel</button>
+                                        <button onClick={handleAddBioVisibility}>Cancel</button>
                                         <button disabled={ textFieldQuery === "" || textFieldQuery.length > 101 } onClick={handleUpdateUserBio}>Save</button>
                                     </div>
                                 </div>
