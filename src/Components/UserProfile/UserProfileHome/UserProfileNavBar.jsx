@@ -103,7 +103,6 @@ const UserProfileNavBar = ({currentUser, refresh, alternativePath, userProfileDe
     }
 
     const handleDeleteFriendRequest = () => {
-        console.log("calling");
         database.collection('users').doc(currentUser).collection('sentRequests').doc(`${uid}${currentUser}`).delete();
         database.collection('users').doc(uid).collection('friendRequests').doc(`${uid}${currentUser}`).delete();
     }
@@ -166,7 +165,7 @@ const UserProfileNavBar = ({currentUser, refresh, alternativePath, userProfileDe
                                         <img className="userProfileNavButtonIcons" src={process.env.PUBLIC_URL + '/Images/edit_icon.png'} alt="edit"/>
                                         <span>Edit Profile</span>
                                     </div>
-                                    <div className="userProfileNavDotsBox">
+                                    <div className="userProfileNavDotsBox flexBox">
                                         <ThreeDots />
                                     </div>
                                     {
@@ -205,7 +204,7 @@ const UserProfileNavBar = ({currentUser, refresh, alternativePath, userProfileDe
                                             </div>
                                         )
                                     }
-                                    <div className="userProfileNavDotsBox">
+                                    <div className="userProfileNavDotsBox flexBox">
                                         <ThreeDots />
                                     </div>
                                 </React.Fragment>

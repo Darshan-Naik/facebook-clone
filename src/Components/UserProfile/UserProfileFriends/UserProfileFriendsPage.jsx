@@ -5,7 +5,7 @@ import FriendsCard from "./FriendsCard";
 import UserProfileFriendsPageSkeleton from "./Skeleton/UserProfileFriendsPageSkeleton";
 import "../../../Styles/UserProfile/UserProfileFriendsPage.css";
 
-function UserProfileFriendsPage({ forceRefresh, userFriends }) {
+function UserProfileFriendsPage({ forceRefresh, userFriends, alternativePath }) {
 
     useEffect(forceRefresh, []);
     
@@ -21,7 +21,7 @@ function UserProfileFriendsPage({ forceRefresh, userFriends }) {
                         <Link className="friendsPageHeaderLinks" to="/friends/profile">
                             Find Friends
                         </Link>
-                        <div className="userProfileNavDotsBox">
+                        <div className="userProfileNavDotsBox flexBox">
                             <ThreeDots />
                         </div>
                     </div>
@@ -33,7 +33,7 @@ function UserProfileFriendsPage({ forceRefresh, userFriends }) {
                                 userFriends.map( el => {
                                     return (
                                         <div key={el.friendId} className="friendsCardMainBox">
-                                            <FriendsCard {...el} />
+                                            <FriendsCard {...el} alternativePath={alternativePath} />
                                         </div>
                                     )
                                 })

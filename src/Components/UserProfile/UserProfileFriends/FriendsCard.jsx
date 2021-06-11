@@ -5,7 +5,7 @@ import "../../../Styles/UserProfile/UserProfileFriendsPage.css";
 import { database } from '../../../Firebase/firebase';
 import FriendsCardSkeleton from "./Skeleton/FriendsCardSkeleton";
 
-function FriendsCard({ friendId}) {
+function FriendsCard({friendId, alternativePath}) {
 
     const [userDetails, setUserDetails] = useState(null);
 
@@ -18,13 +18,13 @@ function FriendsCard({ friendId}) {
     
     return userDetails ? (
         <div className="friendsCardBox flexBox">
-            <Link to={`/profile/${userDetails.uid}`}>
+            <Link to={`${alternativePath}/${userDetails.uid}`}>
                 <div className="friendsProfilePicCover">
                     <img className="fiendsProfilePic" src={userDetails.profilePic} alt={userDetails.first_name}/>
                 </div>
             </Link>
             <div className="friendsCardNamePlateBox">
-                <Link to={`/profile/${userDetails.uid}`}>
+                <Link to={`${alternativePath}/${userDetails.uid}`}>
                     {userDetails.first_name}
                 </Link>
             </div>

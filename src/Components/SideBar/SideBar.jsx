@@ -15,7 +15,7 @@ function SideBar() {
                 <Link className="flexBox sideBarContentLink" to={`/profile/${uid}`}>
                     <SideBarContent src={profilePic} label={`${first_name} ${last_name}`} />
                 </Link>
-                <Link className="flexBox sideBarContentLink" to="/friends/profile">
+                <Link className="flexBox sideBarContentLink" to="/friends/new">
                     <SideBarContent src={process.env.PUBLIC_URL + '/Images/friends_icon.png'} label="Friends" />
                 </Link>
                 <Link className="flexBox sideBarContentLink" to="/">
