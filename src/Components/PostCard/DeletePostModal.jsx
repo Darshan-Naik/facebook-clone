@@ -1,5 +1,6 @@
 import React from 'react';
-import {ReactComponent as CloseIcon} from  "../../Icons/close.svg"
+import {ReactComponent as CloseIcon} from  "../../Icons/close.svg";
+import {ReactComponent as TrashIcon} from  "../../Icons/trash.svg"
 
 function DeletePostModal({handleCancel,handleDelete}) {
     return (
@@ -12,7 +13,7 @@ function DeletePostModal({handleCancel,handleDelete}) {
                     </div> 
                 </div>
                 <div className="deletePostModaleMiddle flexBox">
-                    <img src={process.env.PUBLIC_URL + '/Images/trash.png'}  alt="trash" />      
+                    <TrashIcon/>      
                     <p>Are you sure, you will never get this post again...</p>
                 </div>
                 <div className="deletePostModaleFooter flexBox">

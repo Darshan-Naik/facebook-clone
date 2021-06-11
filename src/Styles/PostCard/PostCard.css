@@ -577,8 +577,10 @@
     flex-direction: column;
 
 }
-.deletePostModaleMiddle img{
-  height: 40px;
+.deletePostModaleMiddle svg{
+  width: 80px;
+  fill: var(--supplementary-1);
+  
 
 }
 .deletePostModaleFooter{
