@@ -31,7 +31,7 @@
     background-size: cover;
 }
 
-.userProfileCoverPhotoBoxOveryLay {
+.userProfileCoverPhotoBoxOverLay {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -515,7 +515,7 @@
 
 .userProfileNavBarContainer {
     position: sticky;
-    top: 41px;
+    top: calc(var(--navBar-height) - 9px);
     z-index: 20;
     background-color: var(--nav-bar-background);
 }
@@ -750,6 +750,19 @@
 
 /* UserProfile Media Queries */
 
+@media only screen and ( max-width: 950px ) {
+
+    .confirmFriendRequestContainer {
+        display: grid;
+        justify-content: center;
+    }
+
+    .confirmFriendRequestHeading {
+        padding-bottom: 10px;
+    }
+
+}
+
 @media only screen and ( max-width: 840px ) {
     
     /* User Profile NavBar Media Queries CSS */
@@ -764,15 +777,6 @@
 
     .userProfileMoreOptionsItemContainer {
         display: flex;
-    }
-
-    .confirmFriendRequestContainer {
-        display: grid;
-        justify-content: center;
-    }
-
-    .confirmFriendRequestHeading {
-        padding-bottom: 10px;
     }
 }
 

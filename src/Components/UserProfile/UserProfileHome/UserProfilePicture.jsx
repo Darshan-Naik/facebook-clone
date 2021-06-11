@@ -47,7 +47,7 @@ const UserProfilePicture = ({userProfilePic=(process.env.PUBLIC_URL + '/Images/u
                         setCoverPicUploadState(Math.floor((snapshot.bytesTransferred/snapshot.totalBytes)*100)+1);
                     },
                     error => {
-                        console.log("error is occuring");
+                        console.log("error is occurring");
                     },
                     () => {
                         storage.ref("profilePicImages")
