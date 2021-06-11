@@ -1,0 +1,62 @@
+.profileProgressBoxContainer{
+    background-color: var(--primary-background);
+    border-radius: 8px;
+    border: 1px solid var(--shadow-1);
+    width: 100%;
+    padding: 10px;
+    margin: 10px auto;
+    text-align: left;
+    box-shadow:0 1px 2px var( --shadow-2);
+   
+}
+.profileProgressBoxHeader{
+    position: relative;
+    justify-content: space-between;
+}
+
+.profileProgressBoxHeader svg{
+    fill: var(--secondary-icon);
+    cursor: pointer;
+}
+.profileProgressBoxContainer ul{
+    margin-left: 15px;
+    cursor: pointer;
+}
+.profileProgressBoxContainer li{
+    font-size: 12px;
+}
+.profileProgressBoxContainer h1{
+    text-decoration: underline;
+    font-weight: 500;
+}
+.profileProgressBarBoxContainer{
+    padding: 5px;
+    cursor: pointer;
+}
+.profileProgressBarBoxContainer img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+.profileProgressBarBox{
+    background-color: var(--secondary-background-1);
+    border-radius: 50px;
+    width: 100%;
+    height: 17px;
+    margin:10px auto;
+    border: 1px solid var(--shadow-1);
+}
+.profileProgressBar{
+    border-radius: 50px;
+    height: 15px;
+    justify-content: flex-end;
+    padding:0 5px;
+}
+.profileProgressBar p{
+    font-size: 12px;
+}
+.userDetailsProgressBar{
+    flex: 1;
+    text-align: left;
+    padding:0 10px;
+}

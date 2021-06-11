@@ -7,8 +7,11 @@ import { useHistory } from 'react-router'
 import { logoutSuccess } from '../../Redux/Auth/actions'
 import { resetApp } from '../../Redux/App/actions'
 import { clearPosts } from '../../Redux/Posts/actions'
+import {ReactComponent as Alert} from  "../../Icons/alert.svg"
+import { database } from '../../Firebase/firebase'
+import AccessibilityInfo from '../../SharedComponents/AccessibilityInfo'
 function AccountMenu() {
-    const {profilePic,first_name,last_name, uid} = useSelector(store=>store.auth.user)
+    const {profilePic,first_name,last_name, uid,accessibility} = useSelector(store=>store.auth.user)
     const dispatch = useDispatch()
     const history = useHistory()
     const dark = useSelector(store=>store.theme.dark)
@@ -19,6 +22,9 @@ function AccountMenu() {
         dispatch(clearPosts())
         dispatch(resetApp())
         dispatch(logoutSuccess())
+    }
+    const handleAccessibility =()=>{
+        database.collection("users").doc(uid).update({accessibility : !accessibility})
     }
     return (
         <div className="accountMenuContainer">
@@ -35,6 +41,15 @@ function AccountMenu() {
                 <p>Dark Mode</p>
                 <div className="themeButton flexBox" onClick={handleTheme} style={{justifyContent:dark?"flex-end" : 'flex-start'}}>
                     <div className="themeButtonBubble" >
+
+                    </div>
+                </div>
+            </div>
+            <div className="accessibilityBox flexBox">
+                <Alert onClick={handleTheme}/>
+                <p>Accessibility</p>
+                <div className="accessibilityButton flexBox" onClick={handleAccessibility} style={{justifyContent:accessibility?"flex-end" : 'flex-start'}}>
+                    <div className="accessibilityButtonBubble" >
 
                     </div>
                 </div>
