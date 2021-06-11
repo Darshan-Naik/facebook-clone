@@ -115,6 +115,11 @@
     position: relative;
     cursor: pointer;
 }
+.navBarUserBox .iconWrapper-2>svg{
+    padding: 10px;
+    width: 50px;
+    height: 50px;
+}
 .navBarUserBox .iconWrapper-2:hover{
     background-color: var(--hover-overlay-2);
 }
@@ -174,7 +179,7 @@
     border-radius: 8px;
     margin: 5px;
 }
-.darkModeBox:hover,.logOutBox:hover{
+.darkModeBox:hover,.logOutBox:hover,.accessibilityBox:hover{
     background-color: var(--hover-overlay);
 }
 .darkModeBox .darkModeIcon{
@@ -319,7 +324,64 @@
     font-size: 12px;
     color: var(--primary-1);
 }
-
+.notificationMenuBox{
+    position: relative;
+}
+.notificationMenuBox .dotsIcon{
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+}
+.notificationMenuBox .dotsIcon:hover{
+    background-color: var(--secondary-background-1);
+}
+.notificationMenu{
+    position: absolute;
+    top:23px;
+    right: -30px;
+    min-width: 300px;
+    background-color: var(--primary-background);
+    z-index: 3333;
+    border:  1px solid var(--shadow-1);
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0px 0px 5px var(--shadow-2);
+}
+.notificationMenu::after{
+    content: "";
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    border-left: 1px solid var(--shadow-1);
+    border-top: 1px solid var(--shadow-1);
+    top: -7px;
+    right: 35px;
+    background-color: var(--primary-background);
+    transform: rotate(45deg);
+}
+.notificationMenuOption{
+    justify-content: flex-start;
+    padding:5px 10px;
+    border-radius: 8px;
+    width: 90%;
+}
+.notificationMenuOption:hover{
+    background-color: var(--hover-overlay);
+}
+.notificationMenu svg{
+    fill: var(--primary-icon);
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    margin:0 5px;
+}
+.notificationMenu .closeIcon {
+    stroke: var(--primary-icon);
+    border: 1px solid var(--primary-icon);
+}
+.noNotifications{
+    margin-left: 10px;
+}
 @media only screen and (max-width: 992px) {
 
     .navBarSearchBoxInput,.userProfileCard,.mainSearchIcon{
