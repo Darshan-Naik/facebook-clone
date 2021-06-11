@@ -168,7 +168,7 @@
 .notificationsContainer::after{
     right: 62px;
 }
-.darkModeBox{
+.darkModeBox,.accessibilityBox{
     justify-content: flex-start;
     padding:5px 10px;
     border-radius: 8px;
@@ -185,8 +185,16 @@
     background-color: var(--shadow-1);
     margin-right: 10px;
 }
-
-.themeButton{
+.accessibilityBox .alertIcon{
+    fill: var(--secondary-icon);
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: var(--shadow-1);
+    margin-right: 10px;
+    stroke: none!important;
+}
+.themeButton,.accessibilityButton{
     width: 40px;
     height: 20px;
     border-radius: 500px;
@@ -194,7 +202,7 @@
     margin:0 15px;
     border: 1px solid teal;
 }
-.themeButtonBubble{
+.themeButtonBubble,.accessibilityButtonBubble{
     background-color: var(--supplementary-3);
     height: 18px;
     width: 18px;
@@ -277,6 +285,7 @@
    flex-direction: column;
    align-items: flex-start;
    max-height: 60vh;
+   justify-content: flex-start;
 }
 .notificationDetails{
     text-align: left;
