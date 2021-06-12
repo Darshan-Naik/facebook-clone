@@ -1,7 +1,7 @@
 .friendsPageSideBarMainContainer {
     min-width: 330px;
     height: calc(100vh - var(--navBar-height));
-    overflow: scroll;
+    overflow-y: scroll;
     border-right: 1px solid var(--shadow-1);
     background-color: var(--primary-background);
 }
@@ -15,41 +15,213 @@
     text-align: left;
 }
 
+.friendsSideBarCount {
+    justify-content: space-between;
+}
+
+.friendsSideBarCount h4 {
+    font-weight: 400;
+    word-spacing: 3px;
+    padding: 8px 0;
+}
+
+.seeAllFriends {
+    padding: 5px 6px;
+    font-weight: 300;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 3px;
+    color: var(--primary-1);
+}
+
+.seeAllFriends:hover {
+    background-color: var(--hover-overlay);
+}
+
 .friendsProfileData {
     flex: 1;
     height: calc(100vh - var(--navBar-height));
-    overflow: scroll;
+    overflow-y: scroll;
 }
 
 .friendsProfileData .userProfileNavBarContainer {
     top: calc( 41px - var(--navBar-height) );
 }
 
-.friendsPageWellcomeContainer {
+.friendsPageWelcomeContainer {
     height: calc(100vh - var(--navBar-height));
     position: relative;
 }
 
-.friendsPageWellcomeBox {
+.friendsPageWelcomeBox {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
 
-.friendsPageWellcomeBox svg {
+.friendsPageWelcomeBox svg {
     width: 112px;
     height: 112px;
 }
 
-.friendsPageWellcomeBox h2 {
+.friendsPageWelcomeBox h2 {
     font-size: 1.25rem;
     line-height: 2;
     font-weight: 600;
     color: var(--secondary-text);
 }
 
-/* Friends Suggestation CSS */
+/* All Friends Requests CSS */
+
+.seeAllFriendsBreadCrumbs {
+    justify-content: flex-start;
+}
+
+.seeAllFriendsBreadCrumbs span, .seeAllFriendsBreadCrumbs small {
+    font-size: 12px;
+    margin: 5px 6px 5px 0;
+    text-align: left;
+}
+
+.seeAllFriendsBreadCrumbs small {
+    cursor: pointer;
+}
+
+.seeAllFriendsBreadCrumbs small:hover {
+    text-decoration: underline;
+}
+
+.allFriendsRequestsSideBarCount {
+    text-align: left;
+    word-spacing: 3px;
+    line-height: 2.5;
+}
+
+.seeAllSentRequestsTagBox {
+    position: relative;
+    width: 100%;
+}
+
+.seeAllSentRequestsTag {
+    position: absolute;
+    top: 0;
+    font-size: 12px;
+    cursor: pointer;
+    text-align: left;
+    color: var(--primary-1);
+}
+
+.seeAllFriendRequestContainer {
+    margin-top: 22px;
+}
+
+.noFriendRequestsViewSentRequest {
+    margin-bottom: 25px;
+}
+
+/* See All Sent Requests Modal CSS */
+
+.seeAllSentRequestModalContainer {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 30;
+    display: grid;
+    place-items: center;
+    background: var(--shadow-9);
+}
+
+.seeAllSentRequestModalBox {
+    max-width: 500px;
+    position: relative;
+    width: 100%;
+    border-radius: 10px;
+    background-color: var(--primary-background);
+}
+
+.seeAllSentRequestModalHeader {
+    padding: 16px;
+    border-bottom: 1px solid var(--divider);
+}
+
+.seeAllSentRequestModalHeaderNamePlate {
+    flex-grow: 1;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+    vertical-align: middle;
+}
+
+.seeAllSentRequestModalCloseIcon {
+    border-radius: 50%;
+    padding: 3px;
+    cursor: pointer;
+    background-color: var(--hover-overlay);
+}
+
+.seeAllSentRequestModalCloseIcon:hover {
+    background-color: var(--hover-overlay-2);
+}
+
+.seeAllSentRequestModalCloseIcon .closeIcon {
+    stroke: var(--secondary-icon);
+}
+
+.allSentRequestMainContainer {
+    min-height: 200px;
+    max-height: 380px;
+    height: 100%;
+    padding: 15px;
+    overflow-y: scroll;
+}
+
+.allSentRequestModalCount {
+    text-align: left;
+    padding-bottom: 10px;
+}
+
+/* Sender Friend Card CSS */
+
+.senderFriendCardMainContainer {
+    justify-content: space-evenly;
+    padding: 0 8px;
+    border-radius: 5px;
+}
+
+.senderFriendCardMainContainer:hover {
+    background-color: var(--hover-overlay);
+}
+
+.senderProfilePicCover {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.senderProfilePicImage {
+    width: 100%;
+    height: 100%;
+    margin-top: 5px;
+    border-radius: 50%;
+}
+
+.senderProfileNamePlateCover {
+    flex-grow: 1;
+    justify-content: flex-start;
+}
+
+.senderProfileNamePlate {
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+/* Friends Suggestion CSS */
 
 .divider {
     margin: 10px 0;
@@ -57,7 +229,7 @@
     background-color: var(--divider);
 }
 
-.peopleSuggestationTitle {
+.peopleSuggestionTitle {
     font-size: 18px;
     font-weight: 500;
     margin-bottom: 5px;
@@ -90,10 +262,19 @@
     flex-direction: column;
 }
 
-.senderDetailsLink {
+.senderDetailsLinkCover {
+    width: 100%;
     margin-bottom: 10px;
+    justify-content: space-between;
+}
+
+.senderDetailsLink {
     align-self: flex-start;
     text-decoration: none;
+}
+
+.senderDetailsTimeConverter {
+    font-size: 12px;
 }
 
 .senderDetailsButtons {

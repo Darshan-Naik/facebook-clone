@@ -8,6 +8,7 @@ import { ReactComponent as VideoCallIcon } from "../../Icons/videoCallIcon.svg";
 import filterFriends from "../../Utils/filterFriends.js"
 import { useHistory } from 'react-router-dom';
 import ActiveContacts from './ActiveContacts';
+import ProfileProgressBox from '../ProfileProgressBox/ProfileProgressBox';
 
 const ActiveContactSideBar = () => {
 
@@ -32,6 +33,7 @@ const ActiveContactSideBar = () => {
 
     return (
         <div className="sideBarContainer">
+            <ProfileProgressBox />
             {
                 peopleSuggested.length > 0 && (
                     <div className="sideBarLinksConatainer">

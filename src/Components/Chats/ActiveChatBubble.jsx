@@ -3,13 +3,13 @@ import StatusDot from '../../SharedComponents/StatusDot'
 import {ReactComponent as CloseIcon} from  "../../Icons/close.svg"
 import { useDispatch, useSelector } from 'react-redux'
 import { addInActiveMessageToActiveMessage, removeInActiveMessage } from '../../Redux/App/actions'
-
+import ToolTip from "../../SharedComponents/ToolTip"
 
 function ActiveChatBubble({chatID,authors}) {
 
     const users = useSelector(store=>store.app.users)
     const uid = useSelector(store=>store.auth.user.uid)
-    const [useDetails,setUserDetails] = React.useState({})
+    const [userDetails,setUserDetails] = React.useState({})
 
     React.useEffect(()=>{
         const senderID = authors.filter(id=>id !==uid)
@@ -27,13 +27,21 @@ function ActiveChatBubble({chatID,authors}) {
         dispatch(addInActiveMessageToActiveMessage(chatID))
     }
     return (
+        <>
         <div onClick={handleUpdate} className="activeChatBubble" onMouseEnter={()=>setCloseButtonVisibility(true)} onMouseLeave={()=>setCloseButtonVisibility(false)}>
           {closeButtonVisibility &&  <div className="activeChatBubbleCloseButton flexBox">
                  <CloseIcon onClick={handleClose}/>
-            </div>}
+            </div>
+                }
+               { closeButtonVisibility && <div className="chatBubbleUserName">
+                    <p>{userDetails?.first_name}</p>
+                 </div>}
             <StatusDot width="15px" height="15px" />
-            <img  src={useDetails?.profilePic || process.env.PUBLIC_URL + '/Images/userProfile_icon.png'}  alt="User" />
+            <img  src={userDetails?.profilePic || process.env.PUBLIC_URL + '/Images/userProfile_icon.png'}  alt="User" />
+            
         </div>
+        
+         </>
     )
 }
 

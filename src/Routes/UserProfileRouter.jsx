@@ -81,7 +81,7 @@ function UserProfileRouter({ path, forceRefresh, refresh }) {
                                 <UserProfilePostsPage userProfileDetails={userData} userFriends={userFriends} alternativePath={path} forceRefresh={forceRefresh} />
                             </Route>
                             <Route  path={`${path}/${userData.uid}/friends`} exact>
-                                <UserProfileFriendsPage userFriends={userFriends} forceRefresh={forceRefresh} />
+                                <UserProfileFriendsPage alternativePath={path} userProfileDetails={userData} userFriends={userFriends} forceRefresh={forceRefresh} />
                             </Route>
                         </Switch>
                     </React.Fragment>
@@ -112,13 +112,13 @@ function UserProfileRouter({ path, forceRefresh, refresh }) {
                                         <UserProfilePostsPage userProfileDetails={userData} userFriends={userFriends} alternativePath={path} forceRefresh={forceRefresh} />
                                     </Route>
                                     <Route  path={`${path}/${userData.uid}/friends`} exact>
-                                        <UserProfileFriendsPage userFriends={userFriends} alternativePath={path} forceRefresh={forceRefresh} />
+                                        <UserProfileFriendsPage userProfileDetails={userData} userFriends={userFriends} alternativePath={path} forceRefresh={forceRefresh} />
                                     </Route>
                                 </Switch>
                             </React.Fragment>
                         ) : (
-                            <div className="friendsPageWellcomeContainer">
-                                <div className="friendsPageWellcomeBox">
+                            <div className="friendsPageWelcomeContainer">
+                                <div className="friendsPageWelcomeBox">
                                     <StatePeople/>
                                     <h2>Select people's names to preview their profile.</h2>
                                 </div>

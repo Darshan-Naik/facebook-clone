@@ -50,7 +50,7 @@ function EditProfileDataModal ({handleEditUserDetailsModal}){
 
     return (
         <div className="postsPageEditUserDetailsModalContainer">
-            <div className="postsPageEditUserDetailsModalBox">
+            <div className="postsPageEditUserDetailsModalBox" onClick={(e) => e.stopPropagation()}>
                 <div className="postsPageEditUserDetailsModalHeader flexBox">
                     <h1 className="postsPageEditDetailsModalHeaderNamePlate">Edit Details</h1>
                     <div className="editUserDetailsModalCloseIconBox flexBox"  onClick={handleEditUserDetailsModal}>

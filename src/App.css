@@ -37,16 +37,16 @@
   border-radius: 50%;
   position: relative;
 }
-.toolTipBox{
+.toolTipBox,.accessibilityInfoBox{
   padding: 8px;
   position: absolute;
-  background-color: var(--shadow-7);
+  background-color: var(--shadow-8);
   font-size: 12px;
   color: var(--white);
   bottom: -40px;
   border-radius: 5px;
   z-index: 999;
-  box-shadow: 0px 0px 2px var(--shadow-8);
+  box-shadow: 0px 0px 5px var(--shadow-8);
 }
 .emoji-mart{
   width: 100%!important;
