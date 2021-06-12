@@ -178,6 +178,7 @@
     border-radius: 50%;
     box-shadow: 0px 0px 5px var(--primary-4);
     cursor: pointer;
+    fill: var(--primary-1);
 }
 
 .chatRoomMessageBox{

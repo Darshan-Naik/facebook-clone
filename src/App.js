@@ -37,7 +37,7 @@ function App() {
     });
 
     const unsubscribe4 = database.collection("users").doc(uid).collection('friends').onSnapshot(res=>{
-      const newFriends = res.docs.map(doc=>doc.data())
+      const newFriends = res.docs.map(doc=>({docId:doc.id,...doc.data()}))
       dispatch( getFriends( newFriends ) );
     });
 

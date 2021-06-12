@@ -5,8 +5,10 @@ import { database } from '../../Firebase/firebase'
 import NotificationBubble from '../../SharedComponents/NotificationBubble'
 import StatusDot from "../../SharedComponents/StatusDot"
 import checkActive from '../../Utils/checkActive'
+import Skeleton, { SkeletonTheme }  from 'react-loading-skeleton'
 
 function ChatRoomCard({chatID,authors}) {
+    const dark = useSelector(store=>store.theme.dark)
     const uid = useSelector(store=>store.auth.user.uid)
     const [userDetails,setUserDetails] = React.useState({})
     const [messages,setMessages] = React.useState([])
@@ -45,7 +47,7 @@ function ChatRoomCard({chatID,authors}) {
         
     },[userDetails.activeStatus])
     const time = new Date(messages[0]?.time?.toDate()).toLocaleTimeString();
-    return (
+    return userDetails.first_name? (
         <div className="chatRoomCardBox flexBox" onClick={()=>history.push(`/messenger/${chatID}`)}>
             <div className="chatRoomUserImage">
               {activeState &&  <StatusDot width="12px" height="12px" />}
@@ -54,13 +56,17 @@ function ChatRoomCard({chatID,authors}) {
             </div>
             <div className="chatRoomUserDetails">
                 <h2>{`${userDetails?.first_name} ${userDetails?.last_name}`}</h2>
-                <small className="flexBox"><p className="messengerText">{messages[0]?.text}</p> <span>{time}</span></small>
+                <small className="flexBox"><p className="messengerText">{messages[0]?.text}</p> <span>{time !=="Invalid Date"&&time}</span></small>
             </div>
-           
-            {/* <div className="messageCount">
-                {messages.filter(el=>el.author !== uid && !el.isRead).length}
-            </div> */}
         </div>
+    ) : ( <div className="chatRoomCardBox flexBox">
+        <SkeletonTheme width={200} color={dark?"#202020" :"#dadada" } highlightColor={dark?"#444":"#f3efef"} > 
+            <div className="flexBox">
+                <Skeleton style={{margin:"0 5px"}} circle={true} height={50} width={50} />
+                <Skeleton style={{borderRadius:"25px"}} width={130} height={15}/>
+            </div>
+    </SkeletonTheme>
+    </div>
     )
 }
 

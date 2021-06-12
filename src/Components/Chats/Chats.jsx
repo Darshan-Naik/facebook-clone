@@ -14,7 +14,9 @@ function Chats() {
     const {activeMessages,inActiveMessages} = useSelector(store=>store.app)
     const [activeChatIndex,setActiveChatIndex] = React.useState(0)
     const dispatch = useDispatch()
-
+    window.addEventListener("click",()=>{
+        setOptionVisibilityBox(false)
+    })
     const handleActiveChatBox = (index)=>{
         setActiveChatIndex(index)
     }
@@ -30,10 +32,10 @@ function Chats() {
     }
     return (
         <> 
-        <div className="activeChatBubbleContainer" onMouseEnter={()=>setOptionVisibility(true)} onMouseLeave={()=>!optionVisibilityBox && setOptionVisibility(false)}>
+        <div className="activeChatBubbleContainer" onMouseEnter={()=>setOptionVisibility(true)} onMouseLeave={()=>!optionVisibilityBox && setOptionVisibility(false)} onClick={(e)=>e.stopPropagation()}>
            {optionVisibility && (activeMessages.length || inActiveMessages.length ) ? <div className="bubbleOptions flexBox" onClick={handleOption}>
             <DotsIcon/>
-           {optionVisibilityBox && <div className="bubbleOptionBox">
+           {optionVisibilityBox && <div className="bubbleOptionBox" >
                 <div className="flexBox bubbleOptionIconBox" onClick={handleCloseAll}>
                     <CloseIcon />
                     <p>Close all chats</p>

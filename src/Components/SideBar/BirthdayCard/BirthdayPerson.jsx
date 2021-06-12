@@ -25,14 +25,14 @@ function BirthdayPerson(props){
     useEffect(()=>{
         database.collection('users').doc(props.friendId).get()
         .then(res => {
-            console.log(res.data())
+            //console.log(res.data())
             setfriendDetails(res.data());
         });
     },[props.friendId])
 
     useEffect(()=>{
         const arr = friendDetails.dob?.split(", ")
-        console.log(arr)
+        //console.log(arr)
         setBirthDate(arr[0] + ", " + arr[1]);
     },[friendDetails])
 
@@ -44,8 +44,8 @@ function BirthdayPerson(props){
                         <BirthdayIcon className="birthdayGiftIcon" />
                         <h3> Birthdays</h3>
                     </div>
+                    <p className="birthdayWishMessage"><strong onClick={()=>history.push(`/profile/${friendDetails.uid}`)}>{`${friendDetails.first_name} ${friendDetails.last_name}'s`}</strong> birthday is today.</p>
                 </div>
-                <p className="birthdayWishMessage"><strong onClick={()=>history.push(`/profile/${friendDetails.uid}`)}>{`${friendDetails.first_name} ${friendDetails.last_name}'s`}</strong> birthday is today.</p>
                 </>:null}
         </div>
     )

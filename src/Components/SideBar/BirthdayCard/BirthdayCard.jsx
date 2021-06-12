@@ -4,9 +4,11 @@ import BirthdayPerson from './BirthdayPerson';
 
 function BirthdayCard(){
     const friends = useSelector(store=>store.auth.friends);
-    //console.log(friends[1].friendId)
+    //console.log(friends)
+    const user = useSelector(store=>store.auth.user)
+    //console.log(user.accessibility)
 
-    return (
+    return user?.accessibility&&(
         <>
         {friends?.map((el)=><BirthdayPerson friendId={el.friendId} />)}
         </>

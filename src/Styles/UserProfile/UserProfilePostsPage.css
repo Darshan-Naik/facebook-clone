@@ -42,7 +42,7 @@
     align-items: flex-start;
 }
 
-.postsPageUserDetalisCoverBox {
+.postsPageUserDetailsCoverBox {
     margin: 8px 0;
 }
 
@@ -58,11 +58,11 @@
     padding: 4px 0 8px;
 }
 
-.postsPageEditUserDetialsBox {
+.postsPageEditUserDetailsBox {
     margin-top: 8px;
 }
 
-.postsPageEditUserDetialsBox button {
+.postsPageEditUserDetailsBox button {
     width: 100%;
     padding: 9px 0;
     font-size: 15px;
@@ -74,7 +74,7 @@
     background-color: var(--secondary-background-1);
 }
 
-.postsPageEditUserDetialsBox button:hover {
+.postsPageEditUserDetailsBox button:hover {
     background-color: var(--hover-overlay-2);
 }
 
@@ -219,7 +219,7 @@
     gap: 15px;
 }
 
-/* User Proile Page Media Queries */
+/* User Profile Page Media Queries */
 
 @media only screen and ( max-width: 924px ) {
 
