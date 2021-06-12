@@ -4,17 +4,17 @@ import {ReactComponent as MinimizeIcon} from  "../../Icons/minimize.svg"
 import {ReactComponent as CloseIcon} from  "../../Icons/close.svg"
 import { useDispatch, useSelector } from 'react-redux'
 import { addInActiveMessage, removeActiveMessage } from '../../Redux/App/actions'
-import { database } from '../../Firebase/firebase'
 import checkActive from '../../Utils/checkActive'
-function ChatBoxHeader({chatID,authors}) {
-    const uid = useSelector(store=>store.auth.user.uid)
-    const [useDetails,setUserDetails] = React.useState({})
+import { useHistory } from 'react-router-dom'
+import Skeleton, { SkeletonTheme }  from 'react-loading-skeleton'
+function ChatBoxHeader({chatID,userDetails}) {
+    const dark = useSelector(store=>store.theme.dark)
     const [activeState,setActiveState]=React.useState(false);
-   
+   const history = useHistory();
    
     React.useEffect(()=>{
-        if(useDetails?.activeStatus){
-            if(checkActive(useDetails?.activeStatus)==="Active Now"){
+        if(userDetails?.activeStatus){
+            if(checkActive(userDetails?.activeStatus)==="Active Now"){
                 setActiveState(true);
             }else{
                 setActiveState(false);
@@ -22,18 +22,8 @@ function ChatBoxHeader({chatID,authors}) {
 
         }
         
-    },[useDetails?.activeStatus])
-    React.useEffect(()=>{
-        const senderID = authors.filter(id=>id !==uid)
-            const unsubscribe = database.collection("users").doc(senderID[0])
-            .onSnapshot((doc) => {
-                setUserDetails(doc.data());             
-            });
-            return () => {
-                unsubscribe();
-            }
-
-    },[uid,authors])
+    },[userDetails?.activeStatus])
+ 
 
     const dispatch = useDispatch()
     const handleClose =()=>{
@@ -44,16 +34,22 @@ function ChatBoxHeader({chatID,authors}) {
     }
     return (
         <div className="chatBoxHeader flexBox">
-            <div className="chatBoxUser flexBox">     
+         { userDetails ? ( <div className="chatBoxUser flexBox" onClick={()=>history.push(`/profile/${userDetails?.uid}`)}>     
                 <div className="chatBoxUserImage">
-                        <img  src={useDetails.profilePic || process.env.PUBLIC_URL + '/Images/userProfile_icon.png'}  alt="User" />
+                        <img  src={userDetails.profilePic || process.env.PUBLIC_URL + '/Images/userProfile_icon.png'}  alt="User" />
                       {activeState &&  <StatusDot bottom={5} right={2} width="12px" height="12px"/>}
                 </div>
                 <div className="chatBoxUserDetails flexBox">
-                    <h4>{ useDetails.first_name? `${useDetails.first_name} ${useDetails.last_name}` : "User"}</h4>
-                    <small>{checkActive(useDetails?.activeStatus)}</small>
+                    <h4>{ userDetails.first_name? `${userDetails.first_name} ${userDetails.last_name}` : "User"}</h4>
+                    <small>{checkActive(userDetails?.activeStatus)}</small>
                 </div>
+            </div> ) :
+            ( <div className="chatBoxUser flexBox"><SkeletonTheme width={200} color={dark?"#202020" :"#dadada" } highlightColor={dark?"#444":"#f3efef"} > 
+            <div className="flexBox">
+                <Skeleton style={{margin:"0 5px"}} circle={true} height={35} width={35} />
+                <Skeleton style={{borderRadius:"25px"}} width={80} height={10}/>
             </div>
+            </SkeletonTheme> </div>)}
             <div className="chatBoxHeaderIcons flexBox">
                 <MinimizeIcon onClick={handleMinimize}/>
                 <CloseIcon onClick={handleClose} />

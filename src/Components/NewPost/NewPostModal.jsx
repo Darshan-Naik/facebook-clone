@@ -125,8 +125,8 @@ function NewPostModal({setPostModalVisibility}) {
         setTitle(title + emoji.native)
     }
     return (
-        <div className="createNewPostModal">
-            <div className="createNewPostContainer">
+        <div className="createNewPostModal"  onClick={()=>setPostModalVisibility(false)} >
+            <div className="createNewPostContainer" onClick={(e)=>e.stopPropagation()}>
               {postState?<div className="newPostProgressContainer flexBox">
                     <div className="progressBox">
                         <h2>Posting</h2> <br />
