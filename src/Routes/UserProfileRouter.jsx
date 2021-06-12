@@ -81,7 +81,7 @@ function UserProfileRouter({ path, forceRefresh, refresh }) {
                                 <UserProfilePostsPage userProfileDetails={userData} userFriends={userFriends} alternativePath={path} forceRefresh={forceRefresh} />
                             </Route>
                             <Route  path={`${path}/${userData.uid}/friends`} exact>
-                                <UserProfileFriendsPage userProfileDetails={userData} userFriends={userFriends} forceRefresh={forceRefresh} />
+                                <UserProfileFriendsPage alternativePath={path} userProfileDetails={userData} userFriends={userFriends} forceRefresh={forceRefresh} />
                             </Route>
                         </Switch>
                     </React.Fragment>

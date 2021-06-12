@@ -21,9 +21,14 @@ function FriendsPageSideBar({ forceRefresh }) {
 
     const history = useHistory();
 
-    const handleSentRequestVisibility = () => {
+    const handleSentRequestVisibility = (e) => {
+        e.stopPropagation();
         setSentRequestVisibility(!sentRequestVisibility);
     }
+
+    window.addEventListener('click', () => {
+        setSentRequestVisibility(false);
+    })
 
     useEffect(() => {
 

@@ -28,6 +28,15 @@ const UserProfilePageHeader = ({ coverPhoto, currentUser, forceRefresh, userProf
         setTextFieldQuery("");
     };
 
+    const handleShowCoverPicModal = (e) => {
+        e.stopPropagation();
+        setShowCoverPicModal(!showCoverPicModal);
+    };
+
+    window.addEventListener('click', () => {
+        setShowCoverPicModal(false);
+    });
+
     const handleChangeCoverPicPreview = () => {
         
         if( !coverPicImageRef.current?.files[0]?.type.includes(`image`) ) {
@@ -112,7 +121,7 @@ const UserProfilePageHeader = ({ coverPhoto, currentUser, forceRefresh, userProf
                         {
                             currentUser === uid && (
                                 <React.Fragment>
-                                    <div className="userProfileEditCoverPhotoContainer flexBox" onClick={() => setShowCoverPicModal(true)} title="Edit cover photo">
+                                    <div className="userProfileEditCoverPhotoContainer flexBox" onClick={handleShowCoverPicModal} title="Edit cover photo">
                                         <div className="userProfileEditCoverPhotoBox">
                                             <img className="userProfileEditCoverCamIcon" src={process.env.PUBLIC_URL + '/Images/camera_icon.png'} alt="camera"/>
                                             <span className="userProfileEditCoverNamePlate">Edit Cover Photo</span>
@@ -121,7 +130,7 @@ const UserProfilePageHeader = ({ coverPhoto, currentUser, forceRefresh, userProf
                                     {
                                         showCoverPicModal && (
                                             <div className="editProfilePicModalContainer">
-                                                <div className="editProfilePicModalBox">
+                                                <div className="editProfilePicModalBox" onClick={(e) => e.stopPropagation()}>
                                                     {
                                                         picUploadState ? (
                                                             <div className="newPostProgressContainer flexBox">
