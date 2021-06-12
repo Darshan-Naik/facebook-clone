@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { database } from '../../../Firebase/firebase';
+import {ReactComponent as BirthdayIcon} from  "../../../Icons/birthdayIcon.svg";
+import "../../../Styles/SideBar/SideBar.css";
 
 const dummyData = {
     dob: "01, Jdm, 2039"
@@ -36,7 +38,15 @@ function BirthdayPerson(props){
 
     return (
         <div>
-            {birthDate===strDate?<p className="birthdayWishMessage"><strong onClick={()=>history.push(`/profile/${friendDetails.uid}`)}>{`${friendDetails.first_name} ${friendDetails.last_name}'s`}</strong> birthday is today.</p>:null}
+            {birthDate===strDate?<>
+                <div className="birthdayCardContainer">
+                    <div className="birthdayCardIcon flexBox">
+                        <BirthdayIcon className="birthdayGiftIcon" />
+                        <h3> Birthdays</h3>
+                    </div>
+                </div>
+                <p className="birthdayWishMessage"><strong onClick={()=>history.push(`/profile/${friendDetails.uid}`)}>{`${friendDetails.first_name} ${friendDetails.last_name}'s`}</strong> birthday is today.</p>
+                </>:null}
         </div>
     )
 }
