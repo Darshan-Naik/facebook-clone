@@ -19,12 +19,14 @@ import AccountMenu from './AccountMenu'
 import { useSelector } from 'react-redux'
 import NewPostModal from '../NewPost/NewPostModal'
 import Notifications from './Notifications'
-
+import SearchResult  from './SearchResult'
 function NavBar({refresh,handleRefresh}) {
     const [postModalVisibility,setPostModalVisibility] = React.useState(false)
     const [notificationVisibility,setNotificationVisibility] = React.useState(false)
     const [accountVisibility,setAccountVisibility] = React.useState(false)
     const [searchBoxVisibility,setSearchBoxVisibility] = React.useState(false)
+    const [search,setSearch] = React.useState("")
+    const [searchResultBoxVisibility,setSearchResultBoxVisibility] = React.useState(false)
     const path = React.useRef(true)
     const history = useHistory()
     const {profilePic,first_name,uid} = useSelector(store=>store.auth.user)
@@ -52,21 +54,32 @@ function NavBar({refresh,handleRefresh}) {
      window.addEventListener("click",()=>{
          setAccountVisibility(false)
          setNotificationVisibility(false)
+         setSearchResultBoxVisibility(false)
      })
      if(notifications.filter(item=>!item.isRead)?.length){
         document.title = `(${notifications.filter(item=>!item.isRead)?.length}) Facebook`
      } else {
         document.title = `Facebook`
      }
-     
+     React.useEffect(()=>{
+            if(search){
+                setSearchResultBoxVisibility(true)
+            } else {
+                setSearchResultBoxVisibility(false)
+            }
+     },[search])
+     const handleSearchResultBoxVisibility=(flag)=>{
+        setSearchResultBoxVisibility(flag)
+     }
+
     return (
         <div className="navBarContainer flexBox">
-
+                {searchResultBoxVisibility && search && <SearchResult handleSearchResultBoxVisibility={handleSearchResultBoxVisibility} query={search}/>}
             <div className="navBarLogo flexBox">
                {!searchBoxVisibility ? <MainLogo onClick={()=>history.push("/")}/> : (<div className="searchBarBackButton flexBox" onClick={()=>setSearchBoxVisibility(false)}>
                 <BackIcon/> 
             </div>)}
-                <div className="navBarSearchBox flexBox" style={{padding:searchBoxVisibility &&"4px 10px"}} >
+                <div className="navBarSearchBox flexBox" style={{padding:searchBoxVisibility &&"4px 10px"}} onClick={(e)=>e.stopPropagation()}>
                <div className="mainSearchIcon flexBox">
                     <SearchIcon />
                 </div> 
@@ -74,7 +87,7 @@ function NavBar({refresh,handleRefresh}) {
                     <SearchIcon onClick={()=>setSearchBoxVisibility(true)}/>
                 </div>
             
-                <input type="text" placeholder="Search Facebook" style={{display: searchBoxVisibility && "flex"}} className="navBarSearchBoxInput"/>
+                <input type="text" onClick={()=>setSearchResultBoxVisibility(true)} value={search} onChange={(e)=>setSearch(e.target.value)} placeholder="Search Facebook" style={{display: searchBoxVisibility && "flex"}} className="navBarSearchBoxInput"/>
                 </div>
               { !searchBoxVisibility && <div className="navBarMenu flexBox">
                     <MenuIcon onClick={handleMenu} />
