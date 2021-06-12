@@ -33,7 +33,9 @@ const UserProfilePicture = ({userProfilePic=(process.env.PUBLIC_URL + '/Images/u
     }
 
     const handleShowProfilePicModal = (e) => {
-        e.stopPropagation();
+        if( e ) {
+            e.stopPropagation();
+        }
         setShowProfilePicModal(!showProfilePicModal);
     };
 
