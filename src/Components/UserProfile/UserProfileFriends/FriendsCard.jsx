@@ -7,6 +7,9 @@ import FriendsCardSkeleton from "./Skeleton/FriendsCardSkeleton";
 
 function FriendsCard({friendId, alternativePath}) {
 
+    const [unfriendOption, setUnfriendOption] = useState(false);
+    const [unfriendModalVisibility, setUnfriendModalVisibility] = useState(false);
+    
     const [userDetails, setUserDetails] = useState(null);
 
     useEffect(() => {

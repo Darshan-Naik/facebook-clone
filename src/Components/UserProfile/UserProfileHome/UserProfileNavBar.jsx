@@ -18,7 +18,7 @@ const UserProfileNavBar = ({currentUser, refresh, alternativePath, userProfileDe
     const [messengerIsLoading, setMessengerIsLoading] = useState(false);
     const [postModalVisibility,setPostModalVisibility] = useState(false);
     const [unfriendOption, setUnfriendOption] = useState(false);
-    const [unfriendModalVisibility, setUnfriendModalVisibility]  =useState(false);
+    const [unfriendModalVisibility, setUnfriendModalVisibility] = useState(false);
 
     const userProfileNavBarRef = useRef();
     
@@ -63,12 +63,16 @@ const UserProfileNavBar = ({currentUser, refresh, alternativePath, userProfileDe
     }
 
     const handleEditUserDetailsModal = (e) => {
-        e.stopPropagation();
+        if( e ) {
+            e.stopPropagation();
+        }
         setEditUserDetailsModalState(!editUserDetailsModalState)
     };
 
     const handleUnfriendModalVisibility = (e) => {
-        e.stopPropagation();
+        if( e ) {
+            e.stopPropagation();
+        }
         setUnfriendModalVisibility(!unfriendModalVisibility);
         setUnfriendOption(false);
     }
