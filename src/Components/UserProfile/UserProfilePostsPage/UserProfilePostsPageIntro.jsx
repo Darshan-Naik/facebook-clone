@@ -11,9 +11,14 @@ function UserProfilePostsPageIntro({ alternativePath, userProfileDetails, userFr
     
     const { uid } = useSelector( state => state.auth.user );
     
-    const handleEditUserDetailsModal = () => {
+    const handleEditUserDetailsModal = (e) => {
+        e.stopPropagation();
         setEditUserDetailsModalState(!editUserDetailsModalState)
     }
+
+    window.addEventListener('click', () => {
+        setEditUserDetailsModalState(false);
+    });
 
     return (
         <div className="postsPageIntroMainContainer">

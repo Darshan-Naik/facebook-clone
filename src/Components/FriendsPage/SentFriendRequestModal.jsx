@@ -6,7 +6,7 @@ function SentFriendRequestModal({ sentRequests, handleSentRequestVisibility }) {
 
     return (
         <div className="seeAllSentRequestModalContainer">
-            <div className="seeAllSentRequestModalBox">
+            <div className="seeAllSentRequestModalBox" onClick={(e) => e.stopPropagation()}>
                 <div className="flexBox seeAllSentRequestModalHeader">
                     <h1 className="seeAllSentRequestModalHeaderNamePlate">Sent Requests</h1>
                     <div className="flexBox seeAllSentRequestModalCloseIcon" onClick={handleSentRequestVisibility}>

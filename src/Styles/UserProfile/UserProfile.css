@@ -681,7 +681,7 @@
     background-color: var(--hover-overlay-2);
 }
 
-.userProfileNavDotsBox .DotsIcon {
+.userProfileNavDotsBox .dotsIcon {
     vertical-align: middle;
 }
 
@@ -748,6 +748,99 @@
     position: relative;
 }
 
+.showUnfriendOptionToggler {
+    position: relative;
+}
+
+.showUnfriendOptionContainer {
+    position: absolute;
+    top: 100%;
+    padding: 8px;
+    z-index: 40;
+    border-radius: 6px;
+    transform: translate(38%, 15%);
+    border: 1px solid var(--shadow-1);
+    background-color: var(--secondary-background-1);
+}
+
+.showUnfriendOptionContainer::before {
+    position: absolute;
+    content: "";
+    width: 15px;
+    height: 15px;
+    top: -9px;
+    right: 15px;
+    border-left: 1px solid var(--shadow-1);
+    border-top: 1px solid var(--shadow-1);
+    transform: rotate(45deg);
+    background-color: var(--secondary-background-1);
+}
+
+.unfriendOptionBox {
+    padding: 2px;
+    cursor: pointer;
+}
+
+.unfriendOptionBoxImage {
+    width: 14px;
+    height: 14px;
+    margin-right: 5px;
+    filter: invert(var(--filter-invert));
+}
+
+.unfriendOptionBoxNamePlate {
+    font-size: 14px;
+}
+
+/* Unfriend Modal CSS */
+
+.unfriendModalNamePlate {
+    flex-grow: 1;
+    font-size: 25px;
+    font-weight: 500;
+}
+
+.unfriendModalWarningTextBox {
+    padding: 30px 0;
+}
+
+.unfriendModalWarningTextPlate {
+    font-size: 16px;
+    line-height: 3;
+    font-weight: 500;
+    word-spacing: 2px;
+}
+
+.unfriendModalConfirmationButtonBox {
+    justify-content: center;
+    padding: 15px 0;
+}
+
+.unfriendModalConfirmationButtonBox button {
+    margin-right: 15px;
+    font-size: 18px;
+    padding: 6px 25px;
+    border: none;
+    outline: none;
+    border-radius: 6px;
+}
+
+.unfriendModalConfirmationButtonBox button:first-child {
+    background-color: var(--supplementary-1);
+}
+
+.unfriendModalConfirmationButtonBox button:first-child:hover {
+    background-color: red;
+}
+
+.unfriendModalConfirmationButtonBox button:last-child {
+    background-color: var(--primary-4);
+}
+
+.unfriendModalConfirmationButtonBox button:last-child:hover {
+    background-color: var(--primary-1);
+}
+
 /* UserProfile Media Queries */
 
 @media only screen and ( max-width: 950px ) {
@@ -792,6 +885,10 @@
 
     .addToStoryContainer span, .editProfileContainer span {
         display: none;
+    }
+
+    .showUnfriendOptionContainer {
+        right: 39%;
     }
     
     .messageLoading {

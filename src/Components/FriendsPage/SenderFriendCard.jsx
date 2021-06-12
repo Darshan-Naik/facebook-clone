@@ -32,10 +32,13 @@ function SenderFriendCard ({receiverId}) {
             </div>
             <div className="senderProfileNamePlateCover flexBox">
                 <Link className="senderProfileNamePlate" to={`/profile/${sentFriendRequestDetails.uid}`}>
-                    {sentFriendRequestDetails.first_name}
+                    {`${sentFriendRequestDetails.first_name} ${sentFriendRequestDetails.last_name}`}
                 </Link>
             </div>
-            <button className="senderProfileCancelRequestButton" onClick={handleCancelRequest}>Cancel Request</button>
+            <div className="flexBox userProfileNavButton addToStoryContainer" onClick={handleCancelRequest}>
+                <img className="userProfileNavButtonIcons userProfileNavButtonIconsFilter" src={process.env.PUBLIC_URL + '/Images/cancel_request_icon.png'} alt="plus"/>
+                <span>Cancel Request</span>
+            </div>
         </div>
     ) : (
         <SkeletonTheme color={dark?"#202020" :"#dadada" } highlightColor={dark?"#444":"#f3efef"}>
