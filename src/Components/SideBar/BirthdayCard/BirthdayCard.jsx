@@ -11,10 +11,10 @@ function BirthdayCard(){
     return (
         <div className="birthdayCardContainer">
             <div className="birthdayCardIcon flexBox">
-                <BirthdayIcon height={20} fill="blue" />
+                <BirthdayIcon className="birthdayGiftIcon" />
                 <h3> Birthdays</h3>
             </div>
-            {friends.map((el)=><BirthdayPerson friendId={el.friendId} />)}
+            {friends?.map((el)=><BirthdayPerson friendId={el.friendId} />)}
         </div>
     )
 }

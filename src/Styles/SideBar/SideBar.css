@@ -100,7 +100,7 @@
 /*birthday card container css */
 
 .birthdayCardContainer {
-  background-color: var(--hover-overlay);
+  background-color: var(--primary-background);
   width: 100%;
   height: auto;
   padding: 15px 5px 20px 20px;
@@ -113,8 +113,19 @@
 }
 .birthdayCardIcon > h3 {
   padding-left: 15px;
+  padding-top: 2px;
 }
 .birthdayRemiderPTag {
   margin-top: 10px;
   width: 80%;
+}
+.birthdayWishMessage {
+  font-size: 15px;
+  margin-top: 10px;
+  width: 90%;
+}
+.birthdayGiftIcon {
+  fill: var(--primary-1);
+  width: 20px;
+  height: 20px;
 }

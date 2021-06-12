@@ -1,21 +1,24 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { database } from '../../../Firebase/firebase';
 
+const dummyData = {
+    dob: "01, Jdm, 2039"
+}/*dummy for first time*/
+
 function BirthdayPerson(props){
-    const [friendDetails, setfriendDetails] = useState([]);
+    const [friendDetails, setfriendDetails] = useState(dummyData);
     const [strDate, setStrDate] = useState([]);
-    const [birthDate, setBirthDate] = useState(0);
-    const [birthMonth, setBirthMonth] = useState("");
+    const [birthDate, setBirthDate] = useState("");
+    const history = useHistory();
     //console.log(props)
 
     useEffect(()=>{
         const date = new Date();
         const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-        setStrDate(28 + ", " + months[1]);
+        setStrDate(date.getDate() + ", " + months[date.getMonth()]);
     },[])
 
-    // date.getDate()
-    // date.getMonth()
 
     useEffect(()=>{
         database.collection('users').doc(props.friendId).get()
@@ -32,9 +35,9 @@ function BirthdayPerson(props){
     },[friendDetails])
 
     return (
-        <>
-            {birthDate===strDate?<p>{`${friendDetails.first_name} ${friendDetails.last_name}`}</p>:console.log(birthDate, strDate)}
-        </>
+        <div>
+            {birthDate===strDate?<p className="birthdayWishMessage"><strong onClick={()=>history.push(`/profile/${friendDetails.uid}`)}>{`${friendDetails.first_name} ${friendDetails.last_name}'s`}</strong> birthday is today.</p>:null}
+        </div>
     )
 }
 
