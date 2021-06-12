@@ -5,8 +5,9 @@ import { useSelector } from 'react-redux'
 import { useParams } from 'react-router'
 import { database } from '../../Firebase/firebase'
 import {ReactComponent as StatePeople} from  "../../Icons/states_people.svg"
+import UserDetailsCard  from '../../SharedComponents/UserDetailsCard'
 import Message from './Message'
-function ChatRoomBody({handleUserDetailsVisibility,data}) {
+function ChatRoomBody({handleUserDetailsVisibility}) {
     const {chatID} = useParams()
     const scroll = React.useRef()
     const [messages,setMessages] = React.useState([])
@@ -37,6 +38,8 @@ function ChatRoomBody({handleUserDetailsVisibility,data}) {
         }
         return()=>{
           unsubscribe && unsubscribe();
+          setSenderData(null)
+          setMessages([])
         }
     },[chatID,uid])
     React.useEffect(()=>{
@@ -44,12 +47,14 @@ function ChatRoomBody({handleUserDetailsVisibility,data}) {
         scroll.current.scroll(0,200000)
         }
     },[messages,chatID])
+
+
     return chatID !== "new"? (
         <div className="chatRoomBodyContainer flexBox" >
            <ChatBodyHeader handleUserDetailsVisibility={handleUserDetailsVisibility} {...senderData} />
            <div className="chatRoomMessageBox scroll" ref={scroll}>
                <div className="messengerFillBox">
-
+                <UserDetailsCard {...senderData}/>
                </div>
            {messages.map(message=><Message key={message.id} {...message} uid={uid} />)}
            </div>
