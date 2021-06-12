@@ -29,7 +29,9 @@ const UserProfilePageHeader = ({ coverPhoto, currentUser, forceRefresh, userProf
     };
 
     const handleShowCoverPicModal = (e) => {
-        e.stopPropagation();
+        if( e ) {
+            e.stopPropagation();
+        }
         setShowCoverPicModal(!showCoverPicModal);
     };
 

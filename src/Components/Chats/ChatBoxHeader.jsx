@@ -34,13 +34,13 @@ function ChatBoxHeader({chatID,userDetails}) {
     }
     return (
         <div className="chatBoxHeader flexBox">
-         { userDetails ? ( <div className="chatBoxUser flexBox" onClick={()=>history.push(`/profile/${userDetails?.uid}`)}>     
+         { userDetails.first_name ? ( <div className="chatBoxUser flexBox" onClick={()=>history.push(`/profile/${userDetails?.uid}`)}>     
                 <div className="chatBoxUserImage">
                         <img  src={userDetails.profilePic || process.env.PUBLIC_URL + '/Images/userProfile_icon.png'}  alt="User" />
                       {activeState &&  <StatusDot bottom={5} right={2} width="12px" height="12px"/>}
                 </div>
                 <div className="chatBoxUserDetails flexBox">
-                    <h4>{ userDetails.first_name? `${userDetails.first_name} ${userDetails.last_name}` : "User"}</h4>
+                    <h4>{`${userDetails?.first_name} ${userDetails?.last_name}`}</h4>
                     <small>{checkActive(userDetails?.activeStatus)}</small>
                 </div>
             </div> ) :
