@@ -49,7 +49,7 @@ function PictureCardComment({postId,comments,userData}) {
     }
 
     return (
-        <div className="postDetailsCardCommentContainer flexBox">
+        <div className="postDetailsCardCommentContainer scroll flexBox">
             <div className="postDetailsModalCommentBox scroll">
                 {comments?.map((el)=><CommentBox key={el.commentId}{...el} />)}
             </div>

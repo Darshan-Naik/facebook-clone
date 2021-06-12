@@ -25,19 +25,19 @@ function PostModal({postEditFunction,handleClosePostModal,uid, id, image,author,
             </div>
             <div className="PicInfoContainer">
                 <PictureCardHeader {...userData} time={time} image={image} activity={activity}author={author} postEditFunction={postEditFunction}/>
-                    {title && <div className="postDetailsCardTags">{title}</div>}
+                {title && <div className="postDetailsCardTags">{title}</div>}
                 <div className="postDetailsCardLike flexBox">
                     <div className="flexBox">
                         <LikeEmoji/> 
                         <p>{likes?.length}</p>
                     </div>
-                <div className="flexBox">
-                    <p>{comments?.length} Comments</p> 
+                    <div className="flexBox">
+                        <p>{comments?.length} Comments</p> 
+                    </div>
                 </div>
-            </div>
             
-            <PictureCardFooter handleDeleteLike={handleDeleteLike} handleLike={handleLike} like={JSON.stringify(likes).includes(uid)} showComment={showComment}/>
-            <PictureCardComment userData={userData} comments={comments} postId={id}/>
+                <PictureCardFooter handleDeleteLike={handleDeleteLike} handleLike={handleLike} like={JSON.stringify(likes).includes(uid)} showComment={showComment}/>
+                <PictureCardComment userData={userData} comments={comments} postId={id}/>
            </div>
            
         </div>

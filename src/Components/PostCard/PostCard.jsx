@@ -48,9 +48,33 @@ function PostCard({title,image,imagePath,id,author,time,video,activity}) {
    
 
     const handleDeletePost=()=>{
-        database.collection("posts").doc(id).delete();
-        storage.ref("postImages").child(imagePath).delete();
         
+        database.collection("posts").doc(id).delete();
+        if(imagePath){
+            storage.ref("postImages").child(imagePath).delete();
+        }
+        
+        
+    }
+
+    const handleShare=()=>{
+        let payload = {
+            originalAuthor:author,
+            author:uid,
+            activity:`shared ${userData.first_name} ${userData.last_name}'s post.`,
+            title:title||"",
+            time:new Date()
+        }
+        if(image){
+            payload.image=image;
+        }else if(video){
+            payload.video=video;
+        }
+        if(author===uid){
+            payload.activity=`shared his post.`
+        }
+       database.collection("posts").add(payload);
+
     }
 
     const handleClosePostModal=()=>{
@@ -88,15 +112,11 @@ function PostCard({title,image,imagePath,id,author,time,video,activity}) {
         database.collection("posts").doc(id).collection("likes").onSnapshot(response=>{
             setLikes(response.docs.map(doc=>({likeId:doc.id,...doc.data()})))
         })
-    },[])
-
-    React.useEffect(()=>{
+   
         database.collection("posts").doc(id).collection("comments").orderBy("time","asc").onSnapshot(response=>{
             setComments(response.docs.map(doc=>({commentId:doc.id,...doc.data()})))
         })
-    },[])
-
-    React.useEffect(() => {
+   
         const unsubscribe = database.collection("users").doc(author)
         .onSnapshot((doc) => {
             setUserData(doc.data());
@@ -106,6 +126,12 @@ function PostCard({title,image,imagePath,id,author,time,video,activity}) {
             unsubscribe();
         }
     }, [])
+
+    React.useEffect(() => {
+        if(!image && userData){
+            setLoading(false);
+        }
+    },[userData]);
 
 
 
@@ -131,7 +157,7 @@ function PostCard({title,image,imagePath,id,author,time,video,activity}) {
                     <p onClick={showComment}>{comments.length} Comments</p> 
                 </div>
             </div>
-            <PostCardFooter handleDeleteLike={handleDeleteLike} handleLike={handleLike} like={JSON.stringify(likes).includes(uid)} showComment={showComment}/>
+            <PostCardFooter handleDeleteLike={handleDeleteLike} handleLike={handleLike} handleShare={handleShare} like={JSON.stringify(likes).includes(uid)} showComment={showComment}/>
            {commentSection && <PostCardComment postId={id} comments={comments} userData={userData}/>}
            
         </div>

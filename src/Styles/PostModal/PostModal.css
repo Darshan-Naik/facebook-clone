@@ -131,13 +131,13 @@
   border-top: 1px solid var(--secondary-text);
 }
 .postDetailsCardFooterBox {
-  width: 30%;
-  margin: 5px 0;
+  flex:1;
+  margin: 5px 10px;
+  border-radius: 4px;
+  padding:0px 5px;
 }
 .postDetailsCardFooterBox:hover {
   background: var(--hover-overlay);
-  border-radius: 4px;
-  width: 30%;
 }
 
 .postDetailsCardFooterBox svg {
@@ -147,6 +147,7 @@
   margin: 5px;
   cursor: pointer;
 }
+
 .postDetailsCardFooterBox .likeIcon {
   fill: var(--primary-1);
 }
@@ -175,7 +176,7 @@
   justify-content: flex-start;
   align-items: flex-start;
   display: flex;
-  flex-direction: column;
+ 
 }
 .postDetailsModalCommentBox  {
   font-weight: 500;
@@ -276,11 +277,6 @@
   padding: 2px;
 }
 
-@media only screen and (max-width: 1224px) {
-  .postDetailsCardContainer {
-    flex-direction: column;
-  }
-}
 
 /* */
 .PicInfoContainer {
@@ -297,13 +293,15 @@
   position: absolute;
   top: 15px;
   left: 30px;
+  border-radius: 50%;
   background-color: transparent;
   border: transparent;
+  background-color: var(--shadow-8);
+  
 }
 .postDetailsModalClose:hover {
   transform: scale(1.01);
-  border-radius: 50%;
-  background-color: var(--hover-overlay);
+  background-color: var(--hover-overlay-1);
 }
 .postDetailsModalClose > svg {
   stroke: var(--white);
@@ -315,4 +313,10 @@
   left: 80px;
   background-color: transparent;
   border: transparent;
+}
+
+@media only screen and (max-width: 768px) {
+  .PicInfoContainer {
+    display: none;
+  }
 }

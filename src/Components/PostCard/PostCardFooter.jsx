@@ -6,7 +6,7 @@ import AfterLike from './AfterLike';
 import Like from './Like';
 
 
-function PostCardFooter({showComment,handleLike,like,handleDeleteLike}) {
+function PostCardFooter({showComment,handleLike,like,handleDeleteLike,handleShare}) {
     return (
         <div className="postCardFooter flexBox">
             <div className="postCardFooterBox flexBox" >
@@ -16,7 +16,7 @@ function PostCardFooter({showComment,handleLike,like,handleDeleteLike}) {
                 <CommentIcon  />
                 <p>Comments</p>
             </div>
-            <div className="postCardFooterBox flexBox">
+            <div className="postCardFooterBox flexBox" onClick={handleShare}>
                 <ShareIcon/>
                 <p>Share</p>
             </div>
