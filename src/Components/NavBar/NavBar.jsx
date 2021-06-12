@@ -53,6 +53,12 @@ function NavBar({refresh,handleRefresh}) {
          setAccountVisibility(false)
          setNotificationVisibility(false)
      })
+     if(notifications.filter(item=>!item.isRead)?.length){
+        document.title = `(${notifications.filter(item=>!item.isRead)?.length}) Facebook`
+     } else {
+        document.title = `Facebook`
+     }
+     
     return (
         <div className="navBarContainer flexBox">
 
