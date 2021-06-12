@@ -22,11 +22,11 @@ function ProfileProgressBox() {
             </div>
             
             <div className="profileProgressBarBoxContainer flexBox" onClick={()=>history.push(`/profile/${user?.uid}`)}>
-                <img src={user.profilePic} alt="Photo" />
+                <img src={user.profilePic || process.env.PUBLIC_URL + '/Images/userProfile_icon.png' } alt="Photo" />
                 <div className="userDetailsProgressBar">
                     <p>{`${user.first_name} ${user.last_name}`}</p>
                     <div className="profileProgressBarBox">
-                        <div className="profileProgressBar flexBox" style={{width:`${progress}%`,backgroundColor:progress <50?"rgb(255, 122, 105)" : "#1877f2"}}>
+                        <div className="profileProgressBar flexBox" style={{width:`${progress}%`,backgroundColor:progress <65?"rgb(255, 122, 105)" : "#1877f2"}}>
                             <p>{`${Math.floor(progress)}%`}</p>
                         </div>
                     </div>
