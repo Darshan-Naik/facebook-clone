@@ -6,7 +6,6 @@ import Router from "./Routes/Router";
 import { getPosts } from './Redux/Posts/actions';
 import { getChatRooms, getUsers, updateActiveContacts } from "./Redux/App/actions";
 import { getFriendRequest, getFriends, getNotifications, getSentRequest, loginSuccess } from "./Redux/Auth/actions";
-import timeConverter from "./Utils/timeConverter";
 
 function App() {
 
@@ -23,10 +22,13 @@ function App() {
     
    
     if(uid && isAuth){
+      /* => getting all users from database 
+         => dispatching users to the redux store */
       database.collection("users").get().then(res=>{
         const newUsers = res.docs.map(doc=>doc.data())
         dispatch(getUsers(newUsers))     
       });
+
     const unsubscribe1 = database.collection("posts").orderBy("time","desc").onSnapshot(res=>{
         const newPosts = res.docs.map(doc=>({id:doc.id,...doc.data()}))
         dispatch(getPosts(newPosts))
@@ -37,7 +39,7 @@ function App() {
     });
 
     const unsubscribe4 = database.collection("users").doc(uid).collection('friends').onSnapshot(res=>{
-      const newFriends = res.docs.map(doc=>doc.data())
+      const newFriends = res.docs.map(doc=>({docId:doc.id,...doc.data()}))
       dispatch( getFriends( newFriends ) );
     });
 

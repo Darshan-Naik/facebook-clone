@@ -4,8 +4,11 @@ import { Link } from "react-router-dom";
 import FriendsCard from "./FriendsCard";
 import UserProfileFriendsPageSkeleton from "./Skeleton/UserProfileFriendsPageSkeleton";
 import "../../../Styles/UserProfile/UserProfileFriendsPage.css";
+import { shallowEqual, useSelector } from 'react-redux';
 
-function UserProfileFriendsPage({ forceRefresh, userFriends }) {
+function UserProfileFriendsPage({ forceRefresh, userFriends, alternativePath, userProfileDetails }) {
+
+    const { uid } = useSelector( state => state.auth.user, shallowEqual );
 
     useEffect(forceRefresh, []);
     
@@ -14,17 +17,23 @@ function UserProfileFriendsPage({ forceRefresh, userFriends }) {
             <div className="userFriendsPageContainer">
                 <div className="flexBox userFriendsPageHeaderBox">
                     <h1 className="userFriendsPageHeaderTitle">Friends</h1>
-                    <div className="flexBox">
-                        <Link className="friendsPageHeaderLinks" to="/friends/profile">
-                            Friend Requests
-                        </Link>
-                        <Link className="friendsPageHeaderLinks" to="/friends/profile">
-                            Find Friends
-                        </Link>
-                        <div className="userProfileNavDotsBox">
-                            <ThreeDots />
-                        </div>
-                    </div>
+                    {
+                        userProfileDetails.uid === uid && (
+                            <React.Fragment>
+                                <div className="flexBox">
+                                    <Link className="friendsPageHeaderLinks" to="/friends/new">
+                                        Friend Requests
+                                    </Link>
+                                    <Link className="friendsPageHeaderLinks" to="/friends/new">
+                                        Find Friends
+                                    </Link>
+                                    <div className="userProfileNavDotsBox flexBox">
+                                        <ThreeDots />
+                                    </div>
+                                </div>
+                            </React.Fragment>
+                        )
+                    }
                 </div>
                 {
                     userFriends.length > 0 ? (
@@ -33,7 +42,7 @@ function UserProfileFriendsPage({ forceRefresh, userFriends }) {
                                 userFriends.map( el => {
                                     return (
                                         <div key={el.friendId} className="friendsCardMainBox">
-                                            <FriendsCard {...el} />
+                                            <FriendsCard {...el} alternativePath={alternativePath} />
                                         </div>
                                     )
                                 })

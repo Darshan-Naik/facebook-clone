@@ -11,9 +11,16 @@ function UserProfilePostsPageIntro({ alternativePath, userProfileDetails, userFr
     
     const { uid } = useSelector( state => state.auth.user );
     
-    const handleEditUserDetailsModal = () => {
+    const handleEditUserDetailsModal = (e) => {
+        if( e ) {
+            e.stopPropagation();
+        }
         setEditUserDetailsModalState(!editUserDetailsModalState)
     }
+
+    window.addEventListener('click', () => {
+        setEditUserDetailsModalState(false);
+    });
 
     return (
         <div className="postsPageIntroMainContainer">
@@ -29,7 +36,7 @@ function UserProfilePostsPageIntro({ alternativePath, userProfileDetails, userFr
                             <div className="postsPageUserDetailsInfoBox flexBox">
                                 {
                                     userProfileDetails.education && (
-                                        <div  className="postsPageUserDetalisCoverBox">
+                                        <div  className="postsPageUserDetailsCoverBox">
                                             <img className="postsPageUserDetailsInfoIcon" src={process.env.PUBLIC_URL + '/Images/studied_at_icon.png'} alt="studied"/>
                                             <span>{userProfileDetails.education}</span>
                                         </div>
@@ -37,7 +44,7 @@ function UserProfilePostsPageIntro({ alternativePath, userProfileDetails, userFr
                                 }
                                 {
                                     userProfileDetails.lives && (      
-                                        <div  className="postsPageUserDetalisCoverBox">
+                                        <div  className="postsPageUserDetailsCoverBox">
                                             <img className="postsPageUserDetailsInfoIcon" src={process.env.PUBLIC_URL + '/Images/lives_in_home_icon.png'} alt="home"/>
                                             <span>{userProfileDetails.lives}</span>
                                         </div>
@@ -45,7 +52,7 @@ function UserProfilePostsPageIntro({ alternativePath, userProfileDetails, userFr
                                 }
                                 {
                                     userProfileDetails.from && (
-                                        <div  className="postsPageUserDetalisCoverBox">
+                                        <div  className="postsPageUserDetailsCoverBox">
                                             <img className="postsPageUserDetailsInfoIcon" src={process.env.PUBLIC_URL + '/Images/location_icon.png'} alt="location"/>
                                             <span>{userProfileDetails.from}</span>
                                         </div>
@@ -53,7 +60,7 @@ function UserProfilePostsPageIntro({ alternativePath, userProfileDetails, userFr
                                 }
                                 {
                                     userProfileDetails.relationship && (
-                                        <div className="postsPageUserDetialsCoverBox">
+                                        <div className="postsPageUserDetailsCoverBox">
                                             <img className="postsPageUserDetailsInfoIcon" src={process.env.PUBLIC_URL + '/Images/relationship_status_icon.png'} alt="relationship"/>
                                             <span>{userProfileDetails.relationship}</span>
                                         </div>
@@ -64,7 +71,7 @@ function UserProfilePostsPageIntro({ alternativePath, userProfileDetails, userFr
                                 {
                                     userProfileDetails.uid === uid && (
                                         <React.Fragment>
-                                                <div className="postsPageEditUserDetialsBox">
+                                                <div className="postsPageEditUserDetailsBox">
                                                     <button onClick={handleEditUserDetailsModal}>Edit Details</button>
                                                 </div>
                                             {
@@ -101,7 +108,7 @@ function UserProfilePostsPageIntro({ alternativePath, userProfileDetails, userFr
                                 {
                                     userFriends.map( (el, i) => {
                                         return i < 9 && (
-                                            <UserFriendCard key={el.friendId} {...el} />
+                                            <UserFriendCard key={el.friendId} {...el} alternativePath={alternativePath} />
                                         )
                                     })
                                 }

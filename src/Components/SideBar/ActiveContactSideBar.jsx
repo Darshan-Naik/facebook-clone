@@ -9,6 +9,7 @@ import filterFriends from "../../Utils/filterFriends.js"
 import { useHistory } from 'react-router-dom';
 import ActiveContacts from './ActiveContacts';
 import BirthdayCard from './BirthdayCard/BirthdayCard';
+import ProfileProgressBox from '../ProfileProgressBox/ProfileProgressBox';
 
 const ActiveContactSideBar = () => {
 
@@ -34,6 +35,7 @@ const ActiveContactSideBar = () => {
     return (
         <div className="sideBarContainer">
             <BirthdayCard />
+            <ProfileProgressBox />
             {
                 peopleSuggested.length > 0 && (
                     <div className="sideBarLinksConatainer">

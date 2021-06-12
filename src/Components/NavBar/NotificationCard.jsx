@@ -22,7 +22,7 @@ function NotificationCard({notificationID,tag,author,action,time,isRead,comment}
     return (
         <div className="notificationCardBox flexBox" onClick={handleNotificationRead}>
             <div className="notificationAuthorImage">
-                <img src={userDetails?.profilePic} alt="profilePic" />
+                <img src={userDetails?.profilePic || process.env.PUBLIC_URL + '/Images/userProfile_icon.png'} alt="profilePic" />
                 {tag === "like"? <LikeIcon/> : tag === "comment"? <img src={process.env.PUBLIC_URL +"/images/comment.png"} alt="logo" className="imageIcon" /> :tag === "friend"? <img src={process.env.PUBLIC_URL +"/images/friend.png"} alt="logo" className="imageIcon" /> :null }
             </div>
             <div className="notificationDetails">

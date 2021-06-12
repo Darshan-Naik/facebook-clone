@@ -9,14 +9,20 @@ import EmojiMart from "../../SharedComponents/EmojiMart"
 import { DisappearedLoading } from 'react-loadingg';
 import "../../Styles/NewPost/NewPost.css"
 import { database, storage } from '../../Firebase/firebase'
+import { activities } from '../../Utils/localData'
+
+
+
 function NewPostModal({setPostModalVisibility}) {
     const [title,setTitle] = React.useState("")
+    const [activity,setActivity] = React.useState(null)
     const {first_name,profilePic,uid,last_name} = useSelector(store=>store.auth.user)
     const imageRef = React.useRef()
     const[postState,setPostState] = React.useState(0)
     const [imageUrl,setImageUrl] = React.useState()
     const [videoUrl,setVideoUrl] = React.useState()
     const [emojiMartVisibility,setEmojiMartVisibility] = React.useState(false)
+    const [activityBoxVisibility,setActivityBoxVisibility] = React.useState(false)
     const preview =()=>{
         if(imageRef.current.files[0]){
             if(imageRef.current.files[0]?.type.includes("image")){
@@ -35,8 +41,10 @@ function NewPostModal({setPostModalVisibility}) {
         setVideoUrl(null)
         imageRef.current.value = "";
     }
-
-
+    const handleActivity =(el)=>{
+        setActivity(`is ${el.symbol} feeling ${el.activity}.`)
+        setActivityBoxVisibility(false)
+    }
     const handleNewPost=()=>{
             setPostState(1)
             if(imageRef.current?.files[0]?.name){
@@ -59,6 +67,7 @@ function NewPostModal({setPostModalVisibility}) {
                                 image : url,
                                 imagePath : imageRef.current.files[0].name,
                                 title ,
+                                activity,
                                 author : uid,
                                 time : new Date()
                             }
@@ -92,6 +101,7 @@ function NewPostModal({setPostModalVisibility}) {
                                 video : url,
                                 videoPath : imageRef.current.files[0].name,
                                 title ,
+                                activity,
                                 author : uid,
                                 time : new Date()
                             }
@@ -108,6 +118,7 @@ function NewPostModal({setPostModalVisibility}) {
                 }else if(title){
                     const payload ={
                         title ,
+                        activity,
                         author : uid,
                         time : new Date()
                     }
@@ -125,8 +136,8 @@ function NewPostModal({setPostModalVisibility}) {
         setTitle(title + emoji.native)
     }
     return (
-        <div className="createNewPostModal">
-            <div className="createNewPostContainer">
+        <div className="createNewPostModal"  onClick={()=>setPostModalVisibility(false)} >
+            <div className="createNewPostContainer" onClick={(e)=>{e.stopPropagation();setActivityBoxVisibility(false)}}>
               {postState?<div className="newPostProgressContainer flexBox">
                     <div className="progressBox">
                         <h2>Posting</h2> <br />
@@ -151,8 +162,8 @@ function NewPostModal({setPostModalVisibility}) {
                     </div>
                     <div className="createNewPostUserImage flexBox">
                             <img  src={profilePic || process.env.PUBLIC_URL + '/Images/userProfile_icon.png'}  alt="User" />
-                        <div>
-                            <p>{`${first_name || ""} ${last_name || ""}`} </p>
+                        <div className="flexBox newPostUserDetails">
+                            <p>{`${first_name || ""} ${last_name || ""} ${activity || ""}`} </p>
                             <div className="privacySelect flexBox">
                                     <FriendsIcon />
                                     <p>Friends</p>
@@ -200,8 +211,13 @@ function NewPostModal({setPostModalVisibility}) {
                              
                              <input type="file" ref={imageRef} id="image" onChange={preview} style={{display:"none"}} />
                         </div>
-                        <div className="flexBox iconWrap">
-                             <EmojiIcon /> 
+                        <div className="flexBox iconWrap" onClick={(e)=>e.stopPropagation()}>
+                             <EmojiIcon onClick={()=>setActivityBoxVisibility(!activityBoxVisibility)} /> 
+                           {activityBoxVisibility && <div className="activityBox scroll flexBox">
+                                 {activities.map(el=>(<div key={el.activity} className="flexBox activityList" onClick={()=>handleActivity(el)}>
+                                        <p>{el.symbol}</p>  <small>{el.activity}</small>
+                                 </div>))}
+                             </div>}
                         </div>
                         
                     </div>

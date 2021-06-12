@@ -13,7 +13,6 @@
     justify-content: flex-start;
     border-bottom: 1px solid var(--shadow-1);
     padding: 5px;
-
 }
 .newPostUserImage img{
     width: 45px;
@@ -289,11 +288,41 @@
     border-top: 1px solid var(--shadow-1);
     border-left: 1px solid var(--shadow-1);
 }
+.iconWrap{
+    position: relative;
+}
+.activityBox{
+    position: absolute;
+    bottom: 33px;
+    right: 0px;
+    max-height: 220px;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    background-color: var(--primary-background);
+    border: 1px solid var(--shadow-1);
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0px 0px 5px var(--shadow-1);
+}
+.newPostUserDetails{
+    flex-direction: column;
+    align-items: flex-start;
+}
+.activityList{
+    padding: 2px;
+    margin: 4px;
+    width: 100%;
+    text-align: left;
+    border-radius: 8px;
+    justify-content: flex-start;
+}
+.activityList:hover{
+    background-color: var(--hover-overlay);
+}
 @media only screen and (max-width: 992px) {
     .newPostContainer{
         max-width: 500px;
        
     }
-
-    
 }

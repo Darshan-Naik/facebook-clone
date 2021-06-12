@@ -22,6 +22,8 @@ import Notifications from './Notifications'
 
 function NavBar({refresh,handleRefresh}) {
     const [postModalVisibility,setPostModalVisibility] = React.useState(false)
+    const [notificationVisibility,setNotificationVisibility] = React.useState(false)
+    const [accountVisibility,setAccountVisibility] = React.useState(false)
     const [searchBoxVisibility,setSearchBoxVisibility] = React.useState(false)
     const path = React.useRef(true)
     const history = useHistory()
@@ -37,6 +39,26 @@ function NavBar({refresh,handleRefresh}) {
         }
        
     }
+    const handleNotificationVisibility =(e)=>{
+        e.stopPropagation()
+       setNotificationVisibility(!notificationVisibility)
+       setAccountVisibility(false)
+    }
+    const handleAccountVisibility =(e)=>{
+        e.stopPropagation()
+        setNotificationVisibility(false)
+        setAccountVisibility(!accountVisibility)
+     }
+     window.addEventListener("click",()=>{
+         setAccountVisibility(false)
+         setNotificationVisibility(false)
+     })
+     if(notifications.filter(item=>!item.isRead)?.length){
+        document.title = `(${notifications.filter(item=>!item.isRead)?.length}) Facebook`
+     } else {
+        document.title = `Facebook`
+     }
+     
     return (
         <div className="navBarContainer flexBox">
 
@@ -66,7 +88,7 @@ function NavBar({refresh,handleRefresh}) {
                 <IconWrapper path="/videos" label="Videos" handleRefresh={handleRefresh}>
                     <VideoIcon/>
                 </IconWrapper>
-                <IconWrapper path="/friends" label="Friends" handleRefresh={handleRefresh}>
+                <IconWrapper path="/friends/new" label="Friends" handleRefresh={handleRefresh}>
                     <UsersIcon/>
                 </IconWrapper>
                 <IconWrapper path="/games" label="Games" handleRefresh={handleRefresh}>
@@ -85,11 +107,11 @@ function NavBar({refresh,handleRefresh}) {
                 <IconWrapperCircle path="/messenger/new" label="Messenger" icon={ <MessageIcon /> } number={0}>
                     
                 </IconWrapperCircle>
-                <IconWrapperCircle label="Notifications" icon={ <NotificationIcon /> } number={notifications.filter(item=>!item.isRead)?.length}>
-                    <Notifications notifications={notifications}/>
+                <IconWrapperCircle childVisibility={notificationVisibility} label="Notifications" icon={ <NotificationIcon onClick={handleNotificationVisibility} /> } number={notifications.filter(item=>!item.isRead)?.length}>
+                  {notificationVisibility &&  <Notifications notifications={notifications} uid={uid} />}
                 </IconWrapperCircle>
-                <IconWrapperCircle label="Account" icon={ <DownArrowIcon/> }>
-                    <AccountMenu />
+                <IconWrapperCircle childVisibility={accountVisibility} label="Account" icon={ <DownArrowIcon onClick={handleAccountVisibility}/> }>
+                 {accountVisibility &&   <AccountMenu />}
                 </IconWrapperCircle>
                
             </div>

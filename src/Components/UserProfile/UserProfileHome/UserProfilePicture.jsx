@@ -32,9 +32,20 @@ const UserProfilePicture = ({userProfilePic=(process.env.PUBLIC_URL + '/Images/u
 
     }
 
+    const handleShowProfilePicModal = (e) => {
+        if( e ) {
+            e.stopPropagation();
+        }
+        setShowProfilePicModal(!showProfilePicModal);
+    };
+
+    window.addEventListener('click', () => {
+        setShowProfilePicModal(false);
+    });
+
     const handleRemovePreview = () => {
         setProfileImagePreview(null);
-    }
+    };
 
     const handleUpdateProfilePic=()=>{
         setCoverPicUploadState(1);
@@ -47,7 +58,7 @@ const UserProfilePicture = ({userProfilePic=(process.env.PUBLIC_URL + '/Images/u
                         setCoverPicUploadState(Math.floor((snapshot.bytesTransferred/snapshot.totalBytes)*100)+1);
                     },
                     error => {
-                        console.log("error is occuring");
+                        console.log("error is occurring");
                     },
                     () => {
                         storage.ref("profilePicImages")
@@ -81,7 +92,7 @@ const UserProfilePicture = ({userProfilePic=(process.env.PUBLIC_URL + '/Images/u
                     <div className="userProfilePicture" style={{backgroundImage: `url("${ userProfileDetails.profilePic || userProfilePic}")`}}></div>
                     {
                         currentUser === uid && 
-                        <div className="userProfilePictureCameraIconBox" onClick={() => setShowProfilePicModal(true)} title="Edit profile picture">
+                        <div className="userProfilePictureCameraIconBox" onClick={handleShowProfilePicModal} title="Edit profile picture">
                             <img className="userProfileCameraIcon" src={process.env.PUBLIC_URL + '/Images/camera_icon.png'} alt="Cam"/>
                         </div>
                     }
@@ -90,7 +101,7 @@ const UserProfilePicture = ({userProfilePic=(process.env.PUBLIC_URL + '/Images/u
             {
                 showProfilePicModal && (
                     <div className="editProfilePicModalContainer">
-                        <div className="editProfilePicModalBox">
+                        <div className="editProfilePicModalBox" onClick={e => e.stopPropagation()}>
                             {
                                 coverPicUploadState ? (
                                     <div className="newPostProgressContainer flexBox">
