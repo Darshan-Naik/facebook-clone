@@ -42,7 +42,7 @@ function UserProfileFriendsPage({ forceRefresh, userFriends, alternativePath, us
                                 userFriends.map( el => {
                                     return (
                                         <div key={el.friendId} className="friendsCardMainBox">
-                                            <FriendsCard {...el} alternativePath={alternativePath} />
+                                            <FriendsCard {...el} alternativePath={alternativePath} userProfileDetails={userProfileDetails} />
                                         </div>
                                     )
                                 })
