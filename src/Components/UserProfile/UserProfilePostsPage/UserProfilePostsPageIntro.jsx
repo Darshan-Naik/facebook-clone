@@ -12,7 +12,9 @@ function UserProfilePostsPageIntro({ alternativePath, userProfileDetails, userFr
     const { uid } = useSelector( state => state.auth.user );
     
     const handleEditUserDetailsModal = (e) => {
-        e.stopPropagation();
+        if( e ) {
+            e.stopPropagation();
+        }
         setEditUserDetailsModalState(!editUserDetailsModalState)
     }
 
