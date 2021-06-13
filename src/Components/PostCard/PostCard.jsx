@@ -57,7 +57,7 @@ function PostCard({title,image,imagePath,id,author,time,video,activity}) {
         
     }
 
-    const handleShare=()=>{
+    const handleShare=(title)=>{
         let payload = {
             originalAuthor:author,
             author:uid,
@@ -157,7 +157,7 @@ function PostCard({title,image,imagePath,id,author,time,video,activity}) {
                     <p onClick={showComment}>{comments.length} Comments</p> 
                 </div>
             </div>
-            <PostCardFooter handleDeleteLike={handleDeleteLike} handleLike={handleLike} handleShare={handleShare} like={JSON.stringify(likes).includes(uid)} showComment={showComment}/>
+            <PostCardFooter handleDeleteLike={handleDeleteLike} handleLike={handleLike} handleShare={handleShare} like={JSON.stringify(likes).includes(uid)} showComment={showComment} author={author} {...userData} title={title} handleShare={handleShare} image={image}/>
            {commentSection && <PostCardComment postId={id} comments={comments} userData={userData}/>}
            
         </div>

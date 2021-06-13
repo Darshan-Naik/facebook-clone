@@ -2,6 +2,7 @@ import React from 'react';
 import DeletePostModal from './DeletePostModal';
 import EditPostModal from './EditPostModal';
 import {ReactComponent as ShareIcon} from  "../../Icons/shareIcon.svg";
+import {ReactComponent as FavIcon} from  "../../Icons/fav.svg";
 import { useHistory } from 'react-router';
 
 
@@ -45,10 +46,16 @@ function EditBox({handleEditSection,first_name,image,last_name,profilePic,title,
                         <img src={process.env.PUBLIC_URL + '/Images/plus_icon.png'} alt="removeIcon" />
                         <p>Delete Post</p>
                     </div>
-                </>:<div className="editBox flexBox" onClick={()=>history.push(`/profile/${author}`)}>
-                    <ShareIcon/>
-                    <p>View Profile</p>
-                </div>}
+                </>:<>
+                    <div className="editBox flexBox" onClick={()=>history.push(`/profile/${author}`)}>
+                        <ShareIcon/>
+                        <p>View Profile</p>
+                    </div>
+                    <div className="editBox flexBox" onClick={handleEditSection}>
+                        <FavIcon/>
+                        <p>View Profile</p>
+                    </div>
+                </>}
             </div>
             {editModal && <EditPostModal handleEditSection={handleEditSection} handleEditModal={handleEditModal} setEditTitle={setEditTitle} editTitle={editTitle} handleEditPost={handleEditPost} setEditModal={setEditModal} first_name={first_name} last_name={last_name} profilePic={profilePic} title={title}/>}
             {deleteModal && <DeletePostModal handleDelete={handleDelete} handleCancel={handleCancel}/>}

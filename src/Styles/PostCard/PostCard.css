@@ -614,6 +614,56 @@
     background-color: var(--primary-1);
 }
 
+/*------Share Modal--------------------------------*/
+
+.shareImage{
+    width: 100%;
+    max-height: 350px;
+    margin: auto;
+    overflow: hidden;
+    border-radius: 8px 8px 0 0;
+    position: relative;
+}
+.shareImage img{ 
+    border-radius: 8px 8px 0 0;
+    width: 100%;
+    max-height: 350px;
+}
+.shareImage video{
+    width: 100%;
+    max-height: 350px;
+}
+.shareButton{
+    width: 95%;
+    margin: auto;
+    padding: 5px 0;
+    margin-bottom:10px;
+    
+}
+.shareButton .shareButton1{
+    width: 100%;
+    padding: 8px;
+    border: none;
+    border-radius: 8px;
+    margin: 0 10px;
+    background-color: var(--primary-1);
+    color: var(--white);
+}
+.shareButton .shareButton1:hover{
+    background-color: var(--secondary-6);
+}
+.shareCancelButton{
+    width: 100%;
+    padding: 8px;
+    border: none;
+    border-radius: 8px;
+    color: var(--white);
+    background-color: var(--supplementary-1);
+
+}
+.shareCancelButton:hover{
+    background-color: red;
+}
 
 @media only screen and (max-width: 992px) {
     .postCardContainer{
