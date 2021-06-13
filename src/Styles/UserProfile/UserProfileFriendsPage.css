@@ -53,6 +53,7 @@
 
 .friendsCardBox {
     width: 100%;
+    position: relative;
 }
 
 .friendsProfilePicCover {
@@ -92,6 +93,33 @@
 
 .friendsCardThreeDotsBox .dotsIcon {
     fill: var(--primary-text);
+}
+
+/* Friend Card Unfriend option css */
+
+.friendsCardUnfriendOptionContainer {
+    position: absolute;
+    top: 75%;
+    right: 0;
+    padding: 8px;
+    z-index: 40;
+    border-radius: 6px;
+    transform: translate(4%, 0%);
+    border: 1px solid var(--shadow-1);
+    background-color: var(--secondary-background-1);
+}
+
+.friendsCardUnfriendOptionContainer::before {
+    position: absolute;
+    content: "";
+    width: 15px;
+    height: 15px;
+    top: -9px;
+    right: 10px;
+    border-left: 1px solid var(--shadow-1);
+    border-top: 1px solid var(--shadow-1);
+    transform: rotate(45deg);
+    background-color: var(--secondary-background-1);
 }
 
 @media only screen and ( max-width: 880px ) {
