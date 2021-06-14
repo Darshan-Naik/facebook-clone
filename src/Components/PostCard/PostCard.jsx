@@ -10,7 +10,7 @@ import PostCardSkeleton from './Skeleton/PostCardSkeleton';
 
 
 
-function PostCard({title,image,imagePath,id,author,time,video,activity}) {
+function PostCard({title,image,imagePath,id,author,time,video,activity,thumb_url}) {
     const[commentSection,setCommentSection]=React.useState(false);
     const[likes,setLikes]=React.useState([]);
     const [comments,setComments]=React.useState([]);
@@ -40,7 +40,7 @@ function PostCard({title,image,imagePath,id,author,time,video,activity}) {
         }
        
         database.collection("posts").add(payload)
-        database.collection("users").doc(uid).update({profilePic:image});
+        database.collection("users").doc(uid).update({profilePic:thumb_url});
         
 
     }
