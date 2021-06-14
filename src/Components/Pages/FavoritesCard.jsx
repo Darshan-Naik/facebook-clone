@@ -5,8 +5,8 @@ import PostCard from '../PostCard/PostCard'
 function FavoritesCard({postId,time}) {
     const [postDetails,setPostDetails] =React.useState(null);
     React.useEffect(()=>{
-        database.collection("posts").doc(postId).get().then(res=>setPostDetails(res.data()));
-
+        database.collection("posts").doc(postId).get().then(res=>setPostDetails({...res.data(),id:res.id}));
+        
     },[postId])
     
     return postDetails?(

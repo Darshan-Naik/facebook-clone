@@ -13,7 +13,7 @@ function Favorites({handleRefresh}) {
     ):(
         <div className="pageNotFound flexBox">
             <img src={process.env.PUBLIC_URL + '/Images/sadFace.png'} alt="icon" />
-            <h1>You not have any favorite posts.</h1>
+            <h1>You don't have any favorite posts.</h1>
 
         </div>
     )

@@ -13,7 +13,7 @@ function Videos({handleRefresh}) {
     ):(
         <div className="pageNotFound flexBox">
             <img src={process.env.PUBLIC_URL + '/Images/sadFace.png'} alt="icon" />
-            <h1>You not have any videos.</h1>
+            <h1>No videos available.</h1>
 
         </div>
 
