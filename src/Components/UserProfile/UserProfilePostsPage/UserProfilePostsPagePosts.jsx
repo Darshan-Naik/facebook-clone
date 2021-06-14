@@ -10,7 +10,7 @@ function UserProfilePostsPagePosts({userProfileDetails}) {
     const { uid } = useSelector(state => state.auth.user);
 
     useEffect(() => {
-        const unsubscribe = database.collection('posts').where('author', "==", userProfileDetails.uid).orderBy("time","desc")
+        const unsubscribe = database.collection('posts').where('author', "==", userProfileDetails.uid)
         .onSnapshot( res => {
             const newPosts = res.docs.map(doc=>({id:doc.id,...doc.data()}))
             setUserPosts( newPosts );

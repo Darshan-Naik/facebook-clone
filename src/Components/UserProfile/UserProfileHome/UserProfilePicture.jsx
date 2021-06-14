@@ -3,14 +3,17 @@ import { useSelector } from 'react-redux';
 import { database, storage } from '../../../Firebase/firebase';
 import { DisappearedLoading } from 'react-loadingg';
 import { ReactComponent as CloseIcon } from "../../../Icons/close.svg";
+import useVisibility from '../../../Hooks/useVisibility';
+import PopUp from "../../../SharedComponents/PopUp";
 import "../../../Styles/UserProfile/UserProfile.css";
 
 const UserProfilePicture = ({userProfilePic=(process.env.PUBLIC_URL + '/Images/userProfile_icon.png'), currentUser, userProfileDetails}) => {
     
-    const [showProfilePicModal, setShowProfilePicModal] = useState(false);
     const [profileImagePreview, setProfileImagePreview] = useState();
     const [coverPicUploadState, setCoverPicUploadState] = useState(0);
     const [errorImagePreview, setErrorImagePreview] = useState(false);
+
+    const [showProfilePicModal, toggleShowProfilePicModal] = useVisibility();
 
     const profilePicImageRef = useRef();
 
@@ -31,17 +34,6 @@ const UserProfilePicture = ({userProfilePic=(process.env.PUBLIC_URL + '/Images/u
         }
 
     }
-
-    const handleShowProfilePicModal = (e) => {
-        if( e ) {
-            e.stopPropagation();
-        }
-        setShowProfilePicModal(!showProfilePicModal);
-    };
-
-    window.addEventListener('click', () => {
-        setShowProfilePicModal(false);
-    });
 
     const handleRemovePreview = () => {
         setProfileImagePreview(null);
@@ -76,7 +68,7 @@ const UserProfilePicture = ({userProfilePic=(process.env.PUBLIC_URL + '/Images/u
                             database.collection("posts").add(payload)
                             .then(()=>{
                                 profilePicImageRef.current.value = "";
-                                setShowProfilePicModal(false);
+                                toggleShowProfilePicModal();
                                 setCoverPicUploadState(0);
                             })
                         })
@@ -92,7 +84,7 @@ const UserProfilePicture = ({userProfilePic=(process.env.PUBLIC_URL + '/Images/u
                     <div className="userProfilePicture" style={{backgroundImage: `url("${ userProfileDetails.profilePic || userProfilePic}")`}}></div>
                     {
                         currentUser === uid && 
-                        <div className="userProfilePictureCameraIconBox" onClick={handleShowProfilePicModal} title="Edit profile picture">
+                        <div className="userProfilePictureCameraIconBox" onClick={toggleShowProfilePicModal} title="Edit profile picture">
                             <img className="userProfileCameraIcon" src={process.env.PUBLIC_URL + '/Images/camera_icon.png'} alt="Cam"/>
                         </div>
                     }
@@ -100,8 +92,8 @@ const UserProfilePicture = ({userProfilePic=(process.env.PUBLIC_URL + '/Images/u
             </div>
             {
                 showProfilePicModal && (
-                    <div className="editProfilePicModalContainer">
-                        <div className="editProfilePicModalBox" onClick={e => e.stopPropagation()}>
+                    <div className="editProfilePicModalContainer" onClick={toggleShowProfilePicModal}>
+                        <PopUp className="editProfilePicModalBox">
                             {
                                 coverPicUploadState ? (
                                     <div className="newPostProgressContainer flexBox">
@@ -119,7 +111,7 @@ const UserProfilePicture = ({userProfilePic=(process.env.PUBLIC_URL + '/Images/u
                             }
                             <div className="editProfilePicModalHeader flexBox">
                                 <h1 className="editProfilePicModalHeaderNamePlate">Edit Profile Pic</h1>
-                                <div className="editProfilePicModalCloseIconBox flexBox"  onClick={() => setShowProfilePicModal(false)}>
+                                <div className="editProfilePicModalCloseIconBox flexBox"  onClick={toggleShowProfilePicModal}>
                                     <CloseIcon />
                                 </div>
                             </div>
@@ -157,7 +149,7 @@ const UserProfilePicture = ({userProfilePic=(process.env.PUBLIC_URL + '/Images/u
                                     <button disabled={!profileImagePreview} onClick={handleUpdateProfilePic}>Update</button>
                                 </div>
                             </div>
-                        </div>
+                        </PopUp>
                     </div>
                 )
             }

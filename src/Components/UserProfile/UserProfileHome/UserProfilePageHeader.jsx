@@ -7,17 +7,20 @@ import { ReactComponent as CloseIcon } from "../../../Icons/close.svg";
 import { ReactComponent as EmojiIcon } from "../../../Icons/emoji.svg";
 import "../../../Styles/UserProfile/UserProfile.css";
 import { database, storage } from '../../../Firebase/firebase';
+import useVisibility from '../../../Hooks/useVisibility';
+import PopUp from "../../../SharedComponents/PopUp";
 
 const UserProfilePageHeader = ({ coverPhoto, currentUser, forceRefresh, userProfileDetails}) => {
     
     const [addBioVisibility, setAddBioVisibility] = useState(false);
     const [textFieldQuery, setTextFieldQuery] = useState("");
-    const [showCoverPicModal, setShowCoverPicModal] = useState(false);
     const [coverPicImagePreview, setCoverPicImagePreview] = useState();
     const [picUploadState, setPicUploadState] = useState(0);
     const [showEmojiMart, setShowEmojiMart] = useState(false);
     const [errorImagePreview, setErrorImagePreview] = useState(false);
 
+    const [showCoverPicModal, toggleShowCoverPicModal] = useVisibility();
+    
     const coverPicImageRef = useRef();
     
     const dark = useSelector(state => state.theme.dark);
@@ -27,17 +30,6 @@ const UserProfilePageHeader = ({ coverPhoto, currentUser, forceRefresh, userProf
         setAddBioVisibility(!addBioVisibility);
         setTextFieldQuery("");
     };
-
-    const handleShowCoverPicModal = (e) => {
-        if( e ) {
-            e.stopPropagation();
-        }
-        setShowCoverPicModal(!showCoverPicModal);
-    };
-
-    window.addEventListener('click', () => {
-        setShowCoverPicModal(false);
-    });
 
     const handleChangeCoverPicPreview = () => {
         
@@ -89,7 +81,7 @@ const UserProfilePageHeader = ({ coverPhoto, currentUser, forceRefresh, userProf
                             database.collection("posts").add(payload)
                             .then(()=>{
                                 coverPicImageRef.current.value = "";
-                                setShowCoverPicModal(false);
+                                toggleShowCoverPicModal();
                                 setPicUploadState(0);
                             })
                         })
@@ -123,7 +115,7 @@ const UserProfilePageHeader = ({ coverPhoto, currentUser, forceRefresh, userProf
                         {
                             currentUser === uid && (
                                 <React.Fragment>
-                                    <div className="userProfileEditCoverPhotoContainer flexBox" onClick={handleShowCoverPicModal} title="Edit cover photo">
+                                    <div className="userProfileEditCoverPhotoContainer flexBox" onClick={toggleShowCoverPicModal} title="Edit cover photo">
                                         <div className="userProfileEditCoverPhotoBox">
                                             <img className="userProfileEditCoverCamIcon" src={process.env.PUBLIC_URL + '/Images/camera_icon.png'} alt="camera"/>
                                             <span className="userProfileEditCoverNamePlate">Edit Cover Photo</span>
@@ -131,8 +123,8 @@ const UserProfilePageHeader = ({ coverPhoto, currentUser, forceRefresh, userProf
                                     </div>
                                     {
                                         showCoverPicModal && (
-                                            <div className="editProfilePicModalContainer">
-                                                <div className="editProfilePicModalBox" onClick={(e) => e.stopPropagation()}>
+                                            <div className="editProfilePicModalContainer" onClick={toggleShowCoverPicModal}>
+                                                <PopUp className="editProfilePicModalBox">
                                                     {
                                                         picUploadState ? (
                                                             <div className="newPostProgressContainer flexBox">
@@ -150,7 +142,7 @@ const UserProfilePageHeader = ({ coverPhoto, currentUser, forceRefresh, userProf
                                                     }
                                                     <div className="editProfilePicModalHeader flexBox">
                                                         <h1 className="editProfilePicModalHeaderNamePlate">Edit Cover Pic</h1>
-                                                        <div className="editProfilePicModalCloseIconBox flexBox"  onClick={() => setShowCoverPicModal(false)}>
+                                                        <div className="editProfilePicModalCloseIconBox flexBox"  onClick={toggleShowCoverPicModal}>
                                                             <CloseIcon />
                                                         </div>
                                                     </div>
@@ -188,7 +180,7 @@ const UserProfilePageHeader = ({ coverPhoto, currentUser, forceRefresh, userProf
                                                             <button disabled={!coverPicImagePreview} onClick={handleUpdateCoverPic}>Update</button>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </PopUp>
                                             </div>
                                         )
                                     }

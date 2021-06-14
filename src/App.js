@@ -5,7 +5,7 @@ import { database } from "./Firebase/firebase";
 import Router from "./Routes/Router";
 import { getPosts } from './Redux/Posts/actions';
 import { getChatRooms, getUsers, updateActiveContacts } from "./Redux/App/actions";
-import { getFriendRequest, getFriends, getNotifications, getSentRequest, loginSuccess } from "./Redux/Auth/actions";
+import { getFavorites, getFriendRequest, getFriends, getNotifications, getSentRequest, loginSuccess } from "./Redux/Auth/actions";
 
 function App() {
 
@@ -61,6 +61,10 @@ function App() {
       const newNotifications = res.docs.map(doc=>({notificationID:doc.id,...doc.data()}))
      dispatch(getNotifications(newNotifications))
     });
+    const unsubscribe9 = database.collection("users").doc(uid).collection("favorites").orderBy("time","desc").onSnapshot(res=>{
+      const newFavorite = res.docs.map(doc=>(doc.data()))
+     dispatch(getFavorites(newFavorite))
+    });
 
     return () => {
       unsubscribe1();
@@ -70,6 +74,7 @@ function App() {
       unsubscribe6();
       unsubscribe7();
       unsubscribe8();
+      unsubscribe9();
     }
   }
   
