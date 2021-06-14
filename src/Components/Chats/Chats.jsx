@@ -8,11 +8,16 @@ import {ReactComponent as DotsIcon} from  "../../Icons/dots.svg"
 import {ReactComponent as CloseIcon} from  "../../Icons/close.svg"
 import {ReactComponent as MinimizeIcon} from  "../../Icons/minimize.svg"
 import { closeAllMessage, minimizeAllMessage } from '../../Redux/App/actions'
+import NewChatBox from './NewChatBox'
+import useVisibility from '../../Hooks/useVisibility'
+import PopUp from '../../SharedComponents/PopUp'
 function Chats() {
     const [optionVisibility,setOptionVisibility] = React.useState(false)
     const [optionVisibilityBox,setOptionVisibilityBox] = React.useState(false)
     const {activeMessages,inActiveMessages} = useSelector(store=>store.app)
     const [activeChatIndex,setActiveChatIndex] = React.useState(0)
+    const [newChatBox,toggleNewChatBox] = useVisibility()
+
     const dispatch = useDispatch()
     window.addEventListener("click",()=>{
         setOptionVisibilityBox(false)
@@ -32,7 +37,7 @@ function Chats() {
     }
     return (
         <> 
-        <div className="activeChatBubbleContainer" onMouseEnter={()=>setOptionVisibility(true)} onMouseLeave={()=>!optionVisibilityBox && setOptionVisibility(false)} onClick={(e)=>e.stopPropagation()}>
+        <PopUp className="activeChatBubbleContainer" onMouseEnter={()=>setOptionVisibility(true)} onMouseLeave={()=>!optionVisibilityBox && setOptionVisibility(false)} >
            {optionVisibility && (activeMessages.length || inActiveMessages.length ) ? <div className="bubbleOptions flexBox" onClick={handleOption}>
             <DotsIcon/>
            {optionVisibilityBox && <div className="bubbleOptionBox" >
@@ -50,11 +55,12 @@ function Chats() {
             <div className="activeChatBubbleBox">
             {inActiveMessages.map((chatRoom,i)=><ActiveChatBubble key={chatRoom.chatID} {...chatRoom} />)}
             </div>
-            <ChatBubble />
+            <ChatBubble toggleNewChatBox={toggleNewChatBox}/>
             <div className="chatsContainer flexBox">
             {activeMessages.map((chatRoom,i)=><ChatBox key={chatRoom.chatID} {...chatRoom} active={activeChatIndex === i} handleActiveChatBox={handleActiveChatBox} index={i}/>)}
+          {newChatBox &&  <NewChatBox toggleNewChatBox={toggleNewChatBox}/>}
         </div>
-        </div>
+        </PopUp>
         
         </>
     )
