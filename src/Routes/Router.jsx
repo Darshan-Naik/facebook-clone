@@ -9,6 +9,7 @@ import SideBar from '../Components/SideBar/SideBar';
 import Messenger from '../Components/Messenger/Messenger';
 import { useSelector } from 'react-redux';
 import Videos from '../Components/Pages/Videos';
+import Favorites from '../Components/Pages/Favorites';
 
 function Router() {
     const[refresh,setRefresh] = React.useState(true)
@@ -40,6 +41,9 @@ function Router() {
                         </Route>
                         <Route path="/videos" exact>
                             <Videos handleRefresh={handleRefresh} />
+                        </Route>
+                        <Route path="/favorites" exact>
+                            <Favorites handleRefresh={handleRefresh} />
                         </Route>
                         <Route path="/menu" exact>                            
                             <SideBar />
