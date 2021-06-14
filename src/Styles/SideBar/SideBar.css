@@ -27,8 +27,9 @@
 .sideBarContentImage {
   width: 35px;
   height: 35px;
-  border-radius: 100%;
   margin: auto;
+  border-radius: 100%;
+  object-fit: cover;
 }
 
 .sideBarContentLabel {
