@@ -8,24 +8,31 @@ import StatusDot from '../../SharedComponents/StatusDot';
 import checkActive from '../../Utils/checkActive';
 
 
-function PostCardHead({first_name,last_name,profilePic,time,author,activity,title,postEditFunction,image,activeStatus}) {
+function PostCardHead({handleFav,first_name,last_name,profilePic,time,author,activity,title,postEditFunction,image,activeStatus}) {
 
     const [editSection,setEditSection]=React.useState(false);
     const [activeState,setActiveState]=React.useState(false);
     const {uid} = useSelector(store=>store.auth.user);
-
+    const history = useHistory();
     let localTime = new Date(time?.toDate()).toString().split(" ");
     localTime.length=4;
     const localTime1 = new Date(time?.toDate()).toLocaleTimeString();
     const checkTime = new Date().toLocaleString().split(",");
     const originalTime = new Date(time?.toDate()).toLocaleDateString().split(",");
     
-    const handleEditSection=()=>{
-        setEditSection(false);
+    const handleEditSection=(e)=>{
+        if(e){
+            e.stopPropagation();
+        }
+        
+        setEditSection(!editSection);
     }
+    window.addEventListener("click",()=>{
+        setEditSection(false);
+    })
 
  
-    const history = useHistory();
+    
 
     React.useEffect(()=>{
         if(activeStatus){
@@ -60,9 +67,9 @@ function PostCardHead({first_name,last_name,profilePic,time,author,activity,titl
                 </div> 
             </div>
             <div className="postCardHeadBox3 flexBox">
-                <DotsIcon onClick={()=>setEditSection(!editSection)}/>
+                <DotsIcon onClick={handleEditSection}/>
                 {author===uid&&editSection&&<EditBox handleEditSection={handleEditSection}author={author} uid={uid}  first_name={first_name} last_name={last_name} profilePic={profilePic} title={title} {...postEditFunction} image={image}/>}
-                {author!==uid&&editSection&&<EditBox handleEditSection={handleEditSection} author={author} uid={uid} />}
+                {author!==uid&&editSection&&<EditBox handleFav={handleFav} handleEditSection={handleEditSection} author={author} uid={uid} />}
             </div>
            
         </div>

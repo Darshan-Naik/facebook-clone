@@ -42,7 +42,7 @@ function ShareModal({image,video,title,setShareModal,handleShare}) {
                     </div>
                     <div className="editPostInput flexBox">
                        <div className="flexBox inputTextBox">
-                        <textarea value={shareTitle} onChange={(e)=>setShareTitle(e.target.value)}  cols="30" rows={video||image?"1" : "5"} placeholder={`Whats on your mind, ${first_name || ""}?`}></textarea>
+                        <textarea className="scroll" value={shareTitle} onChange={(e)=>setShareTitle(e.target.value)}  cols="30" rows={video||image?"1" : "5"} placeholder={`Whats on your mind, ${first_name || ""}?`}></textarea>
                             <div className="editPostEmojiMartContainer">
                                 <EmojiIcon onClick={()=>setEmojiMartVisibility(!emojiMartVisibility)} />
                             {emojiMartVisibility && <div className="editPostEmojiMartBox">

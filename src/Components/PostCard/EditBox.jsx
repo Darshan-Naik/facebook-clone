@@ -6,7 +6,7 @@ import {ReactComponent as FavIcon} from  "../../Icons/fav.svg";
 import { useHistory } from 'react-router';
 
 
-function EditBox({handleEditSection,first_name,image,last_name,profilePic,title,handleEditPost,handleDeletePost,handleSetProfilePic,author,uid}) {
+function EditBox({handleEditSection,handleFav,first_name,image,last_name,profilePic,title,handleEditPost,handleDeletePost,handleSetProfilePic,author,uid}) {
     const [editTitle,setEditTitle]=React.useState(title)
     const [editModal,setEditModal]=React.useState(false);
     const [deleteModal,setDeleteModal]=React.useState(false);
@@ -29,10 +29,14 @@ function EditBox({handleEditSection,first_name,image,last_name,profilePic,title,
         handleEditSection();
         handleSetProfilePic();
     }
+    const handleFavorite=()=>{
+        handleEditSection();
+        handleFav();
+    }
    
     return (
         <div className="editPostContainer">
-            <div className="editPost flexBox">
+            <div className="editPost flexBox" onClick={(e)=>e.stopPropagation()}>
                 {author===uid?<>
                     <div className="editBox flexBox" onClick={()=>setEditModal(!editModal)}>
                         <img src={process.env.PUBLIC_URL + '/Images/edit_icon.png'} alt="editIcon" />
@@ -46,14 +50,18 @@ function EditBox({handleEditSection,first_name,image,last_name,profilePic,title,
                         <img src={process.env.PUBLIC_URL + '/Images/plus_icon.png'} alt="removeIcon" />
                         <p>Delete Post</p>
                     </div>
+                    <div className="editBox flexBox" onClick={handleFavorite}>
+                        <FavIcon/>
+                        <p>Add to Favorites</p>
+                    </div>
                 </>:<>
                     <div className="editBox flexBox" onClick={()=>history.push(`/profile/${author}`)}>
                         <ShareIcon/>
                         <p>View Profile</p>
                     </div>
-                    <div className="editBox flexBox" onClick={handleEditSection}>
+                    <div className="editBox flexBox" onClick={handleFavorite}>
                         <FavIcon/>
-                        <p>View Profile</p>
+                        <p>Add to Favorites</p>
                     </div>
                 </>}
             </div>

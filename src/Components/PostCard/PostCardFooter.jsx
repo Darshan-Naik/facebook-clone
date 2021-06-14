@@ -23,7 +23,7 @@ function PostCardFooter({showComment,handleLike,like,handleDeleteLike,handleShar
                 <ShareIcon/>
                 <p>Share</p>
             </div>
-            {/* onClick={handleShare} */}
+           
             {shareModal&&<ShareModal author={author} setShareModal={setShareModal} first_name={first_name} last_name={last_name} profilePic={profilePic} title={title} handleShare={handleShare} image={image} />}
             
         </div>

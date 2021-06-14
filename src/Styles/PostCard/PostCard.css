@@ -621,11 +621,10 @@
     max-height: 350px;
     margin: auto;
     overflow: hidden;
-    border-radius: 8px 8px 0 0;
     position: relative;
 }
+
 .shareImage img{ 
-    border-radius: 8px 8px 0 0;
     width: 100%;
     max-height: 350px;
 }
@@ -635,9 +634,8 @@
 }
 .shareButton{
     width: 95%;
-    margin: auto;
     padding: 5px 0;
-    margin-bottom:10px;
+    margin:10px auto;
     
 }
 .shareButton .shareButton1{

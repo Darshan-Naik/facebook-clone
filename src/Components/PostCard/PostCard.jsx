@@ -34,7 +34,6 @@ function PostCard({title,image,imagePath,id,author,time,video,activity}) {
     const handleSetProfilePic=()=>{
         const payload ={
             image,
-            imagePath,
             activity: `changed his profile picture.` ,
             author : uid,
             time : new Date()
@@ -44,6 +43,9 @@ function PostCard({title,image,imagePath,id,author,time,video,activity}) {
         database.collection("users").doc(uid).update({profilePic:image});
         
 
+    }
+    const handleFav=()=>{
+        database.collection("users").doc(uid).collection("favorites").doc(id).set({postId:id,time:new Date()});
     }
    
 
@@ -109,21 +111,23 @@ function PostCard({title,image,imagePath,id,author,time,video,activity}) {
     }
 
     React.useEffect(()=>{
-        database.collection("posts").doc(id).collection("likes").onSnapshot(response=>{
+        const unsubscribe1 = database.collection("posts").doc(id).collection("likes").onSnapshot(response=>{
             setLikes(response.docs.map(doc=>({likeId:doc.id,...doc.data()})))
         })
    
-        database.collection("posts").doc(id).collection("comments").orderBy("time","asc").onSnapshot(response=>{
+        const unsubscribe2 = database.collection("posts").doc(id).collection("comments").orderBy("time","asc").onSnapshot(response=>{
             setComments(response.docs.map(doc=>({commentId:doc.id,...doc.data()})))
         })
    
-        const unsubscribe = database.collection("users").doc(author)
+        const unsubscribe3 = database.collection("users").doc(author)
         .onSnapshot((doc) => {
             setUserData(doc.data());
             
         });
         return () => {
-            unsubscribe();
+            unsubscribe1();
+            unsubscribe2();
+            unsubscribe3();
         }
     }, [])
 
@@ -138,7 +142,7 @@ function PostCard({title,image,imagePath,id,author,time,video,activity}) {
     return (
         <>
         <div className="postCardContainer" style={{display:loading||!userData?"none":"block"}}>
-            <PostCardHead {...userData} postEditFunction={{handleEditPost,handleDeletePost,handleSetProfilePic}} time={time} author={author} image={image}title={title} activity={activity}/>
+            <PostCardHead handleFav={handleFav} {...userData} postEditFunction={{handleEditPost,handleDeletePost,handleSetProfilePic}} time={time} author={author} image={image}title={title} activity={activity}/>
             {title && <div className="postCardTags">{title}</div>}
             {image&&<div onClick={()=>setPostModalVisibility(true)} className="postCardImage">
                 <img onLoad={()=>setLoading(false)} src={image|| process.env.PUBLIC_URL + '/Images/facebook_login_logo.png'} alt="img" />
