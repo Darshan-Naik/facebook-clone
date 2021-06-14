@@ -6,6 +6,7 @@ import { ReactComponent as CloseIcon } from "../../../Icons/close.svg";
 import useVisibility from '../../../Hooks/useVisibility';
 import PopUp from "../../../SharedComponents/PopUp";
 import "../../../Styles/UserProfile/UserProfile.css";
+import Compress from "react-image-file-resizer";
 
 const UserProfilePicture = ({userProfilePic=(process.env.PUBLIC_URL + '/Images/userProfile_icon.png'), currentUser, userProfileDetails}) => {
     
@@ -57,20 +58,59 @@ const UserProfilePicture = ({userProfilePic=(process.env.PUBLIC_URL + '/Images/u
                         .child(profilePicImageRef.current.files[0].name)
                         .getDownloadURL()
                         .then(url=>{
-                            const payload ={
-                                image : url,
-                                imagePath : profilePicImageRef.current.files[0].name,
-                                activity: `updated his profile picture.` ,
-                                author : uid,
-                                time : new Date()
-                            }
-                            database.collection("users").doc(uid).update({profilePic: url, profilePicPath: profilePicImageRef.current.files[0].name })
-                            database.collection("posts").add(payload)
-                            .then(()=>{
-                                profilePicImageRef.current.value = "";
-                                toggleShowProfilePicModal();
-                                setCoverPicUploadState(0);
-                            })
+
+
+
+                            Compress.imageFileResizer(
+                                profilePicImageRef.current.files[0], // the file from input
+                                200, // width
+                                200, // height
+                                "JPEG", // compress format WEBP, JPEG, PNG
+                                70, // quality
+                                0, // rotation
+                                (uri) => {
+                           
+                                let file =  new File([uri],"thumb_"+profilePicImageRef.current.files[0].name, { lastModified: new Date().getTime(), type: uri.type })
+                                console.log(file);
+                                const uploadTask =  storage.ref(`postImages/${file.name}`).put(file)
+
+                                        uploadTask.on("state_changed",
+                                        snapshot =>{
+                                            setCoverPicUploadState(Math.floor((snapshot.bytesTransferred/snapshot.totalBytes)*100)+1)
+                                        },
+                                        error=>{
+                        
+                                        },
+                                        ()=>{
+                                            storage.ref("postImages")
+                                            .child(file.name)
+                                            .getDownloadURL()
+                                            .then(thumb_url=>{
+
+                                                const payload ={
+                                                    image : url,
+                                                    thumb_url,
+                                                    imagePath : profilePicImageRef.current.files[0].name,
+                                                    activity: `updated his profile picture.` ,
+                                                    author : uid,
+                                                    time : new Date()
+                                                }
+                                                database.collection("users").doc(uid).update({profilePic: thumb_url, profilePicPath: profilePicImageRef.current.files[0].name })
+                                                database.collection("posts").add(payload)
+                                                .then(()=>{
+                                                    profilePicImageRef.current.value = "";
+                                                    toggleShowProfilePicModal();
+                                                    setCoverPicUploadState(0);
+                                                })
+                                                    })
+                                            },
+                                        )
+                                    
+                            
+                                
+                                },
+                                "blob" // blob or base64 default base64
+                                    )                           
                         })
                 })
             }
