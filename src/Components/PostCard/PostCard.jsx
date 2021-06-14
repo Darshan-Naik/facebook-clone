@@ -32,15 +32,20 @@ function PostCard({title,image,imagePath,id,author,time,video,activity,thumb_url
     }
 
     const handleSetProfilePic=()=>{
-        const payload ={
-            image,
-            activity: `changed his profile picture.` ,
-            author : uid,
-            time : new Date()
+        if(thumb_url){
+            const payload ={
+                image,
+                thumb_url,
+                activity: `changed his profile picture.` ,
+                author : uid,
+                time : new Date()
+            }
+           
+            database.collection("posts").add(payload)
+            database.collection("users").doc(uid).update({profilePic:thumb_url});
+
         }
-       
-        database.collection("posts").add(payload)
-        database.collection("users").doc(uid).update({profilePic:thumb_url});
+        
         
 
     }
@@ -73,6 +78,7 @@ function PostCard({title,image,imagePath,id,author,time,video,activity,thumb_url
         }
         if(image){
             payload.image=image;
+            payload.thumb_url=thumb_url;
         }else if(video){
             payload.video=video;
         }
