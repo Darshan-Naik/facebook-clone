@@ -1,0 +1,67 @@
+.userPhotosPageMainContainer {
+    max-width: 875px;
+    width: 100%;
+    margin: auto;
+    margin-top: 14.5px;
+    border-radius: 6px;
+    padding: 15px;
+    background-color: var(--primary-background);
+}
+
+.userPhotosPageHeaderTitle {
+    font-size: 18px;
+    font-weight: 600;
+    text-align: left;
+}
+
+.userPhotosBoxCover {
+    padding: 10px 0;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    flex-grow: 1;
+}
+
+.userPhotoCardComponentCover {
+    /* margin: auto; */
+}
+
+/* User Photo Card CSS */
+
+.photoCardImageCover {
+    width: 162px;
+    height: 162px;
+    border-radius: 9px;
+}
+
+.photoCardImage {
+    max-width: 100%;
+    height: 100%;
+    cursor: pointer;
+    border-radius: 9px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+@media only screen and ( max-width: 890px ) {
+    /* User Photo Card CSS */
+    
+    .photoCardImageCover {
+        width: 194px;
+        height: 194px;
+        border-radius: 9px;
+    }
+
+}
+
+@media only screen and ( max-width: 640px ) {
+    /* User Photo Card CSS */
+
+    .photoCardImageCover {
+        width: 223px;
+        height: 223px;
+        border-radius: 9px;
+    }
+    
+}

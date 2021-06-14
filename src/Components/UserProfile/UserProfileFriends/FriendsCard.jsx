@@ -7,7 +7,7 @@ import FriendsCardSkeleton from "./Skeleton/FriendsCardSkeleton";
 import { shallowEqual, useSelector } from 'react-redux';
 import UnfriendModal from "../UserProfileHome/UnfriendModal";
 
-function FriendsCard({ friendId, alternativePath, userProfileDetails }) {
+function FriendsCard({ friendId, alternativePath, userProfileDetails, lastClickedId, handleLastClickedId }) {
 
     const [unfriendOption, setUnfriendOption] = useState(false);
     const [unfriendModalVisibility, setUnfriendModalVisibility] = useState(false);
@@ -27,8 +27,13 @@ function FriendsCard({ friendId, alternativePath, userProfileDetails }) {
         if( e ) {
             e.stopPropagation();
         }
-
-        setUnfriendOption(!unfriendOption);
+        
+        handleLastClickedId(friendId)
+        if( unfriendOption && friendId === lastClickedId ) {
+            setUnfriendOption(false);
+        } else {
+            setUnfriendOption(true);
+        }
     }
 
     window.addEventListener('click', () => {
@@ -42,7 +47,7 @@ function FriendsCard({ friendId, alternativePath, userProfileDetails }) {
 
         setUnfriendModalVisibility(false);
     }
-
+    
     useEffect(() => {
         database.collection('users').doc(friendId).get()
         .then(res => {
@@ -67,7 +72,7 @@ function FriendsCard({ friendId, alternativePath, userProfileDetails }) {
                     <ThreeDots />
                 </div>
                 {
-                    userProfileDetails.uid === uid && unfriendOption && (
+                    userProfileDetails.uid === uid && friendId === lastClickedId && unfriendOption && (
                         <div className="friendsCardUnfriendOptionContainer">
                             <div className="unfriendOptionBox flexBox" onClick={handleUnfriendModalVisibility}>
                                 <img className="unfriendOptionBoxImage" src={process.env.PUBLIC_URL + '/Images/cancel_request_icon.png'} alt="plus"/>

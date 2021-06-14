@@ -102,6 +102,8 @@ const UserProfileNavBar = ({currentUser, refresh, alternativePath, userProfileDe
         database.collection('users').doc(currentUser).collection('friends').doc(uid).delete();
         database.collection('users').doc(uid).collection('friends').doc(currentUser).delete();
 
+        console.log("unfriend Option Called");
+
         setUnfriendModalVisibility(false);
     }
     

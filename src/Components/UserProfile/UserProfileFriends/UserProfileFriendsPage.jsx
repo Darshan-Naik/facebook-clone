@@ -10,6 +10,12 @@ function UserProfileFriendsPage({ forceRefresh, userFriends, alternativePath, us
 
     const { uid } = useSelector( state => state.auth.user, shallowEqual );
 
+    const [lastClickedId, setLastClickedId] = useState(null);
+
+    const handleLastClickedId = (id) => {
+        setLastClickedId(id)
+    }
+
     useEffect(forceRefresh, []);
     
     return userFriends ? (
@@ -42,7 +48,7 @@ function UserProfileFriendsPage({ forceRefresh, userFriends, alternativePath, us
                                 userFriends.map( el => {
                                     return (
                                         <div key={el.friendId} className="friendsCardMainBox">
-                                            <FriendsCard {...el} alternativePath={alternativePath} userProfileDetails={userProfileDetails} />
+                                            <FriendsCard {...el} alternativePath={alternativePath} userProfileDetails={userProfileDetails} lastClickedId={lastClickedId} handleLastClickedId={handleLastClickedId} />
                                         </div>
                                     )
                                 })
