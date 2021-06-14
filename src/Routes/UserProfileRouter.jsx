@@ -4,6 +4,7 @@ import UserProfilePostsPage from "../Components/UserProfile/UserProfilePostsPage
 import UserProfilePageHeader from "../Components/UserProfile/UserProfileHome/UserProfilePageHeader";
 import UserProfileNavBar from "../Components/UserProfile/UserProfileHome/UserProfileNavBar";
 import UserProfileFriendsPage from "../Components/UserProfile/UserProfileFriends/UserProfileFriendsPage";
+import UserProfilePhotosPage from "../Components/UserProfile/UserProfilePhotosPage/UserProfilePhotosPage";
 import {database} from "../Firebase/firebase";
 import UserProfilePageHeaderSkeleton from "../Components/UserProfile/UserProfileHome/Skeleton/UserProfilePageHeaderSkeleton";
 import UserProfileNavBarSkeleton from "../Components/UserProfile/UserProfileHome/Skeleton/UserProfileNavBarSkeleton";
@@ -82,6 +83,9 @@ function UserProfileRouter({ path, forceRefresh, refresh }) {
                             </Route>
                             <Route  path={`${path}/${userData.uid}/friends`} exact>
                                 <UserProfileFriendsPage alternativePath={path} userProfileDetails={userData} userFriends={userFriends} forceRefresh={forceRefresh} />
+                            </Route>
+                            <Route path={`${path}/${userData.uid}/photos`} exact>
+                                <UserProfilePhotosPage userProfileDetails={userData} forceRefresh={forceRefresh} />
                             </Route>
                         </Switch>
                     </React.Fragment>

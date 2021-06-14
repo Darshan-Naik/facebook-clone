@@ -1,13 +1,14 @@
 import React from 'react';
 import { ReactComponent as CloseIcon } from "../../../Icons/close.svg";
+import PopUp from "../../../SharedComponents/PopUp";
 
-function UnfriendModal({ handleUnfriendModalVisibility, first_name, handleUnfriend}) {
+function UnfriendModal({ toggleUnfriendModalVisibility, first_name, handleUnfriend}) {
     return (
-        <div className="seeAllSentRequestModalContainer">
-            <div className="seeAllSentRequestModalBox" onClick={(e) => e.stopPropagation()}>
+        <div className="seeAllSentRequestModalContainer" onClick={toggleUnfriendModalVisibility}>
+            <PopUp className="seeAllSentRequestModalBox">
                 <div className="flexBox seeAllSentRequestModalHeader">
                     <h1 className="unfriendModalNamePlate">Unfriend</h1>
-                    <div className="flexBox seeAllSentRequestModalCloseIcon" onClick={handleUnfriendModalVisibility}>
+                    <div className="flexBox seeAllSentRequestModalCloseIcon" onClick={toggleUnfriendModalVisibility}>
                         <CloseIcon />
                     </div>
                 </div>
@@ -17,9 +18,9 @@ function UnfriendModal({ handleUnfriendModalVisibility, first_name, handleUnfrie
                 <div className="divider"></div>
                 <div className="unfriendModalConfirmationButtonBox flexBox">
                     <button onClick={handleUnfriend}>Yes</button>
-                    <button onClick={handleUnfriendModalVisibility}>No</button>
+                    <button onClick={toggleUnfriendModalVisibility}>No</button>
                 </div>
-            </div>
+            </PopUp>
         </div>
     )
 }

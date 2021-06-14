@@ -11,6 +11,7 @@ function UserProfileNavBarSkeleton() {
                     <div className="flexBox userProfileNavMenuContainer">
                        <Skeleton style={{marginBottom: "6px", borderRadius: "50px", margin: "6px 15px"}} width={80} height={16} /> 
                        <Skeleton style={{marginBottom: "6px", borderRadius: "50px", margin: "6px 15px"}} width={80} height={16} /> 
+                       <Skeleton style={{marginBottom: "6px", borderRadius: "50px", margin: "6px 15px"}} width={80} height={16} /> 
                     </div>
                 </nav>
             </div>
