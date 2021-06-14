@@ -169,7 +169,7 @@ function PostCard({title,image,imagePath,id,author,time,video,activity}) {
            {commentSection && <PostCardComment postId={id} comments={comments} userData={userData}/>}
            
         </div>
-        {postModalVisibility &&<PostModal handleClosePostModal={handleClosePostModal} uid={uid} image={image} video={video} author={author} time={time} userData={userData}  activity={activity} id={id} likes={likes} comments={comments} title={title} handleLike={handleLike} handleDeleteLike={handleDeleteLike} showComment={showComment} postEditFunction={{handleEditPost,handleDeletePost,handleSetProfilePic}}/>}
+        {postModalVisibility &&<PostModal handleFav={handleFav} handleRemoveFav={handleRemoveFav} handleClosePostModal={handleClosePostModal} uid={uid} image={image} video={video} author={author} time={time} userData={userData}  activity={activity} id={id} likes={likes} comments={comments} title={title} handleLike={handleLike} handleDeleteLike={handleDeleteLike} showComment={showComment} postEditFunction={{handleEditPost,handleDeletePost,handleSetProfilePic}}/>}
        
     
         <div className="postCardContainer" style={{display:loading||!userData?"block":"none"}}>
