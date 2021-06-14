@@ -6,22 +6,21 @@ import { database } from '../../../Firebase/firebase';
 import FriendsCardSkeleton from "./Skeleton/FriendsCardSkeleton";
 import { shallowEqual, useSelector } from 'react-redux';
 import UnfriendModal from "../UserProfileHome/UnfriendModal";
+import useVisibility from '../../../Hooks/useVisibility';
 
 function FriendsCard({ friendId, alternativePath, userProfileDetails, lastClickedId, handleLastClickedId }) {
 
     const [unfriendOption, setUnfriendOption] = useState(false);
-    const [unfriendModalVisibility, setUnfriendModalVisibility] = useState(false);
     const [userDetails, setUserDetails] = useState(null);
+
+    const [unfriendModalVisibility, toggleUnfriendModalVisibility] = useVisibility();
     
     const { uid } = useSelector( state => state.auth.user, shallowEqual );
 
-    const handleUnfriendModalVisibility = (e) => {
-        if( e ) {
-            e.stopPropagation();
-        }
-        setUnfriendModalVisibility(!unfriendModalVisibility);
-        setUnfriendOption(false);
-    };
+    const handleToggleUnfriendOption = () => {
+        toggleUnfriendModalVisibility();
+        setUnfriendOption(false)
+    }
 
     const handleUnfriendOption = (e) => {
         if( e ) {
@@ -35,17 +34,12 @@ function FriendsCard({ friendId, alternativePath, userProfileDetails, lastClicke
             setUnfriendOption(true);
         }
     }
-
-    window.addEventListener('click', () => {
-        setUnfriendModalVisibility(false);
-    });
-
     
     const handleUnfriend = () => {
         database.collection('users').doc(userDetails.uid).collection('friends').doc(uid).delete();
         database.collection('users').doc(uid).collection('friends').doc(userDetails.uid).delete();
 
-        setUnfriendModalVisibility(false);
+        toggleUnfriendModalVisibility(false);
     }
     
     useEffect(() => {
@@ -74,7 +68,7 @@ function FriendsCard({ friendId, alternativePath, userProfileDetails, lastClicke
                 {
                     userProfileDetails.uid === uid && friendId === lastClickedId && unfriendOption && (
                         <div className="friendsCardUnfriendOptionContainer">
-                            <div className="unfriendOptionBox flexBox" onClick={handleUnfriendModalVisibility}>
+                            <div className="unfriendOptionBox flexBox" onClick={handleToggleUnfriendOption}>
                                 <img className="unfriendOptionBoxImage" src={process.env.PUBLIC_URL + '/Images/cancel_request_icon.png'} alt="plus"/>
                                 <span className="unfriendOptionBoxNamePlate">Unfriend</span>
                             </div>
@@ -83,7 +77,7 @@ function FriendsCard({ friendId, alternativePath, userProfileDetails, lastClicke
                 }
             </div>
             {
-                unfriendModalVisibility && <UnfriendModal handleUnfriend={handleUnfriend} handleUnfriendModalVisibility={handleUnfriendModalVisibility} {...userDetails} />
+                unfriendModalVisibility && <UnfriendModal handleUnfriend={handleUnfriend} toggleUnfriendModalVisibility={toggleUnfriendModalVisibility} {...userDetails} />
             }
         </React.Fragment>
     ) : (

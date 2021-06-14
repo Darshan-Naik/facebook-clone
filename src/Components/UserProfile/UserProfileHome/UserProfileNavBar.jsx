@@ -10,16 +10,18 @@ import { database } from '../../../Firebase/firebase';
 import NewPostModal from "../../NewPost/NewPostModal";
 import { DisappearedLoading } from "react-loadingg";
 import UnfriendModal from "./UnfriendModal";
+import useVisibility from '../../../Hooks/useVisibility';
 
 const UserProfileNavBar = ({currentUser, refresh, alternativePath, userProfileDetails, userFriends}) => {
     const [userProfileNavBarState, setUserProfileNavBarState] = useState(true);
     const [userProfileMoreOptionsState, setUserProfileMoreOptionsState] = useState(false);
-    const [editUserDetailsModalState, setEditUserDetailsModalState] = useState(false);
     const [messengerIsLoading, setMessengerIsLoading] = useState(false);
     const [postModalVisibility,setPostModalVisibility] = useState(false);
     const [unfriendOption, setUnfriendOption] = useState(false);
-    const [unfriendModalVisibility, setUnfriendModalVisibility] = useState(false);
 
+    const [unfriendModalVisibility, toggleUnfriendModalVisibility] = useVisibility();
+    const [editUserDetailsModalState, toggleEditUserDetailsModalState] = useVisibility();
+    
     const userProfileNavBarRef = useRef();
     
     const { uid } = useSelector(state => state.auth.user);
@@ -45,6 +47,11 @@ const UserProfileNavBar = ({currentUser, refresh, alternativePath, userProfileDe
         });
     }
 
+    const handleUnfriendOption = () => {
+        toggleUnfriendModalVisibility()
+        setUnfriendOption(false)
+    }
+
     const redirectToMessenger = () => {
         setMessengerIsLoading(true);
         const chatRoom = chatRooms.filter( el => el.authors.includes(userProfileDetails.uid) );
@@ -61,26 +68,6 @@ const UserProfileNavBar = ({currentUser, refresh, alternativePath, userProfileDe
             });
         }
     }
-
-    const handleEditUserDetailsModal = (e) => {
-        if( e ) {
-            e.stopPropagation();
-        }
-        setEditUserDetailsModalState(!editUserDetailsModalState)
-    };
-
-    const handleUnfriendModalVisibility = (e) => {
-        if( e ) {
-            e.stopPropagation();
-        }
-        setUnfriendModalVisibility(!unfriendModalVisibility);
-        setUnfriendOption(false);
-    }
-
-    window.addEventListener('click', () => {
-        setEditUserDetailsModalState(false);
-        setUnfriendModalVisibility(false);
-    });
 
     const handleAddFriend = () => {
         let time = new Date();
@@ -104,7 +91,7 @@ const UserProfileNavBar = ({currentUser, refresh, alternativePath, userProfileDe
 
         console.log("unfriend Option Called");
 
-        setUnfriendModalVisibility(false);
+        toggleUnfriendModalVisibility();
     }
     
     const handleCancelRequest = () => {
@@ -190,7 +177,7 @@ const UserProfileNavBar = ({currentUser, refresh, alternativePath, userProfileDe
                                         <img className="userProfileNavButtonIcons userProfileNavButtonIconsFilter" src={process.env.PUBLIC_URL + '/Images/plus_icon.png'} alt="plus"/>
                                         <span>Add to Story</span>
                                     </div>
-                                    <div className="editProfileContainer userProfileNavButton flexBox" onClick={handleEditUserDetailsModal}>
+                                    <div className="editProfileContainer userProfileNavButton flexBox" onClick={toggleEditUserDetailsModalState}>
                                         <img className="userProfileNavButtonIcons" src={process.env.PUBLIC_URL + '/Images/edit_icon.png'} alt="edit"/>
                                         <span>Edit Profile</span>
                                     </div>
@@ -198,7 +185,7 @@ const UserProfileNavBar = ({currentUser, refresh, alternativePath, userProfileDe
                                         <ThreeDots />
                                     </div>
                                     {
-                                        editUserDetailsModalState && <EditProfileDataModal handleEditUserDetailsModal={handleEditUserDetailsModal} />
+                                        editUserDetailsModalState && <EditProfileDataModal toggleEditUserDetailsModalState={toggleEditUserDetailsModalState} />
                                     }
                                 </React.Fragment>
                             ) : (
@@ -239,7 +226,7 @@ const UserProfileNavBar = ({currentUser, refresh, alternativePath, userProfileDe
                                     {
                                         JSON.stringify(userFriends).includes(uid) && unfriendOption && (
                                             <div className="showUnfriendOptionContainer">
-                                                <div className="unfriendOptionBox flexBox" onClick={handleUnfriendModalVisibility}>
+                                                <div className="unfriendOptionBox flexBox" onClick={handleUnfriendOption}>
                                                     <img className="unfriendOptionBoxImage" src={process.env.PUBLIC_URL + '/Images/cancel_request_icon.png'} alt="plus"/>
                                                     <span className="unfriendOptionBoxNamePlate">Unfriend</span>
                                                 </div>
@@ -274,7 +261,7 @@ const UserProfileNavBar = ({currentUser, refresh, alternativePath, userProfileDe
                 postModalVisibility && <NewPostModal setPostModalVisibility={setPostModalVisibility} />
             }
             {
-                unfriendModalVisibility && <UnfriendModal handleUnfriend={handleUnfriend} handleUnfriendModalVisibility={handleUnfriendModalVisibility} {...userProfileDetails} />
+                unfriendModalVisibility && <UnfriendModal handleUnfriend={handleUnfriend} toggleUnfriendModalVisibility={toggleUnfriendModalVisibility} {...userProfileDetails} />
             }
         </React.Fragment>
     )
