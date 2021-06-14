@@ -9,7 +9,7 @@ import { resetApp } from '../../Redux/App/actions'
 import { clearPosts } from '../../Redux/Posts/actions'
 import {ReactComponent as Alert} from  "../../Icons/alert.svg"
 import { database } from '../../Firebase/firebase'
-import AccessibilityInfo from '../../SharedComponents/AccessibilityInfo'
+
 function AccountMenu() {
     const {profilePic,first_name,last_name, uid,accessibility} = useSelector(store=>store.auth.user)
     const dispatch = useDispatch()
