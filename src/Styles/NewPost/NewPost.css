@@ -20,6 +20,7 @@
     border-radius: 50%;
     margin:0 10px;
     cursor: pointer;
+    object-fit: cover;
 }
 .newPostUserImage>div{
     background-color: var(--secondary-background-3);

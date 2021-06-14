@@ -136,6 +136,7 @@
     height: 30px;
     border-radius: 50%;
     margin:3px 5px;
+    object-fit: cover;
 }
 .userProfileCard p{
     font-size: 12px;
@@ -228,6 +229,7 @@
     height: 50px;
     border-radius: 50%;
     margin-right:  15px;
+    object-fit: cover;
 }
 .AccountMenuUserProfileCard p{
     font-size: 14px;
@@ -270,6 +272,7 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
+    object-fit: cover;
 }
 .notificationAuthorImage svg ,.notificationAuthorImage .imageIcon{
     position: absolute;
