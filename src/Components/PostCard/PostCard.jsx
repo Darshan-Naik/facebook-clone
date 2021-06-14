@@ -47,6 +47,10 @@ function PostCard({title,image,imagePath,id,author,time,video,activity}) {
     const handleFav=()=>{
         database.collection("users").doc(uid).collection("favorites").doc(id).set({postId:id,time:new Date()});
     }
+
+    const handleRemoveFav=(id)=>{
+        database.collection("users").doc(uid).collection("favorites").doc(id).delete();
+    }
    
 
     const handleDeletePost=()=>{
@@ -142,7 +146,7 @@ function PostCard({title,image,imagePath,id,author,time,video,activity}) {
     return (
         <>
         <div className="postCardContainer" style={{display:loading||!userData?"none":"block"}}>
-            <PostCardHead handleFav={handleFav} {...userData} postEditFunction={{handleEditPost,handleDeletePost,handleSetProfilePic}} time={time} author={author} image={image}title={title} activity={activity}/>
+            <PostCardHead   handleRemoveFav={handleRemoveFav} handleFav={handleFav} {...userData} postEditFunction={{handleEditPost,handleDeletePost,handleSetProfilePic}} time={time} author={author} image={image}title={title} activity={activity} id={id}/>
             {title && <div className="postCardTags">{title}</div>}
             {image&&<div onClick={()=>setPostModalVisibility(true)} className="postCardImage">
                 <img onLoad={()=>setLoading(false)} src={image|| process.env.PUBLIC_URL + '/Images/facebook_login_logo.png'} alt="img" />
