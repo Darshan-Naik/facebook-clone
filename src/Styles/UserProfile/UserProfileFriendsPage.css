@@ -99,7 +99,7 @@
 
 .friendsCardUnfriendOptionContainer {
     position: absolute;
-    top: 75%;
+    top: 65%;
     right: 0;
     padding: 8px;
     z-index: 40;
@@ -112,10 +112,10 @@
 .friendsCardUnfriendOptionContainer::before {
     position: absolute;
     content: "";
-    width: 15px;
-    height: 15px;
-    top: -9px;
-    right: 10px;
+    width: 10px;
+    height: 10px;
+    top: -7px;
+    right: 12px;
     border-left: 1px solid var(--shadow-1);
     border-top: 1px solid var(--shadow-1);
     transform: rotate(45deg);

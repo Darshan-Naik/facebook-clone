@@ -18,6 +18,10 @@ function useVisibility() {
         setState(false);
     }
 
+    window.addEventListener("click",()=>{
+        setState(false)
+    })
+    
     return [state,handleToggle,handleOpen,handleClose]
 }
 

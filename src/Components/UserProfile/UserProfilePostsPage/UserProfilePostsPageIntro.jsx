@@ -1,26 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
 import EditProfileDataModal from "./EditProfileDataModal";
 import UserFriendCard from "./UserFriendsCard";
 import PostPageFriendsSkeleton from "../UserProfileHome/Skeleton/PostPageFriendsSkeleton";
+import useVisibility from '../../../Hooks/useVisibility';
 
 function UserProfilePostsPageIntro({ alternativePath, userProfileDetails, userFriends }) {
 
-    const [editUserDetailsModalState, setEditUserDetailsModalState] = useState(false);
+    const [editUserDetailsModalState, toggleEditUserDetailsModalState] = useVisibility();
     
     const { uid } = useSelector( state => state.auth.user );
-    
-    const handleEditUserDetailsModal = (e) => {
-        if( e ) {
-            e.stopPropagation();
-        }
-        setEditUserDetailsModalState(!editUserDetailsModalState)
-    }
-
-    window.addEventListener('click', () => {
-        setEditUserDetailsModalState(false);
-    });
 
     return (
         <div className="postsPageIntroMainContainer">
@@ -72,12 +62,12 @@ function UserProfilePostsPageIntro({ alternativePath, userProfileDetails, userFr
                                     userProfileDetails.uid === uid && (
                                         <React.Fragment>
                                                 <div className="postsPageEditUserDetailsBox">
-                                                    <button onClick={handleEditUserDetailsModal}>Edit Details</button>
+                                                    <button onClick={toggleEditUserDetailsModalState}>Edit Details</button>
                                                 </div>
                                             {
                                                 editUserDetailsModalState && (
                                                     <React.Fragment>
-                                                        <EditProfileDataModal handleEditUserDetailsModal={handleEditUserDetailsModal} />
+                                                        <EditProfileDataModal toggleEditUserDetailsModalState={toggleEditUserDetailsModalState} />
                                                     </React.Fragment>
                                                 )
                                             }

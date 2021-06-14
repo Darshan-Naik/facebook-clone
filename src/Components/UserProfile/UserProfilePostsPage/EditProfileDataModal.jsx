@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { database } from '../../../Firebase/firebase';
 import { ReactComponent as CloseIcon } from "../../../Icons/close.svg";
 import { DisappearedLoading } from "react-loadingg";
+import PopUp from '../../../SharedComponents/PopUp';
 
 const initState = {
     education: "",
@@ -11,7 +12,7 @@ const initState = {
     relationship: ""
 }
 
-function EditProfileDataModal ({handleEditUserDetailsModal}){
+function EditProfileDataModal ({toggleEditUserDetailsModalState}){
 
     const [updateUserDetails, setUpdateUserDetails] = useState(initState);
     const [updateIsLoading, setUpdateIsLoading] = useState(false);
@@ -34,7 +35,7 @@ function EditProfileDataModal ({handleEditUserDetailsModal}){
         database.collection("users").doc(user.uid).update(payload)
         .then((res) => {
             setUpdateIsLoading(false)
-            handleEditUserDetailsModal();
+            toggleEditUserDetailsModalState();
         })
     }
 
@@ -49,11 +50,11 @@ function EditProfileDataModal ({handleEditUserDetailsModal}){
     }, [user])
 
     return (
-        <div className="postsPageEditUserDetailsModalContainer">
-            <div className="postsPageEditUserDetailsModalBox" onClick={(e) => e.stopPropagation()}>
+        <div className="postsPageEditUserDetailsModalContainer"  onClick={toggleEditUserDetailsModalState}>
+            <PopUp className="postsPageEditUserDetailsModalBox">
                 <div className="postsPageEditUserDetailsModalHeader flexBox">
                     <h1 className="postsPageEditDetailsModalHeaderNamePlate">Edit Details</h1>
-                    <div className="editUserDetailsModalCloseIconBox flexBox"  onClick={handleEditUserDetailsModal}>
+                    <div className="editUserDetailsModalCloseIconBox flexBox"  onClick={toggleEditUserDetailsModalState}>
                         <CloseIcon />
                     </div>
                 </div>
@@ -104,7 +105,7 @@ function EditProfileDataModal ({handleEditUserDetailsModal}){
                         </div>
                     )
                 }
-            </div>
+            </PopUp>
         </div>
     )
 }
