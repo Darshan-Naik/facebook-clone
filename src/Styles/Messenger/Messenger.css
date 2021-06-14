@@ -91,6 +91,7 @@
 .chatRoomUserImage img{
     width: 50px;
     height: 50px;
+    object-fit: cover;
     border-radius: 50%;
 }
 .chatRoomUserDetails{
@@ -119,6 +120,7 @@
     width: 100px;
     height: 100px;
     border-radius: 50%;
+    object-fit: cover;
 }
 .chatRoomUserDetailsData p {
     font-weight: 500;
@@ -154,6 +156,7 @@
     height: 40px;
     border-radius: 50%;
     cursor: pointer;
+    object-fit: cover;
 }
 .chatBodyHeaderUserDetailsData{
     text-align: left;
