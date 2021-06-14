@@ -1,7 +1,8 @@
 .storyMainContainer {
   background-color: transparent;
   max-width: 676px;
-  width: 100%;
+  min-width: 400px;
+  width: 85%;
   margin: auto;
   margin-bottom: 10px;
 }
@@ -30,6 +31,7 @@
   border-radius: 50%;
   border: 3.5px solid var(--accent);
   box-shadow:0 1px 5px var( --shadow-2);
+  object-fit: cover;
 }
 .imageMainContainer:hover {
   transform: scale(1.01);
@@ -50,6 +52,7 @@
 @media only screen and (max-width: 992px) {
   .storyMainContainer {
     max-width: 500px;
+    width: 100%;
   }
   .mainImgContainer {
     width: 25%;

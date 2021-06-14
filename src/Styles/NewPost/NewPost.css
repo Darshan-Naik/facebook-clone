@@ -1,7 +1,7 @@
 .newPostContainer{
     max-width: 676px;
     min-width: 400px;
-    width: 100%;
+    width: 80%;
     margin: auto;
     border-radius: 8px;
     padding: 10px;
@@ -324,6 +324,6 @@
 @media only screen and (max-width: 992px) {
     .newPostContainer{
         max-width: 500px;
-       
+        width: 100%;
     }
 }
