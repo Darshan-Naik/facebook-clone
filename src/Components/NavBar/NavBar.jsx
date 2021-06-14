@@ -2,7 +2,7 @@ import React from 'react'
 import "../../Styles/NavBar/NavBar.css"
 import {ReactComponent as SearchIcon} from  "../../Icons/search.svg"
 import {ReactComponent as MainLogo} from  "../../Icons/main-logo.svg"
-import {ReactComponent as GameIcon} from  "../../Icons/game.svg"
+import {ReactComponent as FavIcon} from  "../../Icons/fav.svg"
 import {ReactComponent as HomeIcon} from  "../../Icons/home.svg"
 import {ReactComponent as UsersIcon} from  "../../Icons/users.svg"
 import {ReactComponent as VideoIcon} from  "../../Icons/video.svg"
@@ -105,8 +105,8 @@ function NavBar({refresh,handleRefresh}) {
                 <IconWrapper path="/friends/new" label="Friends" handleRefresh={handleRefresh}>
                     <UsersIcon/>
                 </IconWrapper>
-                <IconWrapper path="/games" label="Games" handleRefresh={handleRefresh}>
-                    <GameIcon/>
+                <IconWrapper path="/favorites" label="Favorites" handleRefresh={handleRefresh}>
+                    <FavIcon/>
                 </IconWrapper>
             </div>
             <div className="navBarUserBox flexBox">
