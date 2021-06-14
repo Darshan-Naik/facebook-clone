@@ -10,10 +10,10 @@ import { DisappearedLoading } from 'react-loadingg';
 import "../../Styles/NewPost/NewPost.css"
 import { database, storage } from '../../Firebase/firebase'
 import { activities } from '../../Utils/localData'
+import PopUp from '../../SharedComponents/PopUp'
 
 
-
-function NewPostModal({setPostModalVisibility}) {
+function NewPostModal({togglePostModal}) {
     const [title,setTitle] = React.useState("")
     const [activity,setActivity] = React.useState(null)
     const {first_name,profilePic,uid,last_name} = useSelector(store=>store.auth.user)
@@ -76,7 +76,7 @@ function NewPostModal({setPostModalVisibility}) {
                                 imageRef.current.value = "";
                                 setTitle("")
                                     setPostState(0)
-                                    setPostModalVisibility(false)
+                                    togglePostModal()
                             })
                         })
                     })
@@ -110,7 +110,7 @@ function NewPostModal({setPostModalVisibility}) {
                                 imageRef.current.value = "";
                                 setTitle("")
                                 setPostState(0)
-                                setPostModalVisibility(false)
+                                togglePostModal()
                             })
                         })
                     })
@@ -127,7 +127,7 @@ function NewPostModal({setPostModalVisibility}) {
                     setTitle("")
                     setTimeout(()=>{
                         setPostState(0)
-                        setPostModalVisibility(false)
+                        togglePostModal()
                     },1000)
                     })
             }
@@ -136,8 +136,8 @@ function NewPostModal({setPostModalVisibility}) {
         setTitle(title + emoji.native)
     }
     return (
-        <div className="createNewPostModal"  onClick={()=>setPostModalVisibility(false)} >
-            <div className="createNewPostContainer" onClick={(e)=>{e.stopPropagation();setActivityBoxVisibility(false)}}>
+        <div className="createNewPostModal"  onClick={togglePostModal} >
+            <PopUp className="createNewPostContainer" onClick={setActivityBoxVisibility}>
               {postState?<div className="newPostProgressContainer flexBox">
                     <div className="progressBox">
                         <h2>Posting</h2> <br />
@@ -156,7 +156,7 @@ function NewPostModal({setPostModalVisibility}) {
                         <div className="createNewPostTitle">
                             <p>Create post</p>
                         </div>
-                        <div className="createNewPostCloseButton flexBox"  onClick={()=>setPostModalVisibility(false)}>
+                        <div className="createNewPostCloseButton flexBox"  onClick={togglePostModal}>
                              <CloseIcon/>
                         </div>
                     </div>
@@ -224,7 +224,7 @@ function NewPostModal({setPostModalVisibility}) {
                     <div className="postButton">
                         <button onClick={handleNewPost}>Post</button>
                     </div>
-            </div>
+            </PopUp>
 
         </div>
     )
