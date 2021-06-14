@@ -129,3 +129,17 @@
   width: 20px;
   height: 20px;
 }
+.closeIconBirthDate {
+  stroke: var(--secondary-icon);
+  width: 20px;
+  margin: 0 20px 0 auto;
+  cursor: pointer;
+}
+.closeIconBirthDate:hover {
+  background-color: var(--hover-overlay);
+  width: 20px;
+  border-radius: 10px;
+}
+.strongBirthdayName {
+  cursor: pointer;
+}

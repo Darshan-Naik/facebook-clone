@@ -20,8 +20,9 @@ import { useSelector } from 'react-redux'
 import NewPostModal from '../NewPost/NewPostModal'
 import Notifications from './Notifications'
 import SearchResult  from './SearchResult'
+import useVisibility from '../../Hooks/useVisibility'
 function NavBar({refresh,handleRefresh}) {
-    const [postModalVisibility,setPostModalVisibility] = React.useState(false)
+    const [postModal,togglePostModal] = useVisibility()
     const [notificationVisibility,setNotificationVisibility] = React.useState(false)
     const [accountVisibility,setAccountVisibility] = React.useState(false)
     const [searchBoxVisibility,setSearchBoxVisibility] = React.useState(false)
@@ -114,7 +115,7 @@ function NavBar({refresh,handleRefresh}) {
                     <p>{first_name}</p>
 
                 </div>
-               <IconWrapperCircle label="Create" icon={ <CreateIcon  onClick={()=>setPostModalVisibility(true)}/> } >
+               <IconWrapperCircle label="Create" icon={ <CreateIcon  onClick={togglePostModal}/> } >
                     
                 </IconWrapperCircle >
                 <IconWrapperCircle path="/messenger/new" label="Messenger" icon={ <MessageIcon /> } number={0}>
@@ -128,7 +129,7 @@ function NavBar({refresh,handleRefresh}) {
                 </IconWrapperCircle>
                
             </div>
-        { postModalVisibility &&   <NewPostModal setPostModalVisibility={setPostModalVisibility} />}
+        { postModal &&   <NewPostModal togglePostModal={togglePostModal} />}
         </div>
     )
 }

@@ -1,5 +1,6 @@
 import React from 'react';
-import {ReactComponent as CloseIcon} from  "../../Icons/close.svg"
+import {ReactComponent as CloseIcon} from  "../../Icons/close.svg";
+import {ReactComponent as TrashIcon} from  "../../Icons/trash.svg"
 
 function DeletePostModal({handleCancel,handleDelete}) {
     return (
@@ -11,7 +12,8 @@ function DeletePostModal({handleCancel,handleDelete}) {
                         <CloseIcon onClick={handleCancel}/>
                     </div> 
                 </div>
-                <div className="deletePostModaleMiddle">      
+                <div className="deletePostModaleMiddle flexBox">
+                    <TrashIcon/>      
                     <p>Are you sure, you will never get this post again...</p>
                 </div>
                 <div className="deletePostModaleFooter flexBox">

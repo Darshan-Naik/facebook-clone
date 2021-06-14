@@ -17,17 +17,21 @@
   z-index: 50000;
 }
 .postDetailsCardHeadContainer {
-  padding: 0 15px 5px 15px;
+  padding: 5px 10px;
+}
+.postDetailsCardHeadBox1{
+  position: relative;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  margin: 0 10px ;
+  box-shadow: 0 0 5px var(--shadow-1);
+  cursor: pointer;
 }
 .postDetailsCardHeadBox1 > img {
-  width: 38px;
-  height: 38px;
+  width: 35px;
+  height: 35px;
   border-radius: 50%;
-  box-shadow: 0px 0px 0px 2px var(--white), 0px 0px 0px 4px var(--primary-1);
-  margin: 0 10px;
-  margin-top: 10px;
-  margin-left: 0;
-  cursor: pointer;
 }
 
 .postDetailsCardHeadBox2 {
@@ -68,6 +72,17 @@
 .postDetailsCardHeadBox3:hover {
   background: var(--hover-overlay);
 }
+.postDetailsCardHeadBox3>.dotsIcon{
+  fill: var(--primary-icon);
+}
+
+.postDetailsCardHeadBox3 .editPostContainer {
+  top: 40px;
+  right: 10px;
+
+}
+
+/*-----------Middle-part--------------*/
 .postDetailsCardTags {
   font-size: 14px;
   line-height: 1.3333;
@@ -116,54 +131,61 @@
   border-top: 1px solid var(--secondary-text);
 }
 .postDetailsCardFooterBox {
-  width: 30%;
-  margin: 5px 0;
+  flex:1;
+  margin: 5px 10px;
+  border-radius: 4px;
+  padding:0px 5px;
 }
 .postDetailsCardFooterBox:hover {
   background: var(--hover-overlay);
-  border-radius: 4px;
-  width: 30%;
 }
 
-.postDetailsCardFooter svg {
+.postDetailsCardFooterBox svg {
   width: 18px;
   height: 18px;
   fill: var(--secondary-icon);
   margin: 5px;
   cursor: pointer;
 }
+
 .postDetailsCardFooterBox .likeIcon {
   fill: var(--primary-1);
 }
-.postDetailsCardFooter p {
+.postDetailsCardFooterBox p {
   color: var(--secondary-icon);
   font-size: 15px;
   cursor: pointer;
   font-weight: 500;
 }
-.postDetailsCardFooter small {
+.postDetailsCardFooterBox small {
   color: var(--primary-1);
   font-size: 15px;
   cursor: pointer;
   font-weight: 500;
 }
+
+/*--------Comment-section------------------*/
+
+
 .postDetailsCardCommentContainer {
   margin: 0px 15px 10px 15px;
   padding: 5px 0px 5px 0px;
+  height: 77vh;
   border-top: 1px solid var(--secondary-text);
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
   display: flex;
-  flex-direction: column;
+ 
 }
-.postDetailsCardCommentContainer p {
+.postDetailsModalCommentBox  {
   font-weight: 500;
   color: var(--secondary-text);
   font-size: 14px;
   cursor: pointer;
+  flex: 1;
 }
-.postDetailsCardCommentContainer p:hover {
+.postDetailsModalCommentBox p:hover {
   text-decoration: underline;
 }
 .postDetailsCardInputBox {
@@ -190,10 +212,10 @@
   color: var(--primary-text);
   font-size: 10px;
 }
-.addCommentBox {
+.postDetailsModalCommentBox .addCommentBox {
   border-radius: 10px;
   padding: 5px 10px;
-  max-width: 85%;
+  max-width: 90%;
   min-width: 100px;
   background-color: var(--secondary-background-1);
   flex-direction: column;
@@ -255,11 +277,6 @@
   padding: 2px;
 }
 
-@media only screen and (max-width: 1224px) {
-  .postDetailsCardContainer {
-    flex-direction: column;
-  }
-}
 
 /* */
 .PicInfoContainer {
@@ -272,16 +289,19 @@
 }
 .postDetailsModalClose {
   height: 35px;
+  width: 35px;
   position: absolute;
-  top: 25px;
+  top: 15px;
   left: 30px;
+  border-radius: 50%;
   background-color: transparent;
   border: transparent;
+  background-color: var(--shadow-8);
+  
 }
 .postDetailsModalClose:hover {
   transform: scale(1.01);
-  border-radius: 50%;
-  background-color: var(--hover-overlay);
+  background-color: var(--hover-overlay-1);
 }
 .postDetailsModalClose > svg {
   stroke: var(--white);
@@ -293,4 +313,10 @@
   left: 80px;
   background-color: transparent;
   border: transparent;
+}
+
+@media only screen and (max-width: 768px) {
+  .PicInfoContainer {
+    display: none;
+  }
 }

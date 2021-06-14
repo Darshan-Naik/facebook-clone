@@ -370,6 +370,11 @@
     padding: 5px 10px;
     margin: 5px 0px;
 }
+.editBox svg{
+    width: 20px;
+    height: 20px;
+    fill:var(--primary-icon)
+}
 /*----------------------------Edit Modal------------------------------------*/
 
 .editPostModal{
@@ -569,12 +574,20 @@
 .deletePostModaleMiddle{
     flex:2;
     padding:10px 0 10px 0;
+    flex-direction: column;
+
+}
+.deletePostModaleMiddle svg{
+  width: 80px;
+  fill: var(--supplementary-1);
+  
 
 }
 .deletePostModaleFooter{
     flex:1;
     width: 100%;
     border-top: 1px solid var(--shadow-1);
+    padding: 10px 0;
    
 }
 .deletePostModaleFooter button{
@@ -601,6 +614,54 @@
     background-color: var(--primary-1);
 }
 
+/*------Share Modal--------------------------------*/
+
+.shareImage{
+    width: 100%;
+    max-height: 350px;
+    margin: auto;
+    overflow: hidden;
+    position: relative;
+}
+
+.shareImage img{ 
+    width: 100%;
+    max-height: 350px;
+}
+.shareImage video{
+    width: 100%;
+    max-height: 350px;
+}
+.shareButton{
+    width: 95%;
+    padding: 5px 0;
+    margin:10px auto;
+    
+}
+.shareButton .shareButton1{
+    width: 100%;
+    padding: 8px;
+    border: none;
+    border-radius: 8px;
+    margin: 0 10px;
+    background-color: var(--primary-1);
+    color: var(--white);
+}
+.shareButton .shareButton1:hover{
+    background-color: var(--secondary-6);
+}
+.shareCancelButton{
+    width: 100%;
+    padding: 8px;
+    border: none;
+    border-radius: 8px;
+    color: var(--white);
+    background-color: var(--supplementary-1);
+
+}
+.shareCancelButton:hover{
+    background-color: red;
+}
 
 @media only screen and (max-width: 992px) {
     .postCardContainer{

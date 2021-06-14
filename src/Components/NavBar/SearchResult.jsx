@@ -4,7 +4,7 @@ import SearchResultCard from './SearchResultCard'
 function SearchResult({query,handleSearchResultBoxVisibility}) {
     const users = useSelector(store=>store.app.users)
     const uid = useSelector(store=>store.auth.user.uid)
-    const result = users.filter(user=>`${user.first_name} ${user.last_name}`.toLowerCase().includes(query.toLowerCase()) && user.uid !== uid);
+    const result = users.filter(user=>`${user.first_name} ${user.last_name}`.toLowerCase().includes(query.toLowerCase()));
     return (
         <div className="searchResultContainer flexBox scroll" onClick={(e)=>e.stopPropagation()}>
             {!result.length?(<div className="emptyResult">
