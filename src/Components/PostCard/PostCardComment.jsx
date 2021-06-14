@@ -1,10 +1,9 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { database } from '../../Firebase/firebase';
-import {ReactComponent as CameraIcon} from  "../../Icons/cameraIcon.svg";
 import {ReactComponent as EmojiIcon} from  "../../Icons/happyFace.svg";
 import CommentBox from './CommentBox';
-import EmojiMart from "../../SharedComponents/EmojiMart"
+import EmojiMart from "../../SharedComponents/EmojiMart";
 import { useHistory } from 'react-router';
 
 
@@ -19,10 +18,9 @@ function PostCardComment({postId,comments,userData}) {
 
     const handleChange=(e)=>{
         const {value} = e.target;
-        setComment(value)
-        
-        
+        setComment(value);
     }
+
     const handleSubmit=(e)=>{
         if (e.key === 'Enter') {
             const payload={
@@ -45,7 +43,7 @@ function PostCardComment({postId,comments,userData}) {
             }
             
             setComment("")
-          }
+        }
     }
     
     const handleEmoji=(emoji)=>{
