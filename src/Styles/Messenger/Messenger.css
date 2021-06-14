@@ -11,6 +11,7 @@
 }
 .chatListHeaderContainer{
     width: 100%;
+    position: relative;
 }
 .chatRoomListContainer{
     padding:5px 15px;
@@ -48,6 +49,7 @@
     padding: 8px;
     border-radius: 50%;
     background-color: var(--secondary-background-1);
+    cursor: pointer;
 }
 .chatListSearchBox{
     background-color: var(--secondary-background-1);
@@ -267,6 +269,18 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+}
+.messengerResults{
+    position: absolute;
+    top : 90px;
+    padding: 10px;
+    border: 1px solid var(--shadow-1);
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    background-color: var(--primary-background);
+    z-index: 200;
+    width: 250px;
+    max-height: 60vh;
 }
 @media only screen and (max-width: 992px) {
     .chatRoomUserDetailsContainer{

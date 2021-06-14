@@ -46,6 +46,7 @@ function NewPostModal({togglePostModal}) {
         setActivityBoxVisibility(false)
     }
     const handleNewPost=()=>{
+        setEmojiMartVisibility(false)
             setPostState(1)
             if(imageRef.current?.files[0]?.name){
                 if(imageRef.current?.files[0]?.type.includes("image")){

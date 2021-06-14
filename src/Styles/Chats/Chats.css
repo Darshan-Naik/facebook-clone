@@ -333,3 +333,58 @@
     color: var(--secondary-text);
     font-size: 12px;
 }
+/* new chat box styling */
+.newChatBoxHeader{
+    justify-content: space-between;
+    width: 100%;
+    padding: 15px;
+}
+.newChatBoxHeader svg{
+    stroke : var(--primary-1);  
+    cursor: pointer;
+}
+.newChatSearchContainer{
+    width: 100%;
+    justify-content: flex-start;
+    padding: 15px;
+    padding-top: 0;
+    border-bottom: 1px solid var(--shadow-1);
+}
+.newChatSearchContainer input{
+    padding: 5px;
+    background-color: transparent;
+    border: none;
+    margin:0 5px;
+    font-size: 14px;
+
+}
+.newChatSearchResultContainer{
+    flex: 1;
+    width: 100%;
+}
+.noFriendsFound{
+    padding: 10px;
+}
+.newChatBoxResultCard{
+    padding:5px 10px;
+    margin: 5px;
+    border-radius: 8px;
+    justify-content: flex-start;
+    width: 95%;
+    cursor: pointer;
+}
+.newChatBoxResultCard:hover{
+    background-color: var(--hover-overlay);
+}
+.newChatBoxResultCard img{
+    object-fit: cover;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: 0 5px;
+}
+.newChatBoxResultCard p{
+    font-size: 14px;
+    font-weight: 300;
+    margin: 0 5px;
+}
