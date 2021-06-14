@@ -6,7 +6,7 @@ import EditBox from '../PostCard/EditBox';
 import StatusDot from '../../SharedComponents/StatusDot';
 import checkActive from '../../Utils/checkActive';
 
-function PictureCardHeader({first_name,last_name,profilePic,time,author,activity,title,postEditFunction,image,activeStatus}) {
+function PictureCardHeader({handleFav, handleRemoveFav,id,first_name,last_name,profilePic,time,author,activity,title,postEditFunction,image,activeStatus}) {
    
     const [editSection,setEditSection]=React.useState(false);
     const [activeState,setActiveState]=React.useState(false);
@@ -58,8 +58,7 @@ function PictureCardHeader({first_name,last_name,profilePic,time,author,activity
             </div>
             <div className="postDetailsCardHeadBox3 flexBox">
                 <DotsIcon onClick={()=>setEditSection(!editSection)}/>
-                {author===uid&&editSection&&<EditBox handleEditSection={handleEditSection} first_name={first_name} last_name={last_name} profilePic={profilePic} title={title} {...postEditFunction} image={image}/>}
-                {author!==uid&&editSection&&<EditBox handleEditSection={handleEditSection} author={author} uid={uid} />}
+                {editSection&&<EditBox handleEditSection={handleEditSection} handleRemoveFav={handleRemoveFav} author={author} uid={uid} id={id} first_name={first_name} last_name={last_name} handleFav={handleFav} profilePic={profilePic} title={title} {...postEditFunction} image={image}/>}
             </div>
             
         </div>

@@ -7,7 +7,7 @@ import '../../Styles/PostModal/PostModal.css';
 import {ReactComponent as CloseIcon} from  "../../Icons/close.svg";
 import {ReactComponent as MainLogo} from  "../../Icons/main-logo.svg";
 
-function PostModal({postEditFunction,handleClosePostModal,uid, id, image,author, video, time, userData, activity, likes, comments, title, handleLike, handleDeleteLike,showComment}){
+function PostModal({handleRemoveFav,handleFav, postEditFunction,handleClosePostModal,uid, id, image,author, video, time, userData, activity, likes, comments, title, handleLike, handleDeleteLike,showComment}){
 
     return (
         <div className="postDetailsCardContainer">
@@ -24,7 +24,7 @@ function PostModal({postEditFunction,handleClosePostModal,uid, id, image,author,
                 </div>}
             </div>
             <div className="PicInfoContainer">
-                <PictureCardHeader {...userData} time={time} image={image} activity={activity}author={author} postEditFunction={postEditFunction}/>
+                <PictureCardHeader handleRemoveFav={handleRemoveFav} handleFav={handleFav} id={id} {...userData} time={time} image={image} activity={activity}author={author} postEditFunction={postEditFunction}/>
                 {title && <div className="postDetailsCardTags">{title}</div>}
                 <div className="postDetailsCardLike flexBox">
                     <div className="flexBox">

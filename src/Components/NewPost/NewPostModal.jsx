@@ -66,8 +66,8 @@ function NewPostModal({togglePostModal}) {
                         .then(url=>{
                                     Compress.imageFileResizer(
                                         imageRef.current.files[0], // the file from input
-                                        200, // width
-                                        200, // height
+                                        400, // width
+                                        400, // height
                                         "JPEG", // compress format WEBP, JPEG, PNG
                                         70, // quality
                                         0, // rotation

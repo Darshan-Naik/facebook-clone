@@ -1,0 +1,27 @@
+.pageNotFound{
+    background-color:var(--primary-background);
+    flex-direction: column;
+    height: calc(100vh - var(--navBar-height));
+}
+.pageNotFound img{
+    width: 115px;
+    height: 115px;
+}
+.pageNotFound h2{
+    font-size:20px;
+}
+.pageNotFound div{
+    width: 452px;
+    height: 60px;
+    font-size: 17px;
+    margin: 10px 0;
+}
+.pageNotFound h4{
+    font-size:17px;
+    font-weight:600;
+    color: var(--primary-1);
+    cursor: pointer;
+}
+.pageNotFound h4:hover{
+    text-decoration: underline;
+}

@@ -32,15 +32,20 @@ function PostCard({title,image,imagePath,id,author,time,video,activity,thumb_url
     }
 
     const handleSetProfilePic=()=>{
-        const payload ={
-            image,
-            activity: `changed his profile picture.` ,
-            author : uid,
-            time : new Date()
+        if(thumb_url){
+            const payload ={
+                image,
+                thumb_url,
+                activity: `changed his profile picture.` ,
+                author : uid,
+                time : new Date()
+            }
+           
+            database.collection("posts").add(payload)
+            database.collection("users").doc(uid).update({profilePic:thumb_url});
+
         }
-       
-        database.collection("posts").add(payload)
-        database.collection("users").doc(uid).update({profilePic:thumb_url});
+        
         
 
     }
@@ -73,6 +78,7 @@ function PostCard({title,image,imagePath,id,author,time,video,activity,thumb_url
         }
         if(image){
             payload.image=image;
+            payload.thumb_url=thumb_url;
         }else if(video){
             payload.video=video;
         }
@@ -169,7 +175,7 @@ function PostCard({title,image,imagePath,id,author,time,video,activity,thumb_url
            {commentSection && <PostCardComment postId={id} comments={comments} userData={userData}/>}
            
         </div>
-        {postModalVisibility &&<PostModal handleClosePostModal={handleClosePostModal} uid={uid} image={image} video={video} author={author} time={time} userData={userData}  activity={activity} id={id} likes={likes} comments={comments} title={title} handleLike={handleLike} handleDeleteLike={handleDeleteLike} showComment={showComment} postEditFunction={{handleEditPost,handleDeletePost,handleSetProfilePic}}/>}
+        {postModalVisibility &&<PostModal handleFav={handleFav} handleRemoveFav={handleRemoveFav} handleClosePostModal={handleClosePostModal} uid={uid} image={image} video={video} author={author} time={time} userData={userData}  activity={activity} id={id} likes={likes} comments={comments} title={title} handleLike={handleLike} handleDeleteLike={handleDeleteLike} showComment={showComment} postEditFunction={{handleEditPost,handleDeletePost,handleSetProfilePic}}/>}
        
     
         <div className="postCardContainer" style={{display:loading||!userData?"block":"none"}}>

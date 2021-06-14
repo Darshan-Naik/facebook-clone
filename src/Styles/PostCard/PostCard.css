@@ -25,6 +25,7 @@
     width: 35px;
     height: 35px;
     border-radius: 50%;
+    object-fit: cover;
     
 }
 
@@ -194,6 +195,7 @@
     margin: 0 5px;
     box-shadow: 0 0 5px var(--shadow-1);
     cursor: pointer;
+    object-fit:cover;
 }
 .addComment{
     flex-direction: column;
