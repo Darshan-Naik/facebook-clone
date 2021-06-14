@@ -11,7 +11,7 @@ import "../../Styles/NewPost/NewPost.css"
 import { database, storage } from '../../Firebase/firebase'
 import { activities } from '../../Utils/localData'
 import PopUp from '../../SharedComponents/PopUp'
-
+import Compress from "react-image-file-resizer";
 
 function NewPostModal({togglePostModal}) {
     const [title,setTitle] = React.useState("")
@@ -49,6 +49,7 @@ function NewPostModal({togglePostModal}) {
             setPostState(1)
             if(imageRef.current?.files[0]?.name){
                 if(imageRef.current?.files[0]?.type.includes("image")){
+
                     const uploadTask =  storage.ref(`postImages/${imageRef.current.files[0].name}`).put(imageRef.current.files[0])
 
                     uploadTask.on("state_changed",
@@ -63,23 +64,59 @@ function NewPostModal({togglePostModal}) {
                         .child(imageRef.current.files[0].name)
                         .getDownloadURL()
                         .then(url=>{
-                            const payload ={
-                                image : url,
-                                imagePath : imageRef.current.files[0].name,
-                                title ,
-                                activity,
-                                author : uid,
-                                time : new Date()
-                            }
-                            database.collection("posts").add(payload)
-                            .then(()=>{
-                                imageRef.current.value = "";
-                                setTitle("")
-                                    setPostState(0)
-                                    togglePostModal()
-                            })
-                        })
-                    })
+                                    Compress.imageFileResizer(
+                                        imageRef.current.files[0], // the file from input
+                                        200, // width
+                                        200, // height
+                                        "JPEG", // compress format WEBP, JPEG, PNG
+                                        70, // quality
+                                        0, // rotation
+                                        (uri) => {
+                                   
+                                        let file =  new File([uri],"thumb_"+imageRef.current.files[0].name, { lastModified: new Date().getTime(), type: uri.type })
+                                        console.log(file);
+                                        const uploadTask =  storage.ref(`postImages/${file.name}`).put(file)
+
+                                                uploadTask.on("state_changed",
+                                                snapshot =>{
+                                                    setPostState(Math.floor((snapshot.bytesTransferred/snapshot.totalBytes)*100)+1)
+                                                },
+                                                error=>{
+                                
+                                                },
+                                                ()=>{
+                                                    storage.ref("postImages")
+                                                    .child(file.name)
+                                                    .getDownloadURL()
+                                                    .then(thumb_url=>{
+                                                            const payload ={
+                                                                        image : url,
+                                                                        thumb_url,
+                                                                        imagePath : imageRef.current.files[0].name,
+                                                                        title ,
+                                                                        activity,
+                                                                        author : uid,
+                                                                        time : new Date()
+                                                                    }
+                                                                    database.collection("posts").add(payload)
+                                                                    .then(()=>{
+                                                                        imageRef.current.value = "";
+                                                                        setTitle("")
+                                                                            setPostState(0)
+                                                                            togglePostModal()
+                                                                    })
+                                                            })
+                                                    },
+                                                )
+                                            
+                                    
+                                        
+                                        },
+                                        "blob" // blob or base64 default base64
+                                            )
+                                    })
+                                })
+                
                     } else if(imageRef.current?.files[0]?.type.includes("video")){
                     const uploadTask =  storage.ref(`postVideos/${imageRef.current.files[0].name}`).put(imageRef.current.files[0])
 
