@@ -71,9 +71,6 @@ const UserProfilePageHeader = ({ coverPhoto, currentUser, forceRefresh, userProf
                         .child(coverPicImageRef.current.files[0].name)
                         .getDownloadURL()
                         .then(url=>{
-
-
-
                             Compress.imageFileResizer(
                                 coverPicImageRef.current.files[0], // the file from input
                                 400, // width
@@ -87,50 +84,41 @@ const UserProfilePageHeader = ({ coverPhoto, currentUser, forceRefresh, userProf
                                 console.log(file);
                                 const uploadTask =  storage.ref(`postImages/${file.name}`).put(file)
 
-                                        uploadTask.on("state_changed",
-                                        snapshot =>{
-                                            setPicUploadState(Math.floor((snapshot.bytesTransferred/snapshot.totalBytes)*100)+1)
-                                        },
-                                        error=>{
-                        
-                                        },
-                                        ()=>{
-                                            storage.ref("postImages")
-                                            .child(file.name)
-                                            .getDownloadURL()
-                                            .then(thumb_url=>{
+                                    uploadTask.on("state_changed",
+                                    snapshot =>{
+                                        setPicUploadState(Math.floor((snapshot.bytesTransferred/snapshot.totalBytes)*100)+1)
+                                    },
+                                    error=>{
+                    
+                                    },
+                                    ()=>{
+                                        storage.ref("postImages")
+                                        .child(file.name)
+                                        .getDownloadURL()
+                                        .then(thumb_url=>{
 
-                                                const payload ={
-                                                    image : url,
-                                                    thumb_url,
-                                                    imagePath : coverPicImageRef.current.files[0].name,
-                                                    activity: `updated his cover photo.` ,
-                                                    author : uid,
-                                                    time : new Date()
-                                                }
-                                                database.collection("users").doc(uid).update({coverPic: url, coverPicPath: coverPicImageRef.current.files[0].name })
-                                                database.collection("posts").add(payload)
-                                                .then(()=>{
-                                                    coverPicImageRef.current.value = "";
-                                                    toggleShowCoverPicModal();
-                                                    setPicUploadState(0);
-                                                })
-                                                    })
-                                            },
-                                        )
-                                    
-                            
-                                
-                                },
-                                "blob" // blob or base64 default base64
-                                    )
-
-
-
-
-
-                            
-                        })
+                                            const payload ={
+                                                image : url,
+                                                thumb_url,
+                                                imagePath : coverPicImageRef.current.files[0].name,
+                                                activity: `updated his cover photo.` ,
+                                                author : uid,
+                                                time : new Date()
+                                            }
+                                            database.collection("users").doc(uid).update({coverPic: url, coverPicPath: coverPicImageRef.current.files[0].name })
+                                            database.collection("posts").add(payload)
+                                            .then(()=>{
+                                                coverPicImageRef.current.value = "";
+                                                toggleShowCoverPicModal();
+                                                setPicUploadState(0);
+                                            })
+                                        })
+                                    },
+                                )   
+                            },
+                            "blob" // blob or base64 default base64
+                        )  
+                    })
                 })
             }
         }

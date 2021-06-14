@@ -58,9 +58,6 @@ const UserProfilePicture = ({userProfilePic=(process.env.PUBLIC_URL + '/Images/u
                         .child(profilePicImageRef.current.files[0].name)
                         .getDownloadURL()
                         .then(url=>{
-
-
-
                             Compress.imageFileResizer(
                                 profilePicImageRef.current.files[0], // the file from input
                                 400, // width
@@ -74,44 +71,41 @@ const UserProfilePicture = ({userProfilePic=(process.env.PUBLIC_URL + '/Images/u
                                 console.log(file);
                                 const uploadTask =  storage.ref(`postImages/${file.name}`).put(file)
 
-                                        uploadTask.on("state_changed",
-                                        snapshot =>{
-                                            setCoverPicUploadState(Math.floor((snapshot.bytesTransferred/snapshot.totalBytes)*100)+1)
-                                        },
-                                        error=>{
-                        
-                                        },
-                                        ()=>{
-                                            storage.ref("postImages")
-                                            .child(file.name)
-                                            .getDownloadURL()
-                                            .then(thumb_url=>{
+                                    uploadTask.on("state_changed",
+                                    snapshot =>{
+                                        setCoverPicUploadState(Math.floor((snapshot.bytesTransferred/snapshot.totalBytes)*100)+1)
+                                    },
+                                    error=>{
+                    
+                                    },
+                                    ()=>{
+                                        storage.ref("postImages")
+                                        .child(file.name)
+                                        .getDownloadURL()
+                                        .then(thumb_url=>{
 
-                                                const payload ={
-                                                    image : url,
-                                                    thumb_url,
-                                                    imagePath : profilePicImageRef.current.files[0].name,
-                                                    activity: `updated his profile picture.` ,
-                                                    author : uid,
-                                                    time : new Date()
-                                                }
-                                                database.collection("users").doc(uid).update({profilePic: thumb_url, profilePicPath: profilePicImageRef.current.files[0].name })
-                                                database.collection("posts").add(payload)
-                                                .then(()=>{
-                                                    profilePicImageRef.current.value = "";
-                                                    toggleShowProfilePicModal();
-                                                    setCoverPicUploadState(0);
-                                                })
-                                                    })
-                                            },
-                                        )
-                                    
-                            
-                                
-                                },
-                                "blob" // blob or base64 default base64
-                                    )                           
-                        })
+                                            const payload ={
+                                                image : url,
+                                                thumb_url,
+                                                imagePath : profilePicImageRef.current.files[0].name,
+                                                activity: `updated his profile picture.` ,
+                                                author : uid,
+                                                time : new Date()
+                                            }
+                                            database.collection("users").doc(uid).update({profilePic: thumb_url, profilePicPath: profilePicImageRef.current.files[0].name })
+                                            database.collection("posts").add(payload)
+                                            .then(()=>{
+                                                profilePicImageRef.current.value = "";
+                                                toggleShowProfilePicModal();
+                                                setCoverPicUploadState(0);
+                                            })
+                                        })
+                                    },
+                                )
+                            },
+                            "blob" // blob or base64 default base64
+                        )                           
+                    })
                 })
             }
         }
@@ -144,7 +138,7 @@ const UserProfilePicture = ({userProfilePic=(process.env.PUBLIC_URL + '/Images/u
                                             <DisappearedLoading size="small"/>
                                         </div>
                                         <div className="progressBarBox">
-                                                <div className="progressBar" style={{width:`${coverPicUploadState}%`}}></div>
+                                            <div className="progressBar" style={{width:`${coverPicUploadState}%`}}></div>
                                         </div>
                                     </div>
                                 ) : null
