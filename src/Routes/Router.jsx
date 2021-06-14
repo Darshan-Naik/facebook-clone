@@ -10,6 +10,7 @@ import Messenger from '../Components/Messenger/Messenger';
 import { useSelector } from 'react-redux';
 import Videos from '../Components/Pages/Videos';
 import Favorites from '../Components/Pages/Favorites';
+import PageNotFound from '../Components/Pages/PageNotFound';
 
 function Router() {
     const[refresh,setRefresh] = React.useState(true)
@@ -47,6 +48,9 @@ function Router() {
                         </Route>
                         <Route path="/menu" exact>                            
                             <SideBar />
+                        </Route>
+                        <Route>
+                            <PageNotFound/>
                         </Route>            
                     </Switch>
                 </>

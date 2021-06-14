@@ -40,7 +40,7 @@ function EditBox({handleEditSection, handleRemoveFav,id,handleFav,first_name,ima
         handleRemoveFav(id);
 
     }
-   
+    
     return (
         <div className="editPostContainer">
             <div className="editPost flexBox" onClick={(e)=>e.stopPropagation()}>
