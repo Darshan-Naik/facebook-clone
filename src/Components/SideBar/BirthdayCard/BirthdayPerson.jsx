@@ -3,6 +3,8 @@ import { useHistory } from 'react-router-dom';
 import { database } from '../../../Firebase/firebase';
 import {ReactComponent as BirthdayIcon} from  "../../../Icons/birthdayIcon.svg";
 import "../../../Styles/SideBar/SideBar.css";
+import {ReactComponent as CloseIcon} from  "../../../Icons/close.svg";
+import { saveData } from '../../../Utils/localStorage';
 
 const dummyData = {
     dob: "01, Jdm, 2039"
@@ -43,8 +45,9 @@ function BirthdayPerson(props){
                     <div className="birthdayCardIcon flexBox">
                         <BirthdayIcon className="birthdayGiftIcon" />
                         <h3> Birthdays</h3>
+                        <CloseIcon onClick={()=>props.handleCloseBirthday()} className="closeIconBirthDate" />
                     </div>
-                    <p className="birthdayWishMessage"><strong onClick={()=>history.push(`/profile/${friendDetails.uid}`)}>{`${friendDetails.first_name} ${friendDetails.last_name}'s`}</strong> birthday is today.</p>
+                    <p className="birthdayWishMessage"><strong className="strongBirthdayName" onClick={()=>history.push(`/profile/${friendDetails.uid}`)}>{`${friendDetails.first_name} ${friendDetails.last_name}'s`}</strong> birthday is today.</p>
                 </div>
                 </>:null}
         </div>
