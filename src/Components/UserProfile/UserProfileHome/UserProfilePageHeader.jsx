@@ -9,6 +9,7 @@ import "../../../Styles/UserProfile/UserProfile.css";
 import { database, storage } from '../../../Firebase/firebase';
 import useVisibility from '../../../Hooks/useVisibility';
 import PopUp from "../../../SharedComponents/PopUp";
+import Compress from "react-image-file-resizer";
 
 const UserProfilePageHeader = ({ coverPhoto, currentUser, forceRefresh, userProfileDetails}) => {
     
@@ -70,20 +71,65 @@ const UserProfilePageHeader = ({ coverPhoto, currentUser, forceRefresh, userProf
                         .child(coverPicImageRef.current.files[0].name)
                         .getDownloadURL()
                         .then(url=>{
-                            const payload ={
-                                image : url,
-                                imagePath : coverPicImageRef.current.files[0].name,
-                                activity: `updated his cover photo.` ,
-                                author : uid,
-                                time : new Date()
-                            }
-                            database.collection("users").doc(uid).update({coverPic: url, coverPicPath: coverPicImageRef.current.files[0].name })
-                            database.collection("posts").add(payload)
-                            .then(()=>{
-                                coverPicImageRef.current.value = "";
-                                toggleShowCoverPicModal();
-                                setPicUploadState(0);
-                            })
+
+
+
+                            Compress.imageFileResizer(
+                                coverPicImageRef.current.files[0], // the file from input
+                                200, // width
+                                200, // height
+                                "JPEG", // compress format WEBP, JPEG, PNG
+                                70, // quality
+                                0, // rotation
+                                (uri) => {
+                           
+                                let file =  new File([uri],"thumb_"+coverPicImageRef.current.files[0].name, { lastModified: new Date().getTime(), type: uri.type })
+                                console.log(file);
+                                const uploadTask =  storage.ref(`postImages/${file.name}`).put(file)
+
+                                        uploadTask.on("state_changed",
+                                        snapshot =>{
+                                            setPicUploadState(Math.floor((snapshot.bytesTransferred/snapshot.totalBytes)*100)+1)
+                                        },
+                                        error=>{
+                        
+                                        },
+                                        ()=>{
+                                            storage.ref("postImages")
+                                            .child(file.name)
+                                            .getDownloadURL()
+                                            .then(thumb_url=>{
+
+                                                const payload ={
+                                                    image : url,
+                                                    thumb_url,
+                                                    imagePath : coverPicImageRef.current.files[0].name,
+                                                    activity: `updated his cover photo.` ,
+                                                    author : uid,
+                                                    time : new Date()
+                                                }
+                                                database.collection("users").doc(uid).update({coverPic: url, coverPicPath: coverPicImageRef.current.files[0].name })
+                                                database.collection("posts").add(payload)
+                                                .then(()=>{
+                                                    coverPicImageRef.current.value = "";
+                                                    toggleShowCoverPicModal();
+                                                    setPicUploadState(0);
+                                                })
+                                                    })
+                                            },
+                                        )
+                                    
+                            
+                                
+                                },
+                                "blob" // blob or base64 default base64
+                                    )
+
+
+
+
+
+                            
                         })
                 })
             }
