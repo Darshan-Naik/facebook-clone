@@ -4,7 +4,6 @@ import { database } from '../../../Firebase/firebase';
 import {ReactComponent as BirthdayIcon} from  "../../../Icons/birthdayIcon.svg";
 import "../../../Styles/SideBar/SideBar.css";
 import {ReactComponent as CloseIcon} from  "../../../Icons/close.svg";
-import { saveData } from '../../../Utils/localStorage';
 
 const dummyData = {
     dob: "01, Jdm, 2039"
@@ -15,7 +14,6 @@ function BirthdayPerson(props){
     const [strDate, setStrDate] = useState([]);
     const [birthDate, setBirthDate] = useState("");
     const history = useHistory();
-    //console.log(props)
 
     useEffect(()=>{
         const date = new Date();
@@ -27,14 +25,12 @@ function BirthdayPerson(props){
     useEffect(()=>{
         database.collection('users').doc(props.friendId).get()
         .then(res => {
-            //console.log(res.data())
             setfriendDetails(res.data());
         });
     },[props.friendId])
 
     useEffect(()=>{
         const arr = friendDetails.dob?.split(", ")
-        //console.log(arr)
         setBirthDate(arr[0] + ", " + arr[1]);
     },[friendDetails])
 
