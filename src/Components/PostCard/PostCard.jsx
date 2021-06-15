@@ -7,20 +7,22 @@ import { database, storage } from '../../Firebase/firebase';
 import { useSelector } from 'react-redux';
 import PostModal from '../PostModal/PostModal';
 import PostCardSkeleton from './Skeleton/PostCardSkeleton';
+import useVisibility from '../../Hooks/useVisibility';
 
 
 
 function PostCard({title,image,imagePath,id,author,time,video,activity,thumb_url}) {
-    const[commentSection,setCommentSection]=React.useState(false);
+
+    const[commentSection,toggleCommentSection]= useVisibility();
+    const [postModalVisibility,togglePostModalVisibility]= useVisibility();
     const[likes,setLikes]=React.useState([]);
     const [comments,setComments]=React.useState([]);
     const [userData,setUserData]=React.useState(null);
-    const [postModalVisibility,setPostModalVisibility]=React.useState(false);
     const [loading, setLoading]=React.useState(true);
     const {uid} = useSelector(store=>store.auth.user)
 
     const showComment =()=>{
-        setCommentSection(!commentSection)
+        toggleCommentSection();
     }
 
     const handleEditPost=(editTitle) => {
@@ -90,7 +92,7 @@ function PostCard({title,image,imagePath,id,author,time,video,activity,thumb_url
     }
 
     const handleClosePostModal=()=>{
-        setPostModalVisibility(false)
+        togglePostModalVisibility();
     }
 
     const handleLike=()=>{
@@ -154,10 +156,10 @@ function PostCard({title,image,imagePath,id,author,time,video,activity,thumb_url
         <div className="postCardContainer" style={{display:loading||!userData?"none":"block"}}>
             <PostCardHead   handleRemoveFav={handleRemoveFav} handleFav={handleFav} {...userData} postEditFunction={{handleEditPost,handleDeletePost,handleSetProfilePic}} time={time} author={author} image={image}title={title} activity={activity} id={id}/>
             {title && <div className="postCardTags">{title}</div>}
-            {image&&<div onClick={()=>setPostModalVisibility(true)} className="postCardImage">
+            {image&&<div onClick={togglePostModalVisibility} className="postCardImage">
                 <img onLoad={()=>setLoading(false)} src={image|| process.env.PUBLIC_URL + '/Images/facebook_login_logo.png'} alt="img" />
             </div>}
-            {video&&<div className="postCardImage">
+            {video&&<div onClick={(e)=>{togglePostModalVisibility(); e.preventDefault()}}className="postCardImage">
                 <video width="100%" height="500" controls >
                     <source src={video} type="video/mp4"/>
                 </video>

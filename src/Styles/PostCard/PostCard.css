@@ -475,6 +475,10 @@
 .editPostEmojiMartContainer{
     position: relative;
 }
+.editPostEmojiMartContainer svg{
+    fill:var(--secondary-icon);
+    cursor: pointer;
+}
 .editPostEmojiMartBox{
     position: absolute;
     top: 30px;

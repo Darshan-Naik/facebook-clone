@@ -10,7 +10,7 @@ import useVisibility from '../../Hooks/useVisibility';
 
 
 function EditBox({toggleEditSection, handleRemoveFav,id,handleFav,first_name,image,last_name,profilePic,title,handleEditPost,handleDeletePost,handleSetProfilePic,author,uid}) {
-    const [editTitle,setEditTitle]=React.useState(title)
+    const [editTitle,setEditTitle]=React.useState(title||"");
     const [editModal,toggleEditModal]= useVisibility();
     const [deleteModal,toggleDeleteModal]= useVisibility();
 
