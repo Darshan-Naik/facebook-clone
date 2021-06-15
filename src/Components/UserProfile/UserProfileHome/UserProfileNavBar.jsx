@@ -16,9 +16,9 @@ const UserProfileNavBar = ({currentUser, refresh, alternativePath, userProfileDe
     const [userProfileNavBarState, setUserProfileNavBarState] = useState(true);
     const [userProfileMoreOptionsState, setUserProfileMoreOptionsState] = useState(false);
     const [messengerIsLoading, setMessengerIsLoading] = useState(false);
-    const [postModalVisibility,setPostModalVisibility] = useState(false);
     const [unfriendOption, setUnfriendOption] = useState(false);
 
+    const [postModalVisibility, togglePostModalVisibility] = useVisibility();
     const [unfriendModalVisibility, toggleUnfriendModalVisibility] = useVisibility();
     const [editUserDetailsModalState, toggleEditUserDetailsModalState] = useVisibility();
     
@@ -173,7 +173,7 @@ const UserProfileNavBar = ({currentUser, refresh, alternativePath, userProfileDe
                         {
                             currentUser === uid ? (
                                 <React.Fragment>
-                                    <div className="flexBox userProfileNavButton addToStoryContainer" onClick={() => setPostModalVisibility(true)}>
+                                    <div className="flexBox userProfileNavButton addToStoryContainer" onClick={togglePostModalVisibility}>
                                         <img className="userProfileNavButtonIcons userProfileNavButtonIconsFilter" src={process.env.PUBLIC_URL + '/Images/plus_icon.png'} alt="plus"/>
                                         <span>Add to Story</span>
                                     </div>
@@ -258,7 +258,7 @@ const UserProfileNavBar = ({currentUser, refresh, alternativePath, userProfileDe
                 )
             }
             {
-                postModalVisibility && <NewPostModal setPostModalVisibility={setPostModalVisibility} />
+                postModalVisibility && <NewPostModal togglePostModal={togglePostModalVisibility} />
             }
             {
                 unfriendModalVisibility && <UnfriendModal handleUnfriend={handleUnfriend} toggleUnfriendModalVisibility={toggleUnfriendModalVisibility} {...userProfileDetails} />
