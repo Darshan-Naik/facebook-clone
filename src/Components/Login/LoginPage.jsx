@@ -25,6 +25,7 @@ function LoginPage(){
     const [isCreateClick, setIsCreateClick] = useState(false);
     const [signUpForm,setSignUpForm] = React.useState(initFormSignup)
     const [logInForm,setLogInForm] = React.useState(initFormLogin)
+    const [loginErrorMessage, setLoginErrorMessage] = useState("");
     const {first_name , last_name,email, password} = signUpForm;
     const [dob, setDob] = useState("1, June, 1950");
     const [day, setDay] = useState("1");
@@ -94,6 +95,7 @@ function LoginPage(){
         })
         .catch((err)=>{
             console.log("p",err);
+            setLoginErrorMessage(err.message)
             dispatch(loginFailure(err))
         })
     }
@@ -106,6 +108,9 @@ function LoginPage(){
         console.log("c")
         setIsCreateClick(false);
     }
+    const handleResetPassword = () => {
+        console.log("Resetting")
+    }
 
     const years = new Array(60).fill(1950);
     const days = new Array(31).fill(1);
@@ -115,7 +120,7 @@ function LoginPage(){
         <div>
             <div className="loginPageContainer flexBox">
                 <LoginLogo />
-                <LoginForm {...logInForm} isLoading={isLoading}  handleLoginForm={handleLoginForm} handleLogin={handleLogin} onClickCreate={handleCreateClick} />
+                <LoginForm {...logInForm} isLoading={isLoading}  handleLoginForm={handleLoginForm} handleLogin={handleLogin} onClickCreate={handleCreateClick} isError={isError} loginErrorMessage={loginErrorMessage} handleResetPassword={handleResetPassword}/>
             </div>
             <div className="LoginPageFooter">
                 <p>English (UK)</p>
