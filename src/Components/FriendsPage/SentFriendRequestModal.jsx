@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ReactComponent as CloseIcon } from "../../Icons/close.svg";
 import SenderFriendCard from "./SenderFriendCard";
 

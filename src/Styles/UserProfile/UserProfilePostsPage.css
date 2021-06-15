@@ -234,10 +234,6 @@
 
     /* User Profile Intro Component CSS */
 
-    .postsPageUserFriendsContainer {
-
-    }
-
     .postsPageUserFriendsBox {
         max-width: 148px;
         max-height: 186px;
@@ -270,10 +266,6 @@
 @media only screen and ( max-width: 525px ) {
     
     /* User Profile Intro Component CSS */
-
-    .postsPageUserFriendsContainer {
-
-    }
 
     .postsPageUserFriendsBox {
         max-width: 143px;

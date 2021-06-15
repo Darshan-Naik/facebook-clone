@@ -1,13 +1,12 @@
 import React from 'react';
 import SideBarContent from "./SideBarContent";
 import { Link } from "react-router-dom";
+import { shallowEqual, useSelector } from 'react-redux';
 import "../../Styles/SideBar/SideBar.css";
 import "../../App.css";
-import { useSelector } from 'react-redux';
-
 
 function SideBar() {
-    const { first_name, last_name, uid, profilePic } = useSelector(state => state.auth.user);
+    const { first_name, last_name, uid, profilePic } = useSelector(state => state.auth.user, shallowEqual);
     
     return (
         <div className="sideBarContainer">
@@ -30,7 +29,7 @@ function SideBar() {
                 <Link className="flexBox sideBarContentLink" to="/videos">
                     <SideBarContent src={process.env.PUBLIC_URL + '/Images/watch_icon.png'} label="Watch" />
                 </Link>
-                <Link className="flexBox sideBarContentLink" to="/">
+                <Link className="flexBox sideBarContentLink" to="/favorites">
                     <SideBarContent src={process.env.PUBLIC_URL + '/Images/favorites_icon.png'} label="Favorites" />
                 </Link>
             </div>

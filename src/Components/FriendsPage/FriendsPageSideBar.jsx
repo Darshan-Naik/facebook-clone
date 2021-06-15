@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { useSelector } from 'react-redux';
+import React, { useEffect, useRef, useState } from 'react';
+import { shallowEqual, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import filterFriends from '../../Utils/filterFriends';
 import FriendsPageCard from "./FriendsPageCard";
@@ -16,7 +16,7 @@ function FriendsPageSideBar({ forceRefresh }) {
     const friendRequests = useSelector( state => state.auth.friendRequests );
     const sentRequests = useSelector( state => state.auth.sentRequests );
     const users = useSelector( state => state.app.users );
-    const { friends, user } = useSelector( state => state.auth );
+    const { friends, user } = useSelector( state => state.auth, shallowEqual );
     
     const delayTimeRef = useRef();
 

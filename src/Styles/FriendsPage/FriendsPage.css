@@ -1,5 +1,6 @@
 .friendsPageSideBarMainContainer {
     min-width: 330px;
+    padding: 10px;
     height: calc(100vh - var(--navBar-height));
     overflow-y: scroll;
     border-right: 1px solid var(--shadow-1);
@@ -7,7 +8,7 @@
 }
 
 .friendsPageSideBarContainer {
-    margin: 10px;
+    margin: 7px;
 }
 
 .friendsSideBarHeading {

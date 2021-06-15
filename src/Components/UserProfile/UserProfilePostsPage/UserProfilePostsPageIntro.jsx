@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { shallowEqual, useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
 import EditProfileDataModal from "./EditProfileDataModal";
 import UserFriendCard from "./UserFriendsCard";
@@ -10,7 +10,7 @@ function UserProfilePostsPageIntro({ alternativePath, userProfileDetails, userFr
 
     const [editUserDetailsModalState, toggleEditUserDetailsModalState] = useVisibility();
     
-    const { uid } = useSelector( state => state.auth.user );
+    const { uid } = useSelector( state => state.auth.user, shallowEqual );
 
     return (
         <div className="postsPageIntroMainContainer">
