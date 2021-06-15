@@ -4,7 +4,6 @@ import {ReactComponent as ShareIcon} from  "../../Icons/shareIcon.svg";
 import {ReactComponent as LikeIcon} from  "../../Icons/likeIcon.svg"
 import {ReactComponent as LikeIconBlue} from  "../../Icons/like.svg";
 
-
 function PictureCardFooter({showComment,handleLike,like,handleDeleteLike}) {
     return (
         <div className="postDetailsCardFooter flexBox">

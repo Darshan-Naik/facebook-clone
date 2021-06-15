@@ -9,11 +9,14 @@ import {  useSelector } from 'react-redux';
 import { database } from '../../Firebase/firebase';
 import PostCardSkeleton from '../PostCard/Skeleton/PostCardSkeleton';
 
-function Home({handleRefresh}) {
-    const uid = useSelector(store=>store.auth.user.uid)
+function Home({handleRefresh, toggleNewChatBox}) {
+    const uid = useSelector(store=>store.auth.user.uid);
+    const userActiveStatus = useSelector( store => store.auth.userActiveStatus );
+
     React.useEffect(()=>{
-        database.collection("users").doc(uid).update({activeStatus : new Date()}) 
+        userActiveStatus && database.collection("users").doc(uid).update({activeStatus : new Date()});
     },[uid])
+
     const posts = useSelector(store=>store.posts.posts)
     React.useEffect(handleRefresh,[])
     return (
@@ -44,7 +47,7 @@ function Home({handleRefresh}) {
 
             </div>
             <div className="mainRightSidebarContainer scroll">
-                 <ActiveContactSideBar />
+                 <ActiveContactSideBar toggleNewChatBox={toggleNewChatBox} />
             </div>
             
         </div>
