@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { shallowEqual, useSelector } from 'react-redux';
 import PostCard from "../../PostCard/PostCard";
 import NewPost from "../../NewPost/NewPost";
 import { database } from '../../../Firebase/firebase';
@@ -7,7 +7,7 @@ import { database } from '../../../Firebase/firebase';
 function UserProfilePostsPagePosts({userProfileDetails}) {
     const [userPosts, setUserPosts] = useState([]);
 
-    const { uid } = useSelector(state => state.auth.user);
+    const { uid } = useSelector(state => state.auth.user, shallowEqual);
 
     useEffect(() => {
         const unsubscribe = database.collection('posts').where('author', "==", userProfileDetails.uid)

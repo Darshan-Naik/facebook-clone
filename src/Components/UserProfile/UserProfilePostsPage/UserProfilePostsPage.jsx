@@ -3,7 +3,7 @@ import UserProfilePostsPageIntro from "./UserProfilePostsPageIntro";
 import UserProfilePostsPagePosts from "./UserProfilePostsPagePosts";
 import "../../../Styles/UserProfile/UserProfilePostsPage.css";
 
-const UserProfilePostsPage = ({forceRefresh, alternativePath, userProfileDetails, userFriends}) => {
+function UserProfilePostsPage ({forceRefresh, alternativePath, userProfileDetails, userFriends}) {
     
     useEffect(forceRefresh, []);
 
