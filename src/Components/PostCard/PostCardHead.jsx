@@ -13,27 +13,15 @@ function PostCardHead({handleFav,first_name, handleRemoveFav,id,last_name,profil
 
     const [editSection,toggleEditSection]= useVisibility();
     const [activeState,setActiveState]=React.useState(false);
+    
     const {uid} = useSelector(store=>store.auth.user);
     const history = useHistory();
+
     let localTime = new Date(time?.toDate()).toString().split(" ");
     localTime.length=4;
     const localTime1 = new Date(time?.toDate()).toLocaleTimeString();
     const checkTime = new Date().toLocaleString().split(",");
     const originalTime = new Date(time?.toDate()).toLocaleDateString().split(",");
-    
-    // const toggleEditSection=(e)=>{
-    //     if(e){
-    //         e.stopPropagation();
-    //     }
-        
-    //     setEditSection(!editSection);
-    // }
-    // window.addEventListener("click",()=>{
-    //     setEditSection(false);
-    // })
-
- 
-    
 
     React.useEffect(()=>{
         if(activeStatus){
