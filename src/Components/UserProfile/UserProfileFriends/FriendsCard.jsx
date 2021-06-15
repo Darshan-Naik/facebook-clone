@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { ReactComponent as ThreeDots } from "../../../Icons/dots.svg";
 import { Link } from "react-router-dom";
-import "../../../Styles/UserProfile/UserProfileFriendsPage.css";
 import { database } from '../../../Firebase/firebase';
 import FriendsCardSkeleton from "./Skeleton/FriendsCardSkeleton";
 import { shallowEqual, useSelector } from 'react-redux';
 import UnfriendModal from "../UserProfileHome/UnfriendModal";
 import useVisibility from '../../../Hooks/useVisibility';
+import "../../../Styles/UserProfile/UserProfileFriendsPage.css";
 
 function FriendsCard({ friendId, alternativePath, userProfileDetails, lastClickedId, handleLastClickedId }) {
 

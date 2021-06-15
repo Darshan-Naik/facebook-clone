@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { shallowEqual, useSelector } from 'react-redux';
 import { database } from '../../Firebase/firebase';
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import { Link } from "react-router-dom";
@@ -9,8 +9,8 @@ function FriendsPageCard({ senderId, time }) {
     
     const [senderDetails, setSenderDetails] = useState(null);
     
-    const dark = useSelector( state => state.theme.dark );
-    const uid = useSelector( state => state.auth.user.uid )
+    const dark = useSelector( state => state.theme.dark, shallowEqual );
+    const uid = useSelector( state => state.auth.user.uid, shallowEqual );
 
     const handleAcceptFriendRequest = () => {
         let time = new Date();

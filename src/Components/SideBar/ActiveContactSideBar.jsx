@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import SideBarContent from "./SideBarContent";
 import {ReactComponent as SearchIcon} from  "../../Icons/search.svg";
 import { ReactComponent as GreenTickIcon } from "../../Icons/greenTick.svg";
-import "../../Styles/SideBar/SideBar.css";
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { ReactComponent as ContactBarDots } from "../../Icons/dots.svg";
 import filterFriends from "../../Utils/filterFriends.js"
@@ -13,8 +12,9 @@ import ProfileProgressBox from '../ProfileProgressBox/ProfileProgressBox';
 import useVisibility from '../../Hooks/useVisibility';
 import PopUp from '../../SharedComponents/PopUp';
 import { updateUserActiveStatus } from '../../Redux/Auth/actions';
+import "../../Styles/SideBar/SideBar.css";
 
-const ActiveContactSideBar = ({ toggleNewChatBox }) => {
+function ActiveContactSideBar ({ toggleNewChatBox }) {
 
     const [peopleSuggested, setPeopleSuggested] = useState([]);
     const [activeStatusBox, toggleActiveStatusBox] = useVisibility();

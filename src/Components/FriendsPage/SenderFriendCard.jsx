@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { database } from '../../Firebase/firebase';
 import { Link } from "react-router-dom";
 import { useSelector } from 'react-redux';
@@ -9,7 +9,7 @@ function SenderFriendCard ({receiverId}) {
     const [sentFriendRequestDetails, setSentFriendRequestDetails] = useState(null);
     
     const uid = useSelector( state => state.auth.user.uid );
-    const dark = useSelector( state => state.theme.dark )
+    const dark = useSelector( state => state.theme.dark );
     
     const handleCancelRequest = () => {
         database.collection('users').doc(sentFriendRequestDetails.uid).collection('friendRequests').doc(`${sentFriendRequestDetails.uid}${uid}`).delete();
@@ -20,7 +20,7 @@ function SenderFriendCard ({receiverId}) {
         database.collection('users').doc(receiverId).get()
         .then(res => {
             setSentFriendRequestDetails(res.data());
-        })
+        });
     }, [receiverId]);
 
     return sentFriendRequestDetails ? (

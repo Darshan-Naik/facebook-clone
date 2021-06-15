@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { database } from '../../../Firebase/firebase';
 import { ReactComponent as CloseIcon } from "../../../Icons/close.svg";
