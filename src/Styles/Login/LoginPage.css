@@ -23,7 +23,7 @@
 .loginFormMainDiv {
   background-color: var(--primary-background);
   width: 405px;
-  height: 330px;
+  height: auto;
   padding: 8px 8px 8px 8px;
   margin: 50px 10px;
   border-radius: 10px;
@@ -262,4 +262,15 @@
     bottom: 0;
     text-align: center;
   }
+}
+
+/* error message */
+.errorMessageContainer {
+  padding: 1px 0;
+  width: 380px;
+  margin: 5px auto;
+}
+.errorMessageContainer p {
+  font-size: 13px;
+  color: var(--supplementary-1);
 }
