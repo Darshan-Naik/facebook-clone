@@ -66,6 +66,7 @@
 }
 
 .postDetailsCardHeadBox3 {
+  position: relative;
   width: 36px;
   height: 36px;
   border-radius: 50%;
@@ -76,12 +77,6 @@
 }
 .postDetailsCardHeadBox3>.dotsIcon{
   fill: var(--primary-icon);
-}
-
-.postDetailsCardHeadBox3 .editPostContainer {
-  top: 40px;
-  right: 10px;
-
 }
 
 /*-----------Middle-part--------------*/
@@ -230,7 +225,7 @@
 }
 .addCommentBox > strong {
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--primary-text);
   cursor: pointer;
 }
@@ -238,13 +233,14 @@
   text-decoration: underline;
 }
 .addCommentBox > small {
-  font-size: 14px;
+  font-size: 15px;
   width: 100%;
-  color: var(--primary-text);
+  color: var(--secondary-text);
   word-break: break-all;
   display: -webkit-box;
   word-wrap: break-word;
   cursor: pointer;
+  font-weight: 300;
 }
 .postDetailsCardCommentLikeandReply > small {
   font-size: 12px;
@@ -300,13 +296,14 @@
 }
 .PicInfoContainer {
   flex-direction: column;
-  max-width: 400px;
+  max-width: 500px;
   flex: 1;
   height: 100%;
 }
 .postDetailsModalCommentBox {
   flex: 1;
   max-height: 100%;
+  width: 100%;
 }
 .postDetailsModalClose {
   height: 35px;
