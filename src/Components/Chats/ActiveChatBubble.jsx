@@ -3,6 +3,7 @@ import StatusDot from '../../SharedComponents/StatusDot';
 import {ReactComponent as CloseIcon} from  "../../Icons/close.svg";
 import { useDispatch, useSelector } from 'react-redux';
 import { addInActiveMessageToActiveMessage, removeInActiveMessage } from '../../Redux/App/actions';
+import checkActive from '../../Utils/checkActive';
 
 
 function ActiveChatBubble({chatID,authors}) {
@@ -36,7 +37,7 @@ function ActiveChatBubble({chatID,authors}) {
                { closeButtonVisibility && <div className="chatBubbleUserName">
                     <p>{userDetails?.first_name}</p>
                  </div>}
-            <StatusDot width="15px" height="15px" />
+         {checkActive(userDetails?.activeStatus)==="Active Now" &&  <StatusDot width="15px" height="15px" />}
             <img  src={userDetails?.profilePic || process.env.PUBLIC_URL + '/Images/userProfile_icon.png'}  alt="User" />
             
         </div>

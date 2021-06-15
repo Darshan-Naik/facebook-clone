@@ -5,14 +5,14 @@ import { ReactComponent as DownArrowIcon } from "../../../Icons/downArrow.svg";
 import UserProfileNavLinkWrapper from "./UserProfileNavLinkWrapper";
 import EditProfileDataModal from "../UserProfilePostsPage/EditProfileDataModal";
 import { Link, useHistory } from "react-router-dom";
-import { useSelector } from 'react-redux';
+import { shallowEqual, useSelector } from 'react-redux';
 import { database } from '../../../Firebase/firebase';
 import NewPostModal from "../../NewPost/NewPostModal";
 import { DisappearedLoading } from "react-loadingg";
 import UnfriendModal from "./UnfriendModal";
 import useVisibility from '../../../Hooks/useVisibility';
 
-const UserProfileNavBar = ({currentUser, refresh, alternativePath, userProfileDetails, userFriends}) => {
+function UserProfileNavBar ({currentUser, refresh, alternativePath, userProfileDetails, userFriends}) {
     const [userProfileNavBarState, setUserProfileNavBarState] = useState(true);
     const [userProfileMoreOptionsState, setUserProfileMoreOptionsState] = useState(false);
     const [messengerIsLoading, setMessengerIsLoading] = useState(false);
@@ -24,8 +24,8 @@ const UserProfileNavBar = ({currentUser, refresh, alternativePath, userProfileDe
     
     const userProfileNavBarRef = useRef();
     
-    const { uid } = useSelector(state => state.auth.user);
-    const { friendRequests, sentRequests, friends } = useSelector(state => state.auth);
+    const { uid } = useSelector(state => state.auth.user, shallowEqual);
+    const { friendRequests, sentRequests, friends } = useSelector(state => state.auth, shallowEqual);
     const chatRooms = useSelector( state => state.app.chatRooms );
 
     const history = useHistory();

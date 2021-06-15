@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import UserProfilePicture from "./UserProfilePicture";
-import { useSelector } from 'react-redux';
+import { shallowEqual, useSelector } from 'react-redux';
 import { DisappearedLoading } from 'react-loadingg';
 import EmojiMart from "../../../SharedComponents/EmojiMart";
 import { ReactComponent as CloseIcon } from "../../../Icons/close.svg";
@@ -11,21 +11,21 @@ import useVisibility from '../../../Hooks/useVisibility';
 import PopUp from "../../../SharedComponents/PopUp";
 import Compress from "react-image-file-resizer";
 
-const UserProfilePageHeader = ({ coverPhoto, currentUser, forceRefresh, userProfileDetails}) => {
+function UserProfilePageHeader ({ coverPhoto, currentUser, forceRefresh, userProfileDetails}) {
     
     const [addBioVisibility, setAddBioVisibility] = useState(false);
     const [textFieldQuery, setTextFieldQuery] = useState("");
     const [coverPicImagePreview, setCoverPicImagePreview] = useState();
     const [picUploadState, setPicUploadState] = useState(0);
-    const [showEmojiMart, toggleShowEmojiMart, closeEmojiMart] = useVisibility();
     const [errorImagePreview, setErrorImagePreview] = useState(false);
-
+    
+    const [showEmojiMart, toggleShowEmojiMart, closeEmojiMart] = useVisibility();
     const [showCoverPicModal, toggleShowCoverPicModal] = useVisibility();
     
     const coverPicImageRef = useRef();
     
     const dark = useSelector(state => state.theme.dark);
-    const { uid } = useSelector( state => state.auth.user );
+    const { uid } = useSelector( state => state.auth.user, shallowEqual );
     
     const handleAddBioVisibility = () => {
         setAddBioVisibility(!addBioVisibility);

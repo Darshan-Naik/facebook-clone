@@ -11,19 +11,19 @@ function PostModal({handleShare,handleRemoveFav,handleFav, postEditFunction,hand
 
     return (
         <div className="postDetailsCardContainer">
-            <div className="PicImageContainer">
+            <div className="PicImageContainer flexBox">
                 <button onClick={handleClosePostModal} className="postDetailsModalClose flexBox"><CloseIcon /></button>
                 <button className="postDetailsModalIcon"><MainLogo /></button>
-                {image&&<div className="postDetailsCardImage">
+                {image&&<div className="postDetailsCardImage flexBox">
                     <img src={image|| process.env.PUBLIC_URL + '/Images/facebook_login_logo.png'} alt="img" />
                 </div>}
-                {video&&<div className="postDetailsCardImage">
-                    <video width="1076" height="700" controls >
+                {video&&<div className="postDetailsCardImage flexBox">
+                    <video controls>
                         <source src={video} type="video/mp4"/>
                     </video>
                 </div>}
             </div>
-            <div className="PicInfoContainer">
+            <div className="PicInfoContainer flexBox">
                 <PictureCardHeader handleRemoveFav={handleRemoveFav} handleFav={handleFav} id={id} {...userData} time={time} image={image} activity={activity}author={author} postEditFunction={postEditFunction}/>
                 {title && <div className="postDetailsCardTags">{title}</div>}
                 <div className="postDetailsCardLike flexBox">

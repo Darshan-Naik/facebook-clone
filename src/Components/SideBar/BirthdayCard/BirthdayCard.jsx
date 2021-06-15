@@ -11,9 +11,7 @@ function BirthdayCard(){
 
     useEffect(()=>{
         const date = new Date();
-
         const data = loadData("birthPopUp");
-        console.log(data)
         if(data==false){
             setVisibleBirthPopUp(true);
         } else if(data?.date!=date.getDate()){
@@ -35,7 +33,7 @@ function BirthdayCard(){
 
     return visibleBirthPopUp&&(
         <>
-        {friends?.map((el)=><BirthdayPerson friendId={el.friendId} handleCloseBirthday={handleCloseBirthday} />)}
+        {friends?.map((el)=><BirthdayPerson key={el.friendId} friendId={el.friendId} handleCloseBirthday={handleCloseBirthday} />)}
         </>
     )
 }

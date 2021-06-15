@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { shallowEqual, useSelector } from 'react-redux';
 import { database, storage } from '../../../Firebase/firebase';
 import { DisappearedLoading } from 'react-loadingg';
 import { ReactComponent as CloseIcon } from "../../../Icons/close.svg";
@@ -8,7 +8,7 @@ import PopUp from "../../../SharedComponents/PopUp";
 import "../../../Styles/UserProfile/UserProfile.css";
 import Compress from "react-image-file-resizer";
 
-const UserProfilePicture = ({userProfilePic=(process.env.PUBLIC_URL + '/Images/userProfile_icon.png'), currentUser, userProfileDetails}) => {
+function UserProfilePicture ({userProfilePic=(process.env.PUBLIC_URL + '/Images/userProfile_icon.png'), currentUser, userProfileDetails}) {
     
     const [profileImagePreview, setProfileImagePreview] = useState();
     const [coverPicUploadState, setCoverPicUploadState] = useState(0);
@@ -18,7 +18,7 @@ const UserProfilePicture = ({userProfilePic=(process.env.PUBLIC_URL + '/Images/u
 
     const profilePicImageRef = useRef();
 
-    const { uid } = useSelector( state => state.auth.user );
+    const { uid } = useSelector( state => state.auth.user, shallowEqual );
 
     const handleProfilePicPreview = () => {
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ReactComponent as ThreeDots } from "../../../Icons/dots.svg";
 import { Link } from "react-router-dom";
 import FriendsCard from "./FriendsCard";
