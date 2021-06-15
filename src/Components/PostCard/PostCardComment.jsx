@@ -9,7 +9,7 @@ import useVisibility from '../../Hooks/useVisibility';
 import PopUp from '../../SharedComponents/PopUp';
 
 
-function PostCardComment({postId,comments,userData}) {
+function PostCardComment({postId,setActivePostId,activePostId,comments,userData}) {
     
     const [comment,setComment]=React.useState("")
     const [limit, setLimit]=React.useState(2)
@@ -63,10 +63,10 @@ function PostCardComment({postId,comments,userData}) {
                 <div className="addComment flexBox">
                     <div className="commentInput flexBox">
                         <input autoComplete ="off" autoFocus type="text" name="comment" id="comment" value={comment} onChange={handleChange} onKeyDown={handleSubmit} placeholder="Write a comment..."/>
-                        <div className="postEmojiMartContainer flexBox">
-                            <EmojiIcon onClick={toggleEmojiMart}/>
+                        <div className="postEmojiMartContainer flexBox" >
+                            <EmojiIcon onClick={(e)=>{toggleEmojiMart(e);setActivePostId(postId)}}/>
                             {/* <CameraIcon/> */}
-                            {emojiMart&&<PopUp className="commentInput1">
+                            {activePostId ===postId &&emojiMart&&<PopUp className="commentInput1">
                                 <EmojiMart handleEmoji={handleEmoji}/>
                             </PopUp>}
                         </div>

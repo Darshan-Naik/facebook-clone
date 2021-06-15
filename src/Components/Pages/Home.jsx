@@ -10,6 +10,8 @@ import { database } from '../../Firebase/firebase';
 import PostCardSkeleton from '../PostCard/Skeleton/PostCardSkeleton';
 
 function Home({handleRefresh, toggleNewChatBox}) {
+
+    const [activePostId,setActivePostId]=React.useState(null);
     const uid = useSelector(store=>store.auth.user.uid);
     const userActiveStatus = useSelector( store => store.auth.userActiveStatus );
 
@@ -19,6 +21,7 @@ function Home({handleRefresh, toggleNewChatBox}) {
 
     const posts = useSelector(store=>store.posts.posts)
     React.useEffect(handleRefresh,[])
+    
     return (
         <div className="MainContainer">
             <div className="mainLeftSidebarContainer scroll">
@@ -43,7 +46,7 @@ function Home({handleRefresh, toggleNewChatBox}) {
                     </div>
                 </>)
                 }
-                {posts.map((post)=><PostCard key={post.id} {...post}/>)}
+                {posts.map((post)=><PostCard key={post.id} activePostId={activePostId} setActivePostId={setActivePostId} {...post}/>)}
 
             </div>
             <div className="mainRightSidebarContainer scroll">

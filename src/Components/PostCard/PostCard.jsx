@@ -11,7 +11,7 @@ import useVisibility from '../../Hooks/useVisibility';
 
 
 
-function PostCard({title,image,imagePath,id,author,time,video,activity,thumb_url}) {
+function PostCard({title,image,imagePath,id,author,activePostId,setActivePostId,time,video,activity,thumb_url}) {
 
     const[commentSection,toggleCommentSection]= useVisibility();
     const [postModal,togglePostModal]= useVisibility();
@@ -150,8 +150,8 @@ function PostCard({title,image,imagePath,id,author,time,video,activity,thumb_url
 
     return (
         <>
-        <div className="postCardContainer" style={{display:loading||!userData?"none":"block"}}>
-            <PostCardHead   handleRemoveFav={handleRemoveFav} handleFav={handleFav} {...userData} postEditFunction={{handleEditPost,handleDeletePost,handleSetProfilePic}} time={time} author={author} image={image}title={title} activity={activity} id={id}/>
+        <div className="postCardContainer" style={{display:loading||!userData?"none":"block"}} onClick={()=>setActivePostId(id)}>
+            <PostCardHead  setActivePostId={setActivePostId} handleRemoveFav={handleRemoveFav} handleFav={handleFav} activePostId={activePostId} {...userData} postEditFunction={{handleEditPost,handleDeletePost,handleSetProfilePic}} time={time} author={author} image={image}title={title} activity={activity} id={id}/>
             {title && <div className="postCardTags">{title}</div>}
             {image&&<div onClick={togglePostModal} className="postCardImage">
                 <img onLoad={()=>setLoading(false)} src={image|| process.env.PUBLIC_URL + '/Images/facebook_login_logo.png'} alt="img" />
@@ -171,7 +171,7 @@ function PostCard({title,image,imagePath,id,author,time,video,activity,thumb_url
                 </div>
             </div>
             <PostCardFooter handleDeleteLike={handleDeleteLike} handleLike={handleLike} handleShare={handleShare} like={JSON.stringify(likes).includes(uid)} showComment={toggleCommentSection} author={author} {...userData} title={title}  image={image}/>
-           {commentSection && <PostCardComment postId={id} comments={comments} userData={userData}/>}
+           {commentSection && <PostCardComment setActivePostId={setActivePostId} activePostId={activePostId} postId={id} comments={comments} userData={userData}/>}
            
         </div>
         {postModal &&<PostModal handleShare={handleShare} handleFav={handleFav} handleRemoveFav={handleRemoveFav} handleClosePostModal={handleClosePostModal} uid={uid} image={image} video={video} author={author} time={time} userData={userData}  activity={activity} id={id} likes={likes} comments={comments} title={title} handleLike={handleLike} handleDeleteLike={handleDeleteLike} showComment={toggleCommentSection} postEditFunction={{handleEditPost,handleDeletePost,handleSetProfilePic}}/>}
