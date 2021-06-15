@@ -54,8 +54,8 @@ function PictureCardHeader({handleFav, handleRemoveFav,id,first_name,last_name,p
                     <span>{checkTime[0]===originalTime[0]?localTime1:`${localTime.join(" ")}, ${localTime1}`}</span>
                 </div>
             </div>
-            <div className="postDetailsCardHeadBox3 flexBox">
-                <DotsIcon onClick={toggleEditSection}/>
+            <div className="postDetailsCardHeadBox3 flexBox" onClick={toggleEditSection}>
+                <DotsIcon />
                 {editSection&&<EditBox toggleEditSection={toggleEditSection} handleRemoveFav={handleRemoveFav} author={author} uid={uid} id={id} first_name={first_name} last_name={last_name} handleFav={handleFav} profilePic={profilePic} title={title} {...postEditFunction} image={image}/>}
             </div>
             

@@ -13,7 +13,7 @@ function PostCardHead({handleFav,first_name, handleRemoveFav,id,last_name,profil
 
     const [editSection,toggleEditSection]= useVisibility();
     const [activeState,setActiveState]=React.useState(false);
-    
+
     const {uid} = useSelector(store=>store.auth.user);
     const history = useHistory();
 
@@ -55,8 +55,8 @@ function PostCardHead({handleFav,first_name, handleRemoveFav,id,last_name,profil
                     <span>{checkTime[0]===originalTime[0]?localTime1:`${localTime.join(" ")}, ${localTime1}`}</span>
                 </div> 
             </div>
-            <div className="postCardHeadBox3 flexBox">
-                <DotsIcon onClick={toggleEditSection}/>
+            <div className="postCardHeadBox3 flexBox" onClick={toggleEditSection}>
+                <DotsIcon />
                 {editSection&&<EditBox toggleEditSection={toggleEditSection} handleRemoveFav={handleRemoveFav} author={author} uid={uid} id={id} first_name={first_name} last_name={last_name} handleFav={handleFav} profilePic={profilePic} title={title} {...postEditFunction} image={image}/>}
                
             </div>

@@ -6,9 +6,11 @@ import {ReactComponent as DownArrowIcon} from  "../../Icons/downArrow.svg";
 import EmojiMart from "../../SharedComponents/EmojiMart";
 import { useSelector } from 'react-redux';
 import PopUp from '../../SharedComponents/PopUp';
+import useVisibility from '../../Hooks/useVisibility';
 
 function ShareModal({image,video,title,toggleShareModal,handleShare}) {
-    const [emojiMartVisibility,setEmojiMartVisibility] = React.useState(false);
+
+    const [emojiMart,toggleEmojiMart,closeEmojiMart] = useVisibility()
     const [shareTitle,setShareTitle]=React.useState(title)
     const {profilePic,first_name,last_name} = useSelector(store=>store.auth.user)
     const handleSharePostButton=()=>{
@@ -21,7 +23,7 @@ function ShareModal({image,video,title,toggleShareModal,handleShare}) {
     }
     return (
         <div className="editPostModal">
-            <PopUp className="editedPostContainer">
+            <PopUp className="editedPostContainer" onClick={()=>{closeEmojiMart()}}>
                     <div className="editPostHeader flexBox">
                         <div className="editPostTitle flexBox">
                             <p>Share Post</p>
@@ -45,10 +47,10 @@ function ShareModal({image,video,title,toggleShareModal,handleShare}) {
                        <div className="flexBox inputTextBox">
                         <textarea className="scroll" value={shareTitle} onChange={(e)=>setShareTitle(e.target.value)}  cols="30" rows={video||image?"1" : "5"} placeholder={`Whats on your mind, ${first_name || ""}?`}></textarea>
                             <div className="editPostEmojiMartContainer">
-                                <EmojiIcon onClick={()=>setEmojiMartVisibility(!emojiMartVisibility)} />
-                            {emojiMartVisibility && <div className="editPostEmojiMartBox">
+                                <EmojiIcon onClick={toggleEmojiMart} />
+                            {emojiMart && <PopUp className="editPostEmojiMartBox">
                                     <EmojiMart handleEmoji={handleEmoji} />
-                            </div>}
+                            </PopUp>}
                                
                             </div> 
                         </div>   

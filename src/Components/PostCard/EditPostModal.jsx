@@ -5,10 +5,11 @@ import {ReactComponent as FriendsIcon} from  "../../Icons/friends.svg"
 import {ReactComponent as DownArrowIcon} from  "../../Icons/downArrow.svg";
 import EmojiMart from "../../SharedComponents/EmojiMart";
 import PopUp from  "../../SharedComponents/PopUp";
+import useVisibility from '../../Hooks/useVisibility';
 
 function EditPostModal({profilePic,toggleEditSection,handleEditModal,first_name,last_name,toggleEditModal,handleEditPost,editTitle,setEditTitle}) {
 
-    const [emojiMartVisibility,setEmojiMartVisibility] = React.useState(false);
+    const [emojiMart,toggleEmojiMart,closeEmojiMart] = useVisibility()
 
     const handleEditPostButton=()=>{
         handleEditPost(editTitle)
@@ -23,7 +24,7 @@ function EditPostModal({profilePic,toggleEditSection,handleEditModal,first_name,
 
     return (
         <div className="editPostModal">
-            <PopUp className="editedPostContainer">
+            <PopUp className="editedPostContainer" onClick={()=>{closeEmojiMart()}}>
                     <div className="editPostHeader flexBox">
                         <div className="editPostTitle flexBox">
                             <p>Edit Post</p>
@@ -47,10 +48,10 @@ function EditPostModal({profilePic,toggleEditSection,handleEditModal,first_name,
                        <div className="flexBox inputTextBox">
                         <textarea value={editTitle} onChange={(e)=>setEditTitle(e.target.value)}  cols="30" rows={"5"} placeholder={`Whats on your mind, ${first_name || ""}?`}></textarea>
                             <div className="editPostEmojiMartContainer">
-                                <EmojiIcon onClick={()=>setEmojiMartVisibility(!emojiMartVisibility)} />
-                            {emojiMartVisibility && <div className="editPostEmojiMartBox">
+                                <EmojiIcon onClick={toggleEmojiMart} />
+                            {emojiMart && <PopUp className="editPostEmojiMartBox">
                                     <EmojiMart handleEmoji={handleEmoji} />
-                            </div>}
+                            </PopUp>}
                                
                             </div> 
                         </div>   
