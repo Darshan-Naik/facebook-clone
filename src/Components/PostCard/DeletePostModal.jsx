@@ -1,11 +1,12 @@
 import React from 'react';
 import {ReactComponent as CloseIcon} from  "../../Icons/close.svg";
-import {ReactComponent as TrashIcon} from  "../../Icons/trash.svg"
+import {ReactComponent as TrashIcon} from  "../../Icons/trash.svg";
+import PopUp from "../../SharedComponents/PopUp";
 
 function DeletePostModal({handleCancel,handleDelete}) {
     return (
         <div className="deletePostModalContainer">
-            <div className="deletePostModalBox flexBox">
+            <PopUp className="deletePostModalBox flexBox">
                 <div className="deletePostModaleHeader flexBox">
                     <h1>Delete Post</h1>
                     <div className="flexBox">
@@ -20,7 +21,7 @@ function DeletePostModal({handleCancel,handleDelete}) {
                     <button className="postDeleteButton"  onClick={handleDelete}>Yes</button>
                     <button  onClick={handleCancel}>No</button>
                 </div>
-            </div>
+            </PopUp>
         </div>
     )
 }

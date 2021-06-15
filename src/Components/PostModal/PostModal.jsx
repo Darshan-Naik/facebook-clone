@@ -7,7 +7,7 @@ import '../../Styles/PostModal/PostModal.css';
 import {ReactComponent as CloseIcon} from  "../../Icons/close.svg";
 import {ReactComponent as MainLogo} from  "../../Icons/main-logo.svg";
 
-function PostModal({handleRemoveFav,handleFav, postEditFunction,handleClosePostModal,uid, id, image,author, video, time, userData, activity, likes, comments, title, handleLike, handleDeleteLike,showComment}){
+function PostModal({handleShare,handleRemoveFav,handleFav, postEditFunction,handleClosePostModal,uid, id, image,author, video, time, userData, activity, likes, comments, title, handleLike, handleDeleteLike,showComment}){
 
     return (
         <div className="postDetailsCardContainer">
@@ -36,7 +36,7 @@ function PostModal({handleRemoveFav,handleFav, postEditFunction,handleClosePostM
                     </div>
                 </div>
             
-                <PictureCardFooter handleDeleteLike={handleDeleteLike} handleLike={handleLike} like={JSON.stringify(likes).includes(uid)} showComment={showComment}/>
+                <PictureCardFooter handleShare={handleShare} title={title} image={image} {...userData}   handleDeleteLike={handleDeleteLike} handleLike={handleLike} like={JSON.stringify(likes).includes(uid)} showComment={showComment}/>
                 <PictureCardComment userData={userData} comments={comments} postId={id}/>
            </div>
            

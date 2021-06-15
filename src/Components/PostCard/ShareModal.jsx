@@ -5,14 +5,15 @@ import {ReactComponent as FriendsIcon} from  "../../Icons/friends.svg"
 import {ReactComponent as DownArrowIcon} from  "../../Icons/downArrow.svg";
 import EmojiMart from "../../SharedComponents/EmojiMart";
 import { useSelector } from 'react-redux';
+import PopUp from '../../SharedComponents/PopUp';
 
-function ShareModal({image,video,title,setShareModal,handleShare}) {
+function ShareModal({image,video,title,toggleShareModal,handleShare}) {
     const [emojiMartVisibility,setEmojiMartVisibility] = React.useState(false);
     const [shareTitle,setShareTitle]=React.useState(title)
     const {profilePic,first_name,last_name} = useSelector(store=>store.auth.user)
     const handleSharePostButton=()=>{
         handleShare(shareTitle);
-        setShareModal(false);
+        toggleShareModal();
     }
 
     const handleEmoji=(emoji)=>{
@@ -20,12 +21,12 @@ function ShareModal({image,video,title,setShareModal,handleShare}) {
     }
     return (
         <div className="editPostModal">
-            <div className="editedPostContainer">
+            <PopUp className="editedPostContainer">
                     <div className="editPostHeader flexBox">
                         <div className="editPostTitle flexBox">
                             <p>Share Post</p>
                         </div>
-                        <div className="editPostCloseButton flexBox"  onClick={()=>setShareModal(false)}>
+                        <div className="editPostCloseButton flexBox"  onClick={()=>toggleShareModal(false)}>
                              <CloseIcon/>
                         </div>
                     </div>
@@ -62,9 +63,9 @@ function ShareModal({image,video,title,setShareModal,handleShare}) {
                     </div>}
                     <div className="shareButton flexBox">
                         <button className="shareButton1"  onClick={handleSharePostButton}>Share Post</button>
-                        <button className="shareCancelButton" onClick={()=>setShareModal(false)} >Cancel Share</button>
+                        <button className="shareCancelButton" onClick={toggleShareModal} >Cancel Share</button>
                     </div>
-            </div>
+            </PopUp>
 
         </div>
     )

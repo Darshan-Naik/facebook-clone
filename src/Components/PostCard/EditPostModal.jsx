@@ -4,14 +4,15 @@ import {ReactComponent as CloseIcon} from  "../../Icons/close.svg"
 import {ReactComponent as FriendsIcon} from  "../../Icons/friends.svg"
 import {ReactComponent as DownArrowIcon} from  "../../Icons/downArrow.svg";
 import EmojiMart from "../../SharedComponents/EmojiMart";
+import PopUp from  "../../SharedComponents/PopUp";
 
-function EditPostModal({profilePic,handleEditSection,handleEditModal,first_name,last_name,setEditModal,handleEditPost,editTitle,setEditTitle}) {
+function EditPostModal({profilePic,toggleEditSection,handleEditModal,first_name,last_name,toggleEditModal,handleEditPost,editTitle,setEditTitle}) {
 
     const [emojiMartVisibility,setEmojiMartVisibility] = React.useState(false);
 
     const handleEditPostButton=()=>{
         handleEditPost(editTitle)
-        handleEditSection();
+        toggleEditSection();
         handleEditModal();
 
     }
@@ -22,12 +23,12 @@ function EditPostModal({profilePic,handleEditSection,handleEditModal,first_name,
 
     return (
         <div className="editPostModal">
-            <div className="editedPostContainer">
+            <PopUp className="editedPostContainer">
                     <div className="editPostHeader flexBox">
                         <div className="editPostTitle flexBox">
                             <p>Edit Post</p>
                         </div>
-                        <div className="editPostCloseButton flexBox"  onClick={()=>setEditModal(false)}>
+                        <div className="editPostCloseButton flexBox"  onClick={handleEditModal}>
                              <CloseIcon/>
                         </div>
                     </div>
@@ -57,7 +58,7 @@ function EditPostModal({profilePic,handleEditSection,handleEditModal,first_name,
                     <div className="editPostButton">
                         <button onClick={handleEditPostButton}>Edit Post</button>
                     </div>
-            </div>
+            </PopUp>
 
         </div>
     )

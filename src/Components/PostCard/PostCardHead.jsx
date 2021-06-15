@@ -6,11 +6,12 @@ import EditBox from './EditBox';
 import { useSelector } from 'react-redux';
 import StatusDot from '../../SharedComponents/StatusDot';
 import checkActive from '../../Utils/checkActive';
+import useVisibility from '../../Hooks/useVisibility';
 
 
 function PostCardHead({handleFav,first_name, handleRemoveFav,id,last_name,profilePic,time,author,activity,title,postEditFunction,image,activeStatus}) {
 
-    const [editSection,setEditSection]=React.useState(false);
+    const [editSection,toggleEditSection]= useVisibility();
     const [activeState,setActiveState]=React.useState(false);
     const {uid} = useSelector(store=>store.auth.user);
     const history = useHistory();
@@ -20,16 +21,16 @@ function PostCardHead({handleFav,first_name, handleRemoveFav,id,last_name,profil
     const checkTime = new Date().toLocaleString().split(",");
     const originalTime = new Date(time?.toDate()).toLocaleDateString().split(",");
     
-    const handleEditSection=(e)=>{
-        if(e){
-            e.stopPropagation();
-        }
+    // const toggleEditSection=(e)=>{
+    //     if(e){
+    //         e.stopPropagation();
+    //     }
         
-        setEditSection(!editSection);
-    }
-    window.addEventListener("click",()=>{
-        setEditSection(false);
-    })
+    //     setEditSection(!editSection);
+    // }
+    // window.addEventListener("click",()=>{
+    //     setEditSection(false);
+    // })
 
  
     
@@ -67,8 +68,8 @@ function PostCardHead({handleFav,first_name, handleRemoveFav,id,last_name,profil
                 </div> 
             </div>
             <div className="postCardHeadBox3 flexBox">
-                <DotsIcon onClick={handleEditSection}/>
-                {editSection&&<EditBox handleEditSection={handleEditSection} handleRemoveFav={handleRemoveFav} author={author} uid={uid} id={id} first_name={first_name} last_name={last_name} handleFav={handleFav} profilePic={profilePic} title={title} {...postEditFunction} image={image}/>}
+                <DotsIcon onClick={toggleEditSection}/>
+                {editSection&&<EditBox toggleEditSection={toggleEditSection} handleRemoveFav={handleRemoveFav} author={author} uid={uid} id={id} first_name={first_name} last_name={last_name} handleFav={handleFav} profilePic={profilePic} title={title} {...postEditFunction} image={image}/>}
                
             </div>
            
