@@ -17,7 +17,7 @@ const UserProfilePageHeader = ({ coverPhoto, currentUser, forceRefresh, userProf
     const [textFieldQuery, setTextFieldQuery] = useState("");
     const [coverPicImagePreview, setCoverPicImagePreview] = useState();
     const [picUploadState, setPicUploadState] = useState(0);
-    const [showEmojiMart, setShowEmojiMart] = useState(false);
+    const [showEmojiMart, toggleShowEmojiMart, closeEmojiMart] = useVisibility();
     const [errorImagePreview, setErrorImagePreview] = useState(false);
 
     const [showCoverPicModal, toggleShowCoverPicModal] = useVisibility();
@@ -239,17 +239,17 @@ const UserProfilePageHeader = ({ coverPhoto, currentUser, forceRefresh, userProf
                     }
                     {
                         currentUser === uid && addBioVisibility && (
-                            <div className="addBoxTexFieldContainer">
+                            <PopUp className="addBoxTexFieldContainer" onClick={() => {toggleShowEmojiMart(); closeEmojiMart(); }}>
                                 <textarea className="addBioTextField scroll" value={textFieldQuery} onChange={(e) => setTextFieldQuery(e.target.value)} placeholder="Describe who you are"></textarea>
                                 <div className="addBioTextFieldCharCount flexBox">
                                     {`${101 - textFieldQuery.length} characters remaining`}
                                     <div className="addBioTextFieldEmojiMart flexBox">
-                                        <EmojiIcon onClick={() => setShowEmojiMart(!showEmojiMart)} />
+                                        <EmojiIcon onClick={toggleShowEmojiMart} />
                                         {
                                             showEmojiMart && (
-                                                <div className="addBioEmojiContainer">
+                                                <PopUp className="addBioEmojiContainer">
                                                     <EmojiMart handleEmoji={handleBioEmoji} />
-                                                </div>
+                                                </PopUp>
                                             )
                                         }
                                     </div>
@@ -264,7 +264,7 @@ const UserProfilePageHeader = ({ coverPhoto, currentUser, forceRefresh, userProf
                                         <button disabled={ textFieldQuery === "" || textFieldQuery.length > 101 } onClick={handleUpdateUserBio}>Save</button>
                                     </div>
                                 </div>
-                            </div>
+                            </PopUp>
                         )
                     }
                 </React.Fragment>

@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import { ReactComponent as CloseIcon } from "../../Icons/close.svg";
 import SenderFriendCard from "./SenderFriendCard";
 
-function SentFriendRequestModal({ sentRequests, handleSentRequestVisibility }) {
+function SentFriendRequestModal({ sentRequests, toggleSentRequestVisibility }) {
 
     return (
         <div className="seeAllSentRequestModalContainer">
             <div className="seeAllSentRequestModalBox" onClick={(e) => e.stopPropagation()}>
                 <div className="flexBox seeAllSentRequestModalHeader">
                     <h1 className="seeAllSentRequestModalHeaderNamePlate">Sent Requests</h1>
-                    <div className="flexBox seeAllSentRequestModalCloseIcon" onClick={handleSentRequestVisibility}>
+                    <div className="flexBox seeAllSentRequestModalCloseIcon" onClick={toggleSentRequestVisibility}>
                         <CloseIcon />
                     </div>
                 </div>
