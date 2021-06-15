@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import "../../Styles/Story/Story.css";
 import "../../App.css";
 import { useSelector } from 'react-redux';
-import filterFriends from '../../Utils/filterFriends';
 import StoryBox from './StoryBox';
 
 function StoryContainer(){
