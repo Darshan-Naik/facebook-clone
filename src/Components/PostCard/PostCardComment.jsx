@@ -54,7 +54,7 @@ function PostCardComment({postId,comments,userData}) {
 
 
     return (
-        <div className="postCardCommentContainer flexBox">
+        <PopUp className="postCardCommentContainer flexBox">
             {comments.length>2?limit===2&&<p onClick={()=>setLimit(comments.length)}>View more {comments.length-2} comments</p>:null}
             {comments?.filter((el,i)=>(comments.length-limit)<=i).map((el)=><CommentBox key={el.commentId}{...el} />)}
             {limit===comments.length&&comments.length>2&&<p onClick={()=>setLimit(2)}>View less comments</p>}
@@ -79,7 +79,7 @@ function PostCardComment({postId,comments,userData}) {
             </div>
             
             
-        </div>
+        </PopUp>
     )
 }
 

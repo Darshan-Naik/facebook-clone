@@ -14,16 +14,13 @@ import useVisibility from '../../Hooks/useVisibility';
 function PostCard({title,image,imagePath,id,author,time,video,activity,thumb_url}) {
 
     const[commentSection,toggleCommentSection]= useVisibility();
-    const [postModalVisibility,togglePostModalVisibility]= useVisibility();
+    const [postModal,togglePostModal]= useVisibility();
     const[likes,setLikes]=React.useState([]);
     const [comments,setComments]=React.useState([]);
     const [userData,setUserData]=React.useState(null);
     const [loading, setLoading]=React.useState(true);
     const {uid} = useSelector(store=>store.auth.user)
 
-    const showComment =()=>{
-        toggleCommentSection();
-    }
 
     const handleEditPost=(editTitle) => {
         const payload={
@@ -92,7 +89,7 @@ function PostCard({title,image,imagePath,id,author,time,video,activity,thumb_url
     }
 
     const handleClosePostModal=()=>{
-        togglePostModalVisibility();
+        togglePostModal();
     }
 
     const handleLike=()=>{
@@ -156,10 +153,10 @@ function PostCard({title,image,imagePath,id,author,time,video,activity,thumb_url
         <div className="postCardContainer" style={{display:loading||!userData?"none":"block"}}>
             <PostCardHead   handleRemoveFav={handleRemoveFav} handleFav={handleFav} {...userData} postEditFunction={{handleEditPost,handleDeletePost,handleSetProfilePic}} time={time} author={author} image={image}title={title} activity={activity} id={id}/>
             {title && <div className="postCardTags">{title}</div>}
-            {image&&<div onClick={togglePostModalVisibility} className="postCardImage">
+            {image&&<div onClick={togglePostModal} className="postCardImage">
                 <img onLoad={()=>setLoading(false)} src={image|| process.env.PUBLIC_URL + '/Images/facebook_login_logo.png'} alt="img" />
             </div>}
-            {video&&<div onClick={(e)=>{togglePostModalVisibility(); e.preventDefault()}}className="postCardImage">
+            {video&&<div onClick={(e)=>{togglePostModal(e); e.preventDefault()}}className="postCardImage">
                 <video width="100%" height="500" controls >
                     <source src={video} type="video/mp4"/>
                 </video>
@@ -170,14 +167,14 @@ function PostCard({title,image,imagePath,id,author,time,video,activity,thumb_url
                     <p>{likes.length}</p>
                 </div>
                 <div className="flexBox">
-                    <p onClick={showComment}>{comments.length} Comments</p> 
+                    <p onClick={toggleCommentSection}>{comments.length} Comments</p> 
                 </div>
             </div>
-            <PostCardFooter handleDeleteLike={handleDeleteLike} handleLike={handleLike} handleShare={handleShare} like={JSON.stringify(likes).includes(uid)} showComment={showComment} author={author} {...userData} title={title}  image={image}/>
+            <PostCardFooter handleDeleteLike={handleDeleteLike} handleLike={handleLike} handleShare={handleShare} like={JSON.stringify(likes).includes(uid)} showComment={toggleCommentSection} author={author} {...userData} title={title}  image={image}/>
            {commentSection && <PostCardComment postId={id} comments={comments} userData={userData}/>}
            
         </div>
-        {postModalVisibility &&<PostModal handleShare={handleShare} handleFav={handleFav} handleRemoveFav={handleRemoveFav} handleClosePostModal={handleClosePostModal} uid={uid} image={image} video={video} author={author} time={time} userData={userData}  activity={activity} id={id} likes={likes} comments={comments} title={title} handleLike={handleLike} handleDeleteLike={handleDeleteLike} showComment={showComment} postEditFunction={{handleEditPost,handleDeletePost,handleSetProfilePic}}/>}
+        {postModal &&<PostModal handleShare={handleShare} handleFav={handleFav} handleRemoveFav={handleRemoveFav} handleClosePostModal={handleClosePostModal} uid={uid} image={image} video={video} author={author} time={time} userData={userData}  activity={activity} id={id} likes={likes} comments={comments} title={title} handleLike={handleLike} handleDeleteLike={handleDeleteLike} showComment={toggleCommentSection} postEditFunction={{handleEditPost,handleDeletePost,handleSetProfilePic}}/>}
        
     
         <div className="postCardContainer" style={{display:loading||!userData?"block":"none"}}>
