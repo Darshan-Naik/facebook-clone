@@ -42,12 +42,10 @@ function PictureCardHeader({handleFav, handleRemoveFav,id,first_name,last_name,p
             </div>
             <div className="postDetailsCardHeadBox2">
                 <div className="postDetailsCardActivity flexBox">
-                    <div onClick={()=>history.push(`/profile/${author}`)}>
-                        <strong>{`${first_name} ${last_name}`}</strong>
-                    </div>
-                    {activity&&<div>
-                        <span>{activity}</span>
-                    </div>} 
+                    <p>
+                        <strong onClick={()=>history.push(`/profile/${author}`) }>{`${first_name} ${last_name}`}</strong>
+                        <span>{activity || ""}</span>
+                    </p>                       
                 </div>
                 
                 <div>
