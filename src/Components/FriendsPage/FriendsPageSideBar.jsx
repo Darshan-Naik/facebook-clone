@@ -5,12 +5,13 @@ import filterFriends from '../../Utils/filterFriends';
 import FriendsPageCard from "./FriendsPageCard";
 import SideBarContent from "../SideBar/SideBarContent";
 import SentFriendRequestModal from "./SentFriendRequestModal";
+import useVisibility from '../../Hooks/useVisibility';
 
 function FriendsPageSideBar({ forceRefresh }) {
 
     const [peopleSuggested, setPeopleSuggested] = useState([]);
     const [friendsVisibilityLimitation, setFriendsVisibilityLimitation] = useState(false);
-    const [sentRequestVisibility, setSentRequestVisibility] = useState(false);
+    const [sentRequestVisibility, toggleSentRequestVisibility] = useVisibility();
     
     const friendRequests = useSelector( state => state.auth.friendRequests );
     const sentRequests = useSelector( state => state.auth.sentRequests );
@@ -20,17 +21,6 @@ function FriendsPageSideBar({ forceRefresh }) {
     const delayTimeRef = useRef();
 
     const history = useHistory();
-
-    const handleSentRequestVisibility = (e) => {
-        if( e ) {
-            e.stopPropagation();
-        }
-        setSentRequestVisibility(!sentRequestVisibility);
-    }
-
-    window.addEventListener('click', () => {
-        setSentRequestVisibility(false);
-    })
 
     useEffect(() => {
 
@@ -78,7 +68,7 @@ function FriendsPageSideBar({ forceRefresh }) {
                         <div className="divider"></div>
                         <p className="allFriendsRequestsSideBarCount">{`${friendRequests.length} ${ friendRequests.length > 1 ? `Friend Requests` : `Friend Request` }`}</p>
                         <div className="seeAllSentRequestsTagBox">
-                            <p className="seeAllSentRequestsTag" onClick={handleSentRequestVisibility}>View Sent Requests</p>
+                            <p className="seeAllSentRequestsTag" onClick={toggleSentRequestVisibility}>View Sent Requests</p>
                         </div>
                         <div className="seeAllFriendRequestContainer">
                             {
@@ -90,7 +80,7 @@ function FriendsPageSideBar({ forceRefresh }) {
                     <React.Fragment>
                         <h1 className="friendsSideBarHeading">No Friend Requests</h1>
                         <div className="seeAllSentRequestsTagBox noFriendRequestsViewSentRequest">
-                            <p className="seeAllSentRequestsTag" onClick={handleSentRequestVisibility}>View Sent Requests</p>
+                            <p className="seeAllSentRequestsTag" onClick={toggleSentRequestVisibility}>View Sent Requests</p>
                         </div>
                     </React.Fragment>
                 )
@@ -117,7 +107,7 @@ function FriendsPageSideBar({ forceRefresh }) {
                 )
             }
             {
-                sentRequestVisibility && <SentFriendRequestModal sentRequests={sentRequests} handleSentRequestVisibility={handleSentRequestVisibility} />
+                sentRequestVisibility && <SentFriendRequestModal sentRequests={sentRequests} toggleSentRequestVisibility={toggleSentRequestVisibility} />
             }
         </div>
     )
