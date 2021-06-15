@@ -9,20 +9,23 @@ import { resetApp } from '../../Redux/App/actions'
 import { clearPosts } from '../../Redux/Posts/actions'
 import {ReactComponent as Alert} from  "../../Icons/alert.svg"
 import { database } from '../../Firebase/firebase'
-
+import PopUp from '../../SharedComponents/PopUp'
 function AccountMenu() {
     const {profilePic,first_name,last_name, uid,accessibility} = useSelector(store=>store.auth.user)
     const dispatch = useDispatch()
     const history = useHistory()
     const dark = useSelector(store=>store.theme.dark)
+
     const handleTheme =()=>{
         dispatch(switchTheme())
     }
+
     const handleLogout=()=>{
         dispatch(clearPosts())
         dispatch(resetApp())
         dispatch(logoutSuccess())
     }
+
     const handleAccessibility =()=>{
         database.collection("users").doc(uid).update({accessibility : !accessibility})
     }
@@ -36,7 +39,7 @@ function AccountMenu() {
                     </div> 
             </div>
             <hr />
-            <div className="darkModeBox flexBox" onClick={(e)=> e.stopPropagation()}>
+            <PopUp className="darkModeBox flexBox" >
                 <DarkModeIcon onClick={handleTheme}/>
                 <p>Dark Mode</p>
                 <div className="themeButton flexBox" onClick={handleTheme} style={{justifyContent:dark?"flex-end" : 'flex-start'}}>
@@ -44,8 +47,8 @@ function AccountMenu() {
 
                     </div>
                 </div>
-            </div>
-            <div className="accessibilityBox flexBox" onClick={(e)=> e.stopPropagation()}>
+            </PopUp>
+            <PopUp className="accessibilityBox flexBox" >
                 <Alert onClick={handleTheme}/>
                 <p>Accessibility</p>
                 <div className="accessibilityButton flexBox" onClick={handleAccessibility} style={{justifyContent:accessibility?"flex-end" : 'flex-start'}}>
@@ -53,7 +56,7 @@ function AccountMenu() {
 
                     </div>
                 </div>
-            </div>
+            </PopUp>
             <div className="logOutBox flexBox" onClick={handleLogout}>
                 <div className="logoutIconWrap flexBox">
                     <LogoutIcon/>

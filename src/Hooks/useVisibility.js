@@ -22,7 +22,7 @@ function useVisibility() {
         setState(false)
     })
     
-    return [state,handleToggle,handleOpen,handleClose]
+    return [state,handleToggle,handleClose,handleOpen]
 }
 
 export default useVisibility

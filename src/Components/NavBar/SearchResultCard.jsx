@@ -2,10 +2,10 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 
-function SearchResultCard({first_name,last_name,uid,profilePic,lives,handleSearchResultBoxVisibility}) {
+function SearchResultCard({first_name,last_name,uid,profilePic,lives,closeSearchResultBox}) {
     const history = useHistory()
     const handleRedirect=()=>{
-        handleSearchResultBoxVisibility(false)
+        closeSearchResultBox()
         history.push(`/profile/${uid}`)
     }
     const friends = useSelector(store=>store.auth.friends)
