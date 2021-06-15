@@ -5,13 +5,15 @@ import {ReactComponent as EmojiIcon} from  "../../Icons/happyFace.svg";
 import CommentBox from './CommentBox';
 import EmojiMart from "../../SharedComponents/EmojiMart";
 import { useHistory } from 'react-router';
+import useVisibility from '../../Hooks/useVisibility';
+import PopUp from '../../SharedComponents/PopUp';
 
 
 function PostCardComment({postId,comments,userData}) {
     
     const [comment,setComment]=React.useState("")
     const [limit, setLimit]=React.useState(2)
-    const [emojiVisibility,setEmojiVisibility]=React.useState(false)
+    const [emojiMart,toggleEmojiMart] = useVisibility();
 
     const history =useHistory();
     const {uid,profilePic} = useSelector(store=>store.auth.user)
@@ -62,11 +64,11 @@ function PostCardComment({postId,comments,userData}) {
                     <div className="commentInput flexBox">
                         <input autoComplete ="off" autoFocus type="text" name="comment" id="comment" value={comment} onChange={handleChange} onKeyDown={handleSubmit} placeholder="Write a comment..."/>
                         <div className="postEmojiMartContainer flexBox">
-                            <EmojiIcon onClick={()=>setEmojiVisibility(!emojiVisibility)}/>
+                            <EmojiIcon onClick={toggleEmojiMart}/>
                             {/* <CameraIcon/> */}
-                            {emojiVisibility&&<div className="commentInput1">
+                            {emojiMart&&<PopUp className="commentInput1">
                                 <EmojiMart handleEmoji={handleEmoji}/>
-                            </div>}
+                            </PopUp>}
                         </div>
                     </div>
                     

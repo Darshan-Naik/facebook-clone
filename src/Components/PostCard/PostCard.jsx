@@ -171,11 +171,11 @@ function PostCard({title,image,imagePath,id,author,time,video,activity,thumb_url
                     <p onClick={showComment}>{comments.length} Comments</p> 
                 </div>
             </div>
-            <PostCardFooter handleDeleteLike={handleDeleteLike} handleLike={handleLike} handleShare={handleShare} like={JSON.stringify(likes).includes(uid)} showComment={showComment} author={author} {...userData} title={title} handleShare={handleShare} image={image}/>
+            <PostCardFooter handleDeleteLike={handleDeleteLike} handleLike={handleLike} handleShare={handleShare} like={JSON.stringify(likes).includes(uid)} showComment={showComment} author={author} {...userData} title={title}  image={image}/>
            {commentSection && <PostCardComment postId={id} comments={comments} userData={userData}/>}
            
         </div>
-        {postModalVisibility &&<PostModal handleFav={handleFav} handleRemoveFav={handleRemoveFav} handleClosePostModal={handleClosePostModal} uid={uid} image={image} video={video} author={author} time={time} userData={userData}  activity={activity} id={id} likes={likes} comments={comments} title={title} handleLike={handleLike} handleDeleteLike={handleDeleteLike} showComment={showComment} postEditFunction={{handleEditPost,handleDeletePost,handleSetProfilePic}}/>}
+        {postModalVisibility &&<PostModal handleShare={handleShare} handleFav={handleFav} handleRemoveFav={handleRemoveFav} handleClosePostModal={handleClosePostModal} uid={uid} image={image} video={video} author={author} time={time} userData={userData}  activity={activity} id={id} likes={likes} comments={comments} title={title} handleLike={handleLike} handleDeleteLike={handleDeleteLike} showComment={showComment} postEditFunction={{handleEditPost,handleDeletePost,handleSetProfilePic}}/>}
        
     
         <div className="postCardContainer" style={{display:loading||!userData?"block":"none"}}>
