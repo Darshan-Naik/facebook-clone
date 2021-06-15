@@ -7,14 +7,14 @@ import {ReactComponent as LikeIconBlue} from  "../../Icons/like.svg";
 function PictureCardFooter({showComment,handleLike,like,handleDeleteLike}) {
     return (
         <div className="postDetailsCardFooter flexBox">
-            {like?(<div className="postCardFooterBox flexBox" onClick={handleDeleteLike}>
+            {like?(<div className="postDetailsCardFooterBox flexBox" onClick={handleDeleteLike}>
             <div className="flexBox" >
             <LikeIconBlue  />
             <small >Like</small>
             </div>
                 
             </div>): 
-            (<div className="postCardFooterBox flexBox" onClick={handleLike} >
+            (<div className="postDetailsCardFooterBox flexBox" onClick={handleLike} >
             <div className="flexBox" >
             <LikeIcon />
             <p >Like</p>
