@@ -11,12 +11,11 @@ import { closeAllMessage, minimizeAllMessage } from '../../Redux/App/actions'
 import NewChatBox from './NewChatBox'
 import useVisibility from '../../Hooks/useVisibility'
 import PopUp from '../../SharedComponents/PopUp'
-function Chats() {
+function Chats({newChatBox,toggleNewChatBox}) {
     const [option,,closeOption,openOption] = useVisibility()
     const [optionBox,toggleOptionBox] = useVisibility()
     const {activeMessages,inActiveMessages} = useSelector(store=>store.app)
     const [activeChatIndex,setActiveChatIndex] = React.useState(0)
-    const [newChatBox,toggleNewChatBox] = useVisibility()
 
     const dispatch = useDispatch()
     const handleActiveChatBox = (index)=>{
@@ -34,6 +33,7 @@ function Chats() {
         dispatch(minimizeAllMessage())
         toggleOptionBox()
     }
+    
     return (
         <> 
         <PopUp className="activeChatBubbleContainer" onMouseEnter={openOption} onMouseLeave={()=>!optionBox && closeOption()}  >

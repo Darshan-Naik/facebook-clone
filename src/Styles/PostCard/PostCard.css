@@ -123,6 +123,7 @@
 .postCardFooterBox{
     width: 30%;
     margin: 5px 0;
+    cursor: pointer;
 }
 .postCardFooterBox:hover{
     background: var(--hover-overlay);
@@ -134,10 +135,7 @@
     width: 18px;
     height: 18px;
     fill: var(--secondary-icon);
-    margin: 5px;
-    cursor: pointer;
-    
-    
+    margin: 5px;  
 }
 .postCardFooterBox .likeIcon{
     fill: var(--primary-1);
@@ -146,13 +144,11 @@
 .postCardFooter p{
     color: var(--secondary-icon);
     font-size: 15px;
-    cursor: pointer;
     font-weight: 500;
 }
 .postCardFooter small{
     color: var(--primary-1);
     font-size: 15px;
-    cursor: pointer;
     font-weight: 500;
 }
 
@@ -668,7 +664,7 @@
 @media only screen and (max-width: 996px) {
     .postCardContainer{
         max-width: 500px;
-         width: 100%;
+        width: 100%;
     }
 
     

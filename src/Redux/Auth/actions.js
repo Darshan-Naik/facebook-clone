@@ -1,4 +1,4 @@
-import {  GET_FAVORITE, GET_FRIENDS, GET_FRIEND_REQUEST, GET_NOTIFICATIONS, GET_SENT_REQUEST, LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, LOG_OUT_SUCCESS, SIGNUP_FAILURE, SIGNUP_REQUEST, SIGNUP_SUCCESS } from "./actionTypes"
+import {  GET_FAVORITE, GET_FRIENDS, GET_FRIEND_REQUEST, GET_NOTIFICATIONS, GET_SENT_REQUEST, LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, LOG_OUT_SUCCESS, SIGNUP_FAILURE, SIGNUP_REQUEST, SIGNUP_SUCCESS, USER_ACTIVE_STATUS } from "./actionTypes"
 
 
 const loginRequest = (payload)=>{
@@ -75,5 +75,11 @@ const getFavorites = (payload) => {
     }
 }
 
+const updateUserActiveStatus = (payload) => {
+    return {
+        type: USER_ACTIVE_STATUS,
+        payload
+    }
+}
 
-export { loginFailure,loginSuccess,loginRequest,getFavorites,signUpFailure,signupRequest,signupSuccess, getFriendRequest, getFriends, getSentRequest,getNotifications,logoutSuccess}
+export { loginFailure, loginSuccess, loginRequest, getFavorites, signUpFailure, signupRequest, signupSuccess, getFriendRequest, getFriends, getSentRequest, getNotifications, logoutSuccess, updateUserActiveStatus }

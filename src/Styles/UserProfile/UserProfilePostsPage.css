@@ -220,6 +220,10 @@
     gap: 15px;
 }
 
+.userPostsContainer .postCardContainer, .userPostsContainer .newPostContainer {
+    width: 100%;
+}
+
 /* User Profile Page Media Queries */
 
 @media only screen and ( max-width: 924px ) {

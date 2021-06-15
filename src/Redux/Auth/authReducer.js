@@ -1,5 +1,5 @@
 import { loadData, saveData } from "../../Utils/localStorage"
-import {  GET_FAVORITE, GET_FRIENDS, GET_FRIEND_REQUEST, GET_NOTIFICATIONS, GET_SENT_REQUEST, LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, LOG_OUT_SUCCESS, SIGNUP_FAILURE, SIGNUP_REQUEST, SIGNUP_SUCCESS } from "./actionTypes"
+import {  GET_FAVORITE, GET_FRIENDS, GET_FRIEND_REQUEST, GET_NOTIFICATIONS, GET_SENT_REQUEST, LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, LOG_OUT_SUCCESS, SIGNUP_FAILURE, SIGNUP_REQUEST, SIGNUP_SUCCESS, USER_ACTIVE_STATUS } from "./actionTypes"
 
 
 const init = loadData("user") || {
@@ -12,7 +12,8 @@ const init = loadData("user") || {
     favorites : [],
     isError : false,
     isLoading :false,
-    errorMessage : ""
+    errorMessage : "",
+    userActiveStatus: true
 }
 
  export const authReducer = (state=init,{type,payload})=>{
@@ -120,10 +121,18 @@ const init = loadData("user") || {
                     notifications : [],
                     isError : false,
                     isLoading :false,
-                    errorMessage : ""
+                    errorMessage : "",
+                    userActiveStatus: true
                 }
                 saveData("user", initState);
                 return initState
+            }
+
+            case USER_ACTIVE_STATUS: {
+                return {
+                    ...state,
+                    userActiveStatus: !state.userActiveStatus
+                }
             }
             default : return state
     }
