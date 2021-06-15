@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 import { database } from '../../Firebase/firebase';
 import "../../Styles/Story/Story.css";
 import StoryContainerSkeleton from './StorySkeleton/StoryContainerSkeleton';
