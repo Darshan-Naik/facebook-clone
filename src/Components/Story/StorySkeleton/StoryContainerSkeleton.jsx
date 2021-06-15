@@ -6,7 +6,7 @@ function StoryContainerSkeleton() {
     return (
             <SkeletonTheme width={130} color={dark?"#202020" :"#dadada" } highlightColor={dark?"#444":"#f3efef"} > 
                 <div className="flexBox">
-                    <Skeleton style={{borderRadius:"20px", margin: "10px 12px 10px 12px"}} width={110} height={170}/>
+                    <Skeleton style={{borderRadius:"20px", margin: "10px 12px 10px 12px"}} width={90} height={170}/>
                 </div>
             </SkeletonTheme> 
     )
