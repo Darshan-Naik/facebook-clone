@@ -129,10 +129,12 @@ const init = loadData("user") || {
             }
 
             case USER_ACTIVE_STATUS: {
-                return {
+                const updatedState = {
                     ...state,
                     userActiveStatus: !state.userActiveStatus
                 }
+                saveData("user", updatedState);
+                return updatedState;
             }
             default : return state
     }
