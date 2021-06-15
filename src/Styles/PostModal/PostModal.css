@@ -18,6 +18,7 @@
 }
 .postDetailsCardHeadContainer {
   padding: 5px 10px;
+  width: 100%;
 }
 .postDetailsCardHeadBox1{
   position: relative;
@@ -40,7 +41,7 @@
   flex: 1;
   text-align: left;
   flex-direction: column;
-  width: 272px;
+  flex: 1;
 }
 .postDetailsCardHeadBox2 strong {
   font-size: 13px;
@@ -89,26 +90,26 @@
   line-height: 1.3333;
   color: var(--primary-text);
   text-align: left;
+  width: 100%;
   margin-top: 5px;
   margin-bottom: 5px;
   padding: 0 15px;
 }
 .postDetailsCardImage img {
   object-fit: contain;
-  width: 1150px;
   max-width: 100%;
-  height: 100vh;
+  max-height: 100%;
   background-color: var(--black);
 }
 .postDetailsCardImage video {
   object-fit: contain;
-  width: 1150px;
   max-width: 100%;
-  height: 715px;
+  max-height: 100%;
 }
 .postDetailsCardLike {
   justify-content: space-between;
-  margin: 5px 15px;
+  width: 100%;
+  padding: 10px;
 }
 .postDetailsCardLike p {
   font-size: 14px;
@@ -130,6 +131,7 @@
   justify-content: space-around;
   margin: 0 15px;
   border-top: 1px solid var(--secondary-text);
+  width: 100%;
 }
 .postDetailsCardFooterBox {
   flex:1;
@@ -169,9 +171,10 @@
 
 
 .postDetailsCardCommentContainer {
-  margin: 0px 15px 10px 15px;
-  padding: 5px 0px 5px 0px;
-  height: 77vh;
+  width: 100%;
+  margin: 0 15px;
+  padding: 5px;
+  flex: 1;
   border-top: 1px solid var(--secondary-text);
   flex-direction: column;
   justify-content: flex-start;
@@ -193,6 +196,7 @@
   width: 100%;
   justify-content: left;
   margin: 2px 0;
+  padding: 5px;
   justify-content: flex-start;
   align-items: flex-start;
 }
@@ -281,38 +285,52 @@
 
 
 /* */
+.PicImageContainer{
+  flex: 3;
+  height: 100%;
+  background-color: var(--black);
+}
+.PicImageContainer video{
+  max-width: 100%;
+  max-height: 100%;
+}
+.postDetailsCardImage {
+  width: 100%;
+  height: 100%;
+}
 .PicInfoContainer {
-  flex-grow: 1;
+  flex-direction: column;
+  max-width: 400px;
+  flex: 1;
   height: 100%;
 }
 .postDetailsModalCommentBox {
-  min-height: 66vh;
-  max-height: 69vh;
+  flex: 1;
+  max-height: 100%;
 }
 .postDetailsModalClose {
   height: 35px;
   width: 35px;
   position: absolute;
   top: 15px;
-  left: 30px;
+  left: 15px;
   border-radius: 50%;
-  background-color: transparent;
+  background-color: var(--primary-background);
   border: transparent;
   background-color: var(--shadow-8);
   
 }
 .postDetailsModalClose:hover {
   transform: scale(1.01);
-  background-color: var(--hover-overlay-1);
+  background-color: var(--hover-overlay);
 }
 .postDetailsModalClose > svg {
   stroke: var(--white);
 }
 .postDetailsModalIcon {
-  height: 0;
   position: absolute;
   top: 15px;
-  left: 80px;
+  left: 60px;
   background-color: transparent;
   border: transparent;
 }
