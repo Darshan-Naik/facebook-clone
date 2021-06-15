@@ -11,9 +11,12 @@ import { useSelector } from 'react-redux';
 import Videos from '../Components/Pages/Videos';
 import Favorites from '../Components/Pages/Favorites';
 import PageNotFound from '../Components/Pages/PageNotFound';
+import useVisibility from '../Hooks/useVisibility';
 
 function Router() {
-    const[refresh,setRefresh] = React.useState(true)
+    const[refresh,setRefresh] = React.useState(true);
+    const [newChatBox,toggleNewChatBox] = useVisibility();
+
     const handleRefresh = ()=>{
         setRefresh(!refresh)
     }
@@ -35,10 +38,10 @@ function Router() {
                 </Route>
                 <Route path="/">
                 <>           
-                    <Chats />
+                    <Chats newChatBox={newChatBox} toggleNewChatBox={toggleNewChatBox} />
                     <Switch>
                         <Route path="/" exact>
-                            <Home  handleRefresh={handleRefresh}/>
+                            <Home toggleNewChatBox={toggleNewChatBox} handleRefresh={handleRefresh}/>
                         </Route>
                         <Route path="/videos" exact>
                             <Videos handleRefresh={handleRefresh} />

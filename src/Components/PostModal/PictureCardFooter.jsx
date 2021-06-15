@@ -1,16 +1,27 @@
 import React from 'react';
 import {ReactComponent as CommentIcon} from  "../../Icons/commentIcon.svg";
 import {ReactComponent as ShareIcon} from  "../../Icons/shareIcon.svg";
-import AfterLike from '../PostCard/AfterLike';
-import Like from '../PostCard/Like';
-
+import {ReactComponent as LikeIcon} from  "../../Icons/likeIcon.svg"
+import {ReactComponent as LikeIconBlue} from  "../../Icons/like.svg";
 
 function PictureCardFooter({showComment,handleLike,like,handleDeleteLike}) {
     return (
         <div className="postDetailsCardFooter flexBox">
-            <div className="postDetailsCardFooterBox flexBox" >
-                {like?<AfterLike handleDeleteLike={handleDeleteLike}/>:<Like handleLike={handleLike}/>}
+            {like?(<div className="postCardFooterBox flexBox" onClick={handleDeleteLike}>
+            <div className="flexBox" >
+            <LikeIconBlue  />
+            <small >Like</small>
             </div>
+                
+            </div>): 
+            (<div className="postCardFooterBox flexBox" onClick={handleLike} >
+            <div className="flexBox" >
+            <LikeIcon />
+            <p >Like</p>
+            </div>
+                
+            </div>)
+            }
             <div className="postDetailsCardFooterBox flexBox" onClick={showComment}>
                 <CommentIcon  />
                 <p>Comments</p>
