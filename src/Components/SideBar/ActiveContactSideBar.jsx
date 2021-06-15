@@ -1,23 +1,29 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react';
 import SideBarContent from "./SideBarContent";
-import {ReactComponent as SearchIcon} from  "../../Icons/search.svg"
+import {ReactComponent as SearchIcon} from  "../../Icons/search.svg";
+import { ReactComponent as GreenTickIcon } from "../../Icons/greenTick.svg";
 import "../../Styles/SideBar/SideBar.css";
-import { useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { ReactComponent as ContactBarDots } from "../../Icons/dots.svg";
-import { ReactComponent as VideoCallIcon } from "../../Icons/videoCallIcon.svg";
 import filterFriends from "../../Utils/filterFriends.js"
 import { useHistory } from 'react-router-dom';
 import ActiveContacts from './ActiveContacts';
 import BirthdayCard from './BirthdayCard/BirthdayCard';
 import ProfileProgressBox from '../ProfileProgressBox/ProfileProgressBox';
+import useVisibility from '../../Hooks/useVisibility';
+import PopUp from '../../SharedComponents/PopUp';
+import { updateUserActiveStatus } from '../../Redux/Auth/actions';
 
-const ActiveContactSideBar = () => {
+const ActiveContactSideBar = ({ toggleNewChatBox }) => {
 
     const [peopleSuggested, setPeopleSuggested] = useState([]);
-    
-    const { activeContacts, users} = useSelector( state => state.app ); 
-    const { friends, user } = useSelector( state => state.auth );
+    const [activeStatusBox, toggleActiveStatusBox] = useVisibility();
     const delayTimeRef = useRef();
+    
+    const { activeContacts, users} = useSelector( state => state.app, shallowEqual ); 
+    const { friends, user, userActiveStatus } = useSelector( state => state.auth, shallowEqual );
+    
+    const dispatch = useDispatch();
 
     const history = useHistory();
    
@@ -38,7 +44,7 @@ const ActiveContactSideBar = () => {
             <ProfileProgressBox />
             {
                 peopleSuggested.length > 0 && (
-                    <div className="sideBarLinksConatainer">
+                    <div className="sideBarLinksContainer">
                         <div className="activeContactHeader flexBox">
                             <span className="contactHeaderTitle">People you may know</span>
                         </div>
@@ -60,16 +66,36 @@ const ActiveContactSideBar = () => {
                         <div className="flexBox activeContactHeader">
                             <span className="contactHeaderTitle">Contacts</span>
                             <div className="flexBox contactHeaderContentContainer">
-                                <div className="contactIconContainer">
-                                    <VideoCallIcon />
-                                </div>
-                                <div className="contactIconContainer">
+                                <div className="contactIconContainer" onClick={toggleNewChatBox}>
                                     <SearchIcon />
                                 </div>
-                                <div className="contactIconContainer">
+                                <div className="contactIconContainer" onClick={toggleActiveStatusBox}>
                                     <ContactBarDots />
                                 </div>
                             </div>
+                            {
+                                activeStatusBox && (
+                                    <React.Fragment>
+                                        {
+                                            userActiveStatus ? (
+                                                <PopUp className="activeStatusPopUpCover flexBox" onClick={() => dispatch( updateUserActiveStatus() )}>
+                                                    <div className="activeStatusPopUP userActive flexBox">
+                                                        <GreenTickIcon />
+                                                        <small>Turn Off Active Status</small>
+                                                    </div>
+                                                </PopUp>
+                                            ) : (
+                                                <PopUp className="activeStatusPopUpCover flexBox" onClick={() => dispatch( updateUserActiveStatus() )}>
+                                                    <div className="activeStatusPopUP userNotActive flexBox">
+                                                        <GreenTickIcon />
+                                                        <small>Turn On Active Status</small>
+                                                    </div>
+                                                </PopUp>
+                                            )
+                                        }
+                                    </React.Fragment>
+                                )
+                            }
                         </div>
                         <React.Fragment>
                             {

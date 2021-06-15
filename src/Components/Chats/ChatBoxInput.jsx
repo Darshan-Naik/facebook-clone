@@ -5,9 +5,9 @@ import {ReactComponent as LikeIcon} from  "../../Icons/like.svg"
 import {ReactComponent as PhotosIcon} from  "../../Icons/photos.svg"
 import { database } from '../../Firebase/firebase'
 import EmojiMart from "../../SharedComponents/EmojiMart"
-function ChatBoxInput({active,chatID,uid}) {
+function ChatBoxInput({active,chatID,uid,emojiMart,toggleEmojiMart}) {
     const [inputBoxIcon,setInputBoxIcon] = React.useState(true)
-    const [emojiMartVisibility,setEmojiMartVisibility] = React.useState(false)
+
     const [text,setText] =React.useState("") 
     React.useEffect(()=>{
         if(text){
@@ -40,7 +40,7 @@ function ChatBoxInput({active,chatID,uid}) {
         }
         const handleEmoji=(emoji)=>{
             setText(text + emoji.native)
-            setEmojiMartVisibility(false)
+            toggleEmojiMart()
         }
     return (
         <div className={`chatBoxInputContainer flexBox`}>
@@ -49,10 +49,10 @@ function ChatBoxInput({active,chatID,uid}) {
             <div className="chatBoxInput flexBox">
                 <input  type="text"  value={text} placeholder="Aa" autoFocus onChange={(e)=>setText(e.target.value)} onKeyDown={handleSend}/>
                 <div className="flexBox chatBoxEmojiContainer">
-                {emojiMartVisibility && active && <div className="chatBoxEmojiMart">
+                {emojiMart && active && <div className="chatBoxEmojiMart">
                     <EmojiMart handleEmoji={handleEmoji} />
                 </div>}
-                <EmojiIcon onClick={()=>setEmojiMartVisibility(!emojiMartVisibility)} />
+                <EmojiIcon onClick={toggleEmojiMart} />
                 </div>  
             </div>
             <div className="flexBox chatBoxInputLikeButton">

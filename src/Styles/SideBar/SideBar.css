@@ -38,8 +38,11 @@
   margin-left: 10px;
 }
 
+/* Active Contact Side Bar CSS */
+
 .activeContactHeader {
   margin: 1%;
+  position: relative;
   justify-content: space-between;
 }
 
@@ -47,13 +50,6 @@
   text-align: left;
   font-weight: 500;
   color: var(--secondary-text);
-}
-
-.videoCallIcon {
-  width: 20px;
-  height: 20px;
-  opacity: 0.6;
-  vertical-align: middle;
 }
 
 .contactHeaderContentContainer {
@@ -98,6 +94,47 @@
   fill: var(--primary-icon);
 }
 
+.activeStatusPopUpCover {
+  position: absolute;
+  max-width: 220px;
+  width: 100%;
+  padding: 8px 10px;
+  top: 100%;
+  right: 1.5%;
+  z-index: 10;
+  border-radius: 6px;
+  border: 1px solid var(--shadow-1);
+  background-color: var(--secondary-background-1);
+}
+
+.activeStatusPopUpCover::before {
+  position: absolute;
+  content: "";
+  width: 12px;
+  height: 12px;
+  top: -8px;
+  right: 3.5%;
+  transform: rotate(45deg);
+  border-top: 1px solid var(--shadow-1);
+  border-left: 1px solid var(--shadow-1);
+  background-color: var(--secondary-background-1);
+}
+.activeStatusPopUP {
+  width: 100%;
+  cursor: pointer;
+  justify-content: space-around;
+}
+
+.userActive .greenTick, .userNotActive .greenTick {
+  width: 19px;
+  height: 19px;
+  fill: green;
+}
+
+.userNotActive .greenTick {
+  fill: var(--secondary-icon);
+}
+
 /*birthday card container css */
 
 .birthdayCardContainer {
@@ -109,38 +146,56 @@
   text-align: left;
   margin: 5px auto 12px;
 }
+
 .birthdayCardIcon {
   justify-content: left;
 }
+
 .birthdayCardIcon > h3 {
   padding-left: 15px;
   padding-top: 2px;
 }
+
 .birthdayRemiderPTag {
   margin-top: 10px;
   width: 80%;
 }
+
 .birthdayWishMessage {
   font-size: 15px;
   margin-top: 10px;
   width: 90%;
 }
+
 .birthdayGiftIcon {
   fill: var(--primary-1);
   width: 20px;
   height: 20px;
 }
+
 .closeIconBirthDate {
   stroke: var(--secondary-icon);
   width: 20px;
   margin: 0 20px 0 auto;
   cursor: pointer;
 }
+
 .closeIconBirthDate:hover {
   background-color: var(--hover-overlay);
   width: 20px;
   border-radius: 10px;
 }
+
 .strongBirthdayName {
   cursor: pointer;
+}
+
+@media only screen and ( max-width: 1000px ) {
+
+  /* Active Contact Side Bar CSS */
+
+  .activeStatusPopUP small {
+    font-size: 13px;
+  }
+  
 }

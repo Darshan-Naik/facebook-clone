@@ -6,9 +6,13 @@ import {ReactComponent as LikeIconBlue} from  "../../Icons/like.svg";
 import ShareModal from '../PostCard/ShareModal';
 import useVisibility from '../../Hooks/useVisibility';
 
+<<<<<<< HEAD
 
 function PictureCardFooter({author,first_name,last_name,profilePic,title,handleShare, image,showComment,handleLike,like,handleDeleteLike}) {
     const [shareModal,toggleShareModal]= useVisibility();
+=======
+function PictureCardFooter({showComment,handleLike,like,handleDeleteLike}) {
+>>>>>>> 4dc12fc5649c15b7d139436d1240e31ffaf9050f
     return (
         <div className="postDetailsCardFooter flexBox">
             {like?(<div className="postDetailsCardFooterBox flexBox" onClick={handleDeleteLike}>

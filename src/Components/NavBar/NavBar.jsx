@@ -23,11 +23,11 @@ import SearchResult  from './SearchResult'
 import useVisibility from '../../Hooks/useVisibility'
 function NavBar({refresh,handleRefresh}) {
     const [postModal,togglePostModal] = useVisibility()
-    const [notificationVisibility,setNotificationVisibility] = React.useState(false)
-    const [accountVisibility,setAccountVisibility] = React.useState(false)
-    const [searchBoxVisibility,setSearchBoxVisibility] = React.useState(false)
+    const [notification,toggleNotification,closeNotification] = useVisibility()
+    const [account,toggleAccount,closeAccount] = useVisibility()
+    const [searchBox,toggleSearchBox] = useVisibility()
     const [search,setSearch] = React.useState("")
-    const [searchResultBoxVisibility,setSearchResultBoxVisibility] = React.useState(false)
+    const [searchResultBox,,closeSearchResultBox,openSearchResultBox] = useVisibility()
     const path = React.useRef(true)
     const history = useHistory()
     const {profilePic,first_name,uid} = useSelector(store=>store.auth.user)
@@ -42,21 +42,14 @@ function NavBar({refresh,handleRefresh}) {
         }
        
     }
-    const handleNotificationVisibility =(e)=>{
-        e.stopPropagation()
-       setNotificationVisibility(!notificationVisibility)
-       setAccountVisibility(false)
+    const handleNotificationVisibility =(e)=>{  
+        toggleNotification(e)
+        closeAccount(e)
     }
     const handleAccountVisibility =(e)=>{
-        e.stopPropagation()
-        setNotificationVisibility(false)
-        setAccountVisibility(!accountVisibility)
+        closeNotification(e)
+        toggleAccount(e)
      }
-     window.addEventListener("click",()=>{
-         setAccountVisibility(false)
-         setNotificationVisibility(false)
-         setSearchResultBoxVisibility(false)
-     })
      if(notifications.filter(item=>!item.isRead)?.length){
         document.title = `(${notifications.filter(item=>!item.isRead)?.length}) Facebook`
      } else {
@@ -64,33 +57,31 @@ function NavBar({refresh,handleRefresh}) {
      }
      React.useEffect(()=>{
             if(search){
-                setSearchResultBoxVisibility(true)
+                openSearchResultBox()
             } else {
-                setSearchResultBoxVisibility(false)
+                closeSearchResultBox()
             }
      },[search])
-     const handleSearchResultBoxVisibility=(flag)=>{
-        setSearchResultBoxVisibility(flag)
-     }
+
 
     return (
         <div className="navBarContainer flexBox">
-                {searchResultBoxVisibility && search && <SearchResult handleSearchResultBoxVisibility={handleSearchResultBoxVisibility} query={search}/>}
+                {searchResultBox && search && <SearchResult closeSearchResultBox={closeSearchResultBox} query={search}/>}
             <div className="navBarLogo flexBox">
-               {!searchBoxVisibility ? <MainLogo onClick={()=>history.push("/")}/> : (<div className="searchBarBackButton flexBox" onClick={()=>setSearchBoxVisibility(false)}>
+               {!searchBox ? <MainLogo onClick={()=>history.push("/")}/> : (<div className="searchBarBackButton flexBox" onClick={toggleSearchBox}>
                 <BackIcon/> 
             </div>)}
-                <div className="navBarSearchBox flexBox" style={{padding:searchBoxVisibility &&"4px 10px"}} onClick={(e)=>e.stopPropagation()}>
+                <div className="navBarSearchBox flexBox" style={{padding:searchBox &&"4px 10px"}} onClick={(e)=>e.stopPropagation()}>
                <div className="mainSearchIcon flexBox">
                     <SearchIcon />
                 </div> 
                 <div className="mainSearchIconResponse flexBox">
-                    <SearchIcon onClick={()=>setSearchBoxVisibility(true)}/>
+                    <SearchIcon onClick={toggleSearchBox}/>
                 </div>
             
-                <input type="text" onClick={()=>setSearchResultBoxVisibility(true)} value={search} onChange={(e)=>setSearch(e.target.value)} placeholder="Search Facebook" style={{display: searchBoxVisibility && "flex"}} className="navBarSearchBoxInput"/>
+                <input type="text" onClick={openSearchResultBox} value={search} onChange={(e)=>setSearch(e.target.value)} placeholder="Search Facebook" style={{display: searchBox && "flex"}} className="navBarSearchBoxInput"/>
                 </div>
-              { !searchBoxVisibility && <div className="navBarMenu flexBox">
+              { !searchBox && <div className="navBarMenu flexBox">
                     <MenuIcon onClick={handleMenu} />
                 </div>}
             </div>
@@ -121,11 +112,11 @@ function NavBar({refresh,handleRefresh}) {
                 <IconWrapperCircle path="/messenger/new" label="Messenger" icon={ <MessageIcon /> } number={0}>
                     
                 </IconWrapperCircle>
-                <IconWrapperCircle childVisibility={notificationVisibility} label="Notifications" icon={ <NotificationIcon onClick={handleNotificationVisibility} /> } number={notifications.filter(item=>!item.isRead)?.length}>
-                  {notificationVisibility &&  <Notifications notifications={notifications} uid={uid} />}
+                <IconWrapperCircle childVisibility={notification} label="Notifications" icon={ <NotificationIcon onClick={handleNotificationVisibility} /> } number={notifications.filter(item=>!item.isRead)?.length}>
+                  {notification &&  <Notifications notifications={notifications} uid={uid} />}
                 </IconWrapperCircle>
-                <IconWrapperCircle childVisibility={accountVisibility} label="Account" icon={ <DownArrowIcon onClick={handleAccountVisibility}/> }>
-                 {accountVisibility &&   <AccountMenu />}
+                <IconWrapperCircle childVisibility={account} label="Account" icon={ <DownArrowIcon onClick={handleAccountVisibility}/> }>
+                 {account &&   <AccountMenu />}
                 </IconWrapperCircle>
                
             </div>

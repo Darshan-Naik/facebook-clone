@@ -1,9 +1,9 @@
-import React from 'react'
-import StatusDot from '../../SharedComponents/StatusDot'
-import {ReactComponent as CloseIcon} from  "../../Icons/close.svg"
-import { useDispatch, useSelector } from 'react-redux'
-import { addInActiveMessageToActiveMessage, removeInActiveMessage } from '../../Redux/App/actions'
-import ToolTip from "../../SharedComponents/ToolTip"
+import React from 'react';
+import StatusDot from '../../SharedComponents/StatusDot';
+import {ReactComponent as CloseIcon} from  "../../Icons/close.svg";
+import { useDispatch, useSelector } from 'react-redux';
+import { addInActiveMessageToActiveMessage, removeInActiveMessage } from '../../Redux/App/actions';
+
 
 function ActiveChatBubble({chatID,authors}) {
 

@@ -10,6 +10,7 @@ import Skeleton, { SkeletonTheme }  from 'react-loading-skeleton'
 function ChatBoxHeader({chatID,userDetails}) {
     const dark = useSelector(store=>store.theme.dark)
     const [activeState,setActiveState]=React.useState(false);
+    
    const history = useHistory();
    
     React.useEffect(()=>{
