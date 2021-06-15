@@ -5,12 +5,15 @@ import { useSelector } from 'react-redux';
 import EditBox from '../PostCard/EditBox';
 import StatusDot from '../../SharedComponents/StatusDot';
 import checkActive from '../../Utils/checkActive';
+import useVisibility from '../../Hooks/useVisibility';
 
 function PictureCardHeader({handleFav, handleRemoveFav,id,first_name,last_name,profilePic,time,author,activity,title,postEditFunction,image,activeStatus}) {
    
-    const [editSection,setEditSection]=React.useState(false);
+    const [editSection,toggleEditSection]= useVisibility();
     const [activeState,setActiveState]=React.useState(false);
+
     const {uid} = useSelector(store=>store.auth.user);
+    const history = useHistory();
 
     let localTime = new Date(time?.toDate()).toString().split(" ");
     localTime.length=4;
@@ -18,11 +21,6 @@ function PictureCardHeader({handleFav, handleRemoveFav,id,first_name,last_name,p
     const checkTime = new Date().toLocaleString().split(",");
     const originalTime = new Date(time?.toDate()).toLocaleDateString().split(",");
     
-    const handleEditSection=()=>{
-        setEditSection(false);
-    }
-    const history = useHistory();
-
     React.useEffect(()=>{
         if(activeStatus){
             if(checkActive(activeStatus)==="Active Now"){
@@ -56,9 +54,9 @@ function PictureCardHeader({handleFav, handleRemoveFav,id,first_name,last_name,p
                     <span>{checkTime[0]===originalTime[0]?localTime1:`${localTime.join(" ")}, ${localTime1}`}</span>
                 </div>
             </div>
-            <div className="postDetailsCardHeadBox3 flexBox">
-                <DotsIcon onClick={()=>setEditSection(!editSection)}/>
-                {editSection&&<EditBox handleEditSection={handleEditSection} handleRemoveFav={handleRemoveFav} author={author} uid={uid} id={id} first_name={first_name} last_name={last_name} handleFav={handleFav} profilePic={profilePic} title={title} {...postEditFunction} image={image}/>}
+            <div className="postDetailsCardHeadBox3 flexBox" onClick={toggleEditSection}>
+                <DotsIcon />
+                {editSection&&<EditBox toggleEditSection={toggleEditSection} handleRemoveFav={handleRemoveFav} author={author} uid={uid} id={id} first_name={first_name} last_name={last_name} handleFav={handleFav} profilePic={profilePic} title={title} {...postEditFunction} image={image}/>}
             </div>
             
         </div>
