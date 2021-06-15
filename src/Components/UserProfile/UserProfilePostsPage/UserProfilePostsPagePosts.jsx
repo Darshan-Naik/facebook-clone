@@ -6,6 +6,7 @@ import { database } from '../../../Firebase/firebase';
 
 function UserProfilePostsPagePosts({userProfileDetails}) {
     const [userPosts, setUserPosts] = useState([]);
+    const [activePostId,setActivePostId]=React.useState(null);
 
     const { uid } = useSelector(state => state.auth.user, shallowEqual);
 
@@ -32,7 +33,7 @@ function UserProfilePostsPagePosts({userProfileDetails}) {
                 )
             }
             {
-                userPosts.map( el => <PostCard {...el} key={el.id} /> )
+                userPosts.map( el => <PostCard {...el} activePostId={activePostId} setActivePostId={setActivePostId} key={el.id} /> )
             }
         </div>
     )

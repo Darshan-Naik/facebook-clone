@@ -9,7 +9,7 @@ import useVisibility from '../../Hooks/useVisibility';
 import PopUp from '../../SharedComponents/PopUp';
 
 
-function PostCardComment({postId,comments,userData}) {
+function PostCardComment({postId,setActivePostId,activePostId,comments,userData}) {
     
     const [comment,setComment]=React.useState("")
     const [limit, setLimit]=React.useState(2)
@@ -54,7 +54,7 @@ function PostCardComment({postId,comments,userData}) {
 
 
     return (
-        <div className="postCardCommentContainer flexBox">
+        <PopUp className="postCardCommentContainer flexBox">
             {comments.length>2?limit===2&&<p onClick={()=>setLimit(comments.length)}>View more {comments.length-2} comments</p>:null}
             {comments?.filter((el,i)=>(comments.length-limit)<=i).map((el)=><CommentBox key={el.commentId}{...el} />)}
             {limit===comments.length&&comments.length>2&&<p onClick={()=>setLimit(2)}>View less comments</p>}
@@ -63,10 +63,10 @@ function PostCardComment({postId,comments,userData}) {
                 <div className="addComment flexBox">
                     <div className="commentInput flexBox">
                         <input autoComplete ="off" autoFocus type="text" name="comment" id="comment" value={comment} onChange={handleChange} onKeyDown={handleSubmit} placeholder="Write a comment..."/>
-                        <div className="postEmojiMartContainer flexBox">
-                            <EmojiIcon onClick={toggleEmojiMart}/>
+                        <div className="postEmojiMartContainer flexBox" >
+                            <EmojiIcon onClick={(e)=>{toggleEmojiMart(e);setActivePostId(postId)}}/>
                             {/* <CameraIcon/> */}
-                            {emojiMart&&<PopUp className="commentInput1">
+                            {activePostId ===postId &&emojiMart&&<PopUp className="commentInput1">
                                 <EmojiMart handleEmoji={handleEmoji}/>
                             </PopUp>}
                         </div>
@@ -79,7 +79,7 @@ function PostCardComment({postId,comments,userData}) {
             </div>
             
             
-        </div>
+        </PopUp>
     )
 }
 

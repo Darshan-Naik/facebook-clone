@@ -9,10 +9,11 @@ import checkActive from '../../Utils/checkActive';
 import useVisibility from '../../Hooks/useVisibility';
 
 
-function PostCardHead({handleFav,first_name, handleRemoveFav,id,last_name,profilePic,time,author,activity,title,postEditFunction,image,activeStatus}) {
+function PostCardHead({handleFav,first_name,setActivePostId,activePostId, handleRemoveFav,id,last_name,profilePic,time,author,activity,title,postEditFunction,image,activeStatus}) {
 
     const [editSection,toggleEditSection]= useVisibility();
     const [activeState,setActiveState]=React.useState(false);
+    
 
     const {uid} = useSelector(store=>store.auth.user);
     const history = useHistory();
@@ -55,9 +56,9 @@ function PostCardHead({handleFav,first_name, handleRemoveFav,id,last_name,profil
                     <span>{checkTime[0]===originalTime[0]?localTime1:`${localTime.join(" ")}, ${localTime1}`}</span>
                 </div> 
             </div>
-            <div className="postCardHeadBox3 flexBox" onClick={toggleEditSection}>
+            <div className="postCardHeadBox3 flexBox" onClick={(e)=>{toggleEditSection(e);setActivePostId(id)}}>
                 <DotsIcon />
-                {editSection&&<EditBox toggleEditSection={toggleEditSection} handleRemoveFav={handleRemoveFav} author={author} uid={uid} id={id} first_name={first_name} last_name={last_name} handleFav={handleFav} profilePic={profilePic} title={title} {...postEditFunction} image={image}/>}
+                {activePostId===id && editSection && <EditBox toggleEditSection={toggleEditSection} handleRemoveFav={handleRemoveFav} author={author} uid={uid} id={id} first_name={first_name} last_name={last_name} handleFav={handleFav} profilePic={profilePic} title={title} {...postEditFunction} image={image}/>}
                
             </div>
            

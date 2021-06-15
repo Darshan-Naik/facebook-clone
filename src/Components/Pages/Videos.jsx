@@ -3,11 +3,12 @@ import { useSelector } from 'react-redux'
 import PostCard from '../PostCard/PostCard'
 import "../../Styles/Video/Video.css"
 function Videos({handleRefresh}) {
+    const [activePostId,setActivePostId]=React.useState(null);
     const posts = useSelector(store=>store.posts.posts)
     React.useEffect(handleRefresh,[])
     return posts.filter(post=>post.video).length?( 
         <div className="videoPostContainer scroll">
-            {posts.filter(post=>post.video).map((post)=><PostCard key={post.id} {...post}/>)}
+            {posts.filter(post=>post.video).map((post)=><PostCard key={post.id} activePostId={activePostId} setActivePostId={setActivePostId} {...post}/>)}
 
         </div>
     ):(

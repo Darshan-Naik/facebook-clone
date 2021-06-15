@@ -11,7 +11,7 @@ import useVisibility from '../../Hooks/useVisibility';
 function ShareModal({image,video,title,toggleShareModal,handleShare}) {
 
     const [emojiMart,toggleEmojiMart,closeEmojiMart] = useVisibility()
-    const [shareTitle,setShareTitle]=React.useState(title)
+    const [shareTitle,setShareTitle]=React.useState(title||"");
     const {profilePic,first_name,last_name} = useSelector(store=>store.auth.user)
     const handleSharePostButton=()=>{
         handleShare(shareTitle);

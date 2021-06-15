@@ -6,11 +6,12 @@ import {ReactComponent as LikeEmoji} from  "../../Icons/likeEmoji.svg";
 import '../../Styles/PostModal/PostModal.css';
 import {ReactComponent as CloseIcon} from  "../../Icons/close.svg";
 import {ReactComponent as MainLogo} from  "../../Icons/main-logo.svg";
+import PopUp from "../../SharedComponents/PopUp";
 
 function PostModal({handleShare,handleRemoveFav,handleFav, postEditFunction,handleClosePostModal,uid, id, image,author, video, time, userData, activity, likes, comments, title, handleLike, handleDeleteLike,showComment}){
 
     return (
-        <div className="postDetailsCardContainer">
+        <PopUp className="postDetailsCardContainer">
             <div className="PicImageContainer flexBox">
                 <button onClick={handleClosePostModal} className="postDetailsModalClose flexBox"><CloseIcon /></button>
                 <button className="postDetailsModalIcon"><MainLogo /></button>
@@ -40,7 +41,7 @@ function PostModal({handleShare,handleRemoveFav,handleFav, postEditFunction,hand
                 <PictureCardComment userData={userData} comments={comments} postId={id}/>
            </div>
            
-        </div>
+        </PopUp>
     )
 }
 
