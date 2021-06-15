@@ -5,10 +5,12 @@ import {ReactComponent as LikeIcon} from  "../../Icons/like.svg"
 import {ReactComponent as PhotosIcon} from  "../../Icons/photos.svg"
 import EmojiMart from '../../SharedComponents/EmojiMart'
 import { database } from '../../Firebase/firebase'
+import useVisibility from '../../Hooks/useVisibility'
+import PopUp from '../../SharedComponents/PopUp'
 
 function ChatBodyInput({chatID,uid}) {
     const [text,setText] =React.useState("") 
-    const [emojiMartVisibility,setEmojiMartVisibility] = React.useState(false)
+    const [emojiMart,toggleEmojiMart] = useVisibility()
     const handleSend=(e)=>{
         if(e.keyCode === 13 && text){
             const payload ={
@@ -40,11 +42,11 @@ function ChatBodyInput({chatID,uid}) {
           <PhotosIcon /> 
         <div className="chatBodyInput flexBox">
             <input  type="text"  value={text} placeholder="Aa" autoFocus onChange={(e)=>setText(e.target.value)} onKeyDown={handleSend} />
-            <EmojiIcon onClick={()=>setEmojiMartVisibility(!emojiMartVisibility)} />
+            <EmojiIcon onClick={toggleEmojiMart} />
         </div>
         <LikeIcon onClick={handleSendLike}/>
     </div>
-  {emojiMartVisibility &&  <EmojiMart handleEmoji={handleEmoji} />}
+  {emojiMart && <PopUp><EmojiMart handleEmoji={handleEmoji} /> </PopUp> }
     </>
     )
 }

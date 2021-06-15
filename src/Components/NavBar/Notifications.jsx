@@ -4,30 +4,31 @@ import {ReactComponent as MarkIcon} from  "../../Icons/mark.svg"
 import {ReactComponent as CloseIcon} from  "../../Icons/close.svg"
 import NotificationCard from './NotificationCard'
 import { database } from '../../Firebase/firebase'
+import useVisibility from '../../Hooks/useVisibility'
+import PopUp from '../../SharedComponents/PopUp'
+
 function Notifications({notifications,uid}) {
-        const[menuVisibility,setMenuVisibility] = React.useState(false)
+        const[menu,toggleMenu] = useVisibility()
 
         const handleClearAll =()=>{
+            toggleMenu()
             notifications.map(({notificationID})=>{
                 database.collection('users').doc(uid).collection("notifications").doc(notificationID).delete()
             })
         }
         const handleReadAll =()=>{
+            toggleMenu()
             notifications.map(({notificationID})=>{
                 database.collection('users').doc(uid).collection("notifications").doc(notificationID).update({isRead:true})
             })
         }
-        const handleMenuVisibility = (e)=>{
-            e.stopPropagation()
-            setMenuVisibility(!menuVisibility)
-        }
     return (
         <div className="notificationsContainer" >
-            <div className="notificationsHeader flexBox" >
-                <h1 onClick={(e)=> e.stopPropagation()}>Notifications</h1>
+            <PopUp className="notificationsHeader flexBox" >
+                <h1>Notifications</h1>
                 <div className="notificationMenuBox flexBox">
-                    <DotsIcon onClick={handleMenuVisibility}  />
-                    {notifications.length? menuVisibility && <div className="notificationMenu">
+                    <DotsIcon onClick={toggleMenu}  />
+                    {notifications.length? menu && <PopUp className="notificationMenu">
                         <div className="notificationMenuOption flexBox" onClick={handleReadAll}>
                             <MarkIcon />
                             <p>Mark all as read</p>
@@ -38,10 +39,10 @@ function Notifications({notifications,uid}) {
                         </div>
 
                         
-                        </div>:null}
+                        </PopUp>:null}
                 </div>
                 
-            </div>
+            </PopUp>
             <div className="notificationsBox flexBox scroll">
                 {!notifications.length? <p className="noNotifications">No notifications</p>:null}
             { notifications.map(item=><NotificationCard key={item.notificationID} {...item}/>)   }

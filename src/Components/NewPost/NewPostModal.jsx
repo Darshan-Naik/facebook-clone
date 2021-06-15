@@ -12,6 +12,7 @@ import { database, storage } from '../../Firebase/firebase'
 import { activities } from '../../Utils/localData'
 import PopUp from '../../SharedComponents/PopUp'
 import Compress from "react-image-file-resizer";
+import useVisibility from '../../Hooks/useVisibility'
 
 function NewPostModal({togglePostModal}) {
     const [title,setTitle] = React.useState("")
@@ -21,8 +22,8 @@ function NewPostModal({togglePostModal}) {
     const[postState,setPostState] = React.useState(0)
     const [imageUrl,setImageUrl] = React.useState()
     const [videoUrl,setVideoUrl] = React.useState()
-    const [emojiMartVisibility,setEmojiMartVisibility] = React.useState(false)
-    const [activityBoxVisibility,setActivityBoxVisibility] = React.useState(false)
+    const [emojiMart,toggleEmojiMart,closeEmojiMart] = useVisibility()
+    const [activityBox,toggleActivityBox,closeActivityBox] =  useVisibility()
     const preview =()=>{
         if(imageRef.current.files[0]){
             if(imageRef.current.files[0]?.type.includes("image")){
@@ -43,10 +44,9 @@ function NewPostModal({togglePostModal}) {
     }
     const handleActivity =(el)=>{
         setActivity(`is ${el.symbol} feeling ${el.activity}.`)
-        setActivityBoxVisibility(false)
+        closeActivityBox()
     }
     const handleNewPost=()=>{
-        setEmojiMartVisibility(false)
             setPostState(1)
             if(imageRef.current?.files[0]?.name){
                 if(imageRef.current?.files[0]?.type.includes("image")){
@@ -175,7 +175,7 @@ function NewPostModal({togglePostModal}) {
     }
     return (
         <div className="createNewPostModal"  onClick={togglePostModal} >
-            <PopUp className="createNewPostContainer" onClick={setActivityBoxVisibility}>
+            <PopUp className="createNewPostContainer" onClick={()=>{closeEmojiMart();closeActivityBox()}}>
               {postState?<div className="newPostProgressContainer flexBox">
                     <div className="progressBox">
                         <h2>Posting</h2> <br />
@@ -213,10 +213,10 @@ function NewPostModal({togglePostModal}) {
                        <div className="flexBox inputTextBox">
                         <textarea value={title} onChange={(e)=>setTitle(e.target.value)}  cols="30" rows={videoUrl||imageUrl?"1" : "5"} placeholder={`Whats on your mind, ${first_name || ""}?`}></textarea>
                             <div className="newPostEmojiMartContainer">
-                                <EmojiIcon onClick={()=>setEmojiMartVisibility(!emojiMartVisibility)} />
-                            {emojiMartVisibility && <div className="newPostEmojiMartBox">
+                                <EmojiIcon onClick={toggleEmojiMart} />
+                            {emojiMart && <PopUp className="newPostEmojiMartBox">
                                     <EmojiMart handleEmoji={handleEmoji} />
-                            </div>}
+                            </PopUp>}
                                
                             </div> 
                         </div>
@@ -249,14 +249,14 @@ function NewPostModal({togglePostModal}) {
                              
                              <input type="file" ref={imageRef} id="image" onChange={preview} style={{display:"none"}} />
                         </div>
-                        <div className="flexBox iconWrap" onClick={(e)=>e.stopPropagation()}>
-                             <EmojiIcon onClick={()=>setActivityBoxVisibility(!activityBoxVisibility)} /> 
-                           {activityBoxVisibility && <div className="activityBox scroll flexBox">
+                        <PopUp className="flexBox iconWrap" >
+                             <EmojiIcon onClick={toggleActivityBox} /> 
+                           {activityBox && <div className="activityBox scroll flexBox">
                                  {activities.map(el=>(<div key={el.activity} className="flexBox activityList" onClick={()=>handleActivity(el)}>
                                         <p>{el.symbol}</p>  <small>{el.activity}</small>
                                  </div>))}
                              </div>}
-                        </div>
+                        </PopUp>
                         
                     </div>
                     <div className="postButton">
