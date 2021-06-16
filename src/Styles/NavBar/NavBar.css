@@ -314,6 +314,7 @@
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;  
     overflow: hidden;
+    max-width: 180px;
 }
 .notificationDetails h5 span{
     font-size: 12px;

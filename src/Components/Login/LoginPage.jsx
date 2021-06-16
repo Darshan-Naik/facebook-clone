@@ -4,11 +4,13 @@ import "../../Styles/Login/LoginPage.css"
 import LoginLogo from './LoginLogo';
 import LoginForm from './LoginForm';
 import {ReactComponent as CloseIcon} from  "../../Icons/close.svg"
-import { login, signup } from '../../Firebase/authentication';
+import { login, resetPassword, signup } from '../../Firebase/authentication';
 import { database } from '../../Firebase/firebase';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginFailure, loginRequest, loginSuccess, signUpFailure, signupRequest, signupSuccess } from '../../Redux/Auth/actions';
 import { WaveLoading } from "react-loadingg";
+import useVisibility from '../../Hooks/useVisibility';
+import ResetPassword from './ResetPassword';
 
 const initFormSignup = {
     first_name :"",
@@ -31,6 +33,7 @@ function LoginPage(){
     const [day, setDay] = useState("1");
     const [mon, setMon] = useState("June");
     const [year, setYear] = useState("1950");
+    const [reset,setReset] = useState(false);
     const {errorMessage, isError, isLoading} = useSelector(store=>store.auth);
     const handleSignUpForm = (e)=>{
         //console.log(e.target.value)
@@ -68,7 +71,8 @@ function LoginPage(){
         signup(email,password)
         .then(res=>{
            const {uid} = res.user
-           const payload = {uid,...signUpForm,dob,accessibility:true}
+           let payload = {uid,...signUpForm,dob,accessibility:true}
+           delete  payload.password;
            database.collection("users").doc(uid).set(payload).then((res)=>{
                database.collection("users").doc(uid)
                .onSnapshot((doc) => {
@@ -101,16 +105,12 @@ function LoginPage(){
     }
 
     const handleCreateClick = () => {
-        console.log("u")
         setIsCreateClick(true);
     }
     const handleCloseClick = () => {
-        console.log("c")
         setIsCreateClick(false);
     }
-    const handleResetPassword = () => {
-        console.log("Resetting")
-    }
+    
 
     const years = new Array(60).fill(1950);
     const days = new Array(31).fill(1);
@@ -120,7 +120,7 @@ function LoginPage(){
         <div>
             <div className="loginPageContainer flexBox">
                 <LoginLogo />
-                <LoginForm {...logInForm} isLoading={isLoading}  handleLoginForm={handleLoginForm} handleLogin={handleLogin} onClickCreate={handleCreateClick} isError={isError} loginErrorMessage={loginErrorMessage} handleResetPassword={handleResetPassword}/>
+             {reset? <ResetPassword toggleReset={setReset}  onClickCreate={handleCreateClick} /> : <LoginForm {...logInForm} isLoading={isLoading}  handleLoginForm={handleLoginForm} handleLogin={handleLogin} onClickCreate={handleCreateClick} isError={isError} loginErrorMessage={loginErrorMessage} handleResetPassword={setReset}/>}
             </div>
             <div className="LoginPageFooter">
                 <p>English (UK)</p>

@@ -10,7 +10,7 @@ function ProfileProgressBox() {
     const user = useSelector(store=>store.auth.user)
     const history = useHistory()
     React.useEffect(()=>{
-        setProgress((Object.keys(user).length/17)*100)
+        setProgress((Object.keys(user).length/16)*100)
     },[user])
     return user?.accessibility && (progress<85)? (
         <div className="profileProgressBoxContainer" >

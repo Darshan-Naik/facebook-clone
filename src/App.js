@@ -1,11 +1,11 @@
 import React from "react"
 import { useDispatch, useSelector } from "react-redux";
 import './App.css';
-import { database } from "./Firebase/firebase";
+import { app, database } from "./Firebase/firebase";
 import Router from "./Routes/Router";
-import { getPosts } from './Redux/Posts/actions';
-import { getChatRooms, getUsers, updateActiveContacts } from "./Redux/App/actions";
-import { getFavorites, getFriendRequest, getFriends, getNotifications, getSentRequest, loginSuccess } from "./Redux/Auth/actions";
+import { clearPosts, getPosts } from './Redux/Posts/actions';
+import { getChatRooms, getUsers, resetApp, updateActiveContacts } from "./Redux/App/actions";
+import { getFavorites, getFriendRequest, getFriends, getNotifications, getSentRequest, loginSuccess, logoutSuccess } from "./Redux/Auth/actions";
 
 function App() {
 
@@ -17,6 +17,15 @@ function App() {
   const root = document.querySelector(':root');
   const dark = useSelector(store=>store.theme.dark)
 
+  React.useEffect(()=>{
+      app.auth().onAuthStateChanged(user=>{
+        if(!user){
+          dispatch(clearPosts())
+          dispatch(resetApp())
+          dispatch(logoutSuccess())
+        }
+      })
+  },[])
 
   React.useEffect(()=>{
     
