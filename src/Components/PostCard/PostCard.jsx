@@ -150,7 +150,7 @@ function PostCard({title,image,imagePath,id,author,activePostId,setActivePostId,
 
     return (
         <>
-        <div className="postCardContainer" style={{display:loading||!userData?"none":"block"}} onClick={()=>setActivePostId(id)}>
+        <div className="postCardContainer" style={{display:loading||!userData?"none":"block"}} onClick={()=>setActivePostId(id)} id={id}>
             <PostCardHead  setActivePostId={setActivePostId} handleRemoveFav={handleRemoveFav} handleFav={handleFav} activePostId={activePostId} {...userData} postEditFunction={{handleEditPost,handleDeletePost,handleSetProfilePic}} time={time} author={author} image={image}title={title} activity={activity} id={id}/>
             {title && <div className="postCardTags">{title}</div>}
             {image&&<div onClick={togglePostModal} className="postCardImage">
