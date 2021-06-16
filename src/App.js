@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import './App.css';
 import { app, database } from "./Firebase/firebase";
 import Router from "./Routes/Router";
-import { clearPosts, getPosts } from './Redux/Posts/actions';
+import { clearPosts, getNextPosts, getPosts } from './Redux/Posts/actions';
 import { getChatRooms, getUsers, resetApp, updateActiveContacts } from "./Redux/App/actions";
 import { getFavorites, getFriendRequest, getFriends, getNotifications, getSentRequest, loginSuccess, logoutSuccess } from "./Redux/Auth/actions";
 
@@ -38,7 +38,7 @@ function App() {
         dispatch(getUsers(newUsers))     
       });
 
-    const unsubscribe1 = database.collection("posts").orderBy("time","desc").limit(5).onSnapshot(res=>{
+    const unsubscribe1 = database.collection("posts").orderBy("time","desc").limit(10).onSnapshot(res=>{
         const newPosts = res.docs.map(doc=>({id:doc.id,...doc.data()}))
         setState(res.docs[ res.docs.length-1])
         dispatch(getPosts(newPosts))
@@ -110,7 +110,7 @@ function App() {
     if(state) {
       database.collection("posts").orderBy("time","desc").startAfter(state).limit(5).get().then(res=>{
       setState(res.docs[ res.docs.length-1])
-      dispatch(getPosts(res.docs.map(doc=>({id:doc.id,...doc.data()}))))
+      dispatch(getNextPosts(res.docs.map(doc=>({id:doc.id,...doc.data()}))))
       });
   }
 }
