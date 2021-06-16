@@ -14,7 +14,7 @@ function IconWrapperCircle({children,label,icon,path,number,childVisibility}) {
                     {icon}
                     { children}
                     {!childVisibility && hoverState && <ToolTip label={label} />}
-                    <NotificationBubble number={number}/>
+                    <NotificationBubble numberVisibility={label === "Messenger"} height={label === "Messenger"?"12px" : "18px"}  width={label === "Messenger"?"12px" : "18px"} top={label === "Messenger"?"0" : "-5px"} right={label === "Messenger"?"0" : "-3px"} number={number}/>
         </div>
     )
 }
