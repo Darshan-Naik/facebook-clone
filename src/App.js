@@ -8,7 +8,7 @@ import { getChatRooms, getUsers, resetApp, updateActiveContacts } from "./Redux/
 import { getFavorites, getFriendRequest, getFriends, getNotifications, getSentRequest, loginSuccess, logoutSuccess } from "./Redux/Auth/actions";
 
 function App() {
-
+  const [state,setState] = React.useState(null)
   const uid = useSelector( state => state.auth.user.uid );
   const isAuth = useSelector( state => state.auth.isAuth );
   const friends = useSelector(store=>store.auth.friends)
@@ -38,8 +38,9 @@ function App() {
         dispatch(getUsers(newUsers))     
       });
 
-    const unsubscribe1 = database.collection("posts").orderBy("time","desc").onSnapshot(res=>{
+    const unsubscribe1 = database.collection("posts").orderBy("time","desc").limit(5).onSnapshot(res=>{
         const newPosts = res.docs.map(doc=>({id:doc.id,...doc.data()}))
+        setState(res.docs[ res.docs.length-1])
         dispatch(getPosts(newPosts))
     });
     const unsubscribe3 = database.collection("users").doc(uid).collection('friendRequests').onSnapshot(res=>{
@@ -104,9 +105,19 @@ function App() {
     }
   },[dark,root])
 
+
+ const getNextPost = ()=>{
+    if(state) {
+      database.collection("posts").orderBy("time","desc").startAfter(state).limit(5).get().then(res=>{
+      setState(res.docs[ res.docs.length-1])
+      dispatch(getPosts(res.docs.map(doc=>({id:doc.id,...doc.data()}))))
+      });
+  }
+}
+
   return (
     <div className="App">
-        <Router/>
+        <Router getNextPost={getNextPost}/>
     </div>
   );
 }
