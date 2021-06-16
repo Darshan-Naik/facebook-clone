@@ -1,15 +1,9 @@
-import { CLEAR_POSTS, GET_NEXT_POSTS, GET_POSTS } from "./actionTypes"
+import { CLEAR_POSTS, GET_POSTS } from "./actionTypes"
 
 
 const getPosts=(payload)=>{
     return {
         type : GET_POSTS,
-        payload
-    }
-}
-const getNextPosts=(payload)=>{
-    return {
-        type : GET_NEXT_POSTS,
         payload
     }
 }
@@ -19,4 +13,4 @@ const clearPosts=()=>{
     }
 }
 
-export {getPosts,clearPosts,getNextPosts}
+export {getPosts,clearPosts}
