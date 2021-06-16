@@ -7,14 +7,13 @@ import { saveData } from '../../../Utils/localStorage';
 function BirthdayCard(){
     const [visibleBirthPopUp, setVisibleBirthPopUp] = useState(false);
     const friends = useSelector(store=>store.auth.friends);
-    //console.log(friends)
 
     useEffect(()=>{
         const date = new Date();
         const data = loadData("birthPopUp");
-        if(data==false){
+        if(data===false){
             setVisibleBirthPopUp(true);
-        } else if(data?.date!=date.getDate()){
+        } else if(data?.date!==date.getDate()){
             setVisibleBirthPopUp(true);
         } else {
             setVisibleBirthPopUp(false);
