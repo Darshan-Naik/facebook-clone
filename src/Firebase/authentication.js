@@ -8,6 +8,11 @@ const signup = (email, password)=>{
    return app.auth().createUserWithEmailAndPassword(email, password)
 }
 
-export {login,signup}
+const resetPassword=(email)=>{
+   return app.auth().sendPasswordResetEmail(email)
+}
+
+
+export {login,signup,resetPassword}
 
  

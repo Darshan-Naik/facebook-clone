@@ -51,7 +51,6 @@ function UserProfilePicture ({userProfilePic=(process.env.PUBLIC_URL + '/Images/
                         setCoverPicUploadState(Math.floor((snapshot.bytesTransferred/snapshot.totalBytes)*100)+1);
                     },
                     error => {
-                        console.log("error is occurring");
                     },
                     () => {
                         storage.ref("profilePicImages")
@@ -68,12 +67,10 @@ function UserProfilePicture ({userProfilePic=(process.env.PUBLIC_URL + '/Images/
                                 (uri) => {
                            
                                 let file =  new File([uri],"thumb_"+profilePicImageRef.current.files[0].name, { lastModified: new Date().getTime(), type: uri.type })
-                                console.log(file);
                                 const uploadTask =  storage.ref(`postImages/${file.name}`).put(file)
 
                                     uploadTask.on("state_changed",
                                     snapshot =>{
-                                        setCoverPicUploadState(Math.floor((snapshot.bytesTransferred/snapshot.totalBytes)*100)+1)
                                     },
                                     error=>{
                     

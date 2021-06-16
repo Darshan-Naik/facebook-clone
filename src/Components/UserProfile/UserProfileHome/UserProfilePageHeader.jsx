@@ -81,12 +81,11 @@ function UserProfilePageHeader ({ coverPhoto, currentUser, forceRefresh, userPro
                                 (uri) => {
                            
                                 let file =  new File([uri],"thumb_"+coverPicImageRef.current.files[0].name, { lastModified: new Date().getTime(), type: uri.type })
-                                console.log(file);
                                 const uploadTask =  storage.ref(`postImages/${file.name}`).put(file)
 
                                     uploadTask.on("state_changed",
                                     snapshot =>{
-                                        setPicUploadState(Math.floor((snapshot.bytesTransferred/snapshot.totalBytes)*100)+1)
+                                        
                                     },
                                     error=>{
                     

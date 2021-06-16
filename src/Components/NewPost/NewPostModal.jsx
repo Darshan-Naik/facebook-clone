@@ -75,12 +75,11 @@ function NewPostModal({togglePostModal}) {
                                         (uri) => {
                                    
                                         let file =  new File([uri],"thumb_"+imageRef.current.files[0].name, { lastModified: new Date().getTime(), type: uri.type })
-                                        console.log(file);
                                         const uploadTask =  storage.ref(`postImages/${file.name}`).put(file)
 
                                                 uploadTask.on("state_changed",
                                                 snapshot =>{
-                                                    setPostState(Math.floor((snapshot.bytesTransferred/snapshot.totalBytes)*100)+1)
+                                                    
                                                 },
                                                 error=>{
                                 
@@ -134,7 +133,6 @@ function NewPostModal({togglePostModal}) {
                         .child(imageRef.current.files[0].name)
                         .getDownloadURL()
                         .then(url=>{
-                            console.log(url)
                             const payload ={
                                 video : url,
                                 videoPath : imageRef.current.files[0].name,
