@@ -21,6 +21,7 @@ import NewPostModal from '../NewPost/NewPostModal'
 import Notifications from './Notifications'
 import SearchResult  from './SearchResult'
 import useVisibility from '../../Hooks/useVisibility'
+import { database } from '../../Firebase/firebase'
 function NavBar({refresh,handleRefresh}) {
     const [postModal,togglePostModal] = useVisibility()
     const [notification,toggleNotification,closeNotification] = useVisibility()
@@ -32,6 +33,19 @@ function NavBar({refresh,handleRefresh}) {
     const history = useHistory()
     const {profilePic,first_name,uid} = useSelector(store=>store.auth.user)
     const notifications = useSelector(store=>store.auth.notifications)
+    const [messageCount,setMessageCount] = React.useState(0)
+    const chatRooms = useSelector(store=>store.app.chatRooms)
+    React.useEffect(()=>{
+        let unsubscribe = []
+        chatRooms.map((room,i)=>{
+            unsubscribe[i] =  database.collection("chatRooms").doc(room.chatID).collection("messages").where("isRead" , "==" , false).onSnapshot(snap=>{      
+            setMessageCount(snap.docs.filter(doc=>!doc.data().isRead).length)              
+            })
+        })
+              return()=>{
+                  unsubscribe.forEach((el)=>el())
+              }
+    },[chatRooms])
     const handleMenu=()=>{
         if(path.current){
             path.current = !path.current;
@@ -109,7 +123,7 @@ function NavBar({refresh,handleRefresh}) {
                <IconWrapperCircle label="Create" icon={ <CreateIcon  onClick={togglePostModal}/> } >
                     
                 </IconWrapperCircle >
-                <IconWrapperCircle path="/messenger/new" label="Messenger" icon={ <MessageIcon /> } number={0}>
+                <IconWrapperCircle path="/messenger/new" label="Messenger" icon={ <MessageIcon onClick={()=>setMessageCount(0)}/> } number={messageCount?1:0}>
                     
                 </IconWrapperCircle>
                 <IconWrapperCircle childVisibility={notification} label="Notifications" icon={ <NotificationIcon onClick={handleNotificationVisibility} /> } number={notifications.filter(item=>!item.isRead)?.length}>
