@@ -93,7 +93,7 @@ function UserProfilePicture ({userProfilePic=(process.env.PUBLIC_URL + '/Images/
                                             database.collection("posts").add(payload)
                                             .then(()=>{
                                                 profilePicImageRef.current.value = "";
-                                                toggleShowProfilePicModal();
+                                                toggleShowProfilePicModal(false);
                                                 setCoverPicUploadState(0);
                                             })
                                         })

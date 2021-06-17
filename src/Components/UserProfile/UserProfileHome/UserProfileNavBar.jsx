@@ -91,7 +91,7 @@ function UserProfileNavBar ({currentUser, refresh, alternativePath, userProfileD
 
         console.log("unfriend Option Called");
 
-        toggleUnfriendModalVisibility();
+        toggleUnfriendModalVisibility(false);
     }
     
     const handleCancelRequest = () => {

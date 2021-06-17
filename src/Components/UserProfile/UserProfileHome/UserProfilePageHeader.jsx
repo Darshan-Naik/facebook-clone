@@ -108,7 +108,7 @@ function UserProfilePageHeader ({ coverPhoto, currentUser, forceRefresh, userPro
                                             database.collection("posts").add(payload)
                                             .then(()=>{
                                                 coverPicImageRef.current.value = "";
-                                                toggleShowCoverPicModal();
+                                                toggleShowCoverPicModal(false);
                                                 setPicUploadState(0);
                                             })
                                         })
@@ -238,7 +238,7 @@ function UserProfilePageHeader ({ coverPhoto, currentUser, forceRefresh, userPro
                     }
                     {
                         currentUser === uid && addBioVisibility && (
-                            <PopUp className="addBoxTexFieldContainer" onClick={() => {toggleShowEmojiMart(); closeEmojiMart(); }}>
+                            <PopUp className="addBoxTexFieldContainer" onClick={(e) => {toggleShowEmojiMart(e); closeEmojiMart(); }}>
                                 <textarea className="addBioTextField scroll" value={textFieldQuery} onChange={(e) => setTextFieldQuery(e.target.value)} placeholder="Describe who you are"></textarea>
                                 <div className="addBioTextFieldCharCount flexBox">
                                     {`${101 - textFieldQuery.length} characters remaining`}
