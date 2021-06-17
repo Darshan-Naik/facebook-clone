@@ -1,5 +1,6 @@
 .friendsPageSideBarMainContainer {
-    min-width: 330px;
+    max-width: 350px;
+    min-width: 350px;
     padding: 10px;
     height: calc(100vh - var(--navBar-height));
     overflow-y: scroll;
@@ -274,6 +275,18 @@
 .senderDetailsLink {
     align-self: flex-start;
     text-decoration: none;
+    flex: 1;
+    margin-right: 3px;
+}
+
+.senderDetailsLink p {
+    width: 100%;
+    text-align: left;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
 }
 
 .senderDetailsTimeConverter {
@@ -316,4 +329,21 @@
 
 .senderDetailsButtons button:last-child:hover {
     background-color: var(--hover-overlay-2);
+}
+
+
+@media only screen and ( max-width: 992px ) {
+
+    .friendsPageSideBarMainContainer {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .friendsProfileData {
+        display: none;
+    }
+
+    .senderDetailsContainer {
+        max-width: 350px;
+    }
 }

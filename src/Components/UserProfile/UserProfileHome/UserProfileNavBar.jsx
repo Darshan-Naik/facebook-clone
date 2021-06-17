@@ -47,8 +47,8 @@ function UserProfileNavBar ({currentUser, refresh, alternativePath, userProfileD
         });
     }
 
-    const handleUnfriendOption = () => {
-        toggleUnfriendModalVisibility()
+    const handleUnfriendOption = (e) => {
+        toggleUnfriendModalVisibility(e)
         setUnfriendOption(false)
     }
 

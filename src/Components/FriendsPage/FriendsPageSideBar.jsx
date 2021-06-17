@@ -6,6 +6,7 @@ import FriendsPageCard from "./FriendsPageCard";
 import SideBarContent from "../SideBar/SideBarContent";
 import SentFriendRequestModal from "./SentFriendRequestModal";
 import useVisibility from '../../Hooks/useVisibility';
+import FriendsCard from "./FriendsCard";
 
 function FriendsPageSideBar({ forceRefresh }) {
 
@@ -95,10 +96,29 @@ function FriendsPageSideBar({ forceRefresh }) {
                             </div>
                             {
                                 peopleSuggested?.map( (el, i) => {
-                                    return el.uid !== user.uid && (
+                                    return el.uid !== user.uid && i < 5 && (
                                         <div key={el.uid} onClick={() => history.push(`/friends/${el.uid}`)} className="flexBox sideBarContentLink">
                                             <SideBarContent label={`${el.first_name} ${el.last_name}`} src={el.profilePic} />
                                         </div>
+                                    )
+                                })
+                            }
+                        </div>
+                    </React.Fragment>
+                )
+            }
+            {
+                friends.length !== 0 && (
+                    <React.Fragment>
+                        <div className="divider"></div>
+                        <div className="sideBarLinksContainer">
+                            <div className="activeContactHeader flexBox">
+                                <span className="peopleSuggestionTitle">Friends</span>
+                            </div>
+                            {
+                                friends?.map( (el, i) => {
+                                    return (
+                                        <FriendsCard key={el.friendId} {...el} />
                                     )
                                 })
                             }
