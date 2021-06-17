@@ -111,6 +111,36 @@
     margin: 5px;
     cursor: pointer;
 }
+.likeToolTipContainer{
+    position: relative;
+}
+.likeToolTip{
+    position: absolute;
+    top:25px;
+    right: -75px;
+    padding: 8px;
+    background-color: var(--shadow-8);
+    font-size: 14px;
+    width: 150px;
+    border-radius: 5px;
+    z-index: 999;
+    box-shadow: 0px 0px 5px var(--shadow-8);
+}
+.likeToolTip p{
+    color: var(--white);
+
+}
+.likeToolTipBox {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-top: 5px;
+    
+}
+.likeToolTipBox div{
+    font-size:12px;
+    color: var(--white);
+}
 
 /*---------Footer-part---------------------------------------*/
 
