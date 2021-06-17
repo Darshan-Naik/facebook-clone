@@ -45,14 +45,14 @@ function FriendsPageCard({ senderId, time }) {
     return senderDetails ? (
         <div className="flexBox senderDetailsContainer">
             <div className="senderProfilePicCover">
-                <Link to={`/friends/${senderId}`}>
+                <Link to={window.innerWidth < 992 ? `/profile/${senderId}` : `/friends/${senderId}`}>
                     <img className="senderProfilePic" src={senderDetails.profilePic || process.env.PUBLIC_URL + "/Images/userProfile_icon.png"} alt="profilePic"/>
                 </Link>
             </div>
             <div className="flexBox senderDetailsBox">
                 <div className="senderDetailsLinkCover flexBox">
-                    <Link className="senderDetailsLink" to={`/friends/${senderId}`}>
-                        <p>{senderDetails.first_name}</p>
+                    <Link className="senderDetailsLink" to={window.innerWidth < 992 ? `/profile/${senderId}` : `/friends/${senderId}`}>
+                        <p>{`${senderDetails.first_name} ${senderDetails.last_name}`}</p>
                     </Link>
                     <div className="senderDetailsTimeConverter">
                         {timeConverter(time)}
@@ -71,9 +71,9 @@ function FriendsPageCard({ senderId, time }) {
                     <Skeleton style={{borderRadius: "50%"}} width="100%" height="100%" />
                 </div>
                 <div className="flexBox senderDetailsBox">
-                    <Link className="senderDetailsLink" to={`/friends/${senderId}`}>
+                    <div className="senderDetailsLink" >
                         <Skeleton style={{borderRadius: "50px"}} width="80px" />
-                    </Link>
+                    </div>
                     <div className="flexBox senderDetailsButtons"></div>
                 </div>
             </div>

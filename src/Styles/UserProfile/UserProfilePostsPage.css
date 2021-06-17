@@ -164,7 +164,6 @@
     gap: 11px;
     flex-wrap: wrap;
     justify-content: flex-start;
-    
 }
 
 .postsPageUserFriendsBox {
@@ -188,6 +187,11 @@
     line-height: 1;
     color: var(--primary-text);
     text-decoration: none;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
     align-self: flex-start;
 }
 
