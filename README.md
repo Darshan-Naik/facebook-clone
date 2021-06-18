@@ -3,7 +3,7 @@
 
 Facebook is a leading social media platform across the globe. It has an ability to connect and share with the people you care about.
 
-[Masai School](www.masaischool.com)
+[Masai School](https://www.masaischool.com/)
 > Batch :Samurai 2
 
 ## Authors 
