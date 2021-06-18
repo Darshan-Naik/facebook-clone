@@ -8,10 +8,11 @@ import { useSelector } from 'react-redux';
 import PostModal from '../PostModal/PostModal';
 import PostCardSkeleton from './Skeleton/PostCardSkeleton';
 import useVisibility from '../../Hooks/useVisibility';
+import LikeToolTip from './LikeToolTip';
 
 
 
-function PostCard({title,image,imagePath,id,author,activePostId,setActivePostId,time,video,activity,thumb_url}) {
+function PostCard({title,image,videoPath,imagePath,id,author,activePostId,setActivePostId,time,video,activity,thumb_url}) {
 
     const[commentSection,toggleCommentSection]= useVisibility();
     const [postModal,togglePostModal]= useVisibility();
@@ -19,9 +20,10 @@ function PostCard({title,image,imagePath,id,author,activePostId,setActivePostId,
     const [comments,setComments]=React.useState([]);
     const [userData,setUserData]=React.useState(null);
     const [loading, setLoading]=React.useState(true);
+    const [likeShow,setLikeShow]=React.useState(false);
     const {uid} = useSelector(store=>store.auth.user)
 
-
+    
     const handleEditPost=(editTitle) => {
         const payload={
             title:editTitle
@@ -62,6 +64,10 @@ function PostCard({title,image,imagePath,id,author,activePostId,setActivePostId,
         database.collection("posts").doc(id).delete();
         if(imagePath){
             storage.ref("postImages").child(imagePath).delete();
+        }
+        if(videoPath){
+            storage.ref("postVideos").child(videoPath).delete();
+
         }
         
         
@@ -156,21 +162,22 @@ function PostCard({title,image,imagePath,id,author,activePostId,setActivePostId,
             {image&&<div onClick={togglePostModal} className="postCardImage">
                 <img onLoad={()=>setLoading(false)} src={image|| process.env.PUBLIC_URL + '/Images/facebook_login_logo.png'} alt="img" />
             </div>}
-            {video&&<div onClick={(e)=>{togglePostModal(e); e.preventDefault()}}className="postCardImage">
-                <video width="100%" height="500" controls >
+            {video&&<div onClick={togglePostModal} className="postCardImage">
+                <video width="100%" height="500" controls onClick={(e)=>{e.preventDefault()}} >
                     <source src={video} type="video/mp4"/>
                 </video>
             </div>}
             <div className="postCardLike flexBox">
-                <div className="flexBox">
+                <div className="flexBox likeToolTipContainer" onMouseEnter={()=>setLikeShow(true)} onMouseLeave={()=>setLikeShow(false)}>
                     <LikeEmoji/> 
                     <p>{likes.length}</p>
+                    {likeShow && likes.length>0 && <LikeToolTip likes={likes}/>}
                 </div>
                 <div className="flexBox">
                     <p onClick={toggleCommentSection}>{comments.length} Comments</p> 
                 </div>
             </div>
-            <PostCardFooter handleDeleteLike={handleDeleteLike} handleLike={handleLike} handleShare={handleShare} like={JSON.stringify(likes).includes(uid)} showComment={toggleCommentSection} author={author} {...userData} title={title}  image={image}/>
+            <PostCardFooter handleDeleteLike={handleDeleteLike} handleLike={handleLike} handleShare={handleShare} like={JSON.stringify(likes).includes(uid)} showComment={toggleCommentSection} author={author} {...userData} title={title} video={video} image={image}/>
            {commentSection && <PostCardComment setActivePostId={setActivePostId} activePostId={activePostId} postId={id} comments={comments} userData={userData}/>}
            
         </div>

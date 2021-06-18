@@ -8,7 +8,7 @@ import ShareModal from './ShareModal';
 import useVisibility from '../../Hooks/useVisibility';
 
 
-function PostCardFooter({showComment,handleLike,like,handleDeleteLike,handleShare,first_name,last_name,profilePic,author,title,image}) {
+function PostCardFooter({showComment,handleLike,like,handleDeleteLike,handleShare,first_name,last_name,profilePic,author,title,video,image}) {
     const [shareModal,toggleShareModal]= useVisibility();
     
     return (
@@ -37,7 +37,7 @@ function PostCardFooter({showComment,handleLike,like,handleDeleteLike,handleShar
                 <p>Share</p>
             </div>
            
-            {shareModal&&<ShareModal author={author} toggleShareModal={toggleShareModal} first_name={first_name} last_name={last_name} profilePic={profilePic} title={title} handleShare={handleShare} image={image} />}
+            {shareModal&&<ShareModal author={author} toggleShareModal={toggleShareModal} first_name={first_name} last_name={last_name} profilePic={profilePic} title={title} handleShare={handleShare} video={video} image={image} />}
             
         </div>
     )
