@@ -90,6 +90,7 @@
 .postCardImage img{
     width: 100%;
 }
+
 .postCardLike{
     justify-content: space-between;
     margin: 5px 15px;
@@ -343,6 +344,7 @@
     min-width: 240px;
     top: 30px;
     right: 0px;
+    z-index: 10;
     background-color: var(--primary-background);
     padding: 8px;
     border-radius: 8px;
@@ -364,6 +366,7 @@
 }
 .editPost{
     flex-direction: column;
+    z-index: 1000px;
     justify-content: flex-start;
     align-items: flex-start;
 

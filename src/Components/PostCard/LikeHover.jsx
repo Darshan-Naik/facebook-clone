@@ -19,7 +19,7 @@ function LikeHover({author}) {
     }, [])
     return (
         <div>
-            <>{`${first_name} ${last_name}`}</>
+            <>{`${first_name||""} ${last_name||""}`}</>
             
         </div>
     )

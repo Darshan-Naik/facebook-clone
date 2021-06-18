@@ -66,7 +66,7 @@ function PostCard({title,image,videoPath,imagePath,id,author,activePostId,setAct
             storage.ref("postImages").child(imagePath).delete();
         }
         if(videoPath){
-            storage.ref("postImages").child(videoPath).delete();
+            storage.ref("postVideos").child(videoPath).delete();
 
         }
         
@@ -162,8 +162,8 @@ function PostCard({title,image,videoPath,imagePath,id,author,activePostId,setAct
             {image&&<div onClick={togglePostModal} className="postCardImage">
                 <img onLoad={()=>setLoading(false)} src={image|| process.env.PUBLIC_URL + '/Images/facebook_login_logo.png'} alt="img" />
             </div>}
-            {video&&<div onClick={(e)=>{togglePostModal(e); e.preventDefault()}}className="postCardImage">
-                <video width="100%" height="500" controls >
+            {video&&<div onClick={togglePostModal} className="postCardImage">
+                <video width="100%" height="500" controls onClick={(e)=>{e.preventDefault()}} >
                     <source src={video} type="video/mp4"/>
                 </video>
             </div>}
@@ -171,13 +171,13 @@ function PostCard({title,image,videoPath,imagePath,id,author,activePostId,setAct
                 <div className="flexBox likeToolTipContainer" onMouseEnter={()=>setLikeShow(true)} onMouseLeave={()=>setLikeShow(false)}>
                     <LikeEmoji/> 
                     <p>{likes.length}</p>
-                    {likeShow && <LikeToolTip likes={likes}/>}
+                    {likeShow && likes.length>0 && <LikeToolTip likes={likes}/>}
                 </div>
                 <div className="flexBox">
                     <p onClick={toggleCommentSection}>{comments.length} Comments</p> 
                 </div>
             </div>
-            <PostCardFooter handleDeleteLike={handleDeleteLike} handleLike={handleLike} handleShare={handleShare} like={JSON.stringify(likes).includes(uid)} showComment={toggleCommentSection} author={author} {...userData} title={title}  image={image}/>
+            <PostCardFooter handleDeleteLike={handleDeleteLike} handleLike={handleLike} handleShare={handleShare} like={JSON.stringify(likes).includes(uid)} showComment={toggleCommentSection} author={author} {...userData} title={title} video={video} image={image}/>
            {commentSection && <PostCardComment setActivePostId={setActivePostId} activePostId={activePostId} postId={id} comments={comments} userData={userData}/>}
            
         </div>
