@@ -40,3 +40,16 @@ Facebook is a leading social media platform across the globe. It has an ability 
 
 ## Technologies Used
 The entire replication of the web-application is achieved using React and CSS. We have also used firebase to mock data for feature implementation.
+
+
+## Tech Stack
+
+**Client:** React, Redux, CSS
+
+**Server:** Firebase
+
+
+## Demo
+
+[facebook_clone](https://masai-course.s3.ap-south-1.amazonaws.com/users/742/submissions/107510/253457/725d20b569eaa514278acfd124524994/demo.mp4)
+
