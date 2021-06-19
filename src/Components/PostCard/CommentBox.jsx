@@ -27,8 +27,8 @@ function CommentBox({comment,author,time}) {
                 <img onClick={()=>history.push(`/profile/${author}`)} src={profilePic || process.env.PUBLIC_URL + '/Images/userProfile_icon.png'} alt="otherspic" />
                 <div className="addComment flexBox">
                     <div className="addCommentBox flexBox">
-                        <strong onClick={()=>history.push(`/profile/${author}`)}>{`${first_name} ${last_name}`}</strong>
-                        <small>{comment}</small>
+                        <strong onClick={()=>history.push(`/profile/${author}`)}>{`${first_name||""} ${last_name||""}`}</strong>
+                        <small>{comment||""}</small>
                     </div>
                     <div className="postCardCommentLikeandReply flexBox">
                         <small>Like  </small>
