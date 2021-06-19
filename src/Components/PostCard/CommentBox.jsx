@@ -35,7 +35,7 @@ function CommentBox({comment,author,time}) {
                         <samp>·</samp>
                         <small>Reply </small>
                         <samp>·</samp>
-                        <p>{localTime}</p>
+                        <p>{localTime||""}</p>
 
                     </div>
                     
