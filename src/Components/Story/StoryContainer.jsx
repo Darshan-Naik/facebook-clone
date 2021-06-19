@@ -1,15 +1,22 @@
 import React, { useState } from 'react';
 import "../../Styles/Story/Story.css";
 import "../../App.css";
-import { useSelector } from 'react-redux';
 import StoryBox from './StoryBox';
+import { database } from '../../Firebase/firebase';
 
 function StoryContainer(){
-    const posts = useSelector(store=>store.posts.posts);
+    const [posts,setPosts] = React.useState([])
 
     const [lenStory, setLenStory] = useState(5);
-
-    function handleLength(){
+    React.useEffect(()=>{
+        const unsubscribe = database.collection("posts").where("image", "!=", "undefined").limit(5).onSnapshot(res=>{
+            setPosts(res.docs.map(doc=>({id:doc.id,...doc.data()}))) 
+        });
+        return ()=>{
+            unsubscribe&& unsubscribe()
+        }
+    },[])
+    function handleLength(){    
         if(window.innerWidth>1210){
             setLenStory(5)
         } else if(window.innerWidth<1210 && window.innerWidth>600){

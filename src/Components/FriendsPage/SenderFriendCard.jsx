@@ -27,7 +27,7 @@ function SenderFriendCard ({receiverId}) {
         <div className="flexBox senderFriendCardMainContainer">
             <div className="flexBox">
                 <Link className="senderProfilePicCover" to={`/profile/${sentFriendRequestDetails.uid}`}>
-                    <img className="senderProfilePicImage" src={sentFriendRequestDetails.profilePic} alt={sentFriendRequestDetails.first_name}/>
+                    <img className="senderProfilePicImage" src={sentFriendRequestDetails.profilePic || process.env.PUBLIC_URL + '/Images/userProfile_icon.png'} alt={sentFriendRequestDetails.first_name}/>
                 </Link>
             </div>
             <div className="senderProfileNamePlateCover flexBox">
