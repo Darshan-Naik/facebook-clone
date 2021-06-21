@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { database } from '../../../Firebase/firebase';
-import UserPhotoCard from "./UserPhotoCard";
 import "../../../Styles/UserProfile/UserProfilePhotosPage.css";
+import UserPhotoCard from "./UserPhotoCard";
 
 function UserProfilePhotosPage({ userProfileDetails, forceRefresh }) {
-    
+
     const [userPhotos, setUserPhotos] = useState([]);
-    
+
     useEffect(() => {
         const unsubscribe = database.collection('posts').where('author', '==', userProfileDetails.uid)
-        .onSnapshot(res => {
-            const newPhotos = res.docs.map( doc => ({id: doc.id, ...doc.data()}) );
+            .onSnapshot(res => {
+                const newPhotos = res.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 
-            setUserPhotos(newPhotos);
-        })
+                setUserPhotos(newPhotos);
+            })
 
         return () => {
             unsubscribe();
@@ -27,7 +27,7 @@ function UserProfilePhotosPage({ userProfileDetails, forceRefresh }) {
             <h1 className="userPhotosPageHeaderTitle">Photos</h1>
             <div className="userPhotosBoxCover flexBox">
                 {
-                    userPhotos?.map( el => {
+                    userPhotos?.map(el => {
                         return el.image && (
                             <div key={el.id} className="userPhotoCardComponentCover">
                                 <UserPhotoCard {...el} />

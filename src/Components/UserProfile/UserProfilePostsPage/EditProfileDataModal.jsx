@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { DisappearedLoading } from "react-loadingg";
 import { useSelector } from 'react-redux';
 import { database } from '../../../Firebase/firebase';
 import { ReactComponent as CloseIcon } from "../../../Icons/close.svg";
-import { DisappearedLoading } from "react-loadingg";
 import PopUp from '../../../SharedComponents/PopUp';
 
 const initState = {
@@ -12,31 +12,31 @@ const initState = {
     relationship: ""
 }
 
-function EditProfileDataModal ({toggleEditUserDetailsModalState}){
+function EditProfileDataModal({ toggleEditUserDetailsModalState }) {
 
     const [updateUserDetails, setUpdateUserDetails] = useState(initState);
     const [updateIsLoading, setUpdateIsLoading] = useState(false);
-    
-    const user = useSelector( state => state.auth.user );
+
+    const user = useSelector(state => state.auth.user);
 
     const handleUpdateChange = (e) => {
         const { name, value } = e.target
-        setUpdateUserDetails({...updateUserDetails, [name]: value});
+        setUpdateUserDetails({ ...updateUserDetails, [name]: value });
     }
 
-    const handleUpdateUserDetails = () =>{
+    const handleUpdateUserDetails = () => {
         setUpdateIsLoading(true);
         const payload = {}
-        for(let key in updateUserDetails ) {
-            if( updateUserDetails[key] ) {
+        for (let key in updateUserDetails) {
+            if (updateUserDetails[key]) {
                 payload[key] = updateUserDetails[key]
             }
         }
         database.collection("users").doc(user.uid).update(payload)
-        .then((res) => {
-            setUpdateIsLoading(false)
-            toggleEditUserDetailsModalState();
-        })
+            .then((res) => {
+                setUpdateIsLoading(false)
+                toggleEditUserDetailsModalState();
+            })
     }
 
     useEffect(() => {
@@ -50,11 +50,11 @@ function EditProfileDataModal ({toggleEditUserDetailsModalState}){
     }, [user])
 
     return (
-        <div className="postsPageEditUserDetailsModalContainer"  onClick={toggleEditUserDetailsModalState}>
+        <div className="postsPageEditUserDetailsModalContainer" onClick={toggleEditUserDetailsModalState}>
             <PopUp className="postsPageEditUserDetailsModalBox">
                 <div className="postsPageEditUserDetailsModalHeader flexBox">
                     <h1 className="postsPageEditDetailsModalHeaderNamePlate">Edit Details</h1>
-                    <div className="editUserDetailsModalCloseIconBox flexBox"  onClick={toggleEditUserDetailsModalState}>
+                    <div className="editUserDetailsModalCloseIconBox flexBox" onClick={toggleEditUserDetailsModalState}>
                         <CloseIcon />
                     </div>
                 </div>
@@ -63,15 +63,15 @@ function EditProfileDataModal ({toggleEditUserDetailsModalState}){
                         <form className="flexBox editUserProfileForm">
                             <label>Education</label>
                             <div className="flexBox">
-                                <input value={updateUserDetails.education} name="education" onChange={handleUpdateChange} autoFocus type="text" placeholder="I studied at..."/>
+                                <input value={updateUserDetails.education} name="education" onChange={handleUpdateChange} autoFocus type="text" placeholder="I studied at..." />
                             </div>
                             <label>Lives</label>
                             <div className="flexBox">
-                                <input value={updateUserDetails.lives} name="lives" onChange={handleUpdateChange} type="text" placeholder="I live in..."/>
+                                <input value={updateUserDetails.lives} name="lives" onChange={handleUpdateChange} type="text" placeholder="I live in..." />
                             </div>
                             <label>From</label>
                             <div className="flexBox">
-                                <input value={updateUserDetails.from} name="from" onChange={handleUpdateChange} type="text" placeholder="I'm from..."/>
+                                <input value={updateUserDetails.from} name="from" onChange={handleUpdateChange} type="text" placeholder="I'm from..." />
                             </div>
                             <label>Relationship</label>
                             <div className="flexBox">
@@ -93,7 +93,7 @@ function EditProfileDataModal ({toggleEditUserDetailsModalState}){
                         <div className="chooseProfilePicInputContainer flexBox">
                             <div className="userProfilePicEditOptionsBox updateDetailsLoading">
                                 <button disabled={true}>
-                                    <DisappearedLoading color="#1877f2" size="small" style={{width: `40px`, height: `0`, marginLeft: "6px"}} />
+                                    <DisappearedLoading color="#1877f2" size="small" style={{ width: `40px`, height: `0`, marginLeft: "6px" }} />
                                 </button>
                             </div>
                         </div>

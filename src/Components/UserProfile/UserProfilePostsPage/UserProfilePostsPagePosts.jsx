@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { shallowEqual, useSelector } from 'react-redux';
-import PostCard from "../../PostCard/PostCard";
-import NewPost from "../../NewPost/NewPost";
 import { database } from '../../../Firebase/firebase';
+import NewPost from "../../NewPost/NewPost";
+import PostCard from "../../PostCard/PostCard";
 
-function UserProfilePostsPagePosts({userProfileDetails}) {
+function UserProfilePostsPagePosts({ userProfileDetails }) {
     const [userPosts, setUserPosts] = useState([]);
-    const [activePostId,setActivePostId]=React.useState(null);
+    const [activePostId, setActivePostId] = React.useState(null);
 
     const { uid } = useSelector(state => state.auth.user, shallowEqual);
 
     useEffect(() => {
         const unsubscribe = database.collection('posts').where('author', "==", userProfileDetails.uid)
-        .onSnapshot( res => {
-            const newPosts = res.docs.map(doc=>({id:doc.id,...doc.data()}))
-            setUserPosts( newPosts );
-        });
+            .onSnapshot(res => {
+                const newPosts = res.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+                setUserPosts(newPosts);
+            });
 
         return () => {
             unsubscribe();
@@ -33,7 +33,7 @@ function UserProfilePostsPagePosts({userProfileDetails}) {
                 )
             }
             {
-                userPosts.map( el => <PostCard {...el} activePostId={activePostId} setActivePostId={setActivePostId} key={el.id} /> )
+                userPosts.map(el => <PostCard {...el} activePostId={activePostId} setActivePostId={setActivePostId} key={el.id} />)
             }
         </div>
     )
