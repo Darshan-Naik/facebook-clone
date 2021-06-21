@@ -9,7 +9,7 @@ export const postsReducer= (state=init,{type,payload})=>{
         case GET_POSTS : {
             return {
                 ...state,
-                posts : payload
+                posts :payload
                 
             }
         }

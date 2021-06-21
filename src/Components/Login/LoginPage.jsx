@@ -135,10 +135,6 @@ function LoginPage(){
             <hr className="signUpHr"/>
             {/* <br /> */}
             <button className="signUpbuttonClose" onClick={handleCloseClick}><CloseIcon /></button>
-            {isError && <div className="errorHandlingContainerSignUp">
-                <p>{errorMessage}</p>
-            </div>
-            }
             <div className="nameSignUpContainer" >
                 <input type="text" placeholder="First name" value={first_name} name="first_name"  onChange={handleSignUpForm} />
                 <input type="text" placeholder="Surname" value={last_name}  name="last_name" onChange={handleSignUpForm}/>
@@ -180,6 +176,10 @@ function LoginPage(){
                 </div>
             </div>
             <p className="termsSignUpContainer">By clicking Sign Up, you agree to our Terms, Data Policy and Cookie Policy. </p>
+            {isError && <div className="errorHandlingContainerSignUp">
+                <p>{errorMessage}</p>
+            </div>
+            }
             <button disabled={isLoading} className="signUpButton" onClick={handleSingUp}>{!isLoading?"Sign-up":<WaveLoading size="small" color="var(--primary-background)" style={{margin: "0 auto", paddingTop: "0", paddingBottom: "0"}}/>}</button>
         </div>       
     </div>)}

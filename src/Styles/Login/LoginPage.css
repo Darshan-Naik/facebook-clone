@@ -245,13 +245,11 @@
   width: 90%;
   min-height: 0;
   margin: 0 auto 10px;
-  background-color: var(--shadow-1);
-  border: 1px solid red;
-  padding: 4px;
+  padding: 3px;
 }
 .errorHandlingContainerSignUp > p {
-  font-size: 13px;
-  color: var(--primary-text);
+  font-size: 14px;
+  color: var(--supplementary-1);
 }
 /*Media Queries*/
 @media only screen and (max-width: 900px) {

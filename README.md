@@ -1,70 +1,55 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Facebook Clone
 
-## Available Scripts
+Facebook is a leading social media platform across the globe. It has an ability to connect and share with the people you care about.
 
-In the project directory, you can run:
+[Masai School](https://www.masaischool.com/)
+> Batch :Samurai 2
 
-### `npm start`
+## Authors 
+- Darshan Naik: [Darshan-Naik](https://github.com/Darshan-Naik) 
+- Gurunath Sahukar: [Guru-Eco](https://github.com/Guru-Eco) 
+- Ankit Bajpai: [ankitbajpai1607](https://github.com/ankitbajpai1607) 
+- Soumyadri Das: [soumyadri](https://github.com/soumyadri) 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+#### We, as a team have replicated [facebook.com](https://facebook.com) and tried our level best to implement most of its features using React and Redux.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Sources:
 
-### `npm test`
+- React: [React](https://www.npmjs.com/package/react)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Redux: [Redux](https://www.npmjs.com/package/redux) 
 
-### `npm run build`
+- React-Redux: [React-Redux](https://www.npmjs.com/package/react-redux)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Emoji-Mart: [Emoji-Mart](https://missive.github.io/emoji-mart/)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Images: [Icon-Finder](https://www.iconfinder.com/)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Icons: [Icon-Finder](https://www.iconfinder.com/)
 
-### `npm run eject`
+- Fonts: [Google-Fonts](https://fonts.google.com/icons)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- Firebase: [Firebase](https://firebase.google.com/) 
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- React-Image-File-Resizer: [Image-Resizer](https://www.npmjs.com/package/react-image-file-resizer)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- React-Loading-Skeleton: [Loading-Skeleton](https://www.npmjs.com/package/react-loading-skeleton)  
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- React-Loadingg: [React-Loadingg](https://www.npmjs.com/package/react-loadingg)
 
-## Learn More
+## Technologies Used
+The entire replication of the web-application is achieved using React and CSS. We have also used firebase to mock data for feature implementation.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Tech Stack
 
-### Code Splitting
+**Client:** React, Redux, CSS
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+**Server:** Firebase
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Demo
 
-### Making a Progressive Web App
+[facebook_clone](https://masai-course.s3.ap-south-1.amazonaws.com/users/742/submissions/107510/253457/725d20b569eaa514278acfd124524994/demo.mp4)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
