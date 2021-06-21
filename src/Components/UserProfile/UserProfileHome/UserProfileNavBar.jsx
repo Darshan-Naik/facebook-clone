@@ -1,18 +1,18 @@
 import React, { useRef, useState } from 'react';
-import { ReactComponent as MessengerIcon } from "../../../Icons/message.svg";
+import { DisappearedLoading } from "react-loadingg";
+import { shallowEqual, useSelector } from 'react-redux';
+import { Link, useHistory } from "react-router-dom";
+import { database } from '../../../Firebase/firebase';
+import useVisibility from '../../../Hooks/useVisibility';
 import { ReactComponent as ThreeDots } from "../../../Icons/dots.svg";
 import { ReactComponent as DownArrowIcon } from "../../../Icons/downArrow.svg";
-import UserProfileNavLinkWrapper from "./UserProfileNavLinkWrapper";
-import EditProfileDataModal from "../UserProfilePostsPage/EditProfileDataModal";
-import { Link, useHistory } from "react-router-dom";
-import { shallowEqual, useSelector } from 'react-redux';
-import { database } from '../../../Firebase/firebase';
+import { ReactComponent as MessengerIcon } from "../../../Icons/message.svg";
 import NewPostModal from "../../NewPost/NewPostModal";
-import { DisappearedLoading } from "react-loadingg";
+import EditProfileDataModal from "../UserProfilePostsPage/EditProfileDataModal";
 import UnfriendModal from "./UnfriendModal";
-import useVisibility from '../../../Hooks/useVisibility';
+import UserProfileNavLinkWrapper from "./UserProfileNavLinkWrapper";
 
-function UserProfileNavBar ({currentUser, refresh, alternativePath, userProfileDetails, userFriends}) {
+function UserProfileNavBar({ currentUser, refresh, alternativePath, userProfileDetails, userFriends }) {
     const [userProfileNavBarState, setUserProfileNavBarState] = useState(true);
     const [userProfileMoreOptionsState, setUserProfileMoreOptionsState] = useState(false);
     const [messengerIsLoading, setMessengerIsLoading] = useState(false);
@@ -21,18 +21,18 @@ function UserProfileNavBar ({currentUser, refresh, alternativePath, userProfileD
     const [postModalVisibility, togglePostModalVisibility] = useVisibility();
     const [unfriendModalVisibility, toggleUnfriendModalVisibility] = useVisibility();
     const [editUserDetailsModalState, toggleEditUserDetailsModalState] = useVisibility();
-    
+
     const userProfileNavBarRef = useRef();
-    
+
     const { uid } = useSelector(state => state.auth.user, shallowEqual);
     const { friendRequests, sentRequests, friends } = useSelector(state => state.auth, shallowEqual);
-    const chatRooms = useSelector( state => state.app.chatRooms );
+    const chatRooms = useSelector(state => state.app.chatRooms);
 
     const history = useHistory();
-    
-    window.addEventListener('scroll', function() {
+
+    window.addEventListener('scroll', function () {
         const position = userProfileNavBarRef.current?.getBoundingClientRect()
-        if( position?.top >= 47 ) {
+        if (position?.top >= 47) {
             setUserProfileNavBarState && setUserProfileNavBarState(true);
         } else {
             setUserProfileNavBarState && setUserProfileNavBarState(false);
@@ -54,18 +54,18 @@ function UserProfileNavBar ({currentUser, refresh, alternativePath, userProfileD
 
     const redirectToMessenger = () => {
         setMessengerIsLoading(true);
-        const chatRoom = chatRooms.filter( el => el.authors.includes(userProfileDetails.uid) );
-        if( chatRoom[0]?.chatID ) {
+        const chatRoom = chatRooms.filter(el => el.authors.includes(userProfileDetails.uid));
+        if (chatRoom[0]?.chatID) {
             history.push(`/messenger/${chatRoom[0].chatID}`)
         } else {
             const payload = {
                 authors: [uid, userProfileDetails.uid]
             }
             database.collection('chatRooms').add(payload)
-            .then((res) => {
-                setMessengerIsLoading(false);
-                history.push(`/messenger/${res.id}`)
-            });
+                .then((res) => {
+                    setMessengerIsLoading(false);
+                    history.push(`/messenger/${res.id}`)
+                });
         }
     }
 
@@ -74,7 +74,7 @@ function UserProfileNavBar ({currentUser, refresh, alternativePath, userProfileD
 
         database.collection('users').doc(currentUser).collection('friendRequests').doc(`${currentUser}${uid}`).set({ senderId: uid, time });
         database.collection('users').doc(uid).collection('sentRequests').doc(`${currentUser}${uid}`).set({ receiverId: currentUser, time });
-        
+
         const payload = {
             author: uid,
             isRead: false,
@@ -93,7 +93,7 @@ function UserProfileNavBar ({currentUser, refresh, alternativePath, userProfileD
 
         toggleUnfriendModalVisibility(false);
     }
-    
+
     const handleCancelRequest = () => {
         database.collection('users').doc(currentUser).collection('friendRequests').doc(`${currentUser}${uid}`).delete();
         database.collection('users').doc(uid).collection('sentRequests').doc(`${currentUser}${uid}`).delete();
@@ -125,7 +125,7 @@ function UserProfileNavBar ({currentUser, refresh, alternativePath, userProfileD
 
     return (
         <React.Fragment>
-            <div className="userProfileNavBarContainer" style={currentUser === uid ? {paddingTop: `8px`} : {padding: `none`}} ref={userProfileNavBarRef}>
+            <div className="userProfileNavBarContainer" style={currentUser === uid ? { paddingTop: `8px` } : { padding: `none` }} ref={userProfileNavBarRef}>
                 <nav className="userProfileNav flexBox">
                     {
                         userProfileNavBarState ? (
@@ -163,7 +163,7 @@ function UserProfileNavBar ({currentUser, refresh, alternativePath, userProfileD
                         ) : (
                             <div className="flexBox userProfileNavMenuContainer">
                                 <div className="userProfileNavAfterScrollBox flexBox" onClick={handleScrollToTop}>
-                                    <img className="userProfileNavAfterScrollProfileImage" src={ userProfileDetails.profilePic || process.env.PUBLIC_URL + '/Images/userProfile_icon.png'} alt="profilePic"/>
+                                    <img className="userProfileNavAfterScrollProfileImage" src={userProfileDetails.profilePic || process.env.PUBLIC_URL + '/Images/userProfile_icon.png'} alt="profilePic" />
                                     <span className="userProfileNavAfterScrollNamePlate">{`${userProfileDetails.first_name} ${userProfileDetails.last_name}`}</span>
                                 </div>
                             </div>
@@ -174,11 +174,11 @@ function UserProfileNavBar ({currentUser, refresh, alternativePath, userProfileD
                             currentUser === uid ? (
                                 <React.Fragment>
                                     <div className="flexBox userProfileNavButton addToStoryContainer" onClick={togglePostModalVisibility}>
-                                        <img className="userProfileNavButtonIcons userProfileNavButtonIconsFilter" src={process.env.PUBLIC_URL + '/Images/plus_icon.png'} alt="plus"/>
+                                        <img className="userProfileNavButtonIcons userProfileNavButtonIconsFilter" src={process.env.PUBLIC_URL + '/Images/plus_icon.png'} alt="plus" />
                                         <span>Add to Story</span>
                                     </div>
                                     <div className="editProfileContainer userProfileNavButton flexBox" onClick={toggleEditUserDetailsModalState}>
-                                        <img className="userProfileNavButtonIcons" src={process.env.PUBLIC_URL + '/Images/edit_icon.png'} alt="edit"/>
+                                        <img className="userProfileNavButtonIcons" src={process.env.PUBLIC_URL + '/Images/edit_icon.png'} alt="edit" />
                                         <span>Edit Profile</span>
                                     </div>
                                     <div className="userProfileNavDotsBox flexBox">
@@ -195,7 +195,7 @@ function UserProfileNavBar ({currentUser, refresh, alternativePath, userProfileD
                                             null
                                         ) : JSON.stringify(sentRequests).includes(currentUser) ? (
                                             <div className="flexBox userProfileNavButton addToStoryContainer" onClick={handleCancelRequest}>
-                                                <img className="userProfileNavButtonIcons userProfileNavButtonIconsFilter" src={process.env.PUBLIC_URL + '/Images/cancel_request_icon.png'} alt="plus"/>
+                                                <img className="userProfileNavButtonIcons userProfileNavButtonIconsFilter" src={process.env.PUBLIC_URL + '/Images/cancel_request_icon.png'} alt="plus" />
                                                 <span>Cancel Request</span>
                                             </div>
                                         ) : JSON.stringify(friends).includes(currentUser) ? (
@@ -208,14 +208,14 @@ function UserProfileNavBar ({currentUser, refresh, alternativePath, userProfileD
                                                         </div>
                                                     ) : (
                                                         <div className="editProfileContainer userProfileNavButton flexBox messageLoading">
-                                                            <DisappearedLoading color="#1877f2" size="small" style={{width: `40px`}} />
+                                                            <DisappearedLoading color="#1877f2" size="small" style={{ width: `40px` }} />
                                                         </div>
                                                     )
                                                 }
                                             </React.Fragment>
                                         ) : (
                                             <div className="flexBox userProfileNavButton addToStoryContainer" onClick={handleAddFriend}>
-                                                <img className="userProfileNavButtonIcons userProfileNavButtonIconsFilter" src={process.env.PUBLIC_URL + '/Images/add_friend_icon.png'} alt="plus"/>
+                                                <img className="userProfileNavButtonIcons userProfileNavButtonIconsFilter" src={process.env.PUBLIC_URL + '/Images/add_friend_icon.png'} alt="plus" />
                                                 <span>Add Friend</span>
                                             </div>
                                         )
@@ -227,7 +227,7 @@ function UserProfileNavBar ({currentUser, refresh, alternativePath, userProfileD
                                         JSON.stringify(userFriends).includes(uid) && unfriendOption && (
                                             <div className="showUnfriendOptionContainer">
                                                 <div className="unfriendOptionBox flexBox" onClick={handleUnfriendOption}>
-                                                    <img className="unfriendOptionBoxImage" src={process.env.PUBLIC_URL + '/Images/cancel_request_icon.png'} alt="plus"/>
+                                                    <img className="unfriendOptionBoxImage" src={process.env.PUBLIC_URL + '/Images/cancel_request_icon.png'} alt="plus" />
                                                     <span className="unfriendOptionBoxNamePlate">Unfriend</span>
                                                 </div>
                                             </div>
@@ -240,21 +240,21 @@ function UserProfileNavBar ({currentUser, refresh, alternativePath, userProfileD
                 </nav>
             </div>
             {
-                JSON.stringify(friendRequests).includes(currentUser) && (  
-                <div className="confirmFriendRequestContainer flexBox">
-                    <div className="flexBox">
-                        <img className="userProfileNavAfterScrollProfileImage" src={ userProfileDetails.profilePic || process.env.PUBLIC_URL + '/Images/userProfile_icon.png'} alt="profilePic"/>
-                        <h1 className="confirmFriendRequestHeading"> <span>{userProfileDetails.first_name}</span> sent you a friend request</h1>
-                    </div>
-                    <div className="flexBox">
-                        <div className="userProfileNavButton addToStoryContainer confirmRequestColor" onClick={handleAcceptFriendRequest}>
-                            Confirm Request
+                JSON.stringify(friendRequests).includes(currentUser) && (
+                    <div className="confirmFriendRequestContainer flexBox">
+                        <div className="flexBox">
+                            <img className="userProfileNavAfterScrollProfileImage" src={userProfileDetails.profilePic || process.env.PUBLIC_URL + '/Images/userProfile_icon.png'} alt="profilePic" />
+                            <h1 className="confirmFriendRequestHeading"> <span>{userProfileDetails.first_name}</span> sent you a friend request</h1>
                         </div>
-                        <div className="editProfileContainer userProfileNavButton" onClick={handleDeleteFriendRequest}>
-                            Delete Request
+                        <div className="flexBox">
+                            <div className="userProfileNavButton addToStoryContainer confirmRequestColor" onClick={handleAcceptFriendRequest}>
+                                Confirm Request
+                            </div>
+                            <div className="editProfileContainer userProfileNavButton" onClick={handleDeleteFriendRequest}>
+                                Delete Request
+                            </div>
                         </div>
                     </div>
-                </div>
                 )
             }
             {

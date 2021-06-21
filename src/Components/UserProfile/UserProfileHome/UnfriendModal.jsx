@@ -2,7 +2,7 @@ import React from 'react';
 import { ReactComponent as CloseIcon } from "../../../Icons/close.svg";
 import PopUp from "../../../SharedComponents/PopUp";
 
-function UnfriendModal({ toggleUnfriendModalVisibility, first_name, handleUnfriend}) {
+function UnfriendModal({ toggleUnfriendModalVisibility, first_name, handleUnfriend }) {
     return (
         <div className="seeAllSentRequestModalContainer" onClick={toggleUnfriendModalVisibility}>
             <PopUp className="seeAllSentRequestModalBox">

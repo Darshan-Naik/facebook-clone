@@ -1,24 +1,24 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { shallowEqual, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import filterFriends from '../../Utils/filterFriends';
-import FriendsPageCard from "./FriendsPageCard";
-import SideBarContent from "../SideBar/SideBarContent";
-import SentFriendRequestModal from "./SentFriendRequestModal";
 import useVisibility from '../../Hooks/useVisibility';
+import filterFriends from '../../Utils/filterFriends';
+import SideBarContent from "../SideBar/SideBarContent";
 import FriendsCard from "./FriendsCard";
+import FriendsPageCard from "./FriendsPageCard";
+import SentFriendRequestModal from "./SentFriendRequestModal";
 
 function FriendsPageSideBar({ forceRefresh }) {
 
     const [peopleSuggested, setPeopleSuggested] = useState([]);
     const [friendsVisibilityLimitation, setFriendsVisibilityLimitation] = useState(false);
     const [sentRequestVisibility, toggleSentRequestVisibility] = useVisibility();
-    
-    const friendRequests = useSelector( state => state.auth.friendRequests );
-    const sentRequests = useSelector( state => state.auth.sentRequests );
-    const users = useSelector( state => state.app.users );
-    const { friends, user } = useSelector( state => state.auth, shallowEqual );
-    
+
+    const friendRequests = useSelector(state => state.auth.friendRequests);
+    const sentRequests = useSelector(state => state.auth.sentRequests);
+    const users = useSelector(state => state.app.users);
+    const { friends, user } = useSelector(state => state.auth, shallowEqual);
+
     const delayTimeRef = useRef();
 
     const history = useHistory();
@@ -26,13 +26,13 @@ function FriendsPageSideBar({ forceRefresh }) {
     useEffect(() => {
 
         delayTimeRef.current = setTimeout(() => {
-            setPeopleSuggested( filterFriends( users, friends, user ) )
+            setPeopleSuggested(filterFriends(users, friends, user))
         }, 2000)
 
         return () => {
             clearTimeout(delayTimeRef.current)
         }
-    }, [ users, friends ,user]);
+    }, [users, friends, user]);
 
     useEffect(forceRefresh, []);
 
@@ -43,14 +43,14 @@ function FriendsPageSideBar({ forceRefresh }) {
                     <React.Fragment>
                         <h1 className="friendsSideBarHeading">Friends</h1>
                         <div className="flexBox friendsSideBarCount">
-                            <h4>{`${friendRequests.length} ${ friendRequests.length > 1 ? `Friend Requests` : `Friend Request` }`}</h4>
+                            <h4>{`${friendRequests.length} ${friendRequests.length > 1 ? `Friend Requests` : `Friend Request`}`}</h4>
                             <div className="seeAllFriends" onClick={() => setFriendsVisibilityLimitation(true)}>See All</div>
                         </div>
                         <div>
                             {
-                                friendRequests.map( ( el, i ) => {
+                                friendRequests.map((el, i) => {
                                     return i < 4 && (
-                                        <FriendsPageCard key={el.senderId} {...el}  />
+                                        <FriendsPageCard key={el.senderId} {...el} />
                                     )
                                 })
                             }
@@ -59,21 +59,21 @@ function FriendsPageSideBar({ forceRefresh }) {
                 ) : (
                     <React.Fragment>
                         <p className="seeAllFriendsBreadCrumbs flexBox">
-                            <small onClick={() => setFriendsVisibilityLimitation(false)}>Friends</small> 
+                            <small onClick={() => setFriendsVisibilityLimitation(false)}>Friends</small>
                             <span>
-                                {`>`} 
+                                {`>`}
                             </span>
                             <small>Friend Requests</small>
                         </p>
                         <h1 className="friendsSideBarHeading">Friend Requests</h1>
                         <div className="divider"></div>
-                        <p className="allFriendsRequestsSideBarCount">{`${friendRequests.length} ${ friendRequests.length > 1 ? `Friend Requests` : `Friend Request` }`}</p>
+                        <p className="allFriendsRequestsSideBarCount">{`${friendRequests.length} ${friendRequests.length > 1 ? `Friend Requests` : `Friend Request`}`}</p>
                         <div className="seeAllSentRequestsTagBox">
                             <p className="seeAllSentRequestsTag" onClick={toggleSentRequestVisibility}>View Sent Requests</p>
                         </div>
                         <div className="seeAllFriendRequestContainer">
                             {
-                                friendRequests.map( el => <FriendsPageCard key={el.senderId} {...el}  /> )
+                                friendRequests.map(el => <FriendsPageCard key={el.senderId} {...el} />)
                             }
                         </div>
                     </React.Fragment>
@@ -95,7 +95,7 @@ function FriendsPageSideBar({ forceRefresh }) {
                                 <span className="peopleSuggestionTitle">People You May Know</span>
                             </div>
                             {
-                                peopleSuggested?.map( (el, i) => {
+                                peopleSuggested?.map((el, i) => {
                                     return el.uid !== user.uid && i < 5 && (
                                         <div key={el.uid} onClick={() => history.push(`/friends/${el.uid}`)} className="flexBox sideBarContentLink">
                                             <SideBarContent label={`${el.first_name} ${el.last_name}`} src={el.profilePic} />
@@ -116,7 +116,7 @@ function FriendsPageSideBar({ forceRefresh }) {
                                 <span className="peopleSuggestionTitle">Friends</span>
                             </div>
                             {
-                                friends?.map( (el, i) => {
+                                friends?.map((el, i) => {
                                     return (
                                         <FriendsCard key={el.friendId} {...el} />
                                     )
