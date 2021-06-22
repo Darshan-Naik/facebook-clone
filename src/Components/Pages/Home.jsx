@@ -9,7 +9,7 @@ import {  useSelector } from 'react-redux';
 import { database } from '../../Firebase/firebase';
 import PostCardSkeleton from '../PostCard/Skeleton/PostCardSkeleton';
 
-function Home({handleRefresh, toggleNewChatBox,getNextPost}) {
+function Home({handleRefresh, toggleNewChatBox,getNextPost,limit}) {
     const timer = React.useRef(true)
     const [activePostId,setActivePostId]=React.useState(null);
     const uid = useSelector(store=>store.auth.user.uid);
@@ -23,7 +23,7 @@ function Home({handleRefresh, toggleNewChatBox,getNextPost}) {
     React.useEffect(handleRefresh,[])
     
     const handleGetNextPost =()=>{
-       if((document.getElementById(posts[posts.length-1]?.id)?.getBoundingClientRect().bottom) <= (window.innerHeight+100) && timer.current) {
+       if((document.getElementById(posts[limit-1]?.id)?.getBoundingClientRect().bottom) <= (window.innerHeight+100) && timer.current) {
            timer.current = false;
            setTimeout(()=>{
             timer.current = true;
@@ -55,7 +55,7 @@ function Home({handleRefresh, toggleNewChatBox,getNextPost}) {
                     </div>
                 </>)
                 }
-                {posts.map((post,i)=><PostCard key={post.id+i} activePostId={activePostId} setActivePostId={setActivePostId} {...post}/>)}
+                {posts.map((post,i)=>i<limit?<PostCard key={post.id+i} activePostId={activePostId} setActivePostId={setActivePostId} {...post}/>:null)}
 
             </div>
             <div className="mainRightSidebarContainer scroll">
