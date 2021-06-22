@@ -13,7 +13,7 @@ import Favorites from '../Components/Pages/Favorites';
 import PageNotFound from '../Components/Pages/PageNotFound';
 import useVisibility from '../Hooks/useVisibility';
 
-function Router({getNextPost}) {
+function Router({getNextPost,limit}) {
     const[refresh,setRefresh] = React.useState(true);
     const [newChatBox,toggleNewChatBox] = useVisibility();
 
@@ -41,7 +41,7 @@ function Router({getNextPost}) {
                     <Chats newChatBox={newChatBox} toggleNewChatBox={toggleNewChatBox} />
                     <Switch>
                         <Route path="/" exact>
-                            <Home toggleNewChatBox={toggleNewChatBox} handleRefresh={handleRefresh} getNextPost={getNextPost}/>
+                            <Home toggleNewChatBox={toggleNewChatBox} handleRefresh={handleRefresh} getNextPost={getNextPost} limit={limit}/>
                         </Route>
                         <Route path="/videos" exact>
                             <Videos handleRefresh={handleRefresh} />

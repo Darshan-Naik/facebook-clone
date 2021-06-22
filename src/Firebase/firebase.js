@@ -5,16 +5,16 @@ import "firebase/database";
 import "firebase/storage";
 
 var firebaseConfig = {
-  apiKey: "AIzaSyBmRNmqmTlt3PvUqYY3FUBA4w1qpMkqSS8",
-  authDomain: "facebook-45269.firebaseapp.com",
-  projectId: "facebook-45269",
-  storageBucket: "facebook-45269.appspot.com",
-  messagingSenderId: "761576697175",
-  appId: "1:761576697175:web:11a1cc6fd22137a7b5e212"
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID
   };
 
 
-
+ 
 
   const app = firebase.initializeApp(firebaseConfig);
   const database = firebase.firestore();

@@ -6,7 +6,7 @@ function LikeToolTip({likes}) {
         <div className="likeToolTip">
             <p>Like</p>
             <div className="likeToolTipBox flexBox">
-                {likes.map(el=><LikeHover {...el}/>)}
+                {likes.map(el=><LikeHover key={el.author} {...el}/>)}
             </div>
              
             
