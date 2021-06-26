@@ -14,10 +14,10 @@ function SentFriendRequestModal({ sentRequests, toggleSentRequestVisibility }) {
                     </div>
                 </div>
                 <div className="allSentRequestMainContainer scroll">
-                    <div className="allSentRequestModalCount">{`${sentRequests.length} ${ sentRequests.length > 1 ? `Sent Requests` : `Sent Request` }`}</div>
+                    <div className="allSentRequestModalCount">{`${sentRequests.length} ${sentRequests.length > 1 ? `Sent Requests` : `Sent Request`}`}</div>
                     <div>
                         {
-                            sentRequests?.map( el => <SenderFriendCard key={el.receiverId} {...el} /> )
+                            sentRequests?.map(el => <SenderFriendCard key={el.receiverId} {...el} />)
                         }
                     </div>
                 </div>

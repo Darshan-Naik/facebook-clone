@@ -1,4 +1,4 @@
-import { CLEAR_POSTS, GET_POSTS } from "./actionTypes"
+import { CLEAR_POSTS, GET_NEW_POSTS, GET_POSTS } from "./actionTypes"
 
 const init = {
     posts :[]
@@ -10,6 +10,13 @@ export const postsReducer= (state=init,{type,payload})=>{
             return {
                 ...state,
                 posts :payload
+                
+            }
+        }
+        case GET_NEW_POSTS : {
+            return {
+                ...state,
+                posts :[...state.posts,...payload]
                 
             }
         }

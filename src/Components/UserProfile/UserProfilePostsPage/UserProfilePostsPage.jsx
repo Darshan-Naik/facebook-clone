@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react';
+import "../../../Styles/UserProfile/UserProfilePostsPage.css";
 import UserProfilePostsPageIntro from "./UserProfilePostsPageIntro";
 import UserProfilePostsPagePosts from "./UserProfilePostsPagePosts";
-import "../../../Styles/UserProfile/UserProfilePostsPage.css";
 
-function UserProfilePostsPage ({forceRefresh, alternativePath, userProfileDetails, userFriends}) {
-    
+function UserProfilePostsPage({ forceRefresh, alternativePath, userProfileDetails, userFriends }) {
+
     useEffect(forceRefresh, []);
 
     return (
         <div className="postsPageMainContainer">
-            <div className="postsPageIntroComponentContainer scroll"> 
+            <div className="postsPageIntroComponentContainer scroll">
                 <UserProfilePostsPageIntro userFriends={userFriends} userProfileDetails={userProfileDetails} alternativePath={alternativePath} />
             </div>
             <div className="postsPagePostsComponentContainer scroll">

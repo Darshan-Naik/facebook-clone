@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import './App.css';
 import { app, database } from "./Firebase/firebase";
 import Router from "./Routes/Router";
-import { clearPosts, getPosts } from './Redux/Posts/actions';
+import { clearPosts, getNewPosts, getPosts } from './Redux/Posts/actions';
 import { getChatRooms, getUsers, resetApp, updateActiveContacts } from "./Redux/App/actions";
 import { getFavorites, getFriendRequest, getFriends, getNotifications, getSentRequest, loginSuccess, logoutSuccess } from "./Redux/Auth/actions";
 
 function App() {
-  const [state,setState] = React.useState(null)
+  // const [state,setState] = React.useState(null)
   const [limit,setLimit] = React.useState(5)
   const uid = useSelector( state => state.auth.user.uid );
   const isAuth = useSelector( state => state.auth.isAuth );
@@ -36,6 +36,13 @@ function App() {
         const newUsers = res.docs.map(doc=>doc.data())
         dispatch(getUsers(newUsers))     
       });
+
+      const unsubscribe1 = database.collection("posts").orderBy("time","desc").onSnapshot(res=>{
+        const newPosts = res.docs.map(doc=>({id:doc.id,...doc.data()}))
+        // setState(res.docs[ res.docs.length-1])
+        dispatch(getPosts(newPosts))
+    });
+
     const unsubscribe3 = database.collection("users").doc(uid).collection('friendRequests').onSnapshot(res=>{
       const newFriendRequest = res.docs.map(doc=>doc.data())
       dispatch( getFriendRequest( newFriendRequest ) );
@@ -70,6 +77,7 @@ function App() {
     });
 
     return () => {
+       unsubscribe1();
       unsubscribe3();
       unsubscribe4();
       unsubscribe5();
@@ -80,7 +88,7 @@ function App() {
     }
   }
   
-  },[isAuth,uid,dispatch])
+  },[isAuth,uid])
 
   React.useEffect(()=>{
     if(isAuth){
@@ -97,26 +105,39 @@ function App() {
     }
   },[dark,root])
 
-  React.useEffect(()=>{
-      const unsubscribe1 = database.collection("posts").orderBy("time","desc").limit(limit).onSnapshot(res=>{
-        const newPosts = res.docs.map(doc=>({id:doc.id,...doc.data()}))
-        setState(res.docs[ res.docs.length-1])
-        dispatch(getPosts(newPosts))
-    });
-    return ()=>{
-      unsubscribe1();
-    }
-  },[limit])
+ 
 
- const getNextPost = ()=>{
-    if(state) {
+//  const getNextPost = ()=>{
+//     if(state) {
+//       console.log(state?.id)
+//        database.collection("posts").orderBy("time","desc").startAfter(state).limit(limit).onSnapshot(res=>{
+         
+//         setState(res.docs[ res.docs.length-1])
+//         dispatch(getNewPosts(res.docs.map(doc=>({id:doc.id,...doc.data()}))))
+//     });
+//   }
+// }
+
+// React.useEffect(()=>{
+//   const unsubscribe1 = database.collection("posts").orderBy("time","desc").limit(limit).onSnapshot(res=>{
+//     const newPosts = res.docs.map(doc=>({id:doc.id,...doc.data()}))
+//     setState(res.docs[ res.docs.length-1])
+//     console.log(res.docs.length)
+//     dispatch(getPosts(newPosts))
+//     });
+//     return unsubscribe1
+// },[limit])
+
+  const getNextPost = ()=>{
+    console.log(limit)
       setLimit(limit=>limit+5)
+   
   }
-}
+
 
   return (
     <div className="App">
-        <Router getNextPost={getNextPost}/>
+        <Router getNextPost={getNextPost} limit={limit}/>
     </div>
   );
 }

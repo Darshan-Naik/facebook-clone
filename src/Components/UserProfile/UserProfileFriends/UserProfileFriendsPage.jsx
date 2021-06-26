@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { ReactComponent as ThreeDots } from "../../../Icons/dots.svg";
+import { shallowEqual, useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
+import { ReactComponent as ThreeDots } from "../../../Icons/dots.svg";
+import "../../../Styles/UserProfile/UserProfileFriendsPage.css";
 import FriendsCard from "./FriendsCard";
 import UserProfileFriendsPageSkeleton from "./Skeleton/UserProfileFriendsPageSkeleton";
-import "../../../Styles/UserProfile/UserProfileFriendsPage.css";
-import { shallowEqual, useSelector } from 'react-redux';
 
 function UserProfileFriendsPage({ forceRefresh, userFriends, alternativePath, userProfileDetails }) {
 
-    const { uid } = useSelector( state => state.auth.user, shallowEqual );
+    const { uid } = useSelector(state => state.auth.user, shallowEqual);
 
     const [lastClickedId, setLastClickedId] = useState(null);
 
@@ -17,7 +17,7 @@ function UserProfileFriendsPage({ forceRefresh, userFriends, alternativePath, us
     }
 
     useEffect(forceRefresh, []);
-    
+
     return userFriends ? (
         <div className="userFriendsPageMainContainer">
             <div className="userFriendsPageContainer">
@@ -45,7 +45,7 @@ function UserProfileFriendsPage({ forceRefresh, userFriends, alternativePath, us
                     userFriends.length > 0 ? (
                         <div className="flexBox friendsCardMainContainer">
                             {
-                                userFriends.map( el => {
+                                userFriends.map(el => {
                                     return (
                                         <div key={el.friendId} className="friendsCardMainBox">
                                             <FriendsCard {...el} alternativePath={alternativePath} userProfileDetails={userProfileDetails} lastClickedId={lastClickedId} handleLastClickedId={handleLastClickedId} />
@@ -55,7 +55,7 @@ function UserProfileFriendsPage({ forceRefresh, userFriends, alternativePath, us
                             }
                         </div>
                     ) : (
-                        <div style={{marginTop: "10px"}}>
+                        <div style={{ marginTop: "10px" }}>
                             <h1>You have no friends to show</h1>
                         </div>
                     )

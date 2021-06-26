@@ -1,10 +1,10 @@
-import React from 'react'
-import { useHistory, Link } from 'react-router-dom'
+import React from 'react';
+import { Link, useHistory } from 'react-router-dom';
 
-function UserProfileNavLinkWrapper ({ path, children, extraClass }) {
+function UserProfileNavLinkWrapper({ path, children, extraClass }) {
     const history = useHistory();
     const { location } = history
-    
+
     return (
         <Link to={path} className={location.pathname === path ? `userProfileNavMenuName active ${extraClass}` : `userProfileNavMenuNameBox userProfileNavMenuName ${extraClass}`}>
             {children}

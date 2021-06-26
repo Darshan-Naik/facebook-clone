@@ -50,7 +50,7 @@ function ActiveContactSideBar ({ toggleNewChatBox }) {
                         </div>
                         {
                             peopleSuggested?.map( (el, i) => {
-                                return el.uid !== user.uid && (
+                                return el.uid !== user.uid && i < 3  && (
                                     <div key={el.uid} onClick={() => history.push(`/profile/${el.uid}`)} className="flexBox sideBarContentLink">
                                         <SideBarContent label={`${el.first_name} ${el.last_name}`} src={el.profilePic} />
                                     </div>
