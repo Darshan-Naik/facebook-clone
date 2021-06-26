@@ -66,7 +66,7 @@ You can also take the glimpse of our Project,just follow the below steps:
 
 <br>
 
-## Features
+## Features ✨
 
 1. User can post anything like: text,feeling,activities, photos, videos etc...
 2. User can edit or delete the post.
@@ -77,7 +77,7 @@ You can also take the glimpse of our Project,just follow the below steps:
 
 <br>
 
-## Demo
+## Demo 🎥
 
 [facebook_clone](https://masai-course.s3.ap-south-1.amazonaws.com/users/742/submissions/107510/253457/725d20b569eaa514278acfd124524994/demo.mp4)
 
