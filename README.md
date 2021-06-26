@@ -46,23 +46,23 @@ You can also take the glimpse of our Project,just follow the below steps:
 
 1. Login Page
 
-   ![facebook](https://github.com/Darshan-Naik/facebook-clone/blob/master/public/Images/loginPage.png)
+   ![facebook](https://github.com/Darshan-Naik/facebook-clone/blob/Posts/public/Images/loginPage.PNG)
 
 2. Home Page after Login in Dark Mode
 
-   ![facebook](https://github.com/Darshan-Naik/facebook-clone/blob/master/public/Images/homePage.png)
+   ![facebook](https://github.com/Darshan-Naik/facebook-clone/blob/Posts/public/Images/homePage.PNG)
 
 3. User Profile Page
 
-   ![facebook](https://github.com/Darshan-Naik/facebook-clone/blob/master/public/Images/profilePage.png)
+   ![facebook](https://github.com/Darshan-Naik/facebook-clone/blob/Posts/public/Images/profilePage.PNG)
 
 4. Messenger Page
 
-   ![facebook](https://github.com/Darshan-Naik/facebook-clone/blob/master/public/Images/messangerPage.png)
+   ![facebook](https://github.com/Darshan-Naik/facebook-clone/blob/Posts/public/Images/messangerPage.PNG)
 
 5. Friend Request Page
 
-   ![facebook](https://github.com/Darshan-Naik/facebook-clone/blob/master/public/Images/friendPage.png)
+   ![facebook](https://github.com/Darshan-Naik/facebook-clone/blob/Posts/public/Images/friendPage.PNG)
 
 <br>
 
